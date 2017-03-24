@@ -73,6 +73,8 @@ Function Get-Requirement {
 # Download all
 #----------------------------------------------------------------------
 
+$root = (Resolve-Path -Path $root).Path;
+
 if (!(Test-Path $root)) {
   Write-Host ('Creating root directory at {0}' -f $root);
   New-Item $root -Type directory;
