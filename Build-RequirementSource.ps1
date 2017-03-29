@@ -19,10 +19,17 @@
 #>
 
 Param(
+  [Parameter()]
   [string] $root = '.',
+  [Parameter()]
   [string] $installPath = 'dist',
+  [Parameter()]
   [ValidateSet('Release','Debug')]
   [string] $buildType = 'Release',
+  [Parameter()]
+  [ValidateSet('ninja','vs2015','vs2017')]
+  [string] $generator = 'ninja',
+  [Parameter()]
   [string] $platform = 'Windows'
 )
 
@@ -109,6 +116,7 @@ Function Build-Requirement {
   
   $args = @{
     Path = $sourcePath;
+    Generator = $generator;
     BuildType = $buildType;
     InstallPath = $installPath;
     Options = $options;
