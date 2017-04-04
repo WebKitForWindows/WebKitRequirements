@@ -52,3 +52,4 @@ $root = (Resolve-Path -Path $root).Path;
 $patchPath = (Resolve-Path -Path $patchPath).Path;
 
 Patch-Requirement -Name 'libwebp';
+Patch-Requirement -Name 'sqlite';

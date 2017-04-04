@@ -12,3 +12,4 @@
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.28 | 03-16-2017 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 1.5.1 | 09-20-2016 |
 | [libwebp](https://github.com/webmproject/libwebp) | 0.6.0 | 01-30-2017 |
+| [sqlite](http://sqlite.org) | 3.17.0 | 02-13-2017 |
