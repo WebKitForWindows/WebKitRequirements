@@ -1,0 +1,5 @@
+# Scripts
+*.ps1 eol=crlf
+
+# CMakeLists
+CMakeLists.txt eol=lf
