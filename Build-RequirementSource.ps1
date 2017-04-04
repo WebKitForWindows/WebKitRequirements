@@ -147,3 +147,4 @@ Build-Requirement -Name 'curl' -Options $curlOptions;
 Build-Requirement -Name 'libpng';
 Build-Requirement -Name 'libjpeg-turbo';
 Build-Requirement -Name 'libwebp';
+Build-Requirement -Name 'sqlite';

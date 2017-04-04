@@ -35,6 +35,13 @@ $curlVersion = '7.53.1';
 $curlUrl = ('https://curl.haxx.se/download/curl-{0}.tar.gz' -f $curlVersion);
 
 #----------------------------------------------------------------------
+# Database
+#----------------------------------------------------------------------
+
+$sqliteVersion = '3.17.00'
+$sqliteUrl = ('https://sqlite.org/2017/sqlite-amalgamation-{0}00.zip' -f $sqliteVersion.Replace(".", ""))
+
+#----------------------------------------------------------------------
 # Image formats
 #----------------------------------------------------------------------
 
@@ -89,3 +96,4 @@ Get-Requirement -Name 'curl' -Url $curlUrl;
 Get-Requirement -Name 'libpng' -Url $libPngUrl;
 Get-Requirement -Name 'libjpeg-turbo' -Url $libJpegTurboUrl;
 Get-Requirement -Name 'libwebp' -Url $libWebPUrl;
+Get-Requirement -Name 'sqlite' -Url $sqliteUrl;
