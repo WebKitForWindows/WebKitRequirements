@@ -125,3 +125,8 @@ install(
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
 )
+
+install(
+  FILES sqlite3.h sqlite3ext.h
+  DESTINATION include
+)
