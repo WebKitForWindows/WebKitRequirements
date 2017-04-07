@@ -69,6 +69,13 @@ $freetypeVersion = '2.7.1';
 $freetypeUrl = ('https://sourceforge.net/projects/freetype/files/freetype2/{0}/freetype-{0}.tar.bz2' -f $freetypeVersion);
 
 #----------------------------------------------------------------------
+# Rendering
+#----------------------------------------------------------------------
+
+$pixmanVersion = '0.34.0';
+$pixmanUrl = ('https://www.cairographics.org/releases/pixman-{0}.tar.gz' -f $pixmanVersion);
+
+#----------------------------------------------------------------------
 # Download function
 #----------------------------------------------------------------------
 
@@ -113,3 +120,4 @@ Get-Requirement -Name 'libjpeg-turbo' -Url $libJpegTurboUrl;
 Get-Requirement -Name 'libwebp' -Url $libWebPUrl;
 Get-Requirement -Name 'sqlite' -Url $sqliteUrl;
 Get-Requirement -Name 'freetype' -Url $freetypeUrl;
+Get-Requirement -Name 'pixman' -Url $pixmanUrl;

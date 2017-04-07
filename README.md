@@ -15,3 +15,4 @@
 | [libwebp](https://github.com/webmproject/libwebp) | 0.6.0 | 01-30-2017 |
 | [sqlite](http://sqlite.org) | 3.17.0 | 02-13-2017 |
 | [freetype](https://www.freetype.org) | 2.7.1 | 12-30-2016 |
+| [pixman](http://www.pixman.org/) | 0.34.0 | | 01-31-2016 |
