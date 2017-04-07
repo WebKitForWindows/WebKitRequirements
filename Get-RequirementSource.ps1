@@ -35,6 +35,13 @@ $curlVersion = '7.53.1';
 $curlUrl = ('https://curl.haxx.se/download/curl-{0}.tar.gz' -f $curlVersion);
 
 #----------------------------------------------------------------------
+# XML
+#----------------------------------------------------------------------
+
+$libxml2Version = '2.9.4';
+$libxml2Url = ('ftp://xmlsoft.org/libxml2/libxml2-{0}.tar.gz' -f $libxml2Version);
+
+#----------------------------------------------------------------------
 # Database
 #----------------------------------------------------------------------
 
@@ -55,10 +62,10 @@ $libWebPVersion = '0.6.0';
 $libWebPUrl = ('https://github.com/webmproject/libwebp/archive/v{0}.zip' -f $libWebPVersion);
 
 #----------------------------------------------------------------------
-# Font rendering
+# Fonts
 #----------------------------------------------------------------------
 
-$freetypeVersion = '2.7.1'
+$freetypeVersion = '2.7.1';
 $freetypeUrl = ('https://sourceforge.net/projects/freetype/files/freetype2/{0}/freetype-{0}.tar.bz2' -f $freetypeVersion);
 
 #----------------------------------------------------------------------
@@ -100,6 +107,7 @@ Get-Requirement -Name 'zlib' -Url $zlibUrl;
 Get-Requirement -Name 'libressl' -Url $libreSSLUrl;
 Get-Requirement -Name 'nghttp2' -Url $nghttp2Url;
 Get-Requirement -Name 'curl' -Url $curlUrl;
+Get-Requirement -Name 'libxml2' -Url $libxml2Url;
 Get-Requirement -Name 'libpng' -Url $libPngUrl;
 Get-Requirement -Name 'libjpeg-turbo' -Url $libJpegTurboUrl;
 Get-Requirement -Name 'libwebp' -Url $libWebPUrl;

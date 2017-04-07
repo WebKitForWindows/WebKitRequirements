@@ -96,6 +96,50 @@ $curlOptions = @(
 );
 
 #----------------------------------------------------------------------
+# libxml2 options
+#----------------------------------------------------------------------
+
+$libxml2Options = @(
+  # Threading
+  '-DLIBXML_THREAD_SAFETY=no',
+  '-DWITH_THREAD_ALLOC=OFF',
+
+  # Options
+  '-DWITH_C14N=OFF',
+  '-DWITH_CATALOG=OFF',
+  '-DWITH_DEBUG=OFF',
+  '-DWITH_DOCB=OFF',
+  '-DWITH_FTP=OFF',
+  '-DWITH_FTP=OFF',
+  '-DWITH_HTML=OFF',
+  '-DWITH_HTTP=OFF',
+  '-DWITH_ICONV=OFF',
+  '-DWITH_ICU=ON',
+  '-DWITH_ISO8859X=ON',
+  '-DWITH_LEGACY=OFF',
+  '-DWITH_MEM_DEBUG=OFF',
+  '-DWITH_MODULES=OFF',
+  '-DWITH_OUTPUT=ON',
+  '-DWITH_PATTERN=OFF',
+  '-DWITH_PUSH=ON',
+  '-DWITH_PYTHON=OFF',
+  '-DWITH_READER=OFF',
+  '-DWITH_REGEXPS=ON',
+  '-DWITH_RUN_DEBUG=OFF',
+  '-DWITH_SAX1=ON',
+  '-DWITH_SCHEMAS=OFF',
+  '-DWITH_SCHEMATRON=OFF',
+  '-DWITH_TREE=OFF',
+  '-DWITH_VALID=OFF',
+  '-DWITH_WALKER=ON',
+  '-DWITH_WRITER=OFF',
+  '-DWITH_XINCLUDE=OFF',
+  '-DWITH_XPATH=OFF',
+  '-DWITH_XPTR=OFF',
+  '-DWITH_ZLIB=OFF'
+);
+
+#----------------------------------------------------------------------
 # Build function
 #----------------------------------------------------------------------
 
@@ -144,6 +188,7 @@ Build-Requirement -Name 'zlib';
 Build-Requirement -Name 'libressl';
 Build-Requirement -Name 'nghttp2' -Options $nghttp2Options;
 Build-Requirement -Name 'curl' -Options $curlOptions;
+Build-Requirement -Name 'libxml2' -Options $libxml2Options;
 Build-Requirement -Name 'libpng';
 Build-Requirement -Name 'libjpeg-turbo';
 Build-Requirement -Name 'libwebp';
