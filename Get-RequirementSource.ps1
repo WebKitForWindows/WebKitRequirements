@@ -35,6 +35,14 @@ $curlVersion = '7.53.1';
 $curlUrl = ('https://curl.haxx.se/download/curl-{0}.tar.gz' -f $curlVersion);
 
 #----------------------------------------------------------------------
+# Internationalization
+#----------------------------------------------------------------------
+
+$icuVersion = '59rc'
+$icuUrl = ('https://sourceforge.net/projects/icu/files/ICU4C/{0}/icu4c-{1}-src.tgz' -f $icuVersion, $icuVersion.Replace(".", "_"))
+$icuUrl = ('http://download.icu-project.org/files/icu4c/{0}/icu4c-{1}-src.tgz' -f $icuVersion, $icuVersion.Replace(".", "_"))
+
+#----------------------------------------------------------------------
 # XML
 #----------------------------------------------------------------------
 
@@ -117,6 +125,7 @@ Get-Requirement -Name 'zlib' -Url $zlibUrl;
 Get-Requirement -Name 'libressl' -Url $libreSSLUrl;
 Get-Requirement -Name 'nghttp2' -Url $nghttp2Url;
 Get-Requirement -Name 'curl' -Url $curlUrl;
+Get-Requirement -Name 'icu' -Url $icuUrl;
 Get-Requirement -Name 'libxml2' -Url $libxml2Url;
 Get-Requirement -Name 'libpng' -Url $libPngUrl;
 Get-Requirement -Name 'libjpeg-turbo' -Url $libJpegTurboUrl;
