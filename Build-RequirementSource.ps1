@@ -195,3 +195,4 @@ Build-Requirement -Name 'libwebp';
 Build-Requirement -Name 'sqlite';
 Build-Requirement -Name 'freetype';
 Build-Requirement -Name 'pixman';
+Build-Requirement -Name 'cairo';

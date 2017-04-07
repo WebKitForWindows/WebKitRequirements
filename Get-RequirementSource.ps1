@@ -75,6 +75,9 @@ $freetypeUrl = ('https://sourceforge.net/projects/freetype/files/freetype2/{0}/f
 $pixmanVersion = '0.34.0';
 $pixmanUrl = ('https://www.cairographics.org/releases/pixman-{0}.tar.gz' -f $pixmanVersion);
 
+$cairoVersion = '1.14.8';
+$cairoUrl = ('https://www.cairographics.org/releases/cairo-{0}.tar.xz' -f $cairoVersion);
+
 #----------------------------------------------------------------------
 # Download function
 #----------------------------------------------------------------------
@@ -121,3 +124,4 @@ Get-Requirement -Name 'libwebp' -Url $libWebPUrl;
 Get-Requirement -Name 'sqlite' -Url $sqliteUrl;
 Get-Requirement -Name 'freetype' -Url $freetypeUrl;
 Get-Requirement -Name 'pixman' -Url $pixmanUrl;
+Get-Requirement -Name 'cairo' -Url $cairoUrl;
