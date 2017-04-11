@@ -105,7 +105,7 @@ Function Get-Requirement {
     return;
   }
   
-  Get-SourceCodeRelease -Name $name -Path $url -DestinationPath $destinationPath;
+  Get-SourceCodeRelease -Name $name -Url $url -DestinationPath $destinationPath;
 }
 
 #----------------------------------------------------------------------
@@ -118,7 +118,6 @@ if (!(Test-Path $root)) {
 }
 
 $root = (Resolve-Path -Path $root).Path;
-
 Write-Host ('Downloading source code to {0}' -f $root);
 
 Get-Requirement -Name 'zlib' -Url $zlibUrl;

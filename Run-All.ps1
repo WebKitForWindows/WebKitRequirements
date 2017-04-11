@@ -38,6 +38,7 @@ Param (
 $args = @{
   Root = $sourcePath;
   InstallPath = $installationPath;
+  BuildPath = $buildPath;
   BuildType = $buildType;
   Generator = $generator;
   Platform = $platform;

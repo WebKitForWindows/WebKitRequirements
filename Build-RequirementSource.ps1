@@ -1,19 +1,19 @@
 <#
   .Synopsis
   Builds all the source code for required for building WebKit.
-  
+
   .Details
   Invokes the CMake build for all the required projects.
-  
+
   .Parameter Root
   The root directory to download source to. Defaults to current directory.
-  
+
   .Parameter InstallPath
   The directory to install the built files to.
-  
+
   .Parameter BuildType
   The type of build to run.
-  
+
   .Parameter Platform
   The build platform corresponding to CMAKE_SYSTEM_NAME.
 #>
@@ -23,6 +23,8 @@ Param(
   [string] $root = '.',
   [Parameter()]
   [string] $installPath = 'dist',
+  [Parameter()]
+  [string] $buildPath = 'build',
   [Parameter()]
   [ValidateSet('Release','Debug')]
   [string] $buildType = 'Release',
@@ -150,23 +152,25 @@ Function Build-Requirement {
     [Parameter()]
     [string[]] $options = @()
   )
-  
+
   $sourcePath = Join-Path $root $name;
-  
+  $requirementBuildPath = Join-Path $buildPath $name;
+
   if (!(Test-Path $sourcePath)) {
     Write-Host ('Source code for {0} not present at {1}' -f $name, $destinationPath);
     return;
   }
-  
+
   $args = @{
     Path = $sourcePath;
+    BuildPath = $requirementBuildPath;
     Generator = $generator;
     BuildType = $buildType;
-    InstallPath = $installPath;
+    InstallationPath = $installPath;
     Options = $options;
-    Platform = $platform;
+    #Platform = $platform;
   }
-  
+
   Invoke-CMakeBuild @args;
 }
 
@@ -176,14 +180,29 @@ Function Build-Requirement {
 # Ordered based on dependencies
 #----------------------------------------------------------------------
 
-$root = (Resolve-Path -Path $root).Path;
-
 if (!(Test-Path $root)) {
-  Write-Host ('Creating root directory at {0}' -f $root);
-  New-Item $root -Type directory;
+  Write-Error ('Source code root at {0} not found' -f $root);
+  return;
 }
 
+$root = (Resolve-Path -Path $root).Path;
 Write-Host ('Building source code in {0}' -f $root);
+
+if (!(Test-Path $buildPath)) {
+  Write-Host ('Creating build directory at {0}' -f $buildPath);
+  New-Item $buildPath -Type directory;
+}
+
+$buildPath = (Resolve-Path -Path $buildPath).Path;
+Write-Host ('Building source code at {0}' -f $buildPath);
+
+if (!(Test-Path $installPath)) {
+  Write-Host ('Creating install directory at {0}' -f $installPath);
+  New-Item $installPath -Type directory;
+}
+
+$installPath = (Resolve-Path -Path $installPath).Path;
+Write-Host ('Installing libraries at {0}' -f $installPath);
 
 Build-Requirement -Name 'zlib';
 Build-Requirement -Name 'libressl';
