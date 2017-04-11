@@ -112,12 +112,12 @@ Function Get-Requirement {
 # Download all
 #----------------------------------------------------------------------
 
-$root = (Resolve-Path -Path $root).Path;
-
 if (!(Test-Path $root)) {
   Write-Host ('Creating root directory at {0}' -f $root);
   New-Item $root -Type directory;
 }
+
+$root = (Resolve-Path -Path $root).Path;
 
 Write-Host ('Downloading source code to {0}' -f $root);
 
