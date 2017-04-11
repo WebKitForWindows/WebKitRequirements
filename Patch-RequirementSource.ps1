@@ -29,18 +29,22 @@ Function Patch-Requirement {
   $substringLength = $sourcePath.Length + 1;
   $destinationPath = Join-Path $root $name;
   
-  $files = Get-ChildItem $sourcePath -Recurse -File;
+  $items = Get-ChildItem $sourcePath -Recurse;
   
   Write-Host ('Copying files from {0} to {1}' -f $sourcePath, $destinationPath)
   
-  foreach ($file in $files) {
-    $fileName = $file.FullName;
-    $relativePath = $fileName.Substring($substringLength);
-    $targetFile = Join-Path $destinationPath $relativePath;
+  foreach ($item in $items) {
+    $itemName = $item.FullName;
+    $relativePath = $itemName.Substring($substringLength);
+    $target = Join-Path $destinationPath $relativePath;
 
-    Write-Host ('Copying {0}' -f $relativePath);
-
-    Copy-Item $fileName -Destination $targetFile;
+    if (!($item -is [System.IO.DirectoryInfo])) {
+      Write-Host ('Copying {0}' -f $relativePath);
+      Copy-Item $itemName -Destination $target;
+    } elseif (!(Test-Path $target)) {
+      Write-Host ('Creating directory {0}' -f $relativePath);
+      New-Item $target -Type Directory
+    }
   }
 }
 
