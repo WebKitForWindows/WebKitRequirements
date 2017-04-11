@@ -164,6 +164,7 @@ Function Build-Requirement {
     BuildType = $buildType;
     InstallPath = $installPath;
     Options = $options;
+    Platform = $platform;
   }
   
   Invoke-CMakeBuild @args;
