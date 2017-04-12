@@ -25,16 +25,24 @@ include (CMakeDependentOption)
 set(ICU_VERSION 59)
 set(ICUDATA_NAME icudt${ICU_VERSION})
 
-file(TO_NATIVE_PATH ${CMAKE_CURRENT_LIST_DIR}/source/data/in/${ICUDATA_NAME}l.dat DATA_FILE)
-set(DATA_ASM ${CMAKE_CURRENT_BINARY_DIR}/icudt.asm)
-set(DATA_OBJ ${CMAKE_CURRENT_BINARY_DIR}/icudt.obj)
-set(DATA_ENTRY __imp__${ICUDATA_NAME}_dat)
+file(TO_NATIVE_PATH ${CMAKE_CURRENT_LIST_DIR}/source/data/in/${ICUDATA_NAME}l.dat ICUDATA_FILE)
+set(ICUDATA_ASM ${CMAKE_CURRENT_BINARY_DIR}/icudt.asm)
+set(ICUDATA_OBJ ${CMAKE_CURRENT_BINARY_DIR}/icudt.obj)
+set(ICUDATA_STUB ${CMAKE_CURRENT_BINARY_DIR}/icudt_stub.c)
+set(ICUDATA_ENTRY _${ICUDATA_NAME}_dat)
 
-file(WRITE ${DATA_ASM}
-  "section .data\n"
-  "global ${DATA_ENTRY}\n"
-  "\t${DATA_ENTRY}:\n"
-  "\tincbin \"${DATA_FILE}\"\n"
+file(WRITE ${ICUDATA_ASM}
+  "section .rdata rdata align=32\n"
+  "global ${ICUDATA_ENTRY}\n"
+  "\t${ICUDATA_ENTRY}:\n"
+  "\tincbin \"${ICUDATA_FILE}\"\n"
+)
+
+file(WRITE ${ICUDATA_STUB}
+  "#include \"unicode/utypes.h\"\n"
+  "#include \"unicode/udata.h\"\n"
+  "#include \"unicode/uversion.h\"\n"
+  "U_EXPORT void* U_ICUDATA_ENTRY_POINT;\n"
 )
 
 if(NOT DEFINED NASM)
@@ -43,9 +51,9 @@ endif()
 
 set(NAFLAGS -fwin64)
 
-add_custom_command(OUTPUT ${DATA_OBJ}
-    DEPENDS ${DATA_FILE}
-    COMMAND ${NASM} ${NAFLAGS} ${DATA_ASM} -o${DATA_OBJ})
+add_custom_command(OUTPUT ${ICUDATA_OBJ}
+    DEPENDS ${ICUDATA_FILE}
+    COMMAND ${NASM} ${NAFLAGS} ${ICUDATA_ASM} -o${ICUDATA_OBJ})
 
 set_source_files_properties(${DATA_OBJ} PROPERTIES GENERATED 1)
 
@@ -65,8 +73,6 @@ endfunction()
 
 get_vcxproj_sources("source/common" "common.vcxproj" ICUUC_SOURCES)
 get_vcxproj_sources("source/i18n" "i18n.vcxproj" ICUI18N_SOURCES)
-
-list(APPEND ICUUC_SOURCES ${DATA_OBJ})
 
 #
 # PUBLIC HEADERS
@@ -100,23 +106,34 @@ include_directories(
   source/common/unicode
 )
 
-if (WIN32)
+if (MSVC)
   add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
 endif()
+
+if (FALSE)
+add_static_library(icudt ${ICUDATA_OBJ})
+SET_TARGET_PROPERTIES(icudt-static PROPERTIES LINKER_LANGUAGE C)
 
 add_static_library(icuuc "${ICUUC_SOURCES}")
 target_compile_definitions(icuuc-static PRIVATE U_STATIC_IMPLEMENTATION U_COMMON_IMPLEMENTATION)
 
 add_static_library(icui18n "${ICUI18N_SOURCES}")
 target_compile_definitions(icui18n-static PRIVATE U_STATIC_IMPLEMENTATION U_I18N_IMPLEMENTATION)
+endif()
+
+add_shared_library(icudt "${ICUDATA_OBJ};${ICUDATA_STUB}")
+SET_TARGET_PROPERTIES(icudt PROPERTIES LINKER_LANGUAGE C)
+if(MSVC)
+  SET_TARGET_PROPERTIES(icudt PROPERTIES LINK_FLAGS "/NOENTRY")
+endif()
 
 add_shared_library(icuuc "${ICUUC_SOURCES}")
 target_compile_definitions(icuuc PRIVATE U_COMMON_IMPLEMENTATION)
+target_link_libraries(icuuc icudt)
 
 add_shared_library(icui18n "${ICUI18N_SOURCES}")
 target_compile_definitions(icui18n PRIVATE U_I18N_IMPLEMENTATION)
 target_link_libraries(icui18n icuuc)
-
 
 # INSTALL
 
@@ -133,4 +150,3 @@ install(
     ${ICUI18N_PUBLIC_HEADERS}
   DESTINATION include/unicode
 )
-
