@@ -83,7 +83,7 @@ $freetypeUrl = ('https://sourceforge.net/projects/freetype/files/freetype2/{0}/f
 $pixmanVersion = '0.34.0';
 $pixmanUrl = ('https://www.cairographics.org/releases/pixman-{0}.tar.gz' -f $pixmanVersion);
 
-$cairoVersion = '1.14.8';
+$cairoVersion = '1.14.10';
 $cairoUrl = ('https://www.cairographics.org/releases/cairo-{0}.tar.xz' -f $cairoVersion);
 
 #----------------------------------------------------------------------
