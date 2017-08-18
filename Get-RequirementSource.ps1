@@ -73,7 +73,7 @@ $libWebPUrl = ('https://github.com/webmproject/libwebp/archive/v{0}.zip' -f $lib
 # Fonts
 #----------------------------------------------------------------------
 
-$freetypeVersion = '2.7.1';
+$freetypeVersion = '2.8';
 $freetypeUrl = ('https://sourceforge.net/projects/freetype/files/freetype2/{0}/freetype-{0}.tar.bz2' -f $freetypeVersion);
 
 #----------------------------------------------------------------------
