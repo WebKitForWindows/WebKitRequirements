@@ -28,7 +28,7 @@ $zlibUrl = ('https://github.com/madler/zlib/archive/v{0}.zip' -f $zlibVersion);
 $libreSSLVersion = '2.5.5';
 $libreSSLUrl = ('http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-{0}.tar.gz' -f $libreSSLVersion);
 
-$nghttp2Version = '1.21.1';
+$nghttp2Version = '1.25.0';
 $nghttp2Url = ('https://github.com/nghttp2/nghttp2/archive/v{0}.zip' -f $nghttp2Version);
 
 $curlVersion = '7.53.1';
