@@ -38,8 +38,7 @@ $curlUrl = ('https://curl.haxx.se/download/curl-{0}.tar.gz' -f $curlVersion);
 # Internationalization
 #----------------------------------------------------------------------
 
-$icuVersion = '59rc'
-$icuUrl = ('https://sourceforge.net/projects/icu/files/ICU4C/{0}/icu4c-{1}-src.tgz' -f $icuVersion, $icuVersion.Replace(".", "_"))
+$icuVersion = '59.1'
 $icuUrl = ('http://download.icu-project.org/files/icu4c/{0}/icu4c-{1}-src.tgz' -f $icuVersion, $icuVersion.Replace(".", "_"))
 
 #----------------------------------------------------------------------
