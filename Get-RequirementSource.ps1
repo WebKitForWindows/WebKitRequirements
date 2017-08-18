@@ -63,7 +63,7 @@ $sqliteUrl = ('https://sqlite.org/2017/sqlite-amalgamation-{0}00.zip' -f $sqlite
 $libPngVersion = '1.6.30';
 $libPngUrl = ('https://downloads.sourceforge.net/project/libpng/libpng16/{0}/libpng-{0}.tar.gz' -f $libPngVersion);
 
-$libJpegTurboVersion = '1.5.1';
+$libJpegTurboVersion = '1.5.2';
 $libJpegTurboUrl = ('https://github.com/libjpeg-turbo/libjpeg-turbo/archive/{0}.zip' -f $libJpegTurboVersion);
 
 $libWebPVersion = '0.6.0';
