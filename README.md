@@ -16,5 +16,5 @@
 | [sqlite](http://sqlite.org) | 3.20.0 | 08-01-2017 |
 | [freetype](https://www.freetype.org) | 2.8.0 | 05-13-2017 |
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
-| [cairo](https://www.cairographics.org) | 1.14.8 | 12-07-2016 |
+| [cairo](https://www.cairographics.org) | 1.14.10 | 06-15-2017 |
 | [icu](http://site.icu-project.org) | 59rc | 03-31-2017 |
