@@ -45,3 +45,9 @@ $args = @{
 }
 
 & (Join-Path $PSScriptRoot Build-RequirementSource) @args
+
+#----------------------------------------------------------------------
+# Package
+#----------------------------------------------------------------------
+
+& (Join-Path $PSScriptRoot Package-RequirementSource.ps1) -Root $installationPath;
