@@ -14,6 +14,8 @@ Param(
   [string] $root = '.'
 )
 
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
+
 #----------------------------------------------------------------------
 # Compression
 #----------------------------------------------------------------------
@@ -31,7 +33,7 @@ $libreSSLUrl = ('http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-{0}.tar.gz
 $nghttp2Version = '1.25.0';
 $nghttp2Url = ('https://github.com/nghttp2/nghttp2/archive/v{0}.zip' -f $nghttp2Version);
 
-$curlVersion = '7.55.1';
+$curlVersion = '7.56.0';
 $curlUrl = ('https://curl.haxx.se/download/curl-{0}.tar.gz' -f $curlVersion);
 
 #----------------------------------------------------------------------
