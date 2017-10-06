@@ -1,0 +1,4 @@
+# Ignore default paths of Run-All.ps1
+src
+dist
+build
