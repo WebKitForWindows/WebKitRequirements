@@ -1,6 +1,59 @@
 # Building the Distribution
 
+The following section describes how to create the WinCairoRequirements release.
 
+Powershell is required to build WinCairoRequirements.
+
+## Environment setup
+
+Developers can either setup their own local development environment or can use Docker to
+build the WinCairoRequirements distribution.
+
+### Local development
+
+The following Powershell modules are required to build.
+* [WebKitDev Powershell Module](https://www.powershellgallery.com/packages/WebKitDev/)
+* [7Zip4PowerShell](https://www.powershellgallery.com/packages/7Zip4Powershell/)
+
+To install run the following commands.
+
+```powershell
+Install-Module -Name 7Zip4Powershell
+Install-Module -Name 
+```
+
+### Docker development
+* [WebKit Build Docker Image](https://hub.docker.com/r/webkitdev/msbuild/) - Use VS2015 build tools
+
+```powershell
+# Pulls the latest image
+docker pull webkitdev/msbuild:2015
+
+# Runs an interactive shell which will remove itself when completed
+docker run --name build --rm -it --cpu-count=X --memory=Yg webkitdev/msbuild:2015 powershell
+````
+
+## Building
+
+Creating a release build requires running the following commands.
+
+_Currently VS2015 is the preferred method. This will change once WebKit Windows
+builds require VS2017_
+
+```powershell
+Select-VSEnvironment -Version vs2015
+Run-All.ps1
+```
+
+The script does the following.
+* Downloads the source code releases
+* Downloads CFLite and ICU _[Open issue for removal](https://github.com/donny-dont/WinCairoRequirements/issues/9)_
+* Patches the CMake environment for the library if applicable
+* Builds the library
+* Packages the built libraries into a zip file.
+
+Once complete the zip file can be tested locally within a WebKit WinCairo
+build to verify.
 
 ## CMake Gotchas
 
