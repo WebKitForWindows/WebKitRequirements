@@ -99,28 +99,10 @@ if (WIN32)
   add_definitions(-DSQLITE_API=__declspec\(dllexport\))
 endif()
 
-add_library(sqlite3-static STATIC ${sqlite_sources})
-set_target_properties(sqlite3-static PROPERTIES OUTPUT_NAME "sqlite3")
-target_include_directories(sqlite3-static PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
-if (MSVC)
-  set_target_properties(sqlite3-static PROPERTIES PREFIX "lib")
-endif()
-
-# BUILD SHELL
-
-add_executable(sqlite-console ${console_sources})
-set_target_properties(sqlite-console PROPERTIES OUTPUT_NAME "sqlite3")
-
-if (ENABLE_STATIC_SHELL)
-  target_link_libraries(sqlite-console sqlite3)
-else()
-  target_link_libraries(sqlite-console sqlite3-static)
-endif()
-
 # INSTALL
 
 install(
-  TARGETS sqlite3 sqlite3-static sqlite-console
+  TARGETS sqlite3
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
