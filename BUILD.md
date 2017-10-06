@@ -9,11 +9,12 @@ updated and removed as they are resolved.
 
 ### LibreSSL
 
-CMake version 3.7.1 is not able to detect a LibreSSL build on Windows. If SSL
-support for CURL is not detected then update the `FindOpenSSL.cmake` to this
-[revision](https://gitlab.kitware.com/cmake/cmake/blob/9b78dca3a909ce3161d235718f935bf2fb9b7f64/Modules/FindOpenSSL.cmake).
+LibreSSL currently makes both static and dynamic builds of its libraries. CMake
+will find the static ones but will not find the dynamic. The CMake files are
+patched so `crypto` becomes `libeay32` and `ssl` becomes `ssleay32`. These
+are consistent with the filenames OpenSSL uses on Windows.
 
-This should be fixed with the 3.8.x release.
+CMake should be patched to find the names LibreSSL uses for dynamic libraries.
 
 ### libwebp
 
