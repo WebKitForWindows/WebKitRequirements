@@ -23,6 +23,8 @@ Param (
 # Get
 #----------------------------------------------------------------------
 
+# TODO: Remove CFLite https://github.com/WebKitForWindows/WinCairoRequirements/issues/9
+& (Join-Path $PSScriptRoot Get-CFLite) -Root $installationPath;
 & (Join-Path $PSScriptRoot Get-RequirementSource.ps1) -Root $sourcePath;
 
 #----------------------------------------------------------------------
