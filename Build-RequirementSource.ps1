@@ -235,3 +235,4 @@ Build-Requirement -Name 'sqlite';
 #Build-Requirement -Name 'freetype';
 Build-Requirement -Name 'pixman';
 Build-Requirement -Name 'cairo';
+Build-Requirement -Name 'pthreads';

@@ -63,3 +63,4 @@ Patch-Requirement -Name 'libxslt';
 Patch-Requirement -Name 'pixman';
 Patch-Requirement -Name 'cairo';
 Patch-Requirement -Name 'icu';
+Patch-Requirement -Name 'pthreads';

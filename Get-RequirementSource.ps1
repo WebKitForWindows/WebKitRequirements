@@ -91,6 +91,13 @@ $cairoVersion = '1.14.10';
 $cairoUrl = ('https://www.cairographics.org/releases/cairo-{0}.tar.xz' -f $cairoVersion);
 
 #----------------------------------------------------------------------
+# Porting
+#----------------------------------------------------------------------
+
+$pthreadsVersion = '2.10.0-rc';
+$pthreadsUrl = ('https://jaist.dl.sourceforge.net/project/pthreads4w/pthreads4w-code-v{0}.zip' -f $pthreadsVersion);
+
+#----------------------------------------------------------------------
 # Download function
 #----------------------------------------------------------------------
 
@@ -138,3 +145,4 @@ Get-Requirement -Name 'sqlite' -Url $sqliteUrl;
 Get-Requirement -Name 'freetype' -Url $freetypeUrl;
 Get-Requirement -Name 'pixman' -Url $pixmanUrl;
 Get-Requirement -Name 'cairo' -Url $cairoUrl;
+Get-Requirement -Name 'pthreads' -Url $pthreadsUrl;

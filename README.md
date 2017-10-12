@@ -19,3 +19,4 @@
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
 | [cairo](https://www.cairographics.org) | 1.14.10 | 06-15-2017 |
 | [icu](http://site.icu-project.org) | 59.1 | 04-14-2017 |
+| [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.10.0-rc | 10-03-2016 |
