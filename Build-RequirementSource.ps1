@@ -225,7 +225,7 @@ Build-Requirement -Name 'zlib';
 Build-Requirement -Name 'libressl';
 Build-Requirement -Name 'nghttp2' -Options $nghttp2Options;
 Build-Requirement -Name 'curl' -Options $curlOptions;
-#Build-Requirement -Name 'icu';
+Build-Requirement -Name 'icu';
 Build-Requirement -Name 'libxml2' -Options $libxml2Options;
 Build-Requirement -Name 'libxslt' -Options $libxsltOptions;
 Build-Requirement -Name 'libpng';
