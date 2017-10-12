@@ -47,7 +47,6 @@ Run-All.ps1
 
 The script does the following.
 * Downloads the source code releases
-* Downloads CFLite and ICU _[Open issue for removal](https://github.com/donny-dont/WinCairoRequirements/issues/9)_
 * Patches the CMake environment for the library if applicable
 * Builds the library
 * Packages the built libraries into a zip file.
