@@ -20,3 +20,4 @@
 | [cairo](https://www.cairographics.org) | 1.14.10 | 06-15-2017 |
 | [icu](http://site.icu-project.org) | 59.1 | 04-14-2017 |
 | [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.10.0-rc | 10-03-2016 |
+| [OpenCFLite](https://github.com/fujii/OpenCFLite) | 0.0.1 | 10-13-2017 |

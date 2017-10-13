@@ -97,6 +97,9 @@ $cairoUrl = ('https://www.cairographics.org/releases/cairo-{0}.tar.xz' -f $cairo
 $pthreadsVersion = '2.10.0-rc';
 $pthreadsUrl = ('https://jaist.dl.sourceforge.net/project/pthreads4w/pthreads4w-code-v{0}.zip' -f $pthreadsVersion);
 
+$cfLiteUrlVersion = '0.0.2';
+$cfLiteUrl = ('https://github.com/fujii/OpenCFLite/archive/v{0}.tar.gz' -f $cfLiteUrlVersion);
+
 #----------------------------------------------------------------------
 # Download function
 #----------------------------------------------------------------------
@@ -146,3 +149,4 @@ Get-Requirement -Name 'freetype' -Url $freetypeUrl;
 Get-Requirement -Name 'pixman' -Url $pixmanUrl;
 Get-Requirement -Name 'cairo' -Url $cairoUrl;
 Get-Requirement -Name 'pthreads' -Url $pthreadsUrl;
+Get-Requirement -Name 'cflite' -Url $cfLiteUrl;
