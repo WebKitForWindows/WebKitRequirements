@@ -54,7 +54,7 @@ $libxml2Url = ('ftp://xmlsoft.org/libxml2/libxml2-{0}.tar.gz' -f $libxml2Version
 # Database
 #----------------------------------------------------------------------
 
-$sqliteVersion = '3.20.01'
+$sqliteVersion = '3.21.00'
 $sqliteUrl = ('https://sqlite.org/2017/sqlite-amalgamation-{0}00.zip' -f $sqliteVersion.Replace(".", ""))
 
 #----------------------------------------------------------------------

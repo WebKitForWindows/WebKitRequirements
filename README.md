@@ -13,7 +13,7 @@
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.34 | 09-29-2017 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 1.5.2 | 08-09-2017 |
 | [libwebp](https://github.com/webmproject/libwebp) | 0.6.0 | 01-30-2017 |
-| [sqlite](http://sqlite.org) | 3.20.1 | 08-24-2017 |
+| [sqlite](http://sqlite.org) | 3.21.0 | 10-24-2017 |
 | [freetype](https://www.freetype.org) | 2.8.0 | 05-13-2017 |
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
 | [cairo](https://www.cairographics.org) | 1.14.10 | 06-15-2017 |
