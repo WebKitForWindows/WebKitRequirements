@@ -15,7 +15,7 @@ Param(
 
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
 
-$url = 'https://github.com/WebKitForWindows/WinCairoRequirements/releases/download/cflitev2017.04.05/CFLite.zip';
+$url = 'https://github.com/WebKitForWindows/WinCairoRequirements/releases/download/v2017.04.05/CFLite.zip';
 $extension = [System.IO.Path]::GetExtension($url);
 $fileName = [System.IO.Path]::GetTempFileName() | Rename-Item -NewName { $_ -replace '.tmp$', $extension } -PassThru;
 
