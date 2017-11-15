@@ -47,7 +47,7 @@ $icuUrl = ('http://download.icu-project.org/files/icu4c/{0}/icu4c-{1}-src.tgz' -
 # XML
 #----------------------------------------------------------------------
 
-$libxml2Version = '2.9.4';
+$libxml2Version = '2.9.7';
 $libxml2Url = ('ftp://xmlsoft.org/libxml2/libxml2-{0}.tar.gz' -f $libxml2Version);
 
 #----------------------------------------------------------------------

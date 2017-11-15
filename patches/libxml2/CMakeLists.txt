@@ -14,8 +14,8 @@ cmake_minimum_required(VERSION 3.7)
 
 project(xml2)
 
-set(VERSION 2.9.4)
-set(LIBXML_VERSION_NUMBER 20904)
+set(VERSION 2.9.7)
+set(LIBXML_VERSION_NUMBER 20907)
 
 set(LIBXML_THREAD_SAFETY "native" CACHE STRING "Enable thread safety")
 set_property(CACHE LIBXML_THREAD_SAFETY PROPERTY STRINGS no ctls native posix)
