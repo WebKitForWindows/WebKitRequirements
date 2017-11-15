@@ -6,7 +6,7 @@
 | Library | Version | Release Date |
 |---|:---:|:---:|
 | [zlib](http://zlib.net) | 1.2.11 | 01-15-2017 |
-| [libressl](https://www.libressl.org) | 2.6.2 | 09-26-2017 |
+| [libressl](https://www.libressl.org) | 2.6.3 | 11-06-2017 |
 | [nghttp2](https://nghttp2.org) | 1.27.0 | 10-25-2017 |
 | [curl](https://curl.haxx.se) | 7.56.1 | 10-23-2017 |
 | [libxml2](http://xmlsoft.org/) | 2.9.7 | 11-02-2016 |
