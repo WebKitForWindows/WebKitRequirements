@@ -825,7 +825,7 @@ if (BUILD_SHARED)
 	set_target_properties(crypto-shared PROPERTIES VERSION
 		${CRYPTO_VERSION} SOVERSION ${CRYPTO_MAJOR_VERSION})
 	if(ENABLE_LIBRESSL_INSTALL)
-		install(TARGETS crypto crypto-shared DESTINATION ${CMAKE_INSTALL_LIBDIR})
+		install(TARGETS crypto-shared DESTINATION ${CMAKE_INSTALL_LIBDIR})
 	endif(ENABLE_LIBRESSL_INSTALL)
 else()
 	add_library(crypto STATIC ${CRYPTO_SRC})

@@ -56,6 +56,7 @@ $root = (Resolve-Path -Path $root).Path;
 $patchPath = (Resolve-Path -Path $patchPath).Path;
 
 Patch-Requirement -Name 'libwebp';
+Patch-Requirement -Name 'libressl';
 Patch-Requirement -Name 'sqlite';
 Patch-Requirement -Name 'libxml2';
 Patch-Requirement -Name 'libxslt';
