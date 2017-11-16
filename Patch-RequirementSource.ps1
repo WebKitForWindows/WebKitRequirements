@@ -58,6 +58,7 @@ $patchPath = (Resolve-Path -Path $patchPath).Path;
 Patch-Requirement -Name 'libwebp';
 Patch-Requirement -Name 'sqlite';
 Patch-Requirement -Name 'libxml2';
+Patch-Requirement -Name 'libxslt';
 Patch-Requirement -Name 'pixman';
 Patch-Requirement -Name 'cairo';
 Patch-Requirement -Name 'icu';

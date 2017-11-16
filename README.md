@@ -9,7 +9,8 @@
 | [libressl](https://www.libressl.org) | 2.6.3 | 11-06-2017 |
 | [nghttp2](https://nghttp2.org) | 1.27.0 | 10-25-2017 |
 | [curl](https://curl.haxx.se) | 7.56.1 | 10-23-2017 |
-| [libxml2](http://xmlsoft.org/) | 2.9.7 | 11-02-2016 |
+| [libxml2](http://xmlsoft.org/) | 2.9.7 | 11-02-2017 |
+| [libxslt](http://xmlsoft.org/libxslt/) | 1.1.32 | 11-02-2017 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.34 | 09-29-2017 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 1.5.2 | 08-09-2017 |
 | [libwebp](https://github.com/webmproject/libwebp) | 0.6.0 | 01-30-2017 |

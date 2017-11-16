@@ -113,7 +113,6 @@ $libxml2Options = @(
   '-DWITH_DOCB=OFF',
   '-DWITH_FTP=OFF',
   '-DWITH_FTP=OFF',
-  '-DWITH_HTML=OFF',
   '-DWITH_HTTP=OFF',
   '-DWITH_ICONV=OFF',
   '-DWITH_ICU=ON',
@@ -131,14 +130,32 @@ $libxml2Options = @(
   '-DWITH_SAX1=ON',
   '-DWITH_SCHEMAS=OFF',
   '-DWITH_SCHEMATRON=OFF',
-  '-DWITH_TREE=OFF',
   '-DWITH_VALID=OFF',
   '-DWITH_WALKER=ON',
   '-DWITH_WRITER=OFF',
   '-DWITH_XINCLUDE=OFF',
-  '-DWITH_XPATH=OFF',
   '-DWITH_XPTR=OFF',
-  '-DWITH_ZLIB=OFF'
+  '-DWITH_ZLIB=OFF',
+
+  # Requirements XSLT
+  '-DWITH_HTML=ON',
+  '-DWITH_TREE=ON',
+  '-DWITH_XPATH=ON'
+);
+
+#----------------------------------------------------------------------
+# libxslt options
+#----------------------------------------------------------------------
+
+$libxsltOptions = @(
+  '-DWITH_TRIO=OFF',
+  '-DWITH_XSLT_DEBUG=OFF',
+  '-DWITH_MEM_DEBUG=OFF',
+  '-DWITH_DEBUGGER=OFF',
+  '-DWITH_ICONV=OFF',
+  '-DWITH_ZLIB=OFF',
+  '-DWITH_CRYPTO=OFF',
+  '-DWITH_MODULES=OFF'
 );
 
 #----------------------------------------------------------------------
@@ -210,6 +227,7 @@ Build-Requirement -Name 'nghttp2' -Options $nghttp2Options;
 Build-Requirement -Name 'curl' -Options $curlOptions;
 #Build-Requirement -Name 'icu';
 Build-Requirement -Name 'libxml2' -Options $libxml2Options;
+Build-Requirement -Name 'libxslt' -Options $libxsltOptions;
 Build-Requirement -Name 'libpng';
 Build-Requirement -Name 'libjpeg-turbo';
 Build-Requirement -Name 'libwebp';

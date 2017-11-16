@@ -50,6 +50,9 @@ $icuUrl = ('http://download.icu-project.org/files/icu4c/{0}/icu4c-{1}-src.tgz' -
 $libxml2Version = '2.9.7';
 $libxml2Url = ('ftp://xmlsoft.org/libxml2/libxml2-{0}.tar.gz' -f $libxml2Version);
 
+$libxsltVersion = '1.1.32';
+$libxsltUrl = ('ftp://xmlsoft.org/libxml2/libxslt-{0}.tar.gz' -f $libxsltVersion);
+
 #----------------------------------------------------------------------
 # Database
 #----------------------------------------------------------------------
@@ -127,6 +130,7 @@ Get-Requirement -Name 'nghttp2' -Url $nghttp2Url;
 Get-Requirement -Name 'curl' -Url $curlUrl;
 Get-Requirement -Name 'icu' -Url $icuUrl;
 Get-Requirement -Name 'libxml2' -Url $libxml2Url;
+Get-Requirement -Name 'libxslt' -Url $libxsltUrl;
 Get-Requirement -Name 'libpng' -Url $libPngUrl;
 Get-Requirement -Name 'libjpeg-turbo' -Url $libJpegTurboUrl;
 Get-Requirement -Name 'libwebp' -Url $libWebPUrl;
