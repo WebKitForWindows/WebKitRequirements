@@ -70,7 +70,7 @@ $libPngUrl = ('https://downloads.sourceforge.net/project/libpng/libpng16/{0}/lib
 $libJpegTurboVersion = '1.5.2';
 $libJpegTurboUrl = ('https://github.com/libjpeg-turbo/libjpeg-turbo/archive/{0}.zip' -f $libJpegTurboVersion);
 
-$libWebPVersion = '0.6.0';
+$libWebPVersion = '0.6.1';
 $libWebPUrl = ('https://github.com/webmproject/libwebp/archive/v{0}.zip' -f $libWebPVersion);
 
 #----------------------------------------------------------------------
