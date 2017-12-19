@@ -22,8 +22,6 @@ Param(
 
 $binDirectory = Join-Path $root 'bin'
 $libDirectory = Join-Path $root 'lib'
-$docDirectory = Join-Path $root 'doc'
-$shareDirectory = Join-Path $root 'share'
 
 #----------------------------------------------------------------------
 # Clean directory
@@ -55,15 +53,23 @@ Function Clean-Directory {
 # Remove unused directories
 #----------------------------------------------------------------------
 
-if (Test-Path $docDirectory) {
-  Write-Host ('Removing doc directory at {0}' -f $docDirectory)
-  Remove-Item -Path $docDirectory -Recurse
+Function Remove-Directory {
+  Param(
+    [Parameter(Mandatory)]
+    [string] $name
+  )
+
+  $directory = Join-Path $root $name;
+
+  if (Test-Path $directory) {
+    Write-Host ('Removing {0} directory at {1}' -f $name, $directory);
+    Remove-Item -Path $directory -Recurse;
+  }
 }
 
-if (Test-Path $shareDirectory) {
-  Write-Host ('Removing share directory at {0}' -f $shareDirectory)
-  Remove-Item -Path $shareDirectory -Recurse
-}
+Remove-Directory -Name 'CMake';
+Remove-Directory -Name 'doc';
+Remove-Directory -Name 'share';
 
 #----------------------------------------------------------------------
 # Move dll files into bin
