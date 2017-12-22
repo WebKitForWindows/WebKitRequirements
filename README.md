@@ -7,7 +7,7 @@
 |---|:---:|:---:|
 | [zlib](http://zlib.net) | 1.2.11 | 01-15-2017 |
 | [libressl](https://www.libressl.org) | 2.6.3 | 11-06-2017 |
-| [nghttp2](https://nghttp2.org) | 1.28.0 | 11-25-2017 |
+| [nghttp2](https://nghttp2.org) | 1.29.0 | 12-19-2017 |
 | [curl](https://curl.haxx.se) | 7.57.0 | 11-29-2017 |
 | [libxml2](http://xmlsoft.org/) | 2.9.7 | 11-02-2017 |
 | [libxslt](http://xmlsoft.org/libxslt/) | 1.1.32 | 11-02-2017 |
