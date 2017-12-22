@@ -12,7 +12,7 @@
 | [libxml2](http://xmlsoft.org/) | 2.9.7 | 11-02-2017 |
 | [libxslt](http://xmlsoft.org/libxslt/) | 1.1.32 | 11-02-2017 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.34 | 09-29-2017 |
-| [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 1.5.2 | 08-09-2017 |
+| [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 1.5.3 | 12-14-2017 |
 | [libwebp](https://github.com/webmproject/libwebp) | 0.6.1 | 11-24-2017 |
 | [sqlite](http://sqlite.org) | 3.21.0 | 10-24-2017 |
 | [freetype](https://www.freetype.org) | 2.8.1 | 09-16-2017 |
