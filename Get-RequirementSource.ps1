@@ -27,7 +27,7 @@ $zlibUrl = ('https://github.com/madler/zlib/archive/v{0}.zip' -f $zlibVersion);
 # Networking
 #----------------------------------------------------------------------
 
-$libreSSLVersion = '2.6.3';
+$libreSSLVersion = '2.6.4';
 $libreSSLUrl = ('http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-{0}.tar.gz' -f $libreSSLVersion);
 
 $nghttp2Version = '1.29.0';
