@@ -16,3 +16,4 @@
 
 | Library | Version | Release Date |
 |---|:---:|:---:|
+| [brotli](https://github.com/google/brotli) | 1.0.3 | 03-02-2018 |
