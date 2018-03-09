@@ -1,0 +1,29 @@
+From fbfe056e4d6347c30e6b1c3ce224304beeb44b7f Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Thu, 8 Mar 2018 18:18:00 -0800
+Subject: [PATCH 2/3] Fix library install destination
+
+Currently nghttp2 will install the dynamic and static targets into the lib
+directory. This puts them in the location expected by vcpkg.
+---
+ lib/CMakeLists.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index f69254f3..a2c94d8a 100644
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -64,7 +64,9 @@ if(HAVE_CUNIT)
+ endif()
+ 
+ install(TARGETS nghttp2
+-  DESTINATION "${CMAKE_INSTALL_LIBDIR}")
++  ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++  RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+ 
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libnghttp2.pc"
+   DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+-- 
+2.14.1.windows.1
+
