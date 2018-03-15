@@ -1,0 +1,602 @@
+From e995ec8e3989d4942e07c57f988dda141973a10b Mon Sep 17 00:00:00 2001
+From: Mika Lindqvist <postmaster@raasu.org>
+Date: Thu, 15 Mar 2018 09:31:05 -0700
+Subject: [PATCH 3/3] Move private defines from zconf.h and zconf-ng.h to
+ zbuild.h
+
+Corresponds to https://github.com/Dead2/zlib-ng/pull/162 which is needed to get Windows back to building.
+---
+ adler32.c                         |  1 +
+ arch/aarch64/fill_window_arm.c    |  1 +
+ arch/aarch64/insert_string_acle.c |  1 +
+ arch/arm/fill_window_arm.c        |  1 +
+ arch/arm/insert_string_acle.c     |  1 +
+ arch/x86/crc_folding.c            |  1 +
+ arch/x86/crc_pclmulqdq.c          |  1 +
+ arch/x86/deflate_quick.c          |  1 +
+ arch/x86/fill_window_sse.c        |  1 +
+ arch/x86/insert_string_sse.c      |  1 +
+ compress.c                        |  5 ++---
+ crc32.c                           |  1 +
+ deflate.c                         |  1 +
+ deflate_fast.c                    |  1 +
+ deflate_medium.c                  |  1 +
+ deflate_slow.c                    |  1 +
+ functable.c                       |  1 +
+ gzclose.c                         |  1 +
+ gzlib.c                           |  1 +
+ gzread.c                          |  1 +
+ gzwrite.c                         |  1 +
+ infback.c                         |  1 +
+ inffast.c                         |  1 +
+ inflate.c                         |  1 +
+ inftrees.c                        |  1 +
+ match.c                           |  1 +
+ test/example.c                    | 23 ++++++++++++-----------
+ test/minigzip.c                   |  1 +
+ trees.c                           |  1 +
+ uncompr.c                         |  5 ++---
+ win32/Makefile.msc                |  2 +-
+ zbuild.h                          | 24 ++++++++++++++++++++++++
+ zconf-ng.h.in                     |  5 -----
+ zconf.h.in                        |  5 -----
+ zutil.c                           |  1 +
+ 35 files changed, 69 insertions(+), 28 deletions(-)
+ create mode 100644 zbuild.h
+
+diff --git a/adler32.c b/adler32.c
+index 24e9593..5724b2d 100644
+--- a/adler32.c
++++ b/adler32.c
+@@ -5,6 +5,7 @@
+ 
+ /* @(#) $Id$ */
+ 
++#include "zbuild.h"
+ #include "zutil.h"
+ #include "functable.h"
+ 
+diff --git a/arch/aarch64/fill_window_arm.c b/arch/aarch64/fill_window_arm.c
+index e7388a8..3df6d63 100644
+--- a/arch/aarch64/fill_window_arm.c
++++ b/arch/aarch64/fill_window_arm.c
+@@ -10,6 +10,7 @@
+ 
+ /* @(#) $Id$ */
+ 
++#include "zbuild.h"
+ #include "deflate.h"
+ #include "deflate_p.h"
+ #include "functable.h"
+diff --git a/arch/aarch64/insert_string_acle.c b/arch/aarch64/insert_string_acle.c
+index 629614c..49f11cb 100644
+--- a/arch/aarch64/insert_string_acle.c
++++ b/arch/aarch64/insert_string_acle.c
+@@ -5,6 +5,7 @@
+  *
+  */
+ 
++#include "zbuild.h"
+ #ifdef __ARM_FEATURE_CRC32
+ #include <arm_acle.h>
+ #endif
+diff --git a/arch/arm/fill_window_arm.c b/arch/arm/fill_window_arm.c
+index c27db3c..8065e41 100644
+--- a/arch/arm/fill_window_arm.c
++++ b/arch/arm/fill_window_arm.c
+@@ -10,6 +10,7 @@
+ 
+ /* @(#) $Id$ */
+ 
++#include "zbuild.h"
+ #include "deflate.h"
+ #include "deflate_p.h"
+ #include "functable.h"
+diff --git a/arch/arm/insert_string_acle.c b/arch/arm/insert_string_acle.c
+index 629614c..49f11cb 100644
+--- a/arch/arm/insert_string_acle.c
++++ b/arch/arm/insert_string_acle.c
+@@ -5,6 +5,7 @@
+  *
+  */
+ 
++#include "zbuild.h"
+ #ifdef __ARM_FEATURE_CRC32
+ #include <arm_acle.h>
+ #endif
+diff --git a/arch/x86/crc_folding.c b/arch/x86/crc_folding.c
+index 503c39f..fb9ccba 100644
+--- a/arch/x86/crc_folding.c
++++ b/arch/x86/crc_folding.c
+@@ -18,6 +18,7 @@
+ 
+ #ifdef X86_PCLMULQDQ_CRC
+ 
++#include "zbuild.h"
+ #include <inttypes.h>
+ #include <immintrin.h>
+ #include <wmmintrin.h>
+diff --git a/arch/x86/crc_pclmulqdq.c b/arch/x86/crc_pclmulqdq.c
+index ac0b7eb..0c2896a 100644
+--- a/arch/x86/crc_pclmulqdq.c
++++ b/arch/x86/crc_pclmulqdq.c
+@@ -4,6 +4,7 @@
+  *
+  */
+ 
++#include "zbuild.h"
+ #include "x86.h"
+ #include "crc_folding.h"
+ #include "deflate.h"
+diff --git a/arch/x86/deflate_quick.c b/arch/x86/deflate_quick.c
+index 2c645b8..dc72ca5 100644
+--- a/arch/x86/deflate_quick.c
++++ b/arch/x86/deflate_quick.c
+@@ -17,6 +17,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
++#include "zbuild.h"
+ #include <immintrin.h>
+ #ifdef _MSC_VER
+ #  include <nmmintrin.h>
+diff --git a/arch/x86/fill_window_sse.c b/arch/x86/fill_window_sse.c
+index 7d6f88d..91e56b2 100644
+--- a/arch/x86/fill_window_sse.c
++++ b/arch/x86/fill_window_sse.c
+@@ -10,6 +10,7 @@
+  */
+ #ifdef X86_SSE2_FILL_WINDOW
+ 
++#include "zbuild.h"
+ #include <immintrin.h>
+ #include "deflate.h"
+ #include "deflate_p.h"
+diff --git a/arch/x86/insert_string_sse.c b/arch/x86/insert_string_sse.c
+index a0ae932..cb756ac 100644
+--- a/arch/x86/insert_string_sse.c
++++ b/arch/x86/insert_string_sse.c
+@@ -5,6 +5,7 @@
+  *
+  */
+ 
++#include "zbuild.h"
+ #include "deflate.h"
+ 
+ /* ===========================================================================
+diff --git a/compress.c b/compress.c
+index b065918..6b493fd 100644
+--- a/compress.c
++++ b/compress.c
+@@ -6,12 +6,11 @@
+ /* @(#) $Id$ */
+ 
+ #define ZLIB_INTERNAL
++#include "zbuild.h"
+ #if defined(ZLIB_COMPAT)
+ # include "zlib.h"
+-# define z_size_t unsigned long
+ #else
+ # include "zlib-ng.h"
+-# define z_size_t size_t
+ #endif
+ 
+ /* ===========================================================================
+@@ -60,7 +59,7 @@ int ZEXPORT PREFIX(compress2)(unsigned char *dest, z_size_t *destLen, const unsi
+         err = PREFIX(deflate)(&stream, sourceLen ? Z_NO_FLUSH : Z_FINISH);
+     } while (err == Z_OK);
+ 
+-    *destLen = stream.total_out;
++    *destLen = (z_size_t)stream.total_out;
+     PREFIX(deflateEnd)(&stream);
+     return err == Z_STREAM_END ? Z_OK : err;
+ }
+diff --git a/crc32.c b/crc32.c
+index 8883358..e0f9ec4 100644
+--- a/crc32.c
++++ b/crc32.c
+@@ -11,6 +11,7 @@
+ 
+ /* @(#) $Id$ */
+ 
++# include "zbuild.h"
+ # include "gzendian.h"
+ 
+ /*
+diff --git a/deflate.c b/deflate.c
+index 54e84d3..13ebc8b 100644
+--- a/deflate.c
++++ b/deflate.c
+@@ -49,6 +49,7 @@
+ 
+ /* @(#) $Id$ */
+ 
++#include "zbuild.h"
+ #include "deflate.h"
+ #include "deflate_p.h"
+ #include "match.h"
+diff --git a/deflate_fast.c b/deflate_fast.c
+index e36bd79..7c74dbe 100644
+--- a/deflate_fast.c
++++ b/deflate_fast.c
+@@ -4,6 +4,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
++#include "zbuild.h"
+ #include "deflate.h"
+ #include "deflate_p.h"
+ #include "match.h"
+diff --git a/deflate_medium.c b/deflate_medium.c
+index cfff294..5cb0737 100644
+--- a/deflate_medium.c
++++ b/deflate_medium.c
+@@ -7,6 +7,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ #ifdef MEDIUM_STRATEGY
++#include "zbuild.h"
+ #include "deflate.h"
+ #include "deflate_p.h"
+ #include "match.h"
+diff --git a/deflate_slow.c b/deflate_slow.c
+index 2cbb1e0..1763477 100644
+--- a/deflate_slow.c
++++ b/deflate_slow.c
+@@ -4,6 +4,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
++#include "zbuild.h"
+ #include "deflate.h"
+ #include "deflate_p.h"
+ #include "match.h"
+diff --git a/functable.c b/functable.c
+index 3921fc9..d58ddbd 100644
+--- a/functable.c
++++ b/functable.c
+@@ -3,6 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
++#include "zbuild.h"
+ #include "functable.h"
+ #include "deflate.h"
+ #include "deflate_p.h"
+diff --git a/gzclose.c b/gzclose.c
+index 12f34c5..bafb774 100644
+--- a/gzclose.c
++++ b/gzclose.c
+@@ -3,6 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
++#include "zbuild.h"
+ #include "gzguts.h"
+ 
+ /* gzclose() is in a separate file so that it is linked in only if it is used.
+diff --git a/gzlib.c b/gzlib.c
+index 7b0e136..946fb2b 100644
+--- a/gzlib.c
++++ b/gzlib.c
+@@ -3,6 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
++#include "zbuild.h"
+ #include "gzguts.h"
+ 
+ #if defined(WIN32) && !defined(__BORLANDC__) && !defined(__MINGW32__)
+diff --git a/gzread.c b/gzread.c
+index 47f2f75..dc4f50f 100644
+--- a/gzread.c
++++ b/gzread.c
+@@ -3,6 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
++#include "zbuild.h"
+ #include "gzguts.h"
+ 
+ /* Local functions */
+diff --git a/gzwrite.c b/gzwrite.c
+index f07dc1a..0476d9a 100644
+--- a/gzwrite.c
++++ b/gzwrite.c
+@@ -3,6 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
++#include "zbuild.h"
+ #include <stdarg.h>
+ #include "gzguts.h"
+ 
+diff --git a/infback.c b/infback.c
+index 337a3ba..04553b7 100644
+--- a/infback.c
++++ b/infback.c
+@@ -10,6 +10,7 @@
+    inflate_fast() can be used with either inflate.c or infback.c.
+  */
+ 
++#include "zbuild.h"
+ #include "zutil.h"
+ #include "inftrees.h"
+ #include "inflate.h"
+diff --git a/inffast.c b/inffast.c
+index ca05b2f..501a42d 100644
+--- a/inffast.c
++++ b/inffast.c
+@@ -3,6 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
++#include "zbuild.h"
+ #include "zutil.h"
+ #include "inftrees.h"
+ #include "inflate.h"
+diff --git a/inflate.c b/inflate.c
+index 8b3e930..bbab72e 100644
+--- a/inflate.c
++++ b/inflate.c
+@@ -80,6 +80,7 @@
+  * The history for versions after 1.2.0 are in ChangeLog in zlib distribution.
+  */
+ 
++#include "zbuild.h"
+ #include "zutil.h"
+ #include "inftrees.h"
+ #include "inflate.h"
+diff --git a/inftrees.c b/inftrees.c
+index 3f4bb01..51e8537 100644
+--- a/inftrees.c
++++ b/inftrees.c
+@@ -3,6 +3,7 @@
+  * For conditions of distribution and use, see copyright notice in zlib.h
+  */
+ 
++#include "zbuild.h"
+ #include "zutil.h"
+ #include "inftrees.h"
+ 
+diff --git a/match.c b/match.c
+index a3885cc..fd55c3e 100644
+--- a/match.c
++++ b/match.c
+@@ -8,6 +8,7 @@
+  * OUT assertion: the match length is not greater than s->lookahead
+  */
+ 
++#include "zbuild.h"
+ #include "deflate.h"
+ 
+ #if (defined(UNALIGNED_OK) && MAX_MATCH == 258)
+diff --git a/test/example.c b/test/example.c
+index 77c53bf..b31b4cb 100644
+--- a/test/example.c
++++ b/test/example.c
+@@ -5,6 +5,7 @@
+ 
+ /* @(#) $Id$ */
+ 
++#include "zbuild.h"
+ #ifdef ZLIB_COMPAT
+ #  include "zlib.h"
+ #else
+@@ -38,7 +39,7 @@ void test_deflate       (unsigned char *compr, size_t comprLen);
+ void test_inflate       (unsigned char *compr, size_t comprLen, unsigned char *uncompr, size_t uncomprLen);
+ void test_large_deflate (unsigned char *compr, size_t comprLen, unsigned char *uncompr, size_t uncomprLen);
+ void test_large_inflate (unsigned char *compr, size_t comprLen, unsigned char *uncompr, size_t uncomprLen);
+-void test_flush         (unsigned char *compr, size_t *comprLen);
++void test_flush         (unsigned char *compr, z_size_t *comprLen);
+ void test_sync          (unsigned char *compr, size_t comprLen, unsigned char *uncompr, size_t uncomprLen);
+ void test_dict_deflate  (unsigned char *compr, size_t comprLen);
+ void test_dict_inflate  (unsigned char *compr, size_t comprLen, unsigned char *uncompr, size_t uncomprLen);
+@@ -48,18 +49,18 @@ int  main               (int argc, char *argv[]);
+ static alloc_func zalloc = NULL;
+ static free_func zfree = NULL;
+ 
+-void test_compress      (unsigned char *compr, size_t comprLen,
+-                            unsigned char *uncompr, size_t uncomprLen);
++void test_compress      (unsigned char *compr, z_size_t comprLen,
++                            unsigned char *uncompr, z_size_t uncomprLen);
+ 
+ /* ===========================================================================
+  * Test compress() and uncompress()
+  */
+-void test_compress(unsigned char *compr, size_t comprLen, unsigned char *uncompr, size_t uncomprLen)
++void test_compress(unsigned char *compr, z_size_t comprLen, unsigned char *uncompr, z_size_t uncomprLen)
+ {
+     int err;
+     size_t len = strlen(hello)+1;
+ 
+-    err = PREFIX(compress)(compr, &comprLen, (const unsigned char*)hello, len);
++    err = PREFIX(compress)(compr, &comprLen, (const unsigned char*)hello, (z_size_t)len);
+     CHECK_ERR(err, "compress");
+ 
+     strcpy((char*)uncompr, "garbage");
+@@ -77,12 +78,12 @@ void test_compress(unsigned char *compr, size_t comprLen, unsigned char *uncompr
+ 
+ #ifdef WITH_GZFILEOP
+ void test_gzio          (const char *fname,
+-                            unsigned char *uncompr, size_t uncomprLen);
++                            unsigned char *uncompr, z_size_t uncomprLen);
+ 
+ /* ===========================================================================
+  * Test read/write of .gz files
+  */
+-void test_gzio(const char *fname, unsigned char *uncompr, size_t uncomprLen)
++void test_gzio(const char *fname, unsigned char *uncompr, z_size_t uncomprLen)
+ {
+ #ifdef NO_GZCOMPRESS
+     fprintf(stderr, "NO_GZCOMPRESS -- gz* functions cannot compress\n");
+@@ -332,7 +333,7 @@ void test_large_inflate(unsigned char *compr, size_t comprLen, unsigned char *un
+ /* ===========================================================================
+  * Test deflate() with full flush
+  */
+-void test_flush(unsigned char *compr, size_t *comprLen)
++void test_flush(unsigned char *compr, z_size_t *comprLen)
+ {
+     PREFIX3(stream) c_stream; /* compression stream */
+     int err;
+@@ -362,7 +363,7 @@ void test_flush(unsigned char *compr, size_t *comprLen)
+     err = PREFIX(deflateEnd)(&c_stream);
+     CHECK_ERR(err, "deflateEnd");
+ 
+-    *comprLen = c_stream.total_out;
++    *comprLen = (z_size_t)c_stream.total_out;
+ }
+ 
+ /* ===========================================================================
+@@ -497,8 +498,8 @@ void test_dict_inflate(unsigned char *compr, size_t comprLen, unsigned char *unc
+ int main(int argc, char *argv[])
+ {
+     unsigned char *compr, *uncompr;
+-    size_t comprLen = 10000*sizeof(int); /* don't overflow on MSDOS */
+-    size_t uncomprLen = comprLen;
++    z_size_t comprLen = 10000*sizeof(int); /* don't overflow on MSDOS */
++    z_size_t uncomprLen = comprLen;
+     static const char* myVersion = PREFIX2(VERSION);
+ 
+     if (zVersion()[0] != myVersion[0]) {
+diff --git a/test/minigzip.c b/test/minigzip.c
+index e19bda1..dc06c35 100644
+--- a/test/minigzip.c
++++ b/test/minigzip.c
+@@ -14,6 +14,7 @@
+ 
+ /* @(#) $Id$ */
+ 
++#include "zbuild.h"
+ #ifdef ZLIB_COMPAT
+ # include "zlib.h"
+ #else
+diff --git a/trees.c b/trees.c
+index eedfdf0..5a321b9 100644
+--- a/trees.c
++++ b/trees.c
+@@ -34,6 +34,7 @@
+ 
+ /* #define GEN_TREES_H */
+ 
++#include "zbuild.h"
+ #include "deflate.h"
+ 
+ #ifdef ZLIB_DEBUG
+diff --git a/uncompr.c b/uncompr.c
+index 68a29cf..9f0ac2a 100644
+--- a/uncompr.c
++++ b/uncompr.c
+@@ -6,12 +6,11 @@
+ /* @(#) $Id$ */
+ 
+ #define ZLIB_INTERNAL
++#include "zbuild.h"
+ #ifdef ZLIB_COMPAT
+ # include "zlib.h"
+-# define z_size_t unsigned long
+ #else
+ # include "zlib-ng.h"
+-# define z_size_t size_t
+ #endif
+ 
+ /* ===========================================================================
+@@ -73,7 +72,7 @@ int ZEXPORT PREFIX(uncompress2)(unsigned char *dest, z_size_t *destLen, const un
+ 
+     *sourceLen -= len + stream.avail_in;
+     if (dest != buf)
+-        *destLen = stream.total_out;
++        *destLen = (z_size_t)stream.total_out;
+     else if (stream.total_out && err == Z_BUF_ERROR)
+         left = 1;
+ 
+diff --git a/win32/Makefile.msc b/win32/Makefile.msc
+index 38c3720..430c8fa 100644
+--- a/win32/Makefile.msc
++++ b/win32/Makefile.msc
+@@ -37,7 +37,7 @@ OBJS = adler32.obj compress.obj crc32.obj deflate.obj deflate_fast.obj deflate_q
+        functable.obj infback.obj inflate.obj inftrees.obj inffast.obj match.obj trees.obj uncompr.obj zutil.obj \
+        x86.obj fill_window_sse.obj insert_string_sse.obj crc_folding.obj crc_pclmulqdq.obj
+ !if "$(WITH_GZFILEOP)" != ""
+-WFLAGS = $(WFLAGS) -DWITH_GZFILEOP
++WFLAGS = $(WFLAGS) -DZLIB_COMPAT -DWITH_GZFILEOP
+ OBJS = $(OBJS) gzclose.obj gzlib.obj gzread.obj gzwrite.obj
+ DEFFILE = zlibcompat.def
+ !else
+diff --git a/zbuild.h b/zbuild.h
+new file mode 100644
+index 0000000..e2e6fc3
+--- /dev/null
++++ b/zbuild.h
+@@ -0,0 +1,24 @@
++#ifndef _ZBUILD_H
++#define _ZBUILD_H
++
++/* This has to be first include that defines any types */
++#if defined(_MSC_VER)
++#  include <windows.h>
++   typedef SSIZE_T ssize_t;
++#endif
++
++#if defined(ZLIB_COMPAT)
++#  define PREFIX(x) x
++#  define PREFIX2(x) ZLIB_ ## x
++#  define PREFIX3(x) z_ ## x
++#  define zVersion zlibVersion
++#  define z_size_t unsigned long
++#else
++#  define PREFIX(x) zng_ ## x
++#  define PREFIX2(x) ZLIBNG_ ## x
++#  define PREFIX3(x) zng_ ## x
++#  define zVersion zlibng_version
++#  define z_size_t size_t
++#endif
++
++#endif
+diff --git a/zconf-ng.h.in b/zconf-ng.h.in
+index 204c0ad..ebeeb84 100644
+--- a/zconf-ng.h.in
++++ b/zconf-ng.h.in
+@@ -8,11 +8,6 @@
+ #ifndef ZCONFNG_H
+ #define ZCONFNG_H
+ 
+-#define PREFIX(x) zng_ ## x
+-#define PREFIX2(x) ZLIBNG_ ## x
+-#define PREFIX3(x) zng_ ## x
+-#define zVersion zlibng_version
+-
+ #if defined(_WINDOWS) && !defined(WINDOWS)
+ #  define WINDOWS
+ #endif
+diff --git a/zconf.h.in b/zconf.h.in
+index a7c6ba6..d7cbd13 100644
+--- a/zconf.h.in
++++ b/zconf.h.in
+@@ -8,11 +8,6 @@
+ #ifndef ZCONF_H
+ #define ZCONF_H
+ 
+-#define PREFIX(x) x
+-#define PREFIX2(x) ZLIB_ ## x
+-#define PREFIX3(x) z_ ## x
+-#define zVersion zlibVersion
+-
+ #if defined(_WINDOWS) && !defined(WINDOWS)
+ #  define WINDOWS
+ #endif
+diff --git a/zutil.c b/zutil.c
+index 70ffb84..84720e6 100644
+--- a/zutil.c
++++ b/zutil.c
+@@ -5,6 +5,7 @@
+ 
+ /* @(#) $Id$ */
+ 
++#include "zbuild.h"
+ #include "zutil.h"
+ #ifdef WITH_GZFILEOP
+ #  include "gzguts.h"
+-- 
+2.14.1.windows.1
+

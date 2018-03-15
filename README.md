@@ -16,5 +16,6 @@
 
 | Library | Version | Release Date |
 |---|:---:|:---:|
+| [zlib](https://github.com/Dead2/zlib-ng) | N/A | 03-04-2018 |
 | [brotli](https://github.com/google/brotli) | 1.0.3 | 03-02-2018 |
 | [nghttp2](https://nghttp2.org) | 1.31.0 | 02-27-2018 |

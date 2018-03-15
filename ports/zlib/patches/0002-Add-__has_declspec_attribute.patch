@@ -1,0 +1,149 @@
+From f423348575bbd0eb84a79e54a117cb2b930d9b38 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Thu, 15 Mar 2018 09:28:57 -0700
+Subject: [PATCH 2/3] Add __has_declspec_attribute
+
+Clang contains __has_declspec_attribute for MSVC compatibility. This can be
+used to determine whether __declspec is available.
+---
+ zconf-ng.h.in | 40 ++++++++++++++++++----------------------
+ zconf.h.in    | 40 ++++++++++++++++++----------------------
+ zutil.h       |  2 +-
+ 3 files changed, 37 insertions(+), 45 deletions(-)
+
+diff --git a/zconf-ng.h.in b/zconf-ng.h.in
+index c6b06a2..204c0ad 100644
+--- a/zconf-ng.h.in
++++ b/zconf-ng.h.in
+@@ -30,6 +30,10 @@
+ #  endif
+ #endif
+ 
++#ifndef __has_declspec_attribute
++#  define __has_declspec_attribute(x) 0
++#endif
++
+ /* Maximum value for memLevel in deflateInit2 */
+ #ifndef MAX_MEM_LEVEL
+ #  define MAX_MEM_LEVEL 9
+@@ -60,30 +64,22 @@
+                         /* Type declarations */
+ 
+ 
+-#if defined(WINDOWS) || defined(WIN32)
+-   /* If building or using zlib as a DLL, define ZLIB_DLL.
+-    * This is not mandatory, but it offers a little performance increase.
+-    */
+-#  ifdef ZLIB_DLL
+-#    if defined(WIN32) && (!defined(__BORLANDC__) || (__BORLANDC__ >= 0x500))
+-#      ifdef ZLIB_INTERNAL
+-#        define ZEXTERN extern __declspec(dllexport)
+-#      else
+-#        define ZEXTERN extern __declspec(dllimport)
+-#      endif
++#ifdef ZLIB_DLL
++#  if defined(WIN32) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
++#    ifdef ZLIB_INTERNAL
++#      define ZEXTERN extern __declspec(dllexport)
++#    else
++#      define ZEXTERN extern __declspec(dllimport)
+ #    endif
+-#  endif  /* ZLIB_DLL */
+-   /* If building or using zlib with the WINAPI/WINAPIV calling convention,
+-    * define ZLIB_WINAPI.
+-    * Caution: the standard ZLIB1.DLL is NOT compiled using ZLIB_WINAPI.
+-    */
+-#  ifdef ZLIB_WINAPI
+-#    include <windows.h>
+-     /* No need for _export, use ZLIB.DEF instead. */
+-     /* For complete Windows compatibility, use WINAPI, not __stdcall. */
+-#    define ZEXPORT WINAPI
+-#    define ZEXPORTVA WINAPIV
+ #  endif
++#endif  /* ZLIB_DLL */
++
++#ifdef ZLIB_WINAPI
++#  include <windows.h>
++   /* No need for _export, use ZLIB.DEF instead. */
++   /* For complete Windows compatibility, use WINAPI, not __stdcall. */
++#  define ZEXPORT WINAPI
++#  define ZEXPORTVA WINAPIV
+ #endif
+ 
+ #ifndef ZEXTERN
+diff --git a/zconf.h.in b/zconf.h.in
+index 73b204b..a7c6ba6 100644
+--- a/zconf.h.in
++++ b/zconf.h.in
+@@ -30,6 +30,10 @@
+ #  endif
+ #endif
+ 
++#ifndef __has_declspec_attribute
++#  define __has_declspec_attribute(x) 0
++#endif
++
+ /* Maximum value for memLevel in deflateInit2 */
+ #ifndef MAX_MEM_LEVEL
+ #  define MAX_MEM_LEVEL 9
+@@ -60,30 +64,22 @@
+                         /* Type declarations */
+ 
+ 
+-#if defined(WINDOWS) || defined(WIN32)
+-   /* If building or using zlib as a DLL, define ZLIB_DLL.
+-    * This is not mandatory, but it offers a little performance increase.
+-    */
+-#  ifdef ZLIB_DLL
+-#    if defined(WIN32) && (!defined(__BORLANDC__) || (__BORLANDC__ >= 0x500))
+-#      ifdef ZLIB_INTERNAL
+-#        define ZEXTERN extern __declspec(dllexport)
+-#      else
+-#        define ZEXTERN extern __declspec(dllimport)
+-#      endif
++#ifdef ZLIB_DLL
++#  if defined(WIN32) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
++#    ifdef ZLIB_INTERNAL
++#      define ZEXTERN extern __declspec(dllexport)
++#    else
++#      define ZEXTERN extern __declspec(dllimport)
+ #    endif
+-#  endif  /* ZLIB_DLL */
+-   /* If building or using zlib with the WINAPI/WINAPIV calling convention,
+-    * define ZLIB_WINAPI.
+-    * Caution: the standard ZLIB1.DLL is NOT compiled using ZLIB_WINAPI.
+-    */
+-#  ifdef ZLIB_WINAPI
+-#    include <windows.h>
+-     /* No need for _export, use ZLIB.DEF instead. */
+-     /* For complete Windows compatibility, use WINAPI, not __stdcall. */
+-#    define ZEXPORT WINAPI
+-#    define ZEXPORTVA WINAPIV
+ #  endif
++#endif  /* ZLIB_DLL */
++
++#ifdef ZLIB_WINAPI
++#  include <windows.h>
++   /* No need for _export, use ZLIB.DEF instead. */
++   /* For complete Windows compatibility, use WINAPI, not __stdcall. */
++#  define ZEXPORT WINAPI
++#  define ZEXPORTVA WINAPIV
+ #endif
+ 
+ #ifndef ZEXTERN
+diff --git a/zutil.h b/zutil.h
+index 4889c21..73fa0a3 100644
+--- a/zutil.h
++++ b/zutil.h
+@@ -208,7 +208,7 @@ void ZLIB_INTERNAL   zcfree(void *opaque, void *ptr);
+ #  endif
+ #endif /* (un)likely */
+ 
+-#if defined(_MSC_VER)
++#if defined(_MSC_VER) || __has_declspec_attribute(align)
+ #define ALIGNED_(x) __declspec(align(x))
+ #else
+ #if defined(__GNUC__)
+-- 
+2.14.1.windows.1
+
