@@ -1,0 +1,54 @@
+From 207f1d520d55104b3438c125ed74d58799c58633 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Wed, 21 Mar 2018 12:41:34 -0700
+Subject: [PATCH 2/2] Remove postfix from archive name
+
+CMake can't detect a shared build on Windows when there is a postfix version number.
+---
+ crypto/CMakeLists.txt | 2 +-
+ ssl/CMakeLists.txt    | 2 +-
+ tls/CMakeLists.txt    | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/crypto/CMakeLists.txt b/crypto/CMakeLists.txt
+index 2fa08a5..a78eaff 100644
+--- a/crypto/CMakeLists.txt
++++ b/crypto/CMakeLists.txt
+@@ -818,7 +818,7 @@ if (BUILD_SHARED_LIBS)
+ 	endif()
+ 	set_target_properties(crypto PROPERTIES
+ 		OUTPUT_NAME crypto${CRYPTO_POSTFIX}
+-		ARCHIVE_OUTPUT_NAME crypto${CRYPTO_POSTFIX})
++		ARCHIVE_OUTPUT_NAME crypto)
+ 	set_target_properties(crypto PROPERTIES VERSION
+ 		${CRYPTO_VERSION} SOVERSION ${CRYPTO_MAJOR_VERSION})
+ endif()
+diff --git a/ssl/CMakeLists.txt b/ssl/CMakeLists.txt
+index e87e0f6..21467e1 100644
+--- a/ssl/CMakeLists.txt
++++ b/ssl/CMakeLists.txt
+@@ -57,7 +57,7 @@ if (BUILD_SHARED_LIBS)
+ 	endif()
+ 	set_target_properties(ssl PROPERTIES
+ 		OUTPUT_NAME ssl${SSL_POSTFIX}
+-		ARCHIVE_OUTPUT_NAME ssl${SSL_POSTFIX})
++		ARCHIVE_OUTPUT_NAME ssl)
+ 	set_target_properties(ssl PROPERTIES VERSION ${SSL_VERSION}
+ 		SOVERSION ${SSL_MAJOR_VERSION})
+ endif()
+diff --git a/tls/CMakeLists.txt b/tls/CMakeLists.txt
+index 6c5303c..bc4b05d 100644
+--- a/tls/CMakeLists.txt
++++ b/tls/CMakeLists.txt
+@@ -46,7 +46,7 @@ if (BUILD_SHARED_LIBS)
+ 	endif()
+ 	set_target_properties(tls PROPERTIES
+ 		OUTPUT_NAME tls${TLS_POSTFIX}
+-		ARCHIVE_OUTPUT_NAME tls${TLS_POSTFIX})
++		ARCHIVE_OUTPUT_NAME tls)
+ 	set_target_properties(tls PROPERTIES VERSION ${TLS_VERSION}
+ 		SOVERSION ${TLS_MAJOR_VERSION})
+ endif()
+-- 
+2.14.1.windows.1
+
