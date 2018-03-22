@@ -20,4 +20,5 @@
 | [brotli](https://github.com/google/brotli) | 1.0.3 | 03-02-2018 |
 | [libressl](https://www.libressl.org) | 2.7.0 | 03-21-2018 |
 | [nghttp2](https://nghttp2.org) | 1.31.0 | 02-27-2018 |
+| [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.34 | 09-29-2017 |
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
