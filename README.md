@@ -24,4 +24,5 @@
 | [libxml2](http://xmlsoft.org/) | 2.9.7 | 11-02-2017 |
 | [libxslt](http://xmlsoft.org/libxslt/) | 1.1.32 | 11-02-2017 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.34 | 09-29-2017 |
+| [freetype](https://www.freetype.org) | 2.9.0 | 01-08-2018 |
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
