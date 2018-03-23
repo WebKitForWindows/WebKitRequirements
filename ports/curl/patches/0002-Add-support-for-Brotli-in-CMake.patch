@@ -1,0 +1,79 @@
+From f6828b938e5c406fd5b2b28d7b9a11584725d54d Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Thu, 15 Mar 2018 13:42:11 -0700
+Subject: [PATCH 2/2] Add support for Brotli in CMake
+
+Currently CMake cannot detect Brotli support. This adds detection of the libraries and associated header files. It also adds this to the generated config.
+---
+ CMake/FindBrotli.cmake  | 20 ++++++++++++++++++++
+ CMakeLists.txt          | 12 ++++++++++++
+ lib/curl_config.h.cmake |  3 +++
+ 3 files changed, 35 insertions(+)
+ create mode 100644 CMake/FindBrotli.cmake
+
+diff --git a/CMake/FindBrotli.cmake b/CMake/FindBrotli.cmake
+new file mode 100644
+index 000000000..351b8f757
+--- /dev/null
++++ b/CMake/FindBrotli.cmake
+@@ -0,0 +1,20 @@
++include(FindPackageHandleStandardArgs)
++
++find_path(BROTLI_INCLUDE_DIR "brotli/decode.h")
++
++find_library(BROTLICOMMON_LIBRARY NAMES brotlicommon)
++find_library(BROTLIDEC_LIBRARY NAMES brotlidec)
++
++find_package_handle_standard_args(BROTLI
++    FOUND_VAR
++      BROTLI_FOUND
++    REQUIRED_VARS
++      BROTLIDEC_LIBRARY
++      BROTLICOMMON_LIBRARY
++      BROTLI_INCLUDE_DIR
++    FAIL_MESSAGE
++      "Could NOT find BROTLI"
++)
++
++set(BROTLI_INCLUDE_DIRS ${BROTLI_INCLUDE_DIR})
++set(BROTLI_LIBRARIES ${BROTLICOMMON_LIBRARY} ${BROTLIDEC_LIBRARY})
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6b501d7fb..9c2b44fd8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -521,6 +521,18 @@ if(CURL_ZLIB)
+   endif()
+ endif()
+ 
++option(CURL_BROTLI "Set to ON to enable building curl with brotli support." OFF)
++set(HAVE_BROTLI OFF)
++if(CURL_BROTLI)
++  find_package(BROTLI QUIET)
++  if(BROTLI_FOUND)
++    set(HAVE_BROTLI ON)
++    list(APPEND CURL_LIBS ${BROTLI_LIBRARIES})
++    include_directories(${BROTLI_INCLUDE_DIRS})
++    list(APPEND CMAKE_REQUIRED_INCLUDES ${BROTLI_INCLUDE_DIRS})
++  endif()
++endif()
++
+ #libSSH2
+ option(CMAKE_USE_LIBSSH2 "Use libSSH2" ON)
+ mark_as_advanced(CMAKE_USE_LIBSSH2)
+diff --git a/lib/curl_config.h.cmake b/lib/curl_config.h.cmake
+index e640cc656..4b12083f2 100644
+--- a/lib/curl_config.h.cmake
++++ b/lib/curl_config.h.cmake
+@@ -398,6 +398,9 @@
+ /* if zlib is available */
+ #cmakedefine HAVE_LIBZ 1
+ 
++/* if brotli is available */
++#cmakedefine HAVE_BROTLI 1
++
+ /* if your compiler supports LL */
+ #cmakedefine HAVE_LL 1
+ 
+-- 
+2.14.1.windows.1
+

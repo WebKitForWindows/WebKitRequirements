@@ -1,0 +1,10 @@
+Source: curl
+Version: 7.59.0
+Build-Depends: zlib, brotli, nghttp2
+Description: A library for transferring data with URLs
+
+Feature: ssl
+Build-Depends: libressl
+Description: |
+  SSL support through libressl. If not specified then the system SSL library
+  will be used.
