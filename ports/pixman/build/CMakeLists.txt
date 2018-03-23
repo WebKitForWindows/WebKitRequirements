@@ -9,10 +9,6 @@ string (REGEX REPLACE ".*pixman_minor], ([0-9]+).*" "\\1" PIXMAN_VERSION_MINOR $
 string (REGEX REPLACE ".*pixman_micro], ([0-9]+).*" "\\1" PIXMAN_VERSION_MICRO ${configure_ac})
 set(PIXMAN_VERSION "${PIXMAN_VERSION_MAJOR}.${PIXMAN_VERSION_MINOR}.${PIXMAN_VERSION_MICRO}")
 
-if(NOT MSVC)
-    option(BUILD_SHARED "build shared library" ON)
-endif()
-option(BUILD_STATIC "build static library" ON)
 if(BUILD_SHARED_LIBS)
     option(BUILD_TESTS "build tests" OFF)
 endif()

@@ -66,7 +66,7 @@ option(WITH_XPTR "Enable XPointer support" ON)
 option(WITH_ZLIB "Enable zlib support" OFF)
 
 if (WITH_ICU)
-find_package(ICU 56.1 REQUIRED COMPONENTS uc)
+  find_package(ICU 56.1 REQUIRED COMPONENTS uc)
 endif()
 
 configure_file(

@@ -2,6 +2,7 @@ include(vcpkg_common_functions)
 
 set(BROTLI_VERSION 1.0.3)
 set(BROTLI_HASH 155bb074b494ece12d32fa6c97705367f08105e0f84b1d237b93840e97ca135fe12d2669d0fa9aceb81b76a8d77bcab6bfbb2646f18b26f11af56dff49ef3adc)
+set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/brotli-${BROTLI_VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
@@ -9,7 +10,6 @@ vcpkg_download_distfile(ARCHIVE
     FILENAME "brotli-${BROTLI_VERSION}.zip"
     SHA512 ${BROTLI_HASH}
 )
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/brotli-${BROTLI_VERSION})
 vcpkg_extract_source_archive(${ARCHIVE})
 
 # Apply patches
