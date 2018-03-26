@@ -1,5 +1,5 @@
 Source: libressl
-Version: 2.6.4
+Version: 2.7.1
 Description: |
   LibreSSL is a version of the TLS/crypto stack forked from OpenSSL in 2014,
   with goals of modernizing the codebase, improving security, and applying
