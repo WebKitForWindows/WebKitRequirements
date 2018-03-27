@@ -4,8 +4,8 @@ include(vcpkg_common_functions)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO Dead2/zlib-ng
-    REF 3e7e5e55b881edbafb2c79652ad87a1f6d7e602e
-    SHA512 55ae60db383bc46fd98882d4ee06c600e1bec52fdafcc100a6e57879198aa52207d34595e336ca6b60c364b278ad8095eb368cb9729e551bd90c0bc8436afffc
+    REF df1fd1567f0c0c807393bf7dd8f3dd3b1ba24c09
+    SHA512 28a1b328a6f0e2fe27f7503fa39a35a098c703494b8fb55d1ff19668663f443e1dc99cf6271cf0c146f854cbfa07f1240d35f16fc533b673b3d62ed4519d4824
 )
 
 # Apply patches
@@ -14,7 +14,6 @@ vcpkg_apply_patches(
     PATCHES
         ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-static-target.patch
         ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-__has_declspec_attribute.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Move-private-defines.patch
 )
 
 # Run CMake build
