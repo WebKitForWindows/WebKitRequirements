@@ -2,13 +2,12 @@ include(vcpkg_common_functions)
 
 set(CURL_VERSION 7.59.0)
 string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
-set(CURL_HASH c124d1f39cdf8b64dfa016e5a3521c428f6471128eba54e23484428bfc7276ecd080d1a0adabdd0ddafd02624c7e73fdaa5619e824d36d6242558cce12d3bf77)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/curl-curl-${CURL_TAG})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/archive/curl-${CURL_TAG}.zip"
     FILENAME "curl-${CURL_TAG}.zip"
-    SHA512 ${CURL_HASH}
+    SHA512 c124d1f39cdf8b64dfa016e5a3521c428f6471128eba54e23484428bfc7276ecd080d1a0adabdd0ddafd02624c7e73fdaa5619e824d36d6242558cce12d3bf77
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -59,11 +58,9 @@ set(BUILD_OPTIONS
     -DUSE_WIN32_LDAP=OFF
 )
 
-if (NOT VCPKG_CMAKE_SYSTEM_NAME)
-    # By default VCPKG_CMAKE_SYSTEM_NAME is empty for Windows
-    set(VCPKG_CMAKE_SYSTEM_NAME Windows)
+if (NOT VCPKG_CMAKE_SYSTEM_NAME OR VCPKG_CMAKE_SYSTEM_NAME MATCHES "^Windows")
+    set(VCPKG_WINDOWS ON)
 endif ()
-string(REGEX MATCH "^Windows" VCPKG_WINDOWS ${VCPKG_CMAKE_SYSTEM_NAME})
 
 string(COMPARE EQUAL ${VCPKG_LIBRARY_LINKAGE} static CURL_STATICLIB)
 if (VCPKG_WINDOWS)

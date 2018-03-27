@@ -1,13 +1,12 @@
 include(vcpkg_common_functions)
 
 set(FREETYPE_VERSION 2.9)
-set(FREETYPE_HASH 28465f3453baf9a187529432118389de8f1b85273c9fb787d2c8f0feee8ab64b387ddd936b4e67ec58dcf71e33884e7e25f01169b737824221ab143839a9161a)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/freetype-${FREETYPE_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://download.savannah.gnu.org/releases/freetype/freetype-${FREETYPE_VERSION}.tar.bz2"
     FILENAME "freetype-${FREETYPE_VERSION}.tar.bz2"
-    SHA512 ${FREETYPE_HASH}
+    SHA512 28465f3453baf9a187529432118389de8f1b85273c9fb787d2c8f0feee8ab64b387ddd936b4e67ec58dcf71e33884e7e25f01169b737824221ab143839a9161a
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
