@@ -1,0 +1,44 @@
+From 950c72b878d4ac05771f46702296c0939b953f51 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Mon, 26 Mar 2018 19:44:07 -0700
+Subject: [PATCH 2/2] Use grep and sed on all platforms
+
+The vcpkg port has grep and sed so use that across all platforms.
+---
+ simd/CMakeLists.txt | 19 +++++++------------
+ 1 file changed, 7 insertions(+), 12 deletions(-)
+
+diff --git a/simd/CMakeLists.txt b/simd/CMakeLists.txt
+index 2b37525..9f19442 100755
+--- a/simd/CMakeLists.txt
++++ b/simd/CMakeLists.txt
+@@ -91,19 +91,14 @@ message(STATUS "CMAKE_ASM_NASM_FLAGS = ${EFFECTIVE_ASM_NASM_FLAGS}")
+ 
+ set(CMAKE_ASM_NASM_FLAGS "${CMAKE_ASM_NASM_FLAGS} -I\"${CMAKE_CURRENT_SOURCE_DIR}/nasm/\" -I\"${CMAKE_CURRENT_SOURCE_DIR}/${CPU_TYPE}/\"")
+ 
+-if(WIN32)
+-  set(CMAKE_ASM_NASM_FLAGS "${CMAKE_ASM_NASM_FLAGS} -I\"${CMAKE_CURRENT_SOURCE_DIR}/../win/\"")
+-  set(JSIMDCFG_INC ${CMAKE_CURRENT_SOURCE_DIR}/../win/jsimdcfg.inc)
+-else()
+-  set(GREP grep)
+-  if(CMAKE_SYSTEM_NAME STREQUAL "SunOS")
+-    set(GREP ggrep)
+-  endif()
+-  add_custom_command(OUTPUT jsimdcfg.inc
+-    COMMAND ${CMAKE_C_COMPILER} -E -I${CMAKE_BINARY_DIR} -I${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/jsimdcfg.inc.h | ${GREP} -E '^[\;%]|^\ %' | sed 's%_cpp_protection_%%' | sed 's@% define@%define@g' >jsimdcfg.inc)
+-  set(JSIMDCFG_INC ${CMAKE_CURRENT_BINARY_DIR}/jsimdcfg.inc)
+-  set(CMAKE_ASM_NASM_FLAGS "${CMAKE_ASM_NASM_FLAGS} -I\"${CMAKE_CURRENT_BINARY_DIR}/\"")
++set(GREP grep)
++if(CMAKE_SYSTEM_NAME STREQUAL "SunOS")
++  set(GREP ggrep)
+ endif()
++add_custom_command(OUTPUT jsimdcfg.inc
++  COMMAND ${CMAKE_C_COMPILER} -E -I${CMAKE_BINARY_DIR} -I${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/jsimdcfg.inc.h | ${GREP} -E "^[\;%]|^\ %" | sed "s%_cpp_protection_%%" | sed "s@% define@%define@g" >jsimdcfg.inc)
++set(JSIMDCFG_INC ${CMAKE_CURRENT_BINARY_DIR}/jsimdcfg.inc)
++set(CMAKE_ASM_NASM_FLAGS "${CMAKE_ASM_NASM_FLAGS} -I\"${CMAKE_CURRENT_BINARY_DIR}/\"")
+ 
+ if(CPU_TYPE STREQUAL "x86_64")
+   set(SIMD_SOURCES x86_64/jsimdcpu.asm x86_64/jfdctflt-sse.asm
+-- 
+2.14.1.windows.1
+
