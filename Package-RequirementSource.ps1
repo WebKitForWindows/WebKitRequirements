@@ -56,20 +56,22 @@ Function Clean-Directory {
 Function Remove-Directory {
   Param(
     [Parameter(Mandatory)]
-    [string] $name
+    [string] $name,
+    [Parameter(Mandatory=$false)]
+    [string[]] $exclude
   )
 
   $directory = Join-Path $root $name;
 
   if (Test-Path $directory) {
     Write-Host ('Removing {0} directory at {1}' -f $name, $directory);
-    Remove-Item -Path $directory -Recurse;
+    Remove-Item -Path $directory -Recurse -Exclude $exclude;
   }
 }
 
 Remove-Directory -Name 'CMake';
 Remove-Directory -Name 'doc';
-Remove-Directory -Name 'share';
+Remove-Directory -Name 'share/*' -Exclude 'public_suffix_list.dat';
 
 #----------------------------------------------------------------------
 # Move dll files into bin

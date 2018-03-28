@@ -36,6 +36,8 @@ $nghttp2Url = ('https://github.com/nghttp2/nghttp2/archive/v{0}.zip' -f $nghttp2
 $curlVersion = '7.57.0';
 $curlUrl = ('https://curl.haxx.se/download/curl-{0}.tar.gz' -f $curlVersion);
 
+$pslUrl = 'https://github.com/publicsuffix/list/archive/master.zip';
+
 #----------------------------------------------------------------------
 # Internationalization
 #----------------------------------------------------------------------
@@ -150,3 +152,4 @@ Get-Requirement -Name 'pixman' -Url $pixmanUrl;
 Get-Requirement -Name 'cairo' -Url $cairoUrl;
 Get-Requirement -Name 'pthreads' -Url $pthreadsUrl;
 Get-Requirement -Name 'cflite' -Url $cfLiteUrl;
+Get-Requirement -Name 'psl' -Url $pslUrl;

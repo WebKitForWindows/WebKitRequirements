@@ -237,3 +237,4 @@ Build-Requirement -Name 'pixman';
 Build-Requirement -Name 'cairo';
 Build-Requirement -Name 'pthreads';
 Build-Requirement -Name 'cflite';
+Build-Requirement -Name 'psl';
