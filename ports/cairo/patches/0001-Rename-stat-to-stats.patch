@@ -1,0 +1,67 @@
+From f66dcdf0567f087b7e4bc63d06e9ece1d1c7ef51 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Mon, 2 Apr 2018 14:58:45 -0700
+Subject: [PATCH] Rename stat to stats
+
+There is a struct stat in sys/stat.h that can conflict when building cairo-surface-observer. Rename to avoid this issue.
+---
+ src/cairo-surface-observer-private.h | 6 +++---
+ src/cairo-surface-observer.c         | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/cairo-surface-observer-private.h b/src/cairo-surface-observer-private.h
+index 6ed0c18d1..7d7dd8d4c 100644
+--- a/src/cairo-surface-observer-private.h
++++ b/src/cairo-surface-observer-private.h
+@@ -45,7 +45,7 @@
+ #include "cairo-surface-backend-private.h"
+ #include "cairo-time-private.h"
+ 
+-struct stat {
++struct stats {
+     double min, max, sum, sum_sq;
+     unsigned count;
+ };
+@@ -57,7 +57,7 @@ struct stat {
+ #define NUM_FILL_RULE (CAIRO_FILL_RULE_EVEN_ODD+1)
+ 
+ struct extents {
+-    struct stat area;
++    struct stats area;
+     unsigned int bounded, unbounded;
+ };
+ 
+@@ -152,7 +152,7 @@ struct _cairo_observation {
+ 	unsigned int antialias[NUM_ANTIALIAS];
+ 	struct pattern source;
+ 	struct path path;
+-	struct stat line_width;
++	struct stats line_width;
+ 	struct clip clip;
+ 	unsigned int noop;
+ 
+diff --git a/src/cairo-surface-observer.c b/src/cairo-surface-observer.c
+index 89c7525c7..d63094e51 100644
+--- a/src/cairo-surface-observer.c
++++ b/src/cairo-surface-observer.c
+@@ -58,7 +58,7 @@ static const cairo_surface_backend_t _cairo_surface_observer_backend;
+ 
+ /* observation/stats */
+ 
+-static void init_stats (struct stat *s)
++static void init_stats (struct stats *s)
+ {
+     s->min = HUGE_VAL;
+     s->max = -HUGE_VAL;
+@@ -261,7 +261,7 @@ add_clip (struct clip *stats,
+ }
+ 
+ static void
+-stats_add (struct stat *s, double v)
++stats_add (struct stats *s, double v)
+ {
+     if (v < s->min)
+ 	s->min = v;
+-- 
+2.14.1.windows.1
+
