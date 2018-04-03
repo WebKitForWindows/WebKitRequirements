@@ -19,7 +19,7 @@
 | [icu](http://site.icu-project.org) | 61.1 | 03-26-2018 |
 | [zlib](https://github.com/Dead2/zlib-ng) | N/A | 03-04-2018 |
 | [brotli](https://github.com/google/brotli) | 1.0.3 | 03-02-2018 |
-| [libressl](https://www.libressl.org) | 2.7.1 | 03-23-2018 |
+| [libressl](https://www.libressl.org) | 2.7.2 | 04-01-2018 |
 | [nghttp2](https://nghttp2.org) | 1.31.0 | 02-27-2018 |
 | [curl](https://curl.haxx.se) | 7.59.0 | 03-14-2018 |
 | [libxml2](http://xmlsoft.org/) | 2.9.7 | 11-02-2017 |

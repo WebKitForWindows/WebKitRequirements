@@ -1,7 +1,7 @@
 From 207f1d520d55104b3438c125ed74d58799c58633 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Wed, 21 Mar 2018 12:41:34 -0700
-Subject: [PATCH 2/2] Remove postfix from archive name
+Subject: [PATCH 1/1] Remove postfix from archive name
 
 CMake can't detect a shared build on Windows when there is a postfix version number.
 ---

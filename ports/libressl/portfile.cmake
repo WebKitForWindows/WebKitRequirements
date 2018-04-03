@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(LIBRESSL_VERSION 2.7.1)
+set(LIBRESSL_VERSION 2.7.2)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libressl-${LIBRESSL_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${LIBRESSL_VERSION}.tar.gz"
     FILENAME "libressl-${LIBRESSL_VERSION}.tar.gz"
-    SHA512 b7adc4250ba3fa5a3db20890aacb6b40dc9fbc29cc470c55dc9742430b9ba10ec122e6edf6f1671d77dea6347be1a23dc3d81b3b70f9b6e722212f356c36dfbc
+    SHA512 12d00d057d449eb4119fc2f07034ebc0f1bbcb1602c0e07ef03b50440045eafd70594ddee352946cd9409aed8aceeb6988ba1643f582566fe3498499d94ece49
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -14,8 +14,7 @@ vcpkg_extract_source_archive(${ARCHIVE})
 vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Use-BUILD_SHARED_LIBS-to-specify-library-type.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Remove-postfix-from-archive-name.patch
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-postfix-from-archive-name.patch
 )
 
 # Run CMake build
