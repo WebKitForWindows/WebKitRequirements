@@ -14,7 +14,9 @@ vcpkg_extract_source_archive(${ARCHIVE})
 vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-m-library.patch
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Skip-install-symlink.patch
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Do-not-append-static-to-library-name.patch
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Remove-m-library-when-not-found.patch
 )
 
 # Run CMake build
@@ -36,6 +38,7 @@ vcpkg_configure_cmake(
         -DSKIP_INSTALL_PROGRAMS=ON
         -DSKIP_INSTALL_EXECUTABLES=ON
         -DSKIP_INSTALL_FILES=ON
+        -DSKIP_INSTALL_SYMLINK=ON
     OPTIONS_DEBUG
         -DSKIP_INSTALL_HEADERS=ON
 )

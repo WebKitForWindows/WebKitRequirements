@@ -1,0 +1,25 @@
+From 2c47a1969b74747ae5cf3b5bd1f6cbce6257919c Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Mon, 2 Apr 2018 18:46:24 -0700
+Subject: [PATCH 3/3] Remove m library when not found
+
+libpng will not compile when libm is not found. Remove this restriction.
+---
+ CMakeLists.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2b54b72b9..bbf466b1e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -60,6 +60,7 @@ if(NOT WIN32)
+   )
+   if(NOT M_LIBRARY)
+     message(STATUS "math lib 'libm' not found; floating point support disabled")
++    set(M_LIBRARY "")
+   endif()
+ else()
+   # not needed on windows
+-- 
+2.14.1.windows.1
+

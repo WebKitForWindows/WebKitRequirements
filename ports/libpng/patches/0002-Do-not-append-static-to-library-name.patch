@@ -1,0 +1,39 @@
+From 36c17f574bdeeb9ca3135d2a83223a63d0a61ed9 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Mon, 2 Apr 2018 18:39:43 -0700
+Subject: [PATCH 2/3] Do not append static to library name
+
+On Windows a static lib will have _static appended. In vcpkg only a shared or static library is created so remove this behavior.
+---
+ CMakeLists.txt | 15 +++------------
+ 1 file changed, 3 insertions(+), 12 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 589e5f909..2b54b72b9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -544,18 +544,9 @@ if(PNG_STATIC)
+   set(PNG_LIB_NAME_STATIC png_static)
+   add_library(png_static STATIC ${libpng_sources})
+   add_dependencies(png_static genfiles)
+-  # MSVC doesn't use a different file extension for shared vs. static
+-  # libs.  We are able to change OUTPUT_NAME to remove the _static
+-  # for all other platforms.
+-  if(NOT MSVC)
+-    set_target_properties(png_static PROPERTIES
+-      OUTPUT_NAME "${PNG_LIB_NAME}"
+-      CLEAN_DIRECT_OUTPUT 1)
+-  else()
+-    set_target_properties(png_static PROPERTIES
+-      OUTPUT_NAME "${PNG_LIB_NAME}_static"
+-      CLEAN_DIRECT_OUTPUT 1)
+-  endif()
++  set_target_properties(png_static PROPERTIES
++    OUTPUT_NAME "${PNG_LIB_NAME}"
++    CLEAN_DIRECT_OUTPUT 1)
+   list(APPEND PNG_LIB_TARGETS png_static)
+   if(MSVC)
+     # msvc does not append 'lib' - do it here to have consistent name
+-- 
+2.14.1.windows.1
+
