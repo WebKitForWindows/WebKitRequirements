@@ -32,3 +32,4 @@
 | [cairo](https://www.cairographics.org) | 1.15.10 | 12-14-2017 |
 | [psl](https://publicsuffix.org/) | N/A | 03-28-2018 |
 | [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 07-12-2012 |
+| [OpenCFLite](https://github.com/fujii/OpenCFLite) | 0.0.2 | 12-11-2017 |
