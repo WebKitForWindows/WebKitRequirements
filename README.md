@@ -31,3 +31,4 @@
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
 | [cairo](https://www.cairographics.org) | 1.15.10 | 12-14-2017 |
 | [psl](https://publicsuffix.org/) | N/A | 03-28-2018 |
+| [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 07-12-2012 |
