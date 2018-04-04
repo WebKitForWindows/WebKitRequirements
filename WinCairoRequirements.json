@@ -1,0 +1,19 @@
+[
+    "zlib",
+    "brotli",
+    "libressl",
+    "nghttp2",
+    "curl[ssl]",
+    "icu",
+    "libxml2[xslt]",
+    "libxslt",
+    "libpng",
+    "libjpeg-turbo",
+    "libwebp",
+    "sqlite3",
+    "pixman",
+    "cairo",
+    "psl",
+    "pthreads",
+    "cflite"
+]
