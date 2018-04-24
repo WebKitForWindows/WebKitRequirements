@@ -1,13 +1,13 @@
 include(vcpkg_common_functions)
 
-set(CAIRO_VERSION 1.15.10)
+set(CAIRO_VERSION 1.15.12)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/cairo-${CAIRO_VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "http://cairographics.org/snapshots/cairo-${CAIRO_VERSION}.tar.xz"
     FILENAME "cairo-${CAIRO_VERSION}.tar.xz"
-    SHA512 d56dbf1675c37b70344c1202ac7b50540a99f51a243a98464b05ffb3bb6f17b240af15dea9e3553a1abd36c95c6cf75a2077932205db5461d8a6a9d8aed33686
+    SHA512 97fb2c515f6449c1d84dc3187d11187290a219d39f8168a4367ca43505da80167df93b609a69b7e3938e9d38a2b7db459ad7130d9b5f12ff8c898994dfaa6d7e
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 

@@ -30,7 +30,7 @@
 | [sqlite](http://sqlite.org) | 3.23.0 | 04-02-2018 |
 | [freetype](https://www.freetype.org) | 2.9.0 | 01-08-2018 |
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
-| [cairo](https://www.cairographics.org) | 1.15.10 | 12-14-2017 |
+| [cairo](https://www.cairographics.org) | 1.15.12 | 04-04-2017 |
 | [psl](https://publicsuffix.org/) | N/A | 03-28-2018 |
 | [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 07-12-2012 |
 | [OpenCFLite](https://github.com/fujii/OpenCFLite) | 0.0.2 | 12-11-2017 |
