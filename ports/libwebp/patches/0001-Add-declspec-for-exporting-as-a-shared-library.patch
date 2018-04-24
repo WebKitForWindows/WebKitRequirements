@@ -1,0 +1,35 @@
+From d55b90956074880780d59747d2ac1f9c8a5b8286 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Mon, 23 Apr 2018 18:49:42 -0700
+Subject: [PATCH] Add declspec for exporting as a shared library
+
+This adds a default declaration of __declspec to WEBP_EXTERN.
+---
+ src/webp/types.h | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/src/webp/types.h b/src/webp/types.h
+index 989a763f..4e4389fb 100644
+--- a/src/webp/types.h
++++ b/src/webp/types.h
+@@ -36,10 +36,16 @@ typedef long long int int64_t;
+ #define WEBP_INLINE __forceinline
+ #endif  /* _MSC_VER */
+ 
++#ifndef __has_declspec_attribute
++#define __has_declspec_attribute(x) 0
++#endif
++
+ #ifndef WEBP_EXTERN
+ // This explicitly marks library functions and allows for changing the
+ // signature for e.g., Windows DLL builds.
+-# if defined(__GNUC__) && __GNUC__ >= 4
++# if defined(WIN32) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
++#  define WEBP_EXTERN __declspec(dllexport)
++# elif defined(__GNUC__) && __GNUC__ >= 4
+ #  define WEBP_EXTERN extern __attribute__ ((visibility ("default")))
+ # else
+ #  define WEBP_EXTERN extern
+-- 
+2.14.1.windows.1
+
