@@ -1,0 +1,26 @@
+From 4ba1027f36c9f518b729aa78583c9a0e3f38e785 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Mon, 14 May 2018 16:34:09 -0700
+Subject: [PATCH 2/2] Adjust CMake for vcpkg
+
+Changes the locations of installed files to match what vcpkg expects.
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6f3fef7d5..75fe9c3db 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -464,7 +464,7 @@ if (NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
+       COMPONENT libraries)
+   install(
+     EXPORT freetype-targets
+-      DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/freetype
++      DESTINATION ${CMAKE_INSTALL_DATADIR}/freetype/cmake
+       FILE freetype-config.cmake
+       COMPONENT headers)
+ endif ()
+-- 
+2.14.1.windows.1
+

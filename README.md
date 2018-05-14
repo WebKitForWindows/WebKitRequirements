@@ -28,7 +28,7 @@
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 1.5.90 | 03-23-2018 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.0.0 | 4-02-2018 |
 | [sqlite](http://sqlite.org) | 3.23.1 | 04-10-2018 |
-| [freetype](https://www.freetype.org) | 2.9.0 | 01-08-2018 |
+| [freetype](https://www.freetype.org) | 2.9.1 | 05-02-2018 |
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
 | [cairo](https://www.cairographics.org) | 1.15.12 | 04-04-2017 |
 | [psl](https://publicsuffix.org/) | N/A | 03-28-2018 |
