@@ -12,7 +12,6 @@ vcpkg_extract_source_archive(${ARCHIVE})
 
 # Add CMake sources
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/config.h DESTINATION ${SOURCE_PATH})
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/include/libxml/xmlversion.h.cmake.in DESTINATION ${SOURCE_PATH}/include/libxml)
 
 # Run CMake build
