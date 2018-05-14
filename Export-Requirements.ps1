@@ -11,7 +11,7 @@
 
 Param(
   [Parameter()]
-  [string] $triplet = 'x64-windows',
+  [string] $triplet = 'x64-windows-webkit',
   [Parameter()]
   [string] $libraries = 'WinCairoRequirements.json'
 )
