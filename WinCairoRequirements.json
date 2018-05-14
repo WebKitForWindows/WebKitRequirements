@@ -13,7 +13,5 @@
     "sqlite3",
     "pixman",
     "cairo",
-    "psl",
-    "pthreads",
-    "cflite"
+    "psl"
 ]
