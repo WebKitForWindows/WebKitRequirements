@@ -35,7 +35,7 @@ if (BUILD_SHARED_LIBS AND WIN32)
       --copyright
       --mode library
       --entrypoint icudt${ICU_MAJOR_VERSION}
-      --name icudt${ICU_MAJOR_VERSION}
+      --name icudt${ICU_MAJOR_VERSION}l
       --libname icudt${ICU_MAJOR_VERSION}
       --tempdir ${CMAKE_CURRENT_BINARY_DIR}/temp
       --destdir ${CMAKE_CURRENT_BINARY_DIR}
