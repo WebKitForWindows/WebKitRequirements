@@ -1,13 +1,13 @@
 include(vcpkg_common_functions)
 
-set(CURL_VERSION 7.59.0)
+set(CURL_VERSION 7.60.0)
 string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/curl-curl-${CURL_TAG})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/archive/curl-${CURL_TAG}.zip"
     FILENAME "curl-${CURL_TAG}.zip"
-    SHA512 c124d1f39cdf8b64dfa016e5a3521c428f6471128eba54e23484428bfc7276ecd080d1a0adabdd0ddafd02624c7e73fdaa5619e824d36d6242558cce12d3bf77
+    SHA512 19773facc0b8d3196227285585b4b0ae9d57fc3eca67004e0108b137b1bdc82bbaabbac3540e52efd2ea485316cd525a055c12954195f64e5052007a8f288e12
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -16,8 +16,6 @@ vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES
         ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-support-for-Brotli-in-CMake.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Fix-LibreSSL-detection.patch
 )
 
 # Run CMake build
