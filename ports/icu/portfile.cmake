@@ -24,7 +24,6 @@ file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PA
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/common/CMakeLists.txt DESTINATION ${SOURCE_PATH}/source/common)
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/data/CMakeLists.txt DESTINATION ${SOURCE_PATH}/source/data)
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/i18n/CMakeLists.txt DESTINATION ${SOURCE_PATH}/source/i18n)
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/stubdata/CMakeLists.txt DESTINATION ${SOURCE_PATH}/source/stubdata)
 
 # Run CMake build
 vcpkg_configure_cmake(
