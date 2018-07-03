@@ -1,13 +1,13 @@
 include(vcpkg_common_functions)
 
-set(BROTLI_VERSION 1.0.4)
+set(BROTLI_VERSION 1.0.5)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/brotli-${BROTLI_VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/google/brotli/archive/v${BROTLI_VERSION}.zip"
     FILENAME "brotli-${BROTLI_VERSION}.zip"
-    SHA512 351fd272e57a90e6253bd3a97117ade6432d30b79d2b49c4fb36970eb1ab65446810574565ca90fc0111619d883048d05c99979e0e6217f97de531b8d0f74f74
+    SHA512 a2ec27cf405d66953470c1f5c411aa15935a65a8f19ee10277cf8dcbe65d7447c370e57fce69d38327c1be90b442458d4229b155154849cf95b47bc25aa2c3e7
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
