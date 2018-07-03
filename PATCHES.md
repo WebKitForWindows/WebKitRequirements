@@ -35,6 +35,11 @@ https://github.com/${org}/${repo}/${commit-sha}.patch
 From there save the file into the `patches` directory keeping with the naming
 conventions. Then add it to the list of applied patches.
 
+When running `vcpkg install` make sure that the patch applies. If it does not
+apply cleanly then look at the history of the file that fails and add
+additional commits if required. You may need to delete the port within
+`buildtrees` to force the patches to be reapplied.
+
 ## Manually creating patches
 
 Check out the git repository for the project that is being patched. Make sure
