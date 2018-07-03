@@ -1,0 +1,86 @@
+From 2c15693a3c355d8296a1828123a864397296460b Mon Sep 17 00:00:00 2001
+From: Daniel Stenberg <daniel@haxx.se>
+Date: Wed, 20 Jun 2018 23:00:36 +0200
+Subject: [PATCH] url: fix dangling conn->data pointer
+
+By masking sure to use the *current* easy handle with extracted
+connections from the cache, and make sure to NULLify the ->data pointer
+when the connection is put into the cache to make this mistake easier to
+detect in the future.
+
+Reported-by: Will Dietz
+Fixes #2669
+Closes #2672
+---
+ lib/conncache.c | 3 ++-
+ lib/connect.c   | 6 ++++--
+ lib/url.c       | 2 +-
+ 3 files changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/lib/conncache.c b/lib/conncache.c
+index 6bd06582a6..0665429154 100644
+--- a/lib/conncache.c
++++ b/lib/conncache.c
+@@ -6,7 +6,7 @@
+  *                             \___|\___/|_| \_\_____|
+  *
+  * Copyright (C) 2012 - 2016, Linus Nielsen Feltzing, <linus@haxx.se>
+- * Copyright (C) 2012 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
++ * Copyright (C) 2012 - 2018, Daniel Stenberg, <daniel@haxx.se>, et al.
+  *
+  * This software is licensed as described in the file COPYING, which
+  * you should have received as part of this distribution. The terms
+@@ -451,6 +451,7 @@ bool Curl_conncache_return_conn(struct connectdata *conn)
+   }
+   CONN_LOCK(data);
+   conn->inuse = FALSE; /* Mark the connection unused */
++  conn->data = NULL; /* no owner */
+   CONN_UNLOCK(data);
+ 
+   return (conn_candidate == conn) ? FALSE : TRUE;
+diff --git a/lib/connect.c b/lib/connect.c
+index 12ae817e31..41f2202681 100644
+--- a/lib/connect.c
++++ b/lib/connect.c
+@@ -5,7 +5,7 @@
+  *                            | (__| |_| |  _ <| |___
+  *                             \___|\___/|_| \_\_____|
+  *
+- * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
++ * Copyright (C) 1998 - 2018, Daniel Stenberg, <daniel@haxx.se>, et al.
+  *
+  * This software is licensed as described in the file COPYING, which
+  * you should have received as part of this distribution. The terms
+@@ -1259,9 +1259,11 @@ curl_socket_t Curl_getconnectinfo(struct Curl_easy *data,
+       return CURL_SOCKET_BAD;
+     }
+ 
+-    if(connp)
++    if(connp) {
+       /* only store this if the caller cares for it */
+       *connp = c;
++      c->data = data;
++    }
+     return c->sock[FIRSTSOCKET];
+   }
+   else
+diff --git a/lib/url.c b/lib/url.c
+index d29eddaea7..0cab0a303d 100644
+--- a/lib/url.c
++++ b/lib/url.c
+@@ -965,6 +965,7 @@ static bool extract_if_dead(struct connectdata *conn,
+        use */
+     bool dead;
+ 
++    conn->data = data;
+     if(conn->handler->connection_check) {
+       /* The protocol has a special method for checking the state of the
+          connection. Use it to check if the connection is dead. */
+@@ -979,7 +980,6 @@ static bool extract_if_dead(struct connectdata *conn,
+     }
+ 
+     if(dead) {
+-      conn->data = data;
+       infof(data, "Connection %ld seems to be dead!\n", conn->connection_id);
+       Curl_conncache_remove_conn(conn, FALSE);
+       return TRUE;

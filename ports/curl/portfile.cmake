@@ -16,6 +16,9 @@ vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES
         ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+        # Remove after 7.61.0 release
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-cppcheck-fix-warnings.patch
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0003-url-fix-dangling-conn-data-pointer.patch
 )
 
 # Run CMake build
