@@ -1,13 +1,13 @@
 include(vcpkg_common_functions)
 include(${CMAKE_CURRENT_LIST_DIR}/vcpkg_acquire_gnuwin32_program.cmake)
 
-set(LIBJPEG_TURBO_VERSION 1.5.90)
+set(LIBJPEG_TURBO_VERSION 2.0.0)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libjpeg-turbo-${LIBJPEG_TURBO_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/${LIBJPEG_TURBO_VERSION}.zip"
     FILENAME "libjpeg-turbo-${LIBJPEG_TURBO_VERSION}.zip"
-    SHA512 800d1db42e9235c794cebae25201627ed5b732a5799f96657e23b9af23291913c0ce154d4e9fe4265b011308d7b57570cbf229a81db12ab51deb8e3e4e90d414
+    SHA512 2e8583d1d76699eb0e43056f3d7586139c294d2bee98b9458f60ff4e00dff9d96aa7e71eaaedfcd0aa3033446c25eb7ad1be8c14387f07fc1517ad141a4c9fad
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -28,7 +28,6 @@ vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES
         ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Make-executables-conditional.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Use-grep-and-sed-on-all-platforms.patch
 )
 
 # Run CMake build
