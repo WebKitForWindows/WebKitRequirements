@@ -2,7 +2,7 @@
   .Synopsis
   Packages the requirements into a zip file.
   .Parameter Triplet
-  The vcpkg triplet to use. Defaults to 'x64-windows'
+  The vcpkg triplet to use. Defaults to 'x64-windows-webkit'
   .Parameter Output
   The filename to output to. Defaults to 'WinCairoRequirements.zip'.
 #>

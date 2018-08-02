@@ -4,7 +4,7 @@
   .Details
   Removes pthread headers from the distribution.
   .Parameter Triplet
-  The vcpkg triplet to use. Defaults to 'x64-windows'
+  The vcpkg triplet to use. Defaults to 'x64-windows-webkit'
 #>
 
 Param(

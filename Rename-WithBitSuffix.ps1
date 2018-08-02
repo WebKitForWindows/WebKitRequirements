@@ -4,7 +4,7 @@
   .Details
   Renames 64-bit builds to be bin64/lib64 and 32-bit builds to be bin32/lib64.
   .Parameter Triplet
-  The vcpkg triplet to use. Defaults to 'x64-windows'
+  The vcpkg triplet to use. Defaults to 'x64-windows-webkit'
 #>
 
 Param(

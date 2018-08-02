@@ -4,7 +4,7 @@
   .Details
   Invokes vcpkg export to package all the libraries.
   .Parameter Triplet
-  The vcpkg triplet to use. Defaults to 'x64-windows'
+  The vcpkg triplet to use. Defaults to 'x64-windows-webkit'
   .Parameter Libraries
   Path to a JSON file containing the list of libraries. Defaults to 'WinCairoRequirements.json'.
 #>
