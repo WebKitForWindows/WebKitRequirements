@@ -1,25 +1,23 @@
-From 22656ba29981b9058f37f7043bd3c378a2b592f1 Mon Sep 17 00:00:00 2001
+From d82811303b67fdb962c190f48cf89bc38298f506 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
-Date: Thu, 8 Mar 2018 18:20:01 -0800
+Date: Wed, 5 Sep 2018 10:01:50 -0700
 Subject: [PATCH 3/3] Add __has_declspec_attribute
 
-Clang contains __has_declspec_attribute for MSVC compatibility. This can be
-used to determine whether __declspec is available.
 ---
  lib/includes/nghttp2/nghttp2.h | 7 ++++++-
  1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/lib/includes/nghttp2/nghttp2.h b/lib/includes/nghttp2/nghttp2.h
-index 13cda9f2..44a88d80 100644
+index 8c54b9c8c..deaba7576 100644
 --- a/lib/includes/nghttp2/nghttp2.h
 +++ b/lib/includes/nghttp2/nghttp2.h
 @@ -31,6 +31,11 @@
- #define WIN32
+ #  define WIN32
  #endif
  
-+/* Compatibility with non-clang compilers. */
++/* Compatibility for non-Clang compilers */
 +#ifndef __has_declspec_attribute
-+#define __has_declspec_attribute(x) 0
++#  define __has_declspec_attribute(x) 0
 +#endif
 +
  #ifdef __cplusplus
@@ -28,12 +26,12 @@ index 13cda9f2..44a88d80 100644
 @@ -51,7 +56,7 @@ extern "C" {
  
  #ifdef NGHTTP2_STATICLIB
- #define NGHTTP2_EXTERN
+ #  define NGHTTP2_EXTERN
 -#elif defined(WIN32)
 +#elif defined(WIN32) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
- #ifdef BUILDING_NGHTTP2
- #define NGHTTP2_EXTERN __declspec(dllexport)
- #else /* !BUILDING_NGHTTP2 */
+ #  ifdef BUILDING_NGHTTP2
+ #    define NGHTTP2_EXTERN __declspec(dllexport)
+ #  else /* !BUILDING_NGHTTP2 */
 -- 
 2.14.1.windows.1
 

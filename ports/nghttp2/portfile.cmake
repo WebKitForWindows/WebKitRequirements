@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(NGHTTP2_VERSION 1.32.0)
+set(NGHTTP2_VERSION 1.33.0)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/nghttp2-${NGHTTP2_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/nghttp2/nghttp2/archive/v${NGHTTP2_VERSION}.zip"
     FILENAME "nghttp2-${NGHTTP2_VERSION}.zip"
-    SHA512 967ccddd55fcff6de3169d1464595854fef8600cce791621b8cbeedcbdb5381f7859b4e55c8fa935a22dbacda9d0540448a53072a787a7b465dc4fd47d8dc100
+    SHA512 cc018cb04c9404a0a4c8a50f32070ef5465adc7e6253e2ea9e56b694f624b61e1b0e1902bbef76d78655b4b21da20c0fafde139b4840391c7c86111ab9c560bf
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
