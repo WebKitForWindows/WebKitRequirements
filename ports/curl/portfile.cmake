@@ -5,18 +5,12 @@ string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/curl-curl-${CURL_TAG})
 
 # Get from github commit until v7.61.1 is released
-vcpkg_from_github(
-    OUT_SOURCE_PATH SOURCE_PATH
-    REPO curl/curl
-    REF b7bdf2100e13d3704070b0d1f715851bbdff31da
-    SHA512 8eba2dac72a44dc2fbb94a77917623fc0fa90577fa231a7c4bc58b69f551fd5d780288b2858763d517515127319b6cd66654dc6023f7bdd227d3124b3d586652
+vcpkg_download_distfile(ARCHIVE
+    URLS "https://github.com/curl/curl/archive/curl-${CURL_TAG}.zip"
+    FILENAME "curl-${CURL_TAG}.zip"
+    SHA512 650cd88e773dc1c8d1ae201a62544e3e6ff58dcb9eca18dfa50e823ea832afb285609c537f8a9f308460051cbfbb24d76caa8cca7033ba445fb84d5f7c76ef2f
 )
-#vcpkg_download_distfile(ARCHIVE
-#    URLS "https://github.com/curl/curl/archive/curl-${CURL_TAG}.zip"
-#    FILENAME "curl-${CURL_TAG}.zip"
-#    SHA512 5683775c26ba2dee22307b2182d6080b23f9b8e8978248311bf94f4c67dc85112f19bc12dd3c82444fabd6457635915056fc95034909b832a92b8bba631bfb53
-#)
-#vcpkg_extract_source_archive(${ARCHIVE})
+vcpkg_extract_source_archive(${ARCHIVE})
 
 # Apply patches
 vcpkg_apply_patches(
