@@ -1,0 +1,14 @@
+diff --git a/src/psl.c b/src/psl.c
+index cce5da6..6ecac10 100644
+--- a/src/psl.c
++++ b/src/psl.c
+@@ -1734,6 +1734,9 @@ psl_error_t psl_str_to_utf8lower(const char *str, const char *encoding _UNUSED,
+ 
+ 	if (str_length < 256) {
+ 		/* C89 allocation */
++#ifdef _WIN32
++#define alloca(x) _alloca(x) 
++#endif
+ 		utf16_dst   = alloca(sizeof(UChar) * (str_length * 2 + 1));
+ 		utf16_lower = alloca(sizeof(UChar) * (str_length * 2 + 1));
+ 		utf8_lower  = alloca(str_length * 6 + 1);
