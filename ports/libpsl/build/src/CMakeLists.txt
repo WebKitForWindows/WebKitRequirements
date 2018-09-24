@@ -13,14 +13,13 @@ list(APPEND LIBPSL_SOURCES
     psl.c
 )
 
-add_library(libpsl ${LIBPSL_SOURCES})
-add_dependencies(libpsl GENERATE_DAFSA)
-target_link_libraries(libpsl ${LIBPSL_LIBS})
-target_include_directories(libpsl PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+add_library(psl ${LIBPSL_SOURCES})
+add_dependencies(psl GENERATE_DAFSA)
+target_link_libraries(psl ${LIBPSL_LIBS})
+target_include_directories(psl PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 install(
-    TARGETS libpsl
-    EXPORT LibPSLTargets
+    TARGETS psl
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}

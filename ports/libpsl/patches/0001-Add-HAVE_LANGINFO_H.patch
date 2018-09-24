@@ -1,0 +1,29 @@
+From c13fe6ac1010367d4863656035a733f96dc78b5d Mon Sep 17 00:00:00 2001
+From: Reid <c29reid@uwaterloo.ca>
+Date: Fri, 21 Sep 2018 13:32:43 -0700
+Subject: [PATCH] Add HAVE_LANGINFO_H
+
+---
+ src/psl.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/src/psl.c b/src/psl.c
+index cce5da6..2a51f60 100644
+--- a/src/psl.c
++++ b/src/psl.c
+@@ -75,8 +75,11 @@
+ #include <errno.h>
+ #include <limits.h> /* for UINT_MAX */
+ 
+-#ifndef _WIN32
++#ifdef HAVE_LANGINFO_H
+ # include <langinfo.h>
++#endif
++
++#ifndef _WIN32
+ # include <arpa/inet.h>
+ #endif
+ 
+-- 
+2.17.0.windows.1
+

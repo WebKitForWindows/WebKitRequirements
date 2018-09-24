@@ -4,10 +4,10 @@
 #cmakedefine BUILTIN_GENERATOR_LIBICU @BUILTIN_GENERATOR_LIBICU@
 
 /* generate PSL data using libidn */
-#cmakedefine BUILTIN_GENERATOR_LIBIDN
+#cmakedefine BUILTIN_GENERATOR_LIBIDN @BUILTIN_GENERATOR_LIBIDN@
 
 /* generate PSL data using libidn2 */
-#cmakedefine BUILTIN_GENERATOR_LIBIDN2
+#cmakedefine BUILTIN_GENERATOR_LIBIDN2 @BUILTIN_GENERATOR_LIBIDN2@
 
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
    systems. This function is required for `alloca.c' support on those systems.
@@ -18,50 +18,53 @@
 #cmakedefine C_ALLOCA
 
 /* Define to 1 if you have `alloca', as a function or macro. */
-#cmakedefine HAVE_ALLOCA
+#cmakedefine HAVE_ALLOCA @HAVE_ALLOCA@
 
 /* Define to 1 if you have <alloca.h> and it should be used (not on Ultrix).
    */
-#cmakedefine HAVE_ALLOCA_H
+#cmakedefine HAVE_ALLOCA_H @HAVE_ALLOCA_H@
 
 /* Define to 1 if you have the `clock_gettime' function. */
-#cmakedefine HAVE_CLOCK_GETTIME
+#cmakedefine HAVE_CLOCK_GETTIME @HAVE_CLOCK_GETTIME@
 
 /* Define to 1 if you have the `fmemopen' function. */
-#cmakedefine HAVE_FMEMOPEN
+#cmakedefine HAVE_FMEMOPEN @HAVE_FMEMOPEN@
 
 /* Define to 1 if you have the <inttypes.h> header file. */
-#cmakedefine HAVE_INTTYPES_H
+#cmakedefine HAVE_INTTYPES_H @HAVE_INTTYPES_H@
 
 /* Define to 1 if you have the <memory.h> header file. */
-#cmakedefine HAVE_MEMORY_H
+#cmakedefine HAVE_MEMORY_H @HAVE_MEMORY_H@
 
 /* Define to 1 if you have the `nl_langinfo' function. */
-#cmakedefine HAVE_NL_LANGINFO
+#cmakedefine HAVE_NL_LANGINFO @HAVE_NL_LANGINFO@
 
 /* Define to 1 if you have the <stdint.h> header file. */
-#cmakedefine HAVE_STDINT_H
+#cmakedefine HAVE_STDINT_H @HAVE_STDINT_H@
 
 /* Define to 1 if you have the <stdlib.h> header file. */
-#cmakedefine HAVE_STDLIB_H
+#cmakedefine HAVE_STDLIB_H @HAVE_STDLIB_H@
 
 /* Define to 1 if you have the <strings.h> header file. */
-#cmakedefine HAVE_STRINGS_H
+#cmakedefine HAVE_STRINGS_H @HAVE_STRINGS_H@
 
 /* Define to 1 if you have the <string.h> header file. */
-#cmakedefine HAVE_STRING_H
+#cmakedefine HAVE_STRING_H @HAVE_STRING_H@
 
 /* Define to 1 if you have the `strndup' function. */
-#cmakedefine HAVE_STRNDUP
+#cmakedefine HAVE_STRNDUP @HAVE_STRNDUP@
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
-#cmakedefine HAVE_SYS_STAT_H
+#cmakedefine HAVE_SYS_STAT_H @HAVE_SYS_STAT_H@
 
 /* Define to 1 if you have the <sys/types.h> header file. */
-#cmakedefine HAVE_SYS_TYPES_H
+#cmakedefine HAVE_SYS_TYPES_H @HAVE_SYS_TYPES_H@
 
 /* Define to 1 if you have the <unistd.h> header file. */
-#cmakedefine HAVE_UNISTD_H
+#cmakedefine HAVE_UNISTD_H @HAVE_UNISTD_H@
+
+/* Define to 1 if you have the <langinfo.h> header file. */
+#cmakedefine HAVE_LANGINFO_H @HAVE_LANGINFO_H@
 
 /* Define to the address where bug reports for this package should be sent. */
 #cmakedefine PACKAGE_BUGREPORT
@@ -96,10 +99,10 @@
 #cmakedefine WITH_LIBICU @WITH_LIBICU@
 
 /* generate PSL data using libidn */
-#cmakedefine WITH_LIBIDN
+#cmakedefine WITH_LIBIDN @WITH_LIBIDN@
 
 /* generate PSL data using libidn2 */
-#cmakedefine WITH_LIBIDN2
+#cmakedefine WITH_LIBIDN2 @WITH_LIBIDN2@
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
    calls it, or to nothing if 'inline' is not supported under any name.  */

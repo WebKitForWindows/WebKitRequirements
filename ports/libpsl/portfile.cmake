@@ -22,6 +22,13 @@ vcpkg_find_acquire_program(PYTHON2)
 get_filename_component(PYTHON2_EXE_PATH ${PYTHON2} DIRECTORY)
 set(ENV{PATH} "$ENV{PATH};${PYTHON2_EXE_PATH}")
 
+# Apply patches
+vcpkg_apply_patches(
+    SOURCE_PATH ${SOURCE_PATH}
+    PATCHES
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-HAVE_LANGINFO_H.patch
+)
+
 # Run CMake build
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
@@ -37,3 +44,5 @@ vcpkg_copy_pdbs()
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
+file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/libpsl RENAME copyright)
+file(INSTALL ${SOURCE_PATH}/src/LICENSE.chromium DESTINATION ${CURRENT_PACKAGES_DIR}/share/libpsl RENAME copyright-chromium)
