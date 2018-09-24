@@ -1,22 +1,7 @@
-cmake_minimum_required(VERSION 3.10)
+# Copyright (c) 2018, NikitaFeodonit. All rights reserved.
+#
+## ICU build file for CMake build tools
 
-include(GNUInstallDirs)
-
-set(ICU_MAJOR_VERSION 61)
-set(ICU_MINOR_VERSION 1)
-
-project(ICU VERSION ${ICU_MAJOR_VERSION}.${ICU_MINOR_VERSION} LANGUAGES C CXX)
-
-if (MSVC)
-  set(RTTI_FLAG "/GR")
-  set(ICU_DEFINITIONS
-    _CRT_SECURE_NO_DEPRECATE
-    U_PLATFORM_USES_ONLY_WIN32_API=1
-  )
-else ()
-  set(RTTI_FLAG "-frtti")
-endif ()
-
-add_subdirectory(data)
-add_subdirectory(common)
-add_subdirectory(i18n)
+cmake_minimum_required(VERSION 3.10)  # All settings are in source/CMakeLists.txt
+project(icu_root_project NONE)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/source)
