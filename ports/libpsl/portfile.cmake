@@ -4,8 +4,6 @@ include(${CMAKE_CURRENT_LIST_DIR}/psl.cmake)
 set(LIBPSL_VERSION 0.20.2)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libpsl-${LIBPSL_VERSION})
 
-# Download PSL
-
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/rockdaboot/libpsl/releases/download/libpsl-${LIBPSL_VERSION}/libpsl-${LIBPSL_VERSION}.tar.gz"
     FILENAME "libpsl-${LIBPSL_VERSION}.tar.gz"

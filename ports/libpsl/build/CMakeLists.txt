@@ -1,7 +1,7 @@
 project(libpsl)
 cmake_minimum_required(VERSION 3.7)
 
-find_package(ICU 56.1 REQUIRED COMPONENTS uc)
+find_package(ICU 59.1 REQUIRED COMPONENTS uc)
 
 string(REGEX MATCH "^[0-9]+" LIBPSL_VERSION_MAJOR "${LIBPSL_VERSION}")
 string(REGEX MATCH "\\.[0-9]+\\." LIBPSL_VERSION_MINOR "${LIBPSL_VERSION}")
