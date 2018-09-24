@@ -33,5 +33,6 @@
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
 | [cairo](https://www.cairographics.org) | 1.15.12 | 04-04-2017 |
 | [psl](https://publicsuffix.org/) | N/A | 03-28-2018 |
+| [libpsl](https://github.com/rockdaboot/libpsl) | 0.20.2 | 04-26-2018 |
 | [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 07-12-2012 |
 | [OpenCFLite](https://github.com/fujii/OpenCFLite) | 0.0.2 | 12-11-2017 |

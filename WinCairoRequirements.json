@@ -13,5 +13,5 @@
     "sqlite3",
     "pixman",
     "cairo",
-    "psl"
+    "libpsl"
 ]
