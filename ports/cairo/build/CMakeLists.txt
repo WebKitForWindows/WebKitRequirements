@@ -10,6 +10,9 @@ find_package(Freetype)
 find_package(Threads)
 find_package(Fontconfig)
 
+# This is a workaround for vcpkg's freetype routine which expects bzip2
+list(REMOVE_ITEM FREETYPE_LIBRARIES BZIP2_LIBRARY-NOTFOUND)
+
 include(GNUInstallDirs)
 include(Configure_config.cmake)
 include(Configure_features.cmake)
