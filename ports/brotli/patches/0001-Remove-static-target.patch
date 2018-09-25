@@ -1,4 +1,4 @@
-From 1bde2948a8c710c264c31cdc141ba01d789edad1 Mon Sep 17 00:00:00 2001
+From 1b4b105b0146dfc6390b34142cbe07069cee50f3 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 8 Mar 2018 12:20:35 -0800
 Subject: [PATCH 1/2] Remove static target
@@ -10,7 +10,7 @@ determining the library type created.
  1 file changed, 21 insertions(+), 33 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 2dc7232..b442122 100644
+index 6f1c5a2..561c652 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -114,10 +114,6 @@ set(BROTLI_LIBRARIES_CORE brotlienc brotlidec brotlicommon)

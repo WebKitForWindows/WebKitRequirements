@@ -1,39 +1,29 @@
-From b43e7f64fa4666ef3be312248c02842eaa1366c0 Mon Sep 17 00:00:00 2001
+From 33e479a6428fe666ddc42f4b6300e79342a72124 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
-Date: Thu, 8 Mar 2018 12:23:17 -0800
+Date: Mon, 24 Sep 2018 18:22:19 -0700
 Subject: [PATCH 2/2] Add __has_declspec_attribute
 
 Clang contains __has_declspec_attribute for MSVC compatibility. This can be
 used to determine whether __declspec is available.
 ---
- c/include/brotli/port.h | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ c/include/brotli/port.h | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/c/include/brotli/port.h b/c/include/brotli/port.h
-index 88cdbf4..ce543d3 100644
+index 20dc231..440b61c 100644
 --- a/c/include/brotli/port.h
 +++ b/c/include/brotli/port.h
-@@ -27,6 +27,14 @@
- #define __has_feature(x) 0
- #endif
+@@ -243,8 +243,12 @@
+ 
+ /* <<< <<< <<< end of hedley macros. */
  
 +#ifndef __has_declspec_attribute
-+#if defined(_WIN32)
-+#define __has_declspec_attribute(x) 1
-+#else
 +#define __has_declspec_attribute(x) 0
 +#endif
-+#endif
 +
- #if defined(__GNUC__) && defined(__GNUC_MINOR__)
- #define BROTLI_GCC_VERSION (__GNUC__ * 100 + __GNUC_MINOR__)
- #else
-@@ -47,7 +55,7 @@
- #define BROTLI_MODERN_COMPILER 0
- #endif
- 
--#if defined(BROTLI_SHARED_COMPILATION) && defined(_WIN32)
-+#if defined(BROTLI_SHARED_COMPILATION) && (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
+ #if defined(BROTLI_SHARED_COMPILATION)
+-#if defined(_WIN32)
++#if defined(_WIN32) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
  #if defined(BROTLICOMMON_SHARED_COMPILATION)
  #define BROTLI_COMMON_API __declspec(dllexport)
  #else
