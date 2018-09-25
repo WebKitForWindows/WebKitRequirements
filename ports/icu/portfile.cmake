@@ -12,6 +12,15 @@ vcpkg_download_distfile(ARCHIVE
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
+# Apply patches
+vcpkg_apply_patches(
+    SOURCE_PATH ${SOURCE_PATH}
+    PATCHES
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Check-U_HAVE_TZ-values.patch
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Use-__has_declspec_attribute.patch
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0003-genccode-crashes-when-creating-assembly-files.patch
+)
+
 # Add CMake sources
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/source DESTINATION ${SOURCE_PATH})
@@ -34,7 +43,8 @@ if (NOT VCPKG_WINDOWS OR VCPKG_TARGET_ARCHITECTURE MATCHES "^arm")
     set(CROSS_COMPILING ON)
     set(ENABLE_TOOLS OFF)
 
-    list(APPEND BUILD_OPTIONS -DICU_CROSS_BUILDROOT=E:/WinCairoRequirements/buildtrees/icu/x64-windows-webkit-rel/source)
+    # Place value of ICU_CROSS_BUILDROOT into the triplet file
+    list(APPEND BUILD_OPTIONS -DICU_CROSS_BUILDROOT=${ICU_CROSS_BUILDROOT})
 else ()
     set(CROSS_COMPILING OFF)
     set(ENABLE_TOOLS ON)

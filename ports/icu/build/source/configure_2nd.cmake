@@ -667,9 +667,6 @@ try_compile_src("for_tzname" "c"
     #endif
     #include <stdlib.h>
     #include <time.h>
-    #ifndef tzname /* For SGI.  */
-    extern char *tzname[]; /* RS6000 and others reject char **tzname.  */
-    #endif
   "
   "atoi(*tzname);"
   ""
@@ -694,6 +691,7 @@ else()
   if(__TZNAME)
     set(U_TZNAME _tzname)
     set(U_HAVE_TZNAME 1)
+    list(APPEND CONFIG_CPPFLAGS U_TZNAME=${U_TZNAME})
   else()
     list(APPEND CONFIG_CPPFLAGS U_HAVE_TZNAME=0)
   endif()
