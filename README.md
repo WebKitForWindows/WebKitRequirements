@@ -26,13 +26,12 @@
 | [libxslt](http://xmlsoft.org/libxslt/) | 1.1.32 | 11-02-2017 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.35 | 07-16-2018 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.0.0 | 07-27-2018 |
-| [libwebp](https://github.com/webmproject/libwebp) | 1.0.0 | 4-02-2018 |
+| [libwebp](https://github.com/webmproject/libwebp) | 1.0.0 | 04-02-2018 |
 | [sqlite](http://sqlite.org) | 3.25.1 | 09-18-2018 |
 | [freetype](https://www.freetype.org) | 2.9.1 | 05-02-2018 |
 | [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 1.7.6 | 03-07-2018 | 
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
 | [cairo](https://www.cairographics.org) | 1.15.14 | 09-21-2018 |
-| [psl](https://publicsuffix.org/) | N/A | 03-28-2018 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.20.2 | 04-26-2018 |
 | [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 07-12-2012 |
 | [OpenCFLite](https://github.com/fujii/OpenCFLite) | 0.0.2 | 12-11-2017 |
