@@ -31,7 +31,7 @@
 | [freetype](https://www.freetype.org) | 2.9.1 | 05-02-2018 |
 | [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 1.7.6 | 03-07-2018 | 
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
-| [cairo](https://www.cairographics.org) | 1.15.12 | 04-04-2017 |
+| [cairo](https://www.cairographics.org) | 1.15.14 | 09-21-2018 |
 | [psl](https://publicsuffix.org/) | N/A | 03-28-2018 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.20.2 | 04-26-2018 |
 | [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 07-12-2012 |

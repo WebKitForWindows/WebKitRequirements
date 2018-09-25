@@ -1,5 +1,5 @@
 Source: cairo
-Version: 1.15.12
+Version: 1.15.14
 Build-Depends: libpng, pixman, zlib
 Description: |
   Cairo is a 2D graphics library with support for multiple output devices.
