@@ -81,13 +81,11 @@ if (NOT VCPKG_WINDOWS OR VCPKG_TARGET_ARCHITECTURE MATCHES "^arm")
 
     # When cross compiling curl it does not have the ability to use CMake's try_run
     # functionality so these values need to be set properly for the platform
-    list(APPEND BUILD_OPTIONS
-        -DHAVE_GLIBC_STRERROR_R=ON
-        -DHAVE_POSIX_STRERROR_R=OFF
-        -DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=1
-        -DHAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT=0
-        -DHAVE_POLL_FINE_EXITCODE=0
-    )
+    if (DEFINED CURL_CROSS_BUILD_OPTIONS)
+        list(APPEND BUILD_OPTIONS ${CURL_CROSS_BUILD_OPTIONS})
+    else ()
+        message(FATAL_ERROR "CURL_CROSS_BUILD_OPTIONS needs to be set in the triplet file when cross compiling to communicate values determined by try_run")
+    endif ()
 endif ()
 
 vcpkg_configure_cmake(
