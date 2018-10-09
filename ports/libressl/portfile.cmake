@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(LIBRESSL_VERSION 2.8.0)
+set(LIBRESSL_VERSION 2.8.1)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libressl-${LIBRESSL_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${LIBRESSL_VERSION}.tar.gz"
     FILENAME "libressl-${LIBRESSL_VERSION}.tar.gz"
-    SHA512 3004cd78a9d52dece9f24272389778d6afca549de245852004ddd57b01a0c3a6fa1cee2d56980d067d23b3ead7f7a4aa6bcf4e0c57a56f5f7d9fd3f8d23f3ca2
+    SHA512 57af2c7a1a8522dca25c4e6371cb44f5ab074be1aded153e6e5fca4fa0844518710f7ce834d4dd309086686c492f10fca83f4d45c084eb49607cb5861f07ac99
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
