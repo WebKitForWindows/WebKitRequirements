@@ -52,6 +52,18 @@ set(BUILD_OPTIONS
     -DWITH_ZLIB=OFF
 )
 
+# Windows builds have a config.h in the repository
+if (NOT VCPKG_CMAKE_SYSTEM_NAME OR VCPKG_CMAKE_SYSTEM_NAME MATCHES "^Windows")
+    list(APPEND BUILD_OPTIONS -DLIBXML2_CONFIG_INCLUDE_DIR=win32/VC10)
+else ()
+    if (NOT DEFINED LIBXML2_CONFIG_INCLUDE_DIR)
+        message(FATAL_ERROR "A config.h file is required to build libxml2. Generate and set LIBXML2_CONFIG_INCLUDE_DIR in the triplet")
+    endif ()
+
+    file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/${LIBXML2_CONFIG_INCLUDE_DIR} DESTINATION ${SOURCE_PATH})
+    list(APPEND BUILD_OPTIONS -DLIBXML2_CONFIG_INCLUDE_DIR=${LIBXML2_CONFIG_INCLUDE_DIR})
+endif ()
+
 # libxslt requires certain features to be turned on
 if (xslt IN_LIST FEATURES)
     list(APPEND BUILD_OPTIONS
