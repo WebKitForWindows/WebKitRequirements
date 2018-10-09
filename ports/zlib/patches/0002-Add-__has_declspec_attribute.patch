@@ -1,7 +1,7 @@
-From f423348575bbd0eb84a79e54a117cb2b930d9b38 Mon Sep 17 00:00:00 2001
+From 02d1a649921e503d1128a6e3f9284a35bc5c7287 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 15 Mar 2018 09:28:57 -0700
-Subject: [PATCH 2/3] Add __has_declspec_attribute
+Subject: [PATCH 2/2] Add __has_declspec_attribute
 
 Clang contains __has_declspec_attribute for MSVC compatibility. This can be
 used to determine whether __declspec is available.
@@ -12,10 +12,10 @@ used to determine whether __declspec is available.
  3 files changed, 37 insertions(+), 45 deletions(-)
 
 diff --git a/zconf-ng.h.in b/zconf-ng.h.in
-index c6b06a2..204c0ad 100644
+index 73845ee..ebeeb84 100644
 --- a/zconf-ng.h.in
 +++ b/zconf-ng.h.in
-@@ -30,6 +30,10 @@
+@@ -25,6 +25,10 @@
  #  endif
  #endif
  
@@ -26,7 +26,7 @@ index c6b06a2..204c0ad 100644
  /* Maximum value for memLevel in deflateInit2 */
  #ifndef MAX_MEM_LEVEL
  #  define MAX_MEM_LEVEL 9
-@@ -60,30 +64,22 @@
+@@ -55,30 +59,22 @@
                          /* Type declarations */
  
  
@@ -72,10 +72,10 @@ index c6b06a2..204c0ad 100644
  
  #ifndef ZEXTERN
 diff --git a/zconf.h.in b/zconf.h.in
-index 73b204b..a7c6ba6 100644
+index 8f741c4..d7cbd13 100644
 --- a/zconf.h.in
 +++ b/zconf.h.in
-@@ -30,6 +30,10 @@
+@@ -25,6 +25,10 @@
  #  endif
  #endif
  
@@ -86,7 +86,7 @@ index 73b204b..a7c6ba6 100644
  /* Maximum value for memLevel in deflateInit2 */
  #ifndef MAX_MEM_LEVEL
  #  define MAX_MEM_LEVEL 9
-@@ -60,30 +64,22 @@
+@@ -55,30 +59,22 @@
                          /* Type declarations */
  
  
@@ -145,5 +145,5 @@ index 4889c21..73fa0a3 100644
  #else
  #if defined(__GNUC__)
 -- 
-2.14.1.windows.1
+2.19.0.windows.1
 
