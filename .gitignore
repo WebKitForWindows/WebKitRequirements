@@ -7,6 +7,5 @@ packages
 # Ignore vcpkg files
 # TODO Remove once third party repositories are supported
 .vcpkg-root
-triplets
 scripts
 vcpkg.exe
