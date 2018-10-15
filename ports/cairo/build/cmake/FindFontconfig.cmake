@@ -13,7 +13,7 @@
 # Distributed under the OSI-approved BSD License
 #
 
-if (NOT WIN32)
+if (NOT (${CMAKE_SYSTEM_NAME} MATCHES "Windows"))
     find_package(PkgConfig)
     if (PKG_CONFIG_FOUND)
         pkg_check_modules(_FONTCONFIG fontconfig)
