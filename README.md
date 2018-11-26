@@ -19,7 +19,7 @@
 | [zlib](https://github.com/Dead2/zlib-ng) | N/A | 09-19-2018 |
 | [brotli](https://github.com/google/brotli) | 1.0.6 | 09-19-2018 |
 | [libressl](https://www.libressl.org) | 2.8.1 | 09-25-2018 |
-| [nghttp2](https://nghttp2.org) | 1.34.0 | 10-04-2018 |
+| [nghttp2](https://nghttp2.org) | 1.35.0 | 11-22-2018 |
 | [curl](https://curl.haxx.se) | 7.61.1 | 09-05-2018 |
 | [libxml2](http://xmlsoft.org/) | 2.9.7 | 11-02-2017 |
 | [libxslt](http://xmlsoft.org/libxslt/) | 1.1.32 | 11-02-2017 |

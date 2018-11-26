@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(NGHTTP2_VERSION 1.34.0)
+set(NGHTTP2_VERSION 1.35.0)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/nghttp2-${NGHTTP2_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/nghttp2/nghttp2/archive/v${NGHTTP2_VERSION}.zip"
     FILENAME "nghttp2-${NGHTTP2_VERSION}.zip"
-    SHA512 62aee304f4a5de829525dba2dd1a34612b38aaf681055d48752efafe2715b692113c98f609add506c17299cee5f6886e99e8a751a7c277b6d49cf15e5b624f04
+    SHA512 08df51dc2c513e63ffdbe2dfbf891a6bc9f04060954ce44855af352dbf56ffa008ae85685386085d1605e326acb96b3c1f9a47d6a985e90226777e97c9679c07
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -16,7 +16,6 @@ vcpkg_apply_patches(
     PATCHES
         ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Use-BUILD_SHARED_LIBS.patch
         ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Fix-library-install-destination.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Add-__has_declspec_attribute.patch
 )
 
 # Run CMake build
