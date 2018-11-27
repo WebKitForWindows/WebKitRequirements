@@ -4,8 +4,8 @@ include(vcpkg_common_functions)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO Dead2/zlib-ng
-    REF 9992d3b599b2cfeed5aa34747c8c3e7fe65261d7
-    SHA512 be8c192bb559ef4871de5f71c3b01de9f5b7206bdd402a3d0faf977f19fe072e00038003dc628cab80338d3653f98d6a841de62efd5838e0c451e49cd8f8c4ba
+    REF 796ad10efb749d264fe262b624842a921f05e45c
+    SHA512 f1c7801009ae06e1f0a15e749930daa9d0cefa8419a210612bef8ad4d53393f96f8c6b81c88a9ed5b7878e0071b4bd5829614ee6d247e7ad10d12750904a8501
 )
 
 # Apply patches
