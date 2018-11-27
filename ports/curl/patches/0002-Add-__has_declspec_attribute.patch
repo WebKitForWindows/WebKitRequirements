@@ -1,0 +1,37 @@
+From 0e743cc39ebb1491799bbd561e51696988bf90c9 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Mon, 26 Nov 2018 16:32:43 -0800
+Subject: [PATCH 2/2] Add __has_declspec_attribute
+
+---
+ include/curl/curl.h | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/include/curl/curl.h b/include/curl/curl.h
+index cf6f01de9..2c1e72af2 100644
+--- a/include/curl/curl.h
++++ b/include/curl/curl.h
+@@ -91,6 +91,11 @@
+ #include <support/SupportDefs.h>
+ #endif
+ 
++/* Compatibility for non-Clang compilers */
++#ifndef __has_declspec_attribute
++#  define __has_declspec_attribute(x) 0
++#endif
++
+ #ifdef  __cplusplus
+ extern "C" {
+ #endif
+@@ -109,7 +114,7 @@ typedef void CURLSH;
+ 
+ #ifdef CURL_STATICLIB
+ #  define CURL_EXTERN
+-#elif defined(WIN32) || defined(_WIN32) || defined(__SYMBIAN32__)
++#elif defined(WIN32) || defined(_WIN32) || defined(__SYMBIAN32__) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
+ #  if defined(BUILDING_LIBCURL)
+ #    define CURL_EXTERN  __declspec(dllexport)
+ #  else
+-- 
+2.19.0.windows.1
+

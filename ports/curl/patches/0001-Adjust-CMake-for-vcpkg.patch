@@ -1,39 +1,25 @@
-From 49a6afb302449ef07cf6b0cab7b487b6ab38441a Mon Sep 17 00:00:00 2001
+From 813e1b87320381eddbc297683b9c8b3e46576693 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
-Date: Thu, 15 Mar 2018 13:39:54 -0700
+Date: Mon, 26 Nov 2018 16:32:05 -0800
 Subject: [PATCH 1/2] Adjust CMake for vcpkg
 
-Changes the locations of installed files to match what vcpkg expects.
 ---
- CMakeLists.txt | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 490cc19ef..6b501d7fb 100644
+index a3c17c452..6dd721fa8 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -1131,11 +1131,7 @@ function(TRANSFORM_MAKEFILE_INC INPUT_FILE OUTPUT_FILE)
+@@ -1150,7 +1150,7 @@ endfunction()
  
- endfunction()
+ include(GNUInstallDirs)
  
--if(WIN32 AND NOT CYGWIN)
--    set(CURL_INSTALL_CMAKE_DIR CMake)
--else()
--    set(CURL_INSTALL_CMAKE_DIR lib/cmake/curl)
--endif()
-+set(CURL_INSTALL_CMAKE_DIR share/curl)
- 
- if(USE_MANUAL)
-   add_subdirectory(docs)
-@@ -1265,7 +1261,7 @@ set(VERSIONNUM              "${CURL_VERSION_NUM}")
- configure_file("${CURL_SOURCE_DIR}/curl-config.in"
-                "${CURL_BINARY_DIR}/curl-config" @ONLY)
- install(FILES "${CURL_BINARY_DIR}/curl-config"
--        DESTINATION bin
-+        DESTINATION share/curl
-         PERMISSIONS
-           OWNER_READ OWNER_WRITE OWNER_EXECUTE
-           GROUP_READ GROUP_EXECUTE
+-set(CURL_INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
++set(CURL_INSTALL_CMAKE_DIR ${CMAKE_INSTALL_DATADIR}/curl/cmake)
+ set(TARGETS_EXPORT_NAME "${PROJECT_NAME}Targets")
+ set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
+ set(project_config "${generated_dir}/${PROJECT_NAME}Config.cmake")
 -- 
-2.14.1.windows.1
+2.19.0.windows.1
 

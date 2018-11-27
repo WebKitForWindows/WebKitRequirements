@@ -1,6 +1,6 @@
 include(vcpkg_common_functions)
 
-set(CURL_VERSION 7.61.1)
+set(CURL_VERSION 7.62.0)
 string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/curl-curl-${CURL_TAG})
 
@@ -8,7 +8,7 @@ set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/curl-curl-${CURL_TAG})
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/archive/curl-${CURL_TAG}.zip"
     FILENAME "curl-${CURL_TAG}.zip"
-    SHA512 650cd88e773dc1c8d1ae201a62544e3e6ff58dcb9eca18dfa50e823ea832afb285609c537f8a9f308460051cbfbb24d76caa8cca7033ba445fb84d5f7c76ef2f
+    SHA512 3a27863c59027d454e1979972151d8c43b0a77ff451b389a88b7e7c4caf3a04081986a2a4f960ffee2699eeae818839214360feb58c3a1760b628eed576e3273
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -17,6 +17,7 @@ vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES
         ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-__has_declspec_attribute.patch
 )
 
 # Run CMake build
