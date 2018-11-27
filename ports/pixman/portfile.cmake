@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(PIXMAN_VERSION 0.34.0)
+set(PIXMAN_VERSION 0.36.0)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/pixman-${PIXMAN_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://www.cairographics.org/releases/pixman-${PIXMAN_VERSION}.tar.gz"
     FILENAME "pixman-${PIXMAN_VERSION}.tar.gz"
-    SHA512 81caca5b71582b53aaac473bc37145bd66ba9acebb4773fa8cdb51f4ed7fbcb6954790d8633aad85b2826dd276bcce725e26e37997a517760e9edd72e2669a6d
+    SHA512 227d2d9bbebe20c87e4e5008791516afabaa54cb26f8658beac8e80710671f11cd5391e7d4d910b8450f6c0f7413dfca514e4a175a3b05b305186e8d427ce4d6
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
