@@ -26,7 +26,7 @@
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.35 | 07-16-2018 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.0.1 | 11-12-2018 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.0.1 | 11-16-2018 |
-| [sqlite](http://sqlite.org) | 3.25.2 | 09-25-2018 |
+| [sqlite](http://sqlite.org) | 3.25.3 | 11-05-2018 |
 | [freetype](https://www.freetype.org) | 2.9.1 | 05-02-2018 |
 | [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 1.7.6 | 03-07-2018 | 
 | [pixman](http://www.pixman.org) | 0.34.0 | 01-31-2016 |
