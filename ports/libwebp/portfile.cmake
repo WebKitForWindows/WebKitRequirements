@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(WEBP_VERSION 1.0.0)
+set(WEBP_VERSION 1.0.1)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libwebp-${WEBP_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/webmproject/libwebp/archive/v${WEBP_VERSION}.zip"
     FILENAME "libwebp-${WEBP_VERSION}.zip"
-    SHA512 e57be47047b9c1df4e3b10442aa0f33929ef6f9372dcff3296f8757565743fa56d6b0a6548b9c7bc9eee4f6f85d7b141e8ede9881c5756ecac2bc8ae39535f70
+    SHA512 47a866123e1d88a9a2a6a5131d2f3d204bf0639007fa67755f8c81b95c82add3ed7459282dd99c4079c04c61ebb495a219494e33fe854619d7be22b3de43fbc2
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -21,6 +21,16 @@ vcpkg_apply_patches(
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
+    OPTIONS
+        -DWEBP_BUILD_ANIM_UTILS=OFF
+        -DWEBP_BUILD_CWEBP=OFF
+        -DWEBP_BUILD_DWEBP=OFF
+        -DWEBP_BUILD_GIF2WEBP=OFF
+        -DWEBP_BUILD_IMG2WEBP=OFF
+        -DWEBP_BUILD_VWEBP=OFF
+        -DWEBP_BUILD_WEBPINFO=OFF
+        -DWEBP_BUILD_WEBPMUX=OFF
+        -DWEBP_BUILD_EXTRAS=OFF
 )
 
 vcpkg_install_cmake()
