@@ -20,3 +20,6 @@ if ($triplet.StartsWith('x64')) {
 
 Rename-Item -Path ('installed/{0}/bin' -f $triplet) -NewName ('bin{0}' -f $suffix);
 Rename-Item -Path ('installed/{0}/lib' -f $triplet) -NewName ('lib{0}' -f $suffix);
+
+Rename-Item -Path ('installed/{0}/debug/bin' -f $triplet) -NewName ('bin{0}' -f $suffix);
+Rename-Item -Path ('installed/{0}/debug/lib' -f $triplet) -NewName ('lib{0}' -f $suffix);
