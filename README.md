@@ -23,7 +23,7 @@
 | [curl](https://curl.haxx.se) | 7.62.0 | 10-31-2018 |
 | [libxml2](http://xmlsoft.org/) | 2.9.7 | 11-02-2017 |
 | [libxslt](http://xmlsoft.org/libxslt/) | 1.1.32 | 11-02-2017 |
-| [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.35 | 07-16-2018 |
+| [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.36 | 12-01-2018 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.0.1 | 11-12-2018 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.0.1 | 11-16-2018 |
 | [sqlite](http://sqlite.org) | 3.25.3 | 11-05-2018 |

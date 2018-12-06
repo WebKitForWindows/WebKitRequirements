@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(LIBPNG_VERSION 1.6.35)
+set(LIBPNG_VERSION 1.6.36)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libpng-${LIBPNG_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://downloads.sourceforge.net/project/libpng/libpng16/${LIBPNG_VERSION}/libpng-${LIBPNG_VERSION}.tar.gz"
     FILENAME "libpng-${LIBPNG_VERSION}.tar.gz"
-    SHA512 e4312a4b33e02ad975864d8f1b0c29427625257983962ddd043f258643c18ddcb15a118405282f04d1310817e454a95111e2d4569de494d01d649c7171fd3127
+    SHA512 8b9c54c5555d6a736eaf298cbbae1e08199001202bacabc6212d75fa619e2ecf06bcf36db0321bfdb90a3dc5cde361c8d951002701637a557c34eae80f5d0936
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -16,7 +16,6 @@ vcpkg_apply_patches(
     PATCHES
         ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Skip-install-symlink.patch
         ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Do-not-append-static-to-library-name.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Remove-m-library-when-not-found.patch
 )
 
 # Run CMake build
