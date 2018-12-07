@@ -28,7 +28,7 @@
 | [libwebp](https://github.com/webmproject/libwebp) | 1.0.1 | 11-16-2018 |
 | [sqlite](http://sqlite.org) | 3.26.0 | 12-01-2018 |
 | [freetype](https://www.freetype.org) | 2.9.1 | 05-02-2018 |
-| [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 1.7.6 | 03-07-2018 | 
+| [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.2.0 | 11-29-2018 | 
 | [pixman](http://www.pixman.org) | 0.36.0 | 11-21-2018 |
 | [cairo](https://www.cairographics.org) | 1.16.0 | 10-19-2018 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.20.2 | 04-26-2018 |
