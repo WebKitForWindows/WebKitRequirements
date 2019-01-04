@@ -1,6 +1,6 @@
 include(vcpkg_common_functions)
 
-set(CURL_VERSION 7.62.0)
+set(CURL_VERSION 7.63.0)
 string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/curl-curl-${CURL_TAG})
 
@@ -8,7 +8,7 @@ set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/curl-curl-${CURL_TAG})
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/archive/curl-${CURL_TAG}.zip"
     FILENAME "curl-${CURL_TAG}.zip"
-    SHA512 3a27863c59027d454e1979972151d8c43b0a77ff451b389a88b7e7c4caf3a04081986a2a4f960ffee2699eeae818839214360feb58c3a1760b628eed576e3273
+    SHA512 019deef2d09079973c0fca68352b052fb002d039542875f5fcc535d3e63657acc77787ec0abd86c936ba19ca8810673406dbb6e3d04aed199a95066e600de100
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
