@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(HARFBUZZ_VERSION 2.2.0)
+set(HARFBUZZ_VERSION 2.3.0)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/harfbuzz-${HARFBUZZ_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${HARFBUZZ_VERSION}/harfbuzz-${HARFBUZZ_VERSION}.tar.bz2"
     FILENAME "harfbuzz-${HARFBUZZ_VERSION}.tar.bz2"
-    SHA512 5e8f35c0d7634afc6f623a91d56bfde46b2a1030d439e5dec196001d49a58e409a1bf66c7f9c15a04e030dab4fe2fe2c928061839b1e985459d4f8379b8a0818
+    SHA512 830c5b96384554fb6d2502713e9b2eff384dbe6aa3feb08830226944bcb07c8fb55237f389e1e6416d0942e3efba8b1ed54a49ff8c4762fec230f2404095e85a
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
