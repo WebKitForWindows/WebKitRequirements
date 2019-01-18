@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(LIBXSLT_VERSION 1.1.32)
+set(LIBXSLT_VERSION 1.1.33)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libxslt-${LIBXSLT_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "http://xmlsoft.org/sources/libxslt-${LIBXSLT_VERSION}.tar.gz"
     FILENAME "libxslt-${LIBXSLT_VERSION}.tar.gz"
-    SHA512 e1ed3c103cd4c9897e7dd2360a11f63cf30382b7566ce6fcc81117804e203714446b5a62179ce628c3834b0b32ecdeeceecbdfa417507ce9ed5a107a0ebefb39
+    SHA512 ebbe438a38bf6355950167d3b580edc22baa46a77068c18c42445c1c9c716d42bed3b30c5cd5bec359ab32d03843224dae458e9e32dc61693e7cf4bab23536e0
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
