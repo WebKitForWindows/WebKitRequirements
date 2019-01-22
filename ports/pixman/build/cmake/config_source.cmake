@@ -157,7 +157,7 @@
 /* use GCC Vector Extensions */
 #cmakedefine HAVE_GCC_VECTOR_EXTENSIONS @HAVE_GCC_VECTOR_EXTENSIONS@
 
-/* use OpenMP
+/* use OpenMP */
 #cmakedefine USE_OPENMP @USE_OPENMP@
 
 /* Version number of package */
