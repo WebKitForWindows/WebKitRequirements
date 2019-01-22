@@ -641,6 +641,13 @@ endif()
 add_library(cairo ${enabled_cairo_sources})
 target_link_libraries(cairo ${CAIRO_LIBS})
 
+if (NOT MSVC)
+    target_compile_options(cairo PRIVATE
+        -Wno-parentheses-equality
+        -Wno-enum-conversion
+    )
+endif ()
+
 install(
     TARGETS cairo
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
