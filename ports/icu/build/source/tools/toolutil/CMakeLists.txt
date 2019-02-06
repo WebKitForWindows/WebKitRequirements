@@ -4,12 +4,20 @@
 
 set(lib_NAME ${ICULIBS_TOOLUTIL})
 set(lib_NAME_SUFFIX ${TOOLUTIL_STUBNAME})
+set(lib_OUTPUT_NAME ${lib_NAME}${ICULIBSUFFIX_DEBUG})
+
+if(NOT WIN32)
+  set(lib_RUNTIME_OUTPUT_NAME ${lib_OUTPUT_NAME})
+else()
+  set(lib_RUNTIME_OUTPUT_NAME ${lib_NAME}${PROJECT_VERSION_MAJOR}${ICULIBSUFFIX_DEBUG})
+endif()
 
 add_library(${lib_NAME} "")
 
 set_target_properties(${lib_NAME} PROPERTIES
   EXPORT_NAME ${lib_NAME_SUFFIX}
-  OUTPUT_NAME ${lib_NAME}${ICULIBSUFFIX_DEBUG}
+  OUTPUT_NAME ${lib_OUTPUT_NAME}
+  RUNTIME_OUTPUT_NAME ${lib_RUNTIME_OUTPUT_NAME}
 )
 
 ### Common libraries options
