@@ -44,15 +44,16 @@
 /* Define to 1 to enable cairo's cairo-trace feature */
 #cmakedefine CAIRO_HAS_TRACE
 
-/* Define to 1 to disable certain code paths that rely heavily on
- double
+/* Define to 1 to disable certain code paths that rely heavily on double
    precision floating-point calculation */
 #cmakedefine DISABLE_SOME_FLOATING_POINT
 
-/* Define to 1 if your system stores words within floats
- with the most
+/* Define to 1 if your system stores words within floats with the most
    significant word first */
 #cmakedefine FLOAT_WORDS_BIGENDIAN
+
+/* Define to (0) if freetype2 does not support color fonts */
+#cmakedefine FT_HAS_COLOR
 
 /* Enable pixman glyph cache */
 #cmakedefine HAS_PIXMAN_GLYPHS
@@ -75,6 +76,9 @@
 
 /* Define to 1 if you have the `ctime_r' function. */
 #cmakedefine HAVE_CTIME_R @HAVE_CTIME_R@
+
+/* Enable if your compiler supports the GCC __atomic_* atomic primitives */
+#cmakedefine HAVE_CXX11_ATOMIC_PRIMITIVES
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #cmakedefine HAVE_DLFCN_H @HAVE_DLFCN_H@
@@ -109,6 +113,12 @@
 /* Define to 1 if you have the `fork' function. */
 #cmakedefine HAVE_FORK @HAVE_FORK@
 
+/* Define to 1 if you have the `FT_Done_MM_Var' function. */
+#cmakedefine HAVE_FT_DONE_MM_VAR @HAVE_FT_DONE_MM_VAR@
+
+/* Define to 1 if you have the `FT_Get_Var_Design_Coordinates' function. */
+#cmakedefine HAVE_FT_GET_VAR_DESIGN_COORDINATES @HAVE_FT_GET_VAR_DESIGN_COORDINATES@
+
 /* Define to 1 if you have the `FT_Get_X11_Font_Format' function. */
 #cmakedefine HAVE_FT_GET_X11_FONT_FORMAT @HAVE_FT_GET_X11_FONT_FORMAT@
 
@@ -126,6 +136,10 @@
 
 /* Define to 1 if you have the `funlockfile' function. */
 #cmakedefine HAVE_FUNLOCKFILE @HAVE_FUNLOCKFILE@
+
+/* Enable if your compiler supports the legacy GCC __sync_* atomic primitives
+   */
+#cmakedefine HAVE_GCC_LEGACY_ATOMICS
 
 /* Whether you have gcov */
 #cmakedefine HAVE_GCOV @HAVE_GCOV@
@@ -154,6 +168,9 @@
 /* Define to 1 if you have the `link' function. */
 #cmakedefine HAVE_LINK @HAVE_LINK@
 
+/* Define to 1 if you have the `localtime_r' function. */
+#cmakedefine HAVE_LOCALTIME_R
+
 /* Define to 1 if you have the Valgrind lockdep tool */
 #cmakedefine HAVE_LOCKDEP
 
@@ -172,6 +189,9 @@
 
 /* Define to 1 if you have the `mmap' function. */
 #cmakedefine HAVE_MMAP @HAVE_MMAP@
+
+/* Define to 1 if you have the `newlocale' function. */
+#cmakedefine HAVE_NEWLOCALE
 
 /* Enable if you have MacOS X atomic operations */
 #cmakedefine HAVE_OS_ATOMIC_OPS
@@ -212,6 +232,9 @@
 /* Define to 1 if you have the `strndup' function. */
 #cmakedefine HAVE_STRNDUP @HAVE_STRNDUP@
 
+/* Define to 1 if you have the `strtod_l' function. */
+#cmakedefine HAVE_STRTOD_L
+
 /* Define to 1 if you have the <sys/int_types.h> header file. */
 #cmakedefine HAVE_SYS_INT_TYPES_H @HAVE_SYS_INT_TYPES_H@
 
@@ -242,6 +265,9 @@
 /* Define to 1 if you have the <time.h> header file. */
 #cmakedefine HAVE_TIME_H @HAVE_TIME_H@
 
+/* Define to 1 if typeof works with your compiler. */
+#cmakedefine HAVE_TYPEOF
+
 /* Define to 1 if the system has the type `uint128_t'. */
 #cmakedefine HAVE_UINT128_T @HAVE_UINT128_T@
 
@@ -257,9 +283,6 @@
 /* Define to 1 if you have the `waitpid' function. */
 #cmakedefine HAVE_WAITPID @HAVE_WAITPID@
 
-/* Define to 1 if you have the <windows.h> header file. */
-#cmakedefine HAVE_WINDOWS_H @HAVE_WINDOWS_H@
-
 /* Define to 1 if you have the <X11/extensions/shmproto.h> header file. */
 #cmakedefine HAVE_X11_EXTENSIONS_SHMPROTO_H
 
@@ -268,6 +291,9 @@
 
 /* Define to 1 if you have the <X11/extensions/XShm.h> header file. */
 #cmakedefine HAVE_X11_EXTENSIONS_XSHM_H
+
+/* Define to 1 if you have the <xlocale.h> header file. */
+#cmakedefine HAVE_XLOCALE_H
 
 /* Define to 1 if you have the `XRenderCreateConicalGradient' function. */
 #cmakedefine HAVE_XRENDERCREATECONICALGRADIENT
@@ -290,12 +316,8 @@
 /* Define to 1 if shared memory segments are released deferred. */
 #cmakedefine IPC_RMID_DEFERRED_RELEASE
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory in which libtool stores uninstalled libraries. */
 #cmakedefine LT_OBJDIR
-
-/* Define to 1 if your C compiler doesn't accept -c and -o together. */
-#cmakedefine NO_MINUS_C_MINUS_O
 
 /* Define to the address where bug reports for this package should be sent. */
 #cmakedefine PACKAGE_BUGREPORT

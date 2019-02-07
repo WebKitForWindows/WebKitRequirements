@@ -14,10 +14,10 @@ set(cairo_private
     cairo-clip-private.h
     cairo-combsort-inline.h
     cairo-compiler-private.h
+    cairo-composite-rectangles-private.h
     cairo-compositor-private.h
     cairo-contour-inline.h
     cairo-contour-private.h
-    cairo-composite-rectangles-private.h
     cairo-damage-private.h
     cairo-default-context-private.h
     cairo-device-private.h
@@ -25,10 +25,10 @@ set(cairo_private
     cairo-error-private.h
     cairo-fixed-private.h
     cairo-fixed-type-private.h
+    cairo-fontconfig-private.h
+    cairo-freed-pool-private.h
     cairo-freelist-private.h
     cairo-freelist-type-private.h
-    cairo-freed-pool-private.h
-    cairo-fontconfig-private.h
     cairo-gstate-private.h
     cairo-hash-private.h
     cairo-image-info-private.h
@@ -60,26 +60,26 @@ set(cairo_private
     cairo-rtree-private.h
     cairo-scaled-font-private.h
     cairo-slope-private.h
-    cairo-spans-private.h
     cairo-spans-compositor-private.h
+    cairo-spans-private.h
     cairo-stroke-dash-private.h
-    cairo-surface-inline.h
-    cairo-surface-private.h
     cairo-surface-backend-private.h
     cairo-surface-clipper-private.h
     cairo-surface-fallback-private.h
+    cairo-surface-inline.h
     cairo-surface-observer-inline.h
     cairo-surface-observer-private.h
     cairo-surface-offset-private.h
-    cairo-surface-subsurface-inline.h
-    cairo-surface-subsurface-private.h
+    cairo-surface-private.h
     cairo-surface-snapshot-inline.h
     cairo-surface-snapshot-private.h
+    cairo-surface-subsurface-inline.h
+    cairo-surface-subsurface-private.h
     cairo-surface-wrapper-private.h
     cairo-time-private.h
-    cairo-types-private.h
     cairo-traps-private.h
     cairo-tristrip-private.h
+    cairo-types-private.h
     cairo-user-font-private.h
     cairo-wideint-private.h
     cairo-wideint-type-private.h
@@ -92,19 +92,19 @@ set(cairo_sources
     cairo-atomic.c
     cairo-base64-stream.c
     cairo-base85-stream.c
-    cairo-bentley-ottmann.c
     cairo-bentley-ottmann-rectangular.c
     cairo-bentley-ottmann-rectilinear.c
+    cairo-bentley-ottmann.c
     cairo-botor-scan-converter.c
-    cairo-boxes.c
     cairo-boxes-intersect.c
-    cairo.c
+    cairo-boxes.c
     cairo-cache.c
-    cairo-clip.c
     cairo-clip-boxes.c
     cairo-clip-polygon.c
     cairo-clip-region.c
     cairo-clip-surface.c
+    cairo-clip-tor-scan-converter.c
+    cairo-clip.c
     cairo-color.c
     cairo-composite-rectangles.c
     cairo-compositor.c
@@ -116,12 +116,12 @@ set(cairo_sources
     cairo-error.c
     cairo-fallback-compositor.c
     cairo-fixed.c
-    cairo-font-face.c
-    cairo-font-face-twin.c
     cairo-font-face-twin-data.c
+    cairo-font-face-twin.c
+    cairo-font-face.c
     cairo-font-options.c
-    cairo-freelist.c
     cairo-freed-pool.c
+    cairo-freelist.c
     cairo-gstate.c
     cairo-hash.c
     cairo-hull.c
@@ -131,10 +131,10 @@ set(cairo_sources
     cairo-image-surface.c
     cairo-line.c
     cairo-lzw.c
-    cairo-matrix.c
     cairo-mask-compositor.c
-    cairo-mesh-pattern-rasterizer.c
+    cairo-matrix.c
     cairo-mempool.c
+    cairo-mesh-pattern-rasterizer.c
     cairo-misc.c
     cairo-mono-scan-converter.c
     cairo-mutex.c
@@ -143,20 +143,20 @@ set(cairo_sources
     cairo-output-stream.c
     cairo-paginated-surface.c
     cairo-path-bounds.c
-    cairo-path.c
     cairo-path-fill.c
     cairo-path-fixed.c
     cairo-path-in-fill.c
-    cairo-path-stroke.c
     cairo-path-stroke-boxes.c
     cairo-path-stroke-polygon.c
     cairo-path-stroke-traps.c
     cairo-path-stroke-tristrip.c
+    cairo-path-stroke.c
+    cairo-path.c
     cairo-pattern.c
     cairo-pen.c
-    cairo-polygon.c
     cairo-polygon-intersect.c
     cairo-polygon-reduce.c
+    cairo-polygon.c
     cairo-raster-source-pattern.c
     cairo-recording-surface.c
     cairo-rectangle.c
@@ -166,12 +166,11 @@ set(cairo_sources
     cairo-scaled-font.c
     cairo-shape-mask-compositor.c
     cairo-slope.c
-    cairo-spans.c
     cairo-spans-compositor.c
+    cairo-spans.c
     cairo-spline.c
     cairo-stroke-dash.c
     cairo-stroke-style.c
-    cairo-surface.c
     cairo-surface-clipper.c
     cairo-surface-fallback.c
     cairo-surface-observer.c
@@ -179,18 +178,19 @@ set(cairo_sources
     cairo-surface-snapshot.c
     cairo-surface-subsurface.c
     cairo-surface-wrapper.c
+    cairo-surface.c
     cairo-time.c
     cairo-tor-scan-converter.c
     cairo-tor22-scan-converter.c
-    cairo-clip-tor-scan-converter.c
     cairo-toy-font-face.c
+    cairo-traps-compositor.c
     cairo-traps.c
     cairo-tristrip.c
-    cairo-traps-compositor.c
     cairo-unicode.c
     cairo-user-font.c
     cairo-version.c
     cairo-wideint.c
+    cairo.c
 )
 
 set(_cairo_font_subset_private
@@ -325,13 +325,6 @@ set(cairo_win32_sources
 )
 set(cairo_win32_font_sources win32/cairo-win32-font.c)
 
-set(cairo_skia_headers cairo-skia.h)
-set(cairo_skia_private skia/cairo-skia-private.h)
-set(cairo_skia_cxx_sources
-    skia/cairo-skia-context.cpp
-    skia/cairo-skia-surface.cpp
-)
-
 set(cairo_os2_headers cairo-os2.h)
 set(cairo_os2_private cairo-os2-private.h)
 set(cairo_os2_sources cairo-os2-surface.c)
@@ -355,13 +348,13 @@ set(cairo_gl_sources
     cairo-gl-glyphs.c
     cairo-gl-gradient.c
     cairo-gl-info.c
+    cairo-gl-msaa-compositor.c
     cairo-gl-operand.c
     cairo-gl-shaders.c
-    cairo-gl-msaa-compositor.c
-    cairo-gl-spans-compositor.c
-    cairo-gl-traps-compositor.c
     cairo-gl-source.c
+    cairo-gl-spans-compositor.c
     cairo-gl-surface.c
+    cairo-gl-traps-compositor.c
 )
 set(cairo_glesv2_headers ${cairo_gl_headers})
 set(cairo_glesv2_private ${cairo_gl_private})
