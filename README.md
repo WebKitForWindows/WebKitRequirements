@@ -16,7 +16,7 @@
 | Library | Version | Release Date |
 |---|:---:|:---:|
 | [icu](http://site.icu-project.org) | 61.1 | 03-26-2018 |
-| [zlib](https://github.com/Dead2/zlib-ng) | N/A | 11-14-2018 |
+| [zlib](https://github.com/Dead2/zlib-ng) | N/A | 01-24-2019 |
 | [brotli](https://github.com/google/brotli) | 1.0.7 | 10-23-2018 |
 | [libressl](https://www.libressl.org) | 2.9.0 | 12-15-2018 |
 | [nghttp2](https://nghttp2.org) | 1.36.0 | 01-18-2019 |
