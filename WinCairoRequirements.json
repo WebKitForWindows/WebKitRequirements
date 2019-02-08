@@ -10,6 +10,7 @@
     "libpng",
     "libjpeg-turbo",
     "libwebp",
+    "openjpeg",
     "sqlite3",
     "pixman",
     "cairo",
