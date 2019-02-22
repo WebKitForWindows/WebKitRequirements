@@ -2,13 +2,12 @@ include(vcpkg_common_functions)
 
 set(CURL_VERSION 7.64.0)
 string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/curl-curl-${CURL_TAG})
+set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/curl-${CURL_VERSION})
 
-# Get from github commit until v7.61.1 is released
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/curl/curl/archive/curl-${CURL_TAG}.zip"
-    FILENAME "curl-${CURL_TAG}.zip"
-    SHA512 4fb09f20a22ae05e5641efc1702c12e910b9123c36b254200762d3c658a6c33a9287d409b42e8d3b924a71f4244a1152d65aade1cbe559e01fb96485025ce077
+    URLS "https://github.com/curl/curl/releases/download/curl-${CURL_TAG}/curl-${CURL_VERSION}.zip"
+    FILENAME "curl-${CURL_VERSION}.zip"
+    SHA512 b17a20b201fe35ad001e98d02c4d07475709553e7157982c499568b98dbbd6488b6280e2df7759925f1a42c5839eb511ae019f1c49ae5a56a1cd7392b2a3cf40
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -18,6 +17,9 @@ vcpkg_apply_patches(
     PATCHES
         ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
         ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-__has_declspec_attribute.patch
+        # Remove these patches after 7.64.1
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0003-commit-38d8e1b.patch
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0004-commit-4015fae.patch
 )
 
 # Run CMake build
