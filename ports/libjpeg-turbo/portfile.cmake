@@ -1,13 +1,13 @@
 include(vcpkg_common_functions)
 include(${CMAKE_CURRENT_LIST_DIR}/vcpkg_acquire_gnuwin32_program.cmake)
 
-set(LIBJPEG_TURBO_VERSION 2.0.1)
+set(LIBJPEG_TURBO_VERSION 2.0.2)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libjpeg-turbo-${LIBJPEG_TURBO_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/${LIBJPEG_TURBO_VERSION}.zip"
     FILENAME "libjpeg-turbo-${LIBJPEG_TURBO_VERSION}.zip"
-    SHA512 27f85241d364dc98a527eaacbbc330dc60c836d163bafa761e818725231c41ae5135b68a1ded35373134475421a9631de1728d909dd2600e5f116cb86a45c1aa
+    SHA512 2c0601a8b2c8ff7ab71fa8496407196063195acb61e7361a1e837d838284d2c54478f65b6ab3d965e79ba50e72f12531b0c9c48ec0c0ece9e2c48db5c9749893
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
