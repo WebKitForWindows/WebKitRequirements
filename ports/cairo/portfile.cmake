@@ -21,6 +21,8 @@ vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES
         ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Rename-stat-to-stats.patch
+        # Remove after official fix for https://gitlab.freedesktop.org/cairo/cairo/issues/358
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-steal-boxes-Fix-an-invalid-free-exposed-by-cb871c6c.patch
 )
 
 # Add CMake sources
