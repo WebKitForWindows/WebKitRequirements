@@ -11,7 +11,7 @@ local output_file(name, file, image) = {
 };
 
 {
-  pipeline(name, steps):: {
+  pipeline(name, steps, volumes=[], depends_on=[]):: {
     kind: 'pipeline',
     name: name,
     platform: {
@@ -19,6 +19,8 @@ local output_file(name, file, image) = {
       arch: 'amd64',
     },
     steps: steps,
+    volumes: if std.length(volumes) > 0 then volumes,
+    depends_on: if std.length(depends_on) > 0 then depends_on,
   },
 
   vcpkg_build_all(packages, triplet, image, volumes=[], environment=[])::
