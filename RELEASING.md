@@ -8,7 +8,7 @@ release corresponds to a tag within the git repository.
 ## Tag names
 
 Tags are done based on the date of creation of the distribution. This is done
-because the third party requirements change sporatically and semantic
+because the third party requirements change sporadically and semantic
 versioning does not fit with the distribution. This provides a clear timeline
 on when the requirements changed.
 
