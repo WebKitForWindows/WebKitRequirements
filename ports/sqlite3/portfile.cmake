@@ -1,6 +1,6 @@
 include(vcpkg_common_functions)
 
-set(SQLITE3_VERSION 3.27.01)
+set(SQLITE3_VERSION 3.27.02)
 string(REPLACE "." "" SQLITE3_TAG ${SQLITE3_VERSION})
 string(CONCAT SQLITE3_TAG ${SQLITE3_TAG} "00")
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/sqlite-amalgamation-${SQLITE3_TAG})
@@ -9,7 +9,7 @@ set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/sqlite-amalgamation-${SQLITE3_TAG}
 vcpkg_download_distfile(ARCHIVE
     URLS "https://sqlite.org/2019/sqlite-amalgamation-${SQLITE3_TAG}.zip"
     FILENAME "sqlite-amalgamation-${SQLITE3_TAG}.zip"
-    SHA512 9e9ace498bfb89631d3798e43d3da372d204b869948ecd77fbf18a7eee2b364cdbc6d20fc0482457506a5301bb492fec3af9bf87d4d9f047e08181b7e74aeb68
+    SHA512 f84a6a3101c989164f17b85a6c2674ae2728a75d70daf5e33627a6eaa399adaf763deb968d891ad0660f1ebe660d27fbd55ace379d807f3bb8af4e95c01b68c4
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
