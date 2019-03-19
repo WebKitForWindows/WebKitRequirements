@@ -1,21 +1,14 @@
 include(vcpkg_common_functions)
 
-set(NGHTTP2_VERSION 1.36.0)
+set(NGHTTP2_VERSION 1.37.0)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/nghttp2-${NGHTTP2_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/nghttp2/nghttp2/archive/v${NGHTTP2_VERSION}.zip"
     FILENAME "nghttp2-${NGHTTP2_VERSION}.zip"
-    SHA512 d3de86874ce77733ebf76f2943b57c0dd79f742cacdf3bf47c72a2e0485de576fc3148cc4e359c9756217b0dd381b9de4e7a01c47e2c78191bb8af8e47056fb4
+    SHA512 79f60b5b5995cc8f4505d9acdbc3509ebaf4663301e8e906506aa275bc9121195d7940185852dc27855c14e32f0a60f62163d9836929763bae96f8e3c278b35d
 )
 vcpkg_extract_source_archive(${ARCHIVE})
-
-# Apply patches
-vcpkg_apply_patches(
-    SOURCE_PATH ${SOURCE_PATH}
-    PATCHES
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Fix-library-install-destination.patch
-)
 
 # Run CMake build
 set(BUILD_OPTIONS
