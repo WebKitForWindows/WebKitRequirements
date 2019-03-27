@@ -28,7 +28,7 @@
 | [libwebp](https://github.com/webmproject/libwebp) | 1.0.2 | 01-18-2019 |
 | [openjpeg](https://www.openjpeg.org/) | 2.3.0 | 10-04-2017 |
 | [sqlite](http://sqlite.org) | 3.27.2 | 02-25-2019 |
-| [freetype](https://www.freetype.org) | 2.9.1 | 05-02-2018 |
+| [freetype](https://www.freetype.org) | 2.10.0 | 03-15-2019 |
 | [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.3.1 | 01-30-2019 | 
 | [pixman](http://www.pixman.org) | 0.38.0 | 02-11-2019 |
 | [cairo](https://www.cairographics.org) | 1.16.0 | 10-18-2018 |

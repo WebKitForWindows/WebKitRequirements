@@ -1,7 +1,7 @@
 From 4ba1027f36c9f518b729aa78583c9a0e3f38e785 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 14 May 2018 16:34:09 -0700
-Subject: [PATCH 2/2] Adjust CMake for vcpkg
+Subject: [PATCH 11] Adjust CMake for vcpkg
 
 Changes the locations of installed files to match what vcpkg expects.
 ---
