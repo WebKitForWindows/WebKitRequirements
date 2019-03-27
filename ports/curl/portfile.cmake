@@ -1,13 +1,13 @@
 include(vcpkg_common_functions)
 
-set(CURL_VERSION 7.64.0)
+set(CURL_VERSION 7.64.1)
 string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/curl-${CURL_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${CURL_TAG}/curl-${CURL_VERSION}.zip"
     FILENAME "curl-${CURL_VERSION}.zip"
-    SHA512 b17a20b201fe35ad001e98d02c4d07475709553e7157982c499568b98dbbd6488b6280e2df7759925f1a42c5839eb511ae019f1c49ae5a56a1cd7392b2a3cf40
+    SHA512 534910cf9e1e98a5a295ae32e2b7e0fa192e99012ddcc333d06eb3b7f8231390aae71d56f7094525b9607464e98b134ee63b4b044e540834121e8a9faf6504f9
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -16,10 +16,6 @@ vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES
         ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-__has_declspec_attribute.patch
-        # Remove these patches after 7.64.1
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0003-commit-38d8e1b.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0004-commit-4015fae.patch
 )
 
 # Run CMake build

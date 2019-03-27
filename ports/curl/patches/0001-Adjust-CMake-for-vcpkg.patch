@@ -1,7 +1,7 @@
 From 813e1b87320381eddbc297683b9c8b3e46576693 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 26 Nov 2018 16:32:05 -0800
-Subject: [PATCH 1/2] Adjust CMake for vcpkg
+Subject: [PATCH 1/1] Adjust CMake for vcpkg
 
 ---
  CMakeLists.txt | 2 +-
