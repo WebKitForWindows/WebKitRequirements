@@ -1,6 +1,6 @@
 include(vcpkg_common_functions)
 
-set(ICU_VERSION 61.1)
+set(ICU_VERSION 63.1)
 string(REPLACE "." "_" ICU_TAG ${ICU_VERSION})
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/icu)
 
@@ -8,7 +8,7 @@ set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/icu)
 vcpkg_download_distfile(ARCHIVE
     URLS "http://download.icu-project.org/files/icu4c/${ICU_VERSION}/icu4c-${ICU_TAG}-src.tgz"
     FILENAME "icu4c-${ICU_TAG}-src.tgz"
-    SHA512 4c37691246db802e4bae0c8c5f6ac1dac64c5753b607e539c5c1c36e361fcd9dd81bd1d3b5416c2960153b83700ccdb356412847d0506ab7782ae626ac0ffb94
+    SHA512 9ab407ed840a00cdda7470dcc4c40299a125ad246ae4d019c4b1ede54781157fd63af015a8228cd95dbc47e4d15a0932b2c657489046a19788e5e8266eac079c
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -20,9 +20,7 @@ file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/source DESTINATION ${SOURCE_PATH})
 vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Check-U_HAVE_TZ-values.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Use-__has_declspec_attribute.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0003-genccode-crashes-when-creating-assembly-files.patch
+        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-genccode-crashes-when-creating-assembly-files.patch
 )
 
 # Run CMake build
@@ -51,7 +49,7 @@ else ()
 endif ()
 
 vcpkg_configure_cmake(
-    SOURCE_PATH ${SOURCE_PATH}
+    SOURCE_PATH ${SOURCE_PATH}/source
     PREFER_NINJA
     OPTIONS
         ${BUILD_OPTIONS}

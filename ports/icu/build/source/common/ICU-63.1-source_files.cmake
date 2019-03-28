@@ -14,6 +14,7 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/bytestriebuilder.cpp
     ${private_src_DIR}/bytestrieiterator.cpp
     ${private_src_DIR}/caniter.cpp
+    ${private_src_DIR}/characterproperties.cpp
     ${private_src_DIR}/chariter.cpp
     ${private_src_DIR}/charstr.cpp
     ${private_src_DIR}/cmemory.cpp
@@ -29,7 +30,6 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/filterednormalizer2.cpp
     ${private_src_DIR}/icudataver.cpp
     ${private_src_DIR}/icuplug.cpp
-    ${private_src_DIR}/listformatter.cpp
     ${private_src_DIR}/loadednormalizer2impl.cpp
     ${private_src_DIR}/locavailable.cpp
     ${private_src_DIR}/locbased.cpp
@@ -51,8 +51,8 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/propsvec.cpp
     ${private_src_DIR}/punycode.cpp
     ${private_src_DIR}/putil.cpp
-    ${private_src_DIR}/rbbi_cache.cpp
     ${private_src_DIR}/rbbi.cpp
+    ${private_src_DIR}/rbbi_cache.cpp
     ${private_src_DIR}/rbbidata.cpp
     ${private_src_DIR}/rbbinode.cpp
     ${private_src_DIR}/rbbirb.cpp
@@ -60,8 +60,8 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/rbbisetb.cpp
     ${private_src_DIR}/rbbistbl.cpp
     ${private_src_DIR}/rbbitblb.cpp
-    ${private_src_DIR}/resbund_cnv.cpp
     ${private_src_DIR}/resbund.cpp
+    ${private_src_DIR}/resbund_cnv.cpp
     ${private_src_DIR}/resource.cpp
     ${private_src_DIR}/ruleiter.cpp
     ${private_src_DIR}/schriter.cpp
@@ -74,18 +74,19 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/servslkf.cpp
     ${private_src_DIR}/sharedobject.cpp
     ${private_src_DIR}/simpleformatter.cpp
+    ${private_src_DIR}/static_unicode_sets.cpp
     ${private_src_DIR}/stringpiece.cpp
     ${private_src_DIR}/stringtriebuilder.cpp
     ${private_src_DIR}/uarrsort.cpp
-    ${private_src_DIR}/ubidi_props.cpp
     ${private_src_DIR}/ubidi.cpp
+    ${private_src_DIR}/ubidi_props.cpp
     ${private_src_DIR}/ubidiln.cpp
     ${private_src_DIR}/ubiditransform.cpp
     ${private_src_DIR}/ubidiwrt.cpp
     ${private_src_DIR}/ubrk.cpp
     ${private_src_DIR}/ucase.cpp
-    ${private_src_DIR}/ucasemap_titlecase_brkiter.cpp
     ${private_src_DIR}/ucasemap.cpp
+    ${private_src_DIR}/ucasemap_titlecase_brkiter.cpp
     ${private_src_DIR}/ucat.cpp
     ${private_src_DIR}/uchar.cpp
     ${private_src_DIR}/ucharstrie.cpp
@@ -94,6 +95,8 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/uchriter.cpp
     ${private_src_DIR}/ucln_cmn.cpp
     ${private_src_DIR}/ucmndata.cpp
+    ${private_src_DIR}/ucnv.cpp
+    ${private_src_DIR}/ucnv2022.cpp
     ${private_src_DIR}/ucnv_bld.cpp
     ${private_src_DIR}/ucnv_cb.cpp
     ${private_src_DIR}/ucnv_cnv.cpp
@@ -107,8 +110,6 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/ucnv_u32.cpp
     ${private_src_DIR}/ucnv_u7.cpp
     ${private_src_DIR}/ucnv_u8.cpp
-    ${private_src_DIR}/ucnv.cpp
-    ${private_src_DIR}/ucnv2022.cpp
     ${private_src_DIR}/ucnvbocu.cpp
     ${private_src_DIR}/ucnvdisp.cpp
     ${private_src_DIR}/ucnvhz.cpp
@@ -118,39 +119,40 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/ucnvscsu.cpp
     ${private_src_DIR}/ucnvsel.cpp
     ${private_src_DIR}/ucol_swp.cpp
+    ${private_src_DIR}/ucptrie.cpp
     ${private_src_DIR}/ucurr.cpp
     ${private_src_DIR}/udata.cpp
     ${private_src_DIR}/udatamem.cpp
     ${private_src_DIR}/udataswp.cpp
     ${private_src_DIR}/uenum.cpp
-    ${private_src_DIR}/uhash_us.cpp
     ${private_src_DIR}/uhash.cpp
+    ${private_src_DIR}/uhash_us.cpp
     ${private_src_DIR}/uidna.cpp
     ${private_src_DIR}/uinit.cpp
     ${private_src_DIR}/uinvchar.cpp
     ${private_src_DIR}/uiter.cpp
     ${private_src_DIR}/ulist.cpp
-    ${private_src_DIR}/ulistformatter.cpp
+    ${private_src_DIR}/uloc.cpp
     ${private_src_DIR}/uloc_keytype.cpp
     ${private_src_DIR}/uloc_tag.cpp
-    ${private_src_DIR}/uloc.cpp
     ${private_src_DIR}/umapfile.cpp
     ${private_src_DIR}/umath.cpp
+    ${private_src_DIR}/umutablecptrie.cpp
     ${private_src_DIR}/umutex.cpp
     ${private_src_DIR}/unames.cpp
     ${private_src_DIR}/unifiedcache.cpp
     ${private_src_DIR}/unifilt.cpp
     ${private_src_DIR}/unifunct.cpp
+    ${private_src_DIR}/uniset.cpp
     ${private_src_DIR}/uniset_closure.cpp
     ${private_src_DIR}/uniset_props.cpp
-    ${private_src_DIR}/uniset.cpp
     ${private_src_DIR}/unisetspan.cpp
-    ${private_src_DIR}/unistr_case_locale.cpp
+    ${private_src_DIR}/unistr.cpp
     ${private_src_DIR}/unistr_case.cpp
+    ${private_src_DIR}/unistr_case_locale.cpp
     ${private_src_DIR}/unistr_cnv.cpp
     ${private_src_DIR}/unistr_props.cpp
     ${private_src_DIR}/unistr_titlecase_brkiter.cpp
-    ${private_src_DIR}/unistr.cpp
     ${private_src_DIR}/unorm.cpp
     ${private_src_DIR}/unormcmp.cpp
     ${private_src_DIR}/uobject.cpp
@@ -159,10 +161,10 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/uresbund.cpp
     ${private_src_DIR}/uresdata.cpp
     ${private_src_DIR}/usc_impl.cpp
-    ${private_src_DIR}/uscript_props.cpp
     ${private_src_DIR}/uscript.cpp
-    ${private_src_DIR}/uset_props.cpp
+    ${private_src_DIR}/uscript_props.cpp
     ${private_src_DIR}/uset.cpp
+    ${private_src_DIR}/uset_props.cpp
     ${private_src_DIR}/usetiter.cpp
     ${private_src_DIR}/ushape.cpp
     ${private_src_DIR}/usprep.cpp
@@ -170,20 +172,21 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/ustr_cnv.cpp
     ${private_src_DIR}/ustr_titlecase_brkiter.cpp
     ${private_src_DIR}/ustr_wcs.cpp
-    ${private_src_DIR}/ustrcase_locale.cpp
     ${private_src_DIR}/ustrcase.cpp
+    ${private_src_DIR}/ustrcase_locale.cpp
     ${private_src_DIR}/ustrenum.cpp
     ${private_src_DIR}/ustrfmt.cpp
     ${private_src_DIR}/ustring.cpp
     ${private_src_DIR}/ustrtrns.cpp
     ${private_src_DIR}/utext.cpp
     ${private_src_DIR}/utf_impl.cpp
-    ${private_src_DIR}/util_props.cpp
     ${private_src_DIR}/util.cpp
+    ${private_src_DIR}/util_props.cpp
     ${private_src_DIR}/utrace.cpp
     ${private_src_DIR}/utrie.cpp
-    ${private_src_DIR}/utrie2_builder.cpp
     ${private_src_DIR}/utrie2.cpp
+    ${private_src_DIR}/utrie2_builder.cpp
+    ${private_src_DIR}/utrie_swap.cpp
     ${private_src_DIR}/uts46.cpp
     ${private_src_DIR}/utypes.cpp
     ${private_src_DIR}/uvector.cpp
@@ -237,6 +240,7 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/servnotf.h
     ${private_src_DIR}/sharedobject.h
     ${private_src_DIR}/sprpimpl.h
+    ${private_src_DIR}/static_unicode_sets.h
     ${private_src_DIR}/uarrsort.h
     ${private_src_DIR}/uassert.h
     ${private_src_DIR}/ubidiimp.h
@@ -259,6 +263,7 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/ucnvmbcs.h
     ${private_src_DIR}/ucol_data.h
     ${private_src_DIR}/ucol_swp.h
+    ${private_src_DIR}/ucptrie_impl.h
     ${private_src_DIR}/ucurrimp.h
     ${private_src_DIR}/udatamem.h
     ${private_src_DIR}/udataswp.h
@@ -266,6 +271,7 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/uenumimp.h
     ${private_src_DIR}/uhash.h
     ${private_src_DIR}/uinvchar.h
+    ${private_src_DIR}/ulayout_props_data.h
     ${private_src_DIR}/ulist.h
     ${private_src_DIR}/ulocimp.h
     ${private_src_DIR}/umapfile.h
@@ -316,7 +322,6 @@ target_sources(${lib_NAME}
     ${public_src_DIR}/unicode/icudataver.h
     ${public_src_DIR}/unicode/icuplug.h
     ${public_src_DIR}/unicode/idna.h
-    ${public_src_DIR}/unicode/listformatter.h
     ${public_src_DIR}/unicode/localpointer.h
     ${public_src_DIR}/unicode/locdspnm.h
     ${public_src_DIR}/unicode/locid.h
@@ -354,6 +359,8 @@ target_sources(${lib_NAME}
     ${public_src_DIR}/unicode/ucnv.h
     ${public_src_DIR}/unicode/ucnvsel.h
     ${public_src_DIR}/unicode/uconfig.h
+    ${public_src_DIR}/unicode/ucpmap.h
+    ${public_src_DIR}/unicode/ucptrie.h
     ${public_src_DIR}/unicode/ucurr.h
     ${public_src_DIR}/unicode/udata.h
     ${public_src_DIR}/unicode/udisplaycontext.h
@@ -361,10 +368,10 @@ target_sources(${lib_NAME}
     ${public_src_DIR}/unicode/uidna.h
     ${public_src_DIR}/unicode/uiter.h
     ${public_src_DIR}/unicode/uldnames.h
-    ${public_src_DIR}/unicode/ulistformatter.h
     ${public_src_DIR}/unicode/uloc.h
     ${public_src_DIR}/unicode/umachine.h
     ${public_src_DIR}/unicode/umisc.h
+    ${public_src_DIR}/unicode/umutablecptrie.h
     ${public_src_DIR}/unicode/unifilt.h
     ${public_src_DIR}/unicode/unifunct.h
     ${public_src_DIR}/unicode/unimatch.h
@@ -395,7 +402,7 @@ target_sources(${lib_NAME}
     ${public_src_DIR}/unicode/uversion.h
 )
 
-if(WINDOWS_STORE)
+if(WINDOWS_STORE AND PROJECT_VERSION VERSION_LESS 63)
   set_source_files_properties(
     ${private_src_DIR}/wintz.cpp
     PROPERTIES

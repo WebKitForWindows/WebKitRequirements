@@ -74,6 +74,7 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/servslkf.cpp
     ${private_src_DIR}/sharedobject.cpp
     ${private_src_DIR}/simpleformatter.cpp
+    ${private_src_DIR}/static_unicode_sets.cpp
     ${private_src_DIR}/stringpiece.cpp
     ${private_src_DIR}/stringtriebuilder.cpp
     ${private_src_DIR}/uarrsort.cpp
@@ -237,6 +238,7 @@ target_sources(${lib_NAME}
     ${private_src_DIR}/servnotf.h
     ${private_src_DIR}/sharedobject.h
     ${private_src_DIR}/sprpimpl.h
+    ${private_src_DIR}/static_unicode_sets.h
     ${private_src_DIR}/uarrsort.h
     ${private_src_DIR}/uassert.h
     ${private_src_DIR}/ubidiimp.h

@@ -266,6 +266,18 @@ if(ICU_ENABLE_STATIC AND NOT ICU_ENABLE_SHARED)
   )
 endif()
 
+if(MSVC)
+  # ICU does not use exceptions in library code.
+  list(APPEND CONFIG_CPPFLAGS _HAS_EXCEPTIONS=0)
+
+  # Disable MSBuild warning about Linker OutputFile.
+  # Ex: MSBuild complains that the common project creates "icuuc62.dll"
+  # rather than "common.dll". However, this is intentional.
+  set(CMAKE_VS_GLOBALS  # CMake 3.13+
+    "MSBuildWarningsAsMessages=MSB8012"
+  )
+endif()
+
 # Check whether to enable auto cleanup of libraries
 option(ICU_ENABLE_AUTO_CLEANUP "Enable auto cleanup of libraries" OFF)
 set(UCLN_NO_AUTO_CLEANUP 1)
@@ -414,6 +426,7 @@ if(CMAKE_CXX_STANDARD LESS 11)
   check_message("if #include <string> works" ${_HEADER_STDSTRING})
 endif()
 
+# NOTE: this check is removed in ICU 63.1, C++11 has <atomic>.
 try_compile_src("if_include_atomic_works" "cpp"
   "#include <atomic>"
   ""
@@ -555,7 +568,6 @@ if(_HAVE_NL_LANGINFO)
 else()
   set(HAVE_NL_LANGINFO 0)
   set(U_HAVE_NL_LANGINFO 0)
-  list(APPEND CONFIG_CPPFLAGS U_HAVE_NL_LANGINFO_CODESET=0)
   if(MINGW AND CMAKE_C_COMPILER_ID STREQUAL "GNU")
     list(APPEND CONFIG_CPPFLAGS U_HAVE_NL_LANGINFO_CODESET=0)
   endif()
@@ -667,6 +679,9 @@ try_compile_src("for_tzname" "c"
     #endif
     #include <stdlib.h>
     #include <time.h>
+    #ifndef tzname /* For SGI.  */
+    extern char *tzname[]; /* RS6000 and others reject char **tzname.  */
+    #endif
   "
   "atoi(*tzname);"
   ""
@@ -1026,6 +1041,9 @@ endif()
 # Sets a library suffix
 set(ICU_LIBRARY_SUFFIX "" CACHE STRING "Tag a suffix to the library names")
 set(ICULIBSUFFIX ${ICU_LIBRARY_SUFFIX})
+if(MINGW AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+  set(ICULIBSUFFIX "${ICULIBSUFFIX}$<$<CONFIG:Debug>:d>")
+endif()
 set(msg ${ICULIBSUFFIX})
 if(NOT msg)
   set(msg "none")

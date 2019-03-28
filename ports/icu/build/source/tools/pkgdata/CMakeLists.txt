@@ -14,7 +14,7 @@ include(${PROJECT_SOURCE_DIR}/common_tools_exe_libs.cmake)
 
 # TODO:
 # PRIVATE flags
-#set_property(TARGET ${lib_NAME} APPEND PROPERTY
+#set_property(TARGET ${exe_NAME} APPEND PROPERTY
 #  COMPILE_DEFINITIONS
 #  # DEFS += -DUDATA_SO_SUFFIX=\".$(SO)\" -DSTATIC_O=\"$(STATIC_O)\"
 #  UDATA_SO_SUFFIX=\".$(SO)\"

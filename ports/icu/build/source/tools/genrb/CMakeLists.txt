@@ -16,7 +16,7 @@ foreach(exe_NAME "genrb" "derb")
   ### Executable's specifics
 
   # PRIVATE flags
-  set_property(TARGET ${lib_NAME} APPEND PROPERTY
+  set_property(TARGET ${exe_NAME} APPEND PROPERTY
     COMPILE_DEFINITIONS
       UNISTR_FROM_CHAR_EXPLICIT=explicit
       UNISTR_FROM_STRING_EXPLICIT=explicit

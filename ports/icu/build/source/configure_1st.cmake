@@ -28,7 +28,7 @@ function(check_message msg var)
   else()
     set(res "no")
   endif()
-  message(STATUS "${msg}  ${res}")
+  message(STATUS "checking ${msg}  ${res}")
 endfunction()
 
 function(get_version_parts version out_MAJOR out_MINOR out_PATCH out_TWEAK)

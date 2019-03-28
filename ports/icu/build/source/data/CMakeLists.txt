@@ -114,7 +114,6 @@ set(PKGDATA
 if(MSVC)
   set(ICUDATA_ASM_FILE ${OUTTMPDIR}/${ICUDATA_PLATFORM_NAME}_dat.obj)
 else()
-  message(STATUS "Using assembly file")
   set(ICUDATA_ASM_FILE ${OUTTMPDIR}/${ICUDATA_PLATFORM_NAME}_dat.S)
 endif()
 
@@ -256,22 +255,7 @@ if(PKGDATA_MODE STREQUAL "dll" OR PKGDATA_MODE STREQUAL "static")
   endif()
 endif()
 
-if(ICU_CROSS_COMPILING)
-  add_custom_command(OUTPUT ${ICUDATA_ASM_FILE}
-    COMMAND ${TOOLBINDIR}/genccode
-      -e ${ICUDATA_ENTRY_POINT} # --entrypoint
-      -n ${ICUDATA_NAME}
-      -d ${OUTTMPDIR}
-      -a gcc
-      -f ${ICUDATA_PLATFORM_NAME}_dat
-      ${PKGDATA_LIST}
-    DEPENDS ${deps_pkgdata} ${PKGDATA_LIST} # ${ICUPKG_INC}
-      COMMENT
-        "Packing data to the asm file ${ICUDATA_ASM_FILE}"
-  )
-  add_custom_target(icudata_asm_target DEPENDS ${ICUDATA_ASM_FILE})
-  set_property(SOURCE ${ICUDATA_ASM_FILE} PROPERTY LANGUAGE C)
-elseif(ADD_icudata_asm_target)
+if(ADD_icudata_asm_target)
   add_custom_command(OUTPUT ${ICUDATA_ASM_FILE}
     COMMAND ${PKGDATA}
       -e ${ICUDATA_ENTRY_POINT}  # --entrypoint
@@ -318,7 +302,7 @@ if(PKGDATA_MODE STREQUAL "dll" OR PKGDATA_MODE STREQUAL "static")
     RUNTIME_OUTPUT_NAME ${lib_RUNTIME_OUTPUT_NAME})
 
   ### Common libraries options
-  #include(${PROJECT_SOURCE_DIR}/common_icu_lib_flags.cmake)
+  include(${PROJECT_SOURCE_DIR}/common_icu_lib_flags.cmake)
   #include(${PROJECT_SOURCE_DIR}/common_icu_lib_includes.cmake)  # Not included.
 
   ### Library's specific flags
