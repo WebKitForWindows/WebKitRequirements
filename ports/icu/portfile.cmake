@@ -12,6 +12,10 @@ vcpkg_download_distfile(ARCHIVE
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
+# Add CMake sources
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/source DESTINATION ${SOURCE_PATH})
+
 # Apply patches
 vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
@@ -20,10 +24,6 @@ vcpkg_apply_patches(
         ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Use-__has_declspec_attribute.patch
         ${CMAKE_CURRENT_LIST_DIR}/patches/0003-genccode-crashes-when-creating-assembly-files.patch
 )
-
-# Add CMake sources
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/source DESTINATION ${SOURCE_PATH})
 
 # Run CMake build
 set(BUILD_OPTIONS
