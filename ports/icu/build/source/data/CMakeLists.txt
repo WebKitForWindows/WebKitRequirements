@@ -255,7 +255,22 @@ if(PKGDATA_MODE STREQUAL "dll" OR PKGDATA_MODE STREQUAL "static")
   endif()
 endif()
 
-if(ADD_icudata_asm_target)
+if(ICU_CROSS_COMPILING)
+  add_custom_command(OUTPUT ${ICUDATA_ASM_FILE}
+    COMMAND ${TOOLBINDIR}/genccode
+      -e ${ICUDATA_ENTRY_POINT} # --entrypoint
+      -n ${ICUDATA_NAME}
+      -d ${OUTTMPDIR}
+      -a gcc
+      -f ${ICUDATA_PLATFORM_NAME}_dat
+      ${ICUDATA_SOURCE_ARCHIVE}
+    DEPENDS ${deps_pkgdata} ${ICUDATA_SOURCE_ARCHIVE} # ${ICUPKG_INC}
+      COMMENT
+        "Packing data to the asm file ${ICUDATA_ASM_FILE}"
+  )
+  add_custom_target(icudata_asm_target DEPENDS ${ICUDATA_ASM_FILE})
+  set_property(SOURCE ${ICUDATA_ASM_FILE} PROPERTY LANGUAGE C)
+elseif(ADD_icudata_asm_target)
   add_custom_command(OUTPUT ${ICUDATA_ASM_FILE}
     COMMAND ${PKGDATA}
       -e ${ICUDATA_ENTRY_POINT}  # --entrypoint
