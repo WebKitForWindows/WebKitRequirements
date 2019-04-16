@@ -5,11 +5,12 @@ name: x64
 platform:
   os: windows
   arch: amd64
+  version: 1809
 
 steps:
 - name: vcpkg
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - git clone https://github.com/Microsoft/vcpkg.git C:/vcpkg
   - cd C:/vcpkg
@@ -20,13 +21,13 @@ steps:
 
 - name: zlib
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install zlib --triplet x64-windows-webkit
 
 - name: zlib-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/zlib/config-x64-windows-webkit-out.log
   when:
@@ -36,7 +37,7 @@ steps:
 
 - name: zlib-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/zlib/install-x64-windows-webkit-dbg-out.log
   when:
@@ -46,7 +47,7 @@ steps:
 
 - name: zlib-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/zlib/install-x64-windows-webkit-rel-out.log
   when:
@@ -56,13 +57,13 @@ steps:
 
 - name: brotli
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install brotli --triplet x64-windows-webkit
 
 - name: brotli-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/brotli/config-x64-windows-webkit-out.log
   when:
@@ -72,7 +73,7 @@ steps:
 
 - name: brotli-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/brotli/install-x64-windows-webkit-dbg-out.log
   when:
@@ -82,7 +83,7 @@ steps:
 
 - name: brotli-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/brotli/install-x64-windows-webkit-rel-out.log
   when:
@@ -92,13 +93,13 @@ steps:
 
 - name: libressl
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libressl --triplet x64-windows-webkit
 
 - name: libressl-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libressl/config-x64-windows-webkit-out.log
   when:
@@ -108,7 +109,7 @@ steps:
 
 - name: libressl-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libressl/install-x64-windows-webkit-dbg-out.log
   when:
@@ -118,7 +119,7 @@ steps:
 
 - name: libressl-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libressl/install-x64-windows-webkit-rel-out.log
   when:
@@ -128,13 +129,13 @@ steps:
 
 - name: nghttp2
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install nghttp2 --triplet x64-windows-webkit
 
 - name: nghttp2-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/nghttp2/config-x64-windows-webkit-out.log
   when:
@@ -144,7 +145,7 @@ steps:
 
 - name: nghttp2-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/nghttp2/install-x64-windows-webkit-dbg-out.log
   when:
@@ -154,7 +155,7 @@ steps:
 
 - name: nghttp2-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/nghttp2/install-x64-windows-webkit-rel-out.log
   when:
@@ -164,13 +165,13 @@ steps:
 
 - name: curl
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - "./vcpkg.exe install curl[ssl] --triplet x64-windows-webkit"
 
 - name: curl-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/curl/config-x64-windows-webkit-out.log
   when:
@@ -180,7 +181,7 @@ steps:
 
 - name: curl-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/curl/install-x64-windows-webkit-dbg-out.log
   when:
@@ -190,7 +191,7 @@ steps:
 
 - name: curl-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/curl/install-x64-windows-webkit-rel-out.log
   when:
@@ -200,13 +201,13 @@ steps:
 
 - name: icu
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install icu --triplet x64-windows-webkit
 
 - name: icu-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/icu/config-x64-windows-webkit-out.log
   when:
@@ -216,7 +217,7 @@ steps:
 
 - name: icu-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/icu/install-x64-windows-webkit-dbg-out.log
   when:
@@ -226,7 +227,7 @@ steps:
 
 - name: icu-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/icu/install-x64-windows-webkit-rel-out.log
   when:
@@ -236,13 +237,13 @@ steps:
 
 - name: libxml2
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - "./vcpkg.exe install libxml2[xslt] --triplet x64-windows-webkit"
 
 - name: libxml2-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxml2/config-x64-windows-webkit-out.log
   when:
@@ -252,7 +253,7 @@ steps:
 
 - name: libxml2-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxml2/install-x64-windows-webkit-dbg-out.log
   when:
@@ -262,7 +263,7 @@ steps:
 
 - name: libxml2-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxml2/install-x64-windows-webkit-rel-out.log
   when:
@@ -272,13 +273,13 @@ steps:
 
 - name: libxslt
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libxslt --triplet x64-windows-webkit
 
 - name: libxslt-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxslt/config-x64-windows-webkit-out.log
   when:
@@ -288,7 +289,7 @@ steps:
 
 - name: libxslt-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxslt/install-x64-windows-webkit-dbg-out.log
   when:
@@ -298,7 +299,7 @@ steps:
 
 - name: libxslt-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxslt/install-x64-windows-webkit-rel-out.log
   when:
@@ -308,13 +309,13 @@ steps:
 
 - name: libpng
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libpng --triplet x64-windows-webkit
 
 - name: libpng-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpng/config-x64-windows-webkit-out.log
   when:
@@ -324,7 +325,7 @@ steps:
 
 - name: libpng-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpng/install-x64-windows-webkit-dbg-out.log
   when:
@@ -334,7 +335,7 @@ steps:
 
 - name: libpng-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpng/install-x64-windows-webkit-rel-out.log
   when:
@@ -344,13 +345,13 @@ steps:
 
 - name: libjpeg-turbo
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libjpeg-turbo --triplet x64-windows-webkit
 
 - name: libjpeg-turbo-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libjpeg-turbo/config-x64-windows-webkit-out.log
   when:
@@ -360,7 +361,7 @@ steps:
 
 - name: libjpeg-turbo-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libjpeg-turbo/install-x64-windows-webkit-dbg-out.log
   when:
@@ -370,7 +371,7 @@ steps:
 
 - name: libjpeg-turbo-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libjpeg-turbo/install-x64-windows-webkit-rel-out.log
   when:
@@ -380,13 +381,13 @@ steps:
 
 - name: libwebp
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libwebp --triplet x64-windows-webkit
 
 - name: libwebp-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libwebp/config-x64-windows-webkit-out.log
   when:
@@ -396,7 +397,7 @@ steps:
 
 - name: libwebp-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libwebp/install-x64-windows-webkit-dbg-out.log
   when:
@@ -406,7 +407,7 @@ steps:
 
 - name: libwebp-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libwebp/install-x64-windows-webkit-rel-out.log
   when:
@@ -414,15 +415,51 @@ steps:
     - success
     - failure
 
+- name: openjpeg
+  pull: never
+  image: webkitdev/msbuild:1809
+  commands:
+  - ./vcpkg.exe install openjpeg --triplet x64-windows-webkit
+
+- name: openjpeg-config
+  pull: never
+  image: webkitdev/msbuild:1809
+  commands:
+  - Get-Content ./buildtrees/openjpeg/config-x64-windows-webkit-out.log
+  when:
+    status:
+    - success
+    - failure
+
+- name: openjpeg-debug-build
+  pull: never
+  image: webkitdev/msbuild:1809
+  commands:
+  - Get-Content ./buildtrees/openjpeg/install-x64-windows-webkit-dbg-out.log
+  when:
+    status:
+    - success
+    - failure
+
+- name: openjpeg-release-build
+  pull: never
+  image: webkitdev/msbuild:1809
+  commands:
+  - Get-Content ./buildtrees/openjpeg/install-x64-windows-webkit-rel-out.log
+  when:
+    status:
+    - success
+    - failure
+
 - name: sqlite3
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install sqlite3 --triplet x64-windows-webkit
 
 - name: sqlite3-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/sqlite3/config-x64-windows-webkit-out.log
   when:
@@ -432,7 +469,7 @@ steps:
 
 - name: sqlite3-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/sqlite3/install-x64-windows-webkit-dbg-out.log
   when:
@@ -442,7 +479,7 @@ steps:
 
 - name: sqlite3-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/sqlite3/install-x64-windows-webkit-rel-out.log
   when:
@@ -452,13 +489,13 @@ steps:
 
 - name: pixman
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install pixman --triplet x64-windows-webkit
 
 - name: pixman-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pixman/config-x64-windows-webkit-out.log
   when:
@@ -468,7 +505,7 @@ steps:
 
 - name: pixman-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pixman/install-x64-windows-webkit-dbg-out.log
   when:
@@ -478,7 +515,7 @@ steps:
 
 - name: pixman-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pixman/install-x64-windows-webkit-rel-out.log
   when:
@@ -488,13 +525,13 @@ steps:
 
 - name: cairo
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install cairo --triplet x64-windows-webkit
 
 - name: cairo-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cairo/config-x64-windows-webkit-out.log
   when:
@@ -504,7 +541,7 @@ steps:
 
 - name: cairo-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cairo/install-x64-windows-webkit-dbg-out.log
   when:
@@ -514,7 +551,7 @@ steps:
 
 - name: cairo-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cairo/install-x64-windows-webkit-rel-out.log
   when:
@@ -524,13 +561,13 @@ steps:
 
 - name: libpsl
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libpsl --triplet x64-windows-webkit
 
 - name: libpsl-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpsl/config-x64-windows-webkit-out.log
   when:
@@ -540,7 +577,7 @@ steps:
 
 - name: libpsl-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpsl/install-x64-windows-webkit-dbg-out.log
   when:
@@ -550,7 +587,7 @@ steps:
 
 - name: libpsl-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpsl/install-x64-windows-webkit-rel-out.log
   when:
@@ -560,13 +597,13 @@ steps:
 
 - name: pthreads
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install pthreads --triplet x64-windows-webkit
 
 - name: pthreads-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pthreads/config-x64-windows-webkit-out.log
   when:
@@ -576,7 +613,7 @@ steps:
 
 - name: pthreads-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pthreads/install-x64-windows-webkit-dbg-out.log
   when:
@@ -586,7 +623,7 @@ steps:
 
 - name: pthreads-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pthreads/install-x64-windows-webkit-rel-out.log
   when:
@@ -596,13 +633,13 @@ steps:
 
 - name: cflite
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install cflite --triplet x64-windows-webkit
 
 - name: cflite-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cflite/config-x64-windows-webkit-out.log
   when:
@@ -612,7 +649,7 @@ steps:
 
 - name: cflite-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cflite/install-x64-windows-webkit-dbg-out.log
   when:
@@ -622,7 +659,7 @@ steps:
 
 - name: cflite-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cflite/install-x64-windows-webkit-rel-out.log
   when:
@@ -632,7 +669,7 @@ steps:
 
 - name: bundle
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - "Invoke-Expression -Command \"./Delete-PthreadHeaders.ps1 -Triplet x64-windows-webkit\""
   - "Invoke-Expression -Command \"./Rename-WithBitSuffix.ps1 -Triplet x64-windows-webkit\""
@@ -657,11 +694,12 @@ name: x86
 platform:
   os: windows
   arch: amd64
+  version: 1809
 
 steps:
 - name: vcpkg
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - git clone https://github.com/Microsoft/vcpkg.git C:/vcpkg
   - cd C:/vcpkg
@@ -672,13 +710,13 @@ steps:
 
 - name: zlib
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install zlib --triplet x86-windows-webkit
 
 - name: zlib-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/zlib/config-x86-windows-webkit-out.log
   when:
@@ -688,7 +726,7 @@ steps:
 
 - name: zlib-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/zlib/install-x86-windows-webkit-dbg-out.log
   when:
@@ -698,7 +736,7 @@ steps:
 
 - name: zlib-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/zlib/install-x86-windows-webkit-rel-out.log
   when:
@@ -708,13 +746,13 @@ steps:
 
 - name: brotli
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install brotli --triplet x86-windows-webkit
 
 - name: brotli-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/brotli/config-x86-windows-webkit-out.log
   when:
@@ -724,7 +762,7 @@ steps:
 
 - name: brotli-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/brotli/install-x86-windows-webkit-dbg-out.log
   when:
@@ -734,7 +772,7 @@ steps:
 
 - name: brotli-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/brotli/install-x86-windows-webkit-rel-out.log
   when:
@@ -744,13 +782,13 @@ steps:
 
 - name: libressl
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libressl --triplet x86-windows-webkit
 
 - name: libressl-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libressl/config-x86-windows-webkit-out.log
   when:
@@ -760,7 +798,7 @@ steps:
 
 - name: libressl-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libressl/install-x86-windows-webkit-dbg-out.log
   when:
@@ -770,7 +808,7 @@ steps:
 
 - name: libressl-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libressl/install-x86-windows-webkit-rel-out.log
   when:
@@ -780,13 +818,13 @@ steps:
 
 - name: nghttp2
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install nghttp2 --triplet x86-windows-webkit
 
 - name: nghttp2-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/nghttp2/config-x86-windows-webkit-out.log
   when:
@@ -796,7 +834,7 @@ steps:
 
 - name: nghttp2-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/nghttp2/install-x86-windows-webkit-dbg-out.log
   when:
@@ -806,7 +844,7 @@ steps:
 
 - name: nghttp2-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/nghttp2/install-x86-windows-webkit-rel-out.log
   when:
@@ -816,13 +854,13 @@ steps:
 
 - name: curl
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - "./vcpkg.exe install curl[ssl] --triplet x86-windows-webkit"
 
 - name: curl-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/curl/config-x86-windows-webkit-out.log
   when:
@@ -832,7 +870,7 @@ steps:
 
 - name: curl-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/curl/install-x86-windows-webkit-dbg-out.log
   when:
@@ -842,7 +880,7 @@ steps:
 
 - name: curl-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/curl/install-x86-windows-webkit-rel-out.log
   when:
@@ -852,13 +890,13 @@ steps:
 
 - name: icu
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install icu --triplet x86-windows-webkit
 
 - name: icu-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/icu/config-x86-windows-webkit-out.log
   when:
@@ -868,7 +906,7 @@ steps:
 
 - name: icu-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/icu/install-x86-windows-webkit-dbg-out.log
   when:
@@ -878,7 +916,7 @@ steps:
 
 - name: icu-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/icu/install-x86-windows-webkit-rel-out.log
   when:
@@ -888,13 +926,13 @@ steps:
 
 - name: libxml2
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - "./vcpkg.exe install libxml2[xslt] --triplet x86-windows-webkit"
 
 - name: libxml2-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxml2/config-x86-windows-webkit-out.log
   when:
@@ -904,7 +942,7 @@ steps:
 
 - name: libxml2-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxml2/install-x86-windows-webkit-dbg-out.log
   when:
@@ -914,7 +952,7 @@ steps:
 
 - name: libxml2-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxml2/install-x86-windows-webkit-rel-out.log
   when:
@@ -924,13 +962,13 @@ steps:
 
 - name: libxslt
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libxslt --triplet x86-windows-webkit
 
 - name: libxslt-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxslt/config-x86-windows-webkit-out.log
   when:
@@ -940,7 +978,7 @@ steps:
 
 - name: libxslt-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxslt/install-x86-windows-webkit-dbg-out.log
   when:
@@ -950,7 +988,7 @@ steps:
 
 - name: libxslt-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libxslt/install-x86-windows-webkit-rel-out.log
   when:
@@ -960,13 +998,13 @@ steps:
 
 - name: libpng
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libpng --triplet x86-windows-webkit
 
 - name: libpng-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpng/config-x86-windows-webkit-out.log
   when:
@@ -976,7 +1014,7 @@ steps:
 
 - name: libpng-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpng/install-x86-windows-webkit-dbg-out.log
   when:
@@ -986,7 +1024,7 @@ steps:
 
 - name: libpng-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpng/install-x86-windows-webkit-rel-out.log
   when:
@@ -996,13 +1034,13 @@ steps:
 
 - name: libjpeg-turbo
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libjpeg-turbo --triplet x86-windows-webkit
 
 - name: libjpeg-turbo-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libjpeg-turbo/config-x86-windows-webkit-out.log
   when:
@@ -1012,7 +1050,7 @@ steps:
 
 - name: libjpeg-turbo-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libjpeg-turbo/install-x86-windows-webkit-dbg-out.log
   when:
@@ -1022,7 +1060,7 @@ steps:
 
 - name: libjpeg-turbo-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libjpeg-turbo/install-x86-windows-webkit-rel-out.log
   when:
@@ -1032,13 +1070,13 @@ steps:
 
 - name: libwebp
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libwebp --triplet x86-windows-webkit
 
 - name: libwebp-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libwebp/config-x86-windows-webkit-out.log
   when:
@@ -1048,7 +1086,7 @@ steps:
 
 - name: libwebp-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libwebp/install-x86-windows-webkit-dbg-out.log
   when:
@@ -1058,7 +1096,7 @@ steps:
 
 - name: libwebp-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libwebp/install-x86-windows-webkit-rel-out.log
   when:
@@ -1066,15 +1104,51 @@ steps:
     - success
     - failure
 
+- name: openjpeg
+  pull: never
+  image: webkitdev/msbuild:1809
+  commands:
+  - ./vcpkg.exe install openjpeg --triplet x86-windows-webkit
+
+- name: openjpeg-config
+  pull: never
+  image: webkitdev/msbuild:1809
+  commands:
+  - Get-Content ./buildtrees/openjpeg/config-x86-windows-webkit-out.log
+  when:
+    status:
+    - success
+    - failure
+
+- name: openjpeg-debug-build
+  pull: never
+  image: webkitdev/msbuild:1809
+  commands:
+  - Get-Content ./buildtrees/openjpeg/install-x86-windows-webkit-dbg-out.log
+  when:
+    status:
+    - success
+    - failure
+
+- name: openjpeg-release-build
+  pull: never
+  image: webkitdev/msbuild:1809
+  commands:
+  - Get-Content ./buildtrees/openjpeg/install-x86-windows-webkit-rel-out.log
+  when:
+    status:
+    - success
+    - failure
+
 - name: sqlite3
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install sqlite3 --triplet x86-windows-webkit
 
 - name: sqlite3-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/sqlite3/config-x86-windows-webkit-out.log
   when:
@@ -1084,7 +1158,7 @@ steps:
 
 - name: sqlite3-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/sqlite3/install-x86-windows-webkit-dbg-out.log
   when:
@@ -1094,7 +1168,7 @@ steps:
 
 - name: sqlite3-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/sqlite3/install-x86-windows-webkit-rel-out.log
   when:
@@ -1104,13 +1178,13 @@ steps:
 
 - name: pixman
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install pixman --triplet x86-windows-webkit
 
 - name: pixman-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pixman/config-x86-windows-webkit-out.log
   when:
@@ -1120,7 +1194,7 @@ steps:
 
 - name: pixman-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pixman/install-x86-windows-webkit-dbg-out.log
   when:
@@ -1130,7 +1204,7 @@ steps:
 
 - name: pixman-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pixman/install-x86-windows-webkit-rel-out.log
   when:
@@ -1140,13 +1214,13 @@ steps:
 
 - name: cairo
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install cairo --triplet x86-windows-webkit
 
 - name: cairo-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cairo/config-x86-windows-webkit-out.log
   when:
@@ -1156,7 +1230,7 @@ steps:
 
 - name: cairo-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cairo/install-x86-windows-webkit-dbg-out.log
   when:
@@ -1166,7 +1240,7 @@ steps:
 
 - name: cairo-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cairo/install-x86-windows-webkit-rel-out.log
   when:
@@ -1176,13 +1250,13 @@ steps:
 
 - name: libpsl
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libpsl --triplet x86-windows-webkit
 
 - name: libpsl-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpsl/config-x86-windows-webkit-out.log
   when:
@@ -1192,7 +1266,7 @@ steps:
 
 - name: libpsl-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpsl/install-x86-windows-webkit-dbg-out.log
   when:
@@ -1202,7 +1276,7 @@ steps:
 
 - name: libpsl-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/libpsl/install-x86-windows-webkit-rel-out.log
   when:
@@ -1212,13 +1286,13 @@ steps:
 
 - name: pthreads
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install pthreads --triplet x86-windows-webkit
 
 - name: pthreads-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pthreads/config-x86-windows-webkit-out.log
   when:
@@ -1228,7 +1302,7 @@ steps:
 
 - name: pthreads-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pthreads/install-x86-windows-webkit-dbg-out.log
   when:
@@ -1238,7 +1312,7 @@ steps:
 
 - name: pthreads-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/pthreads/install-x86-windows-webkit-rel-out.log
   when:
@@ -1248,13 +1322,13 @@ steps:
 
 - name: cflite
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install cflite --triplet x86-windows-webkit
 
 - name: cflite-config
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cflite/config-x86-windows-webkit-out.log
   when:
@@ -1264,7 +1338,7 @@ steps:
 
 - name: cflite-debug-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cflite/install-x86-windows-webkit-dbg-out.log
   when:
@@ -1274,7 +1348,7 @@ steps:
 
 - name: cflite-release-build
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - Get-Content ./buildtrees/cflite/install-x86-windows-webkit-rel-out.log
   when:
@@ -1284,7 +1358,7 @@ steps:
 
 - name: bundle
   pull: never
-  image: webkitdev/msbuild
+  image: webkitdev/msbuild:1809
   commands:
   - "Invoke-Expression -Command \"./Delete-PthreadHeaders.ps1 -Triplet x86-windows-webkit\""
   - "Invoke-Expression -Command \"./Rename-WithBitSuffix.ps1 -Triplet x86-windows-webkit\""

@@ -17,6 +17,7 @@ local output_file(name, file, image) = {
     platform: {
       os: 'windows',
       arch: 'amd64',
+      version: 1809,
     },
     steps: steps,
     volumes: if std.length(volumes) > 0 then volumes,

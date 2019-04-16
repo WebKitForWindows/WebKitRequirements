@@ -1,6 +1,6 @@
 local build = import 'build.libsonnet';
 local targets = import 'WinCairoRequirements.json';
-local image = 'webkitdev/msbuild';
+local image = 'webkitdev/msbuild:1809';
 
 local pipeline(name, triplet, archive) = build.pipeline(
   name,
