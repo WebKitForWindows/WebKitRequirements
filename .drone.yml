@@ -837,7 +837,7 @@ steps:
 
 ---
 kind: pipeline
-name: x64
+name: x86
 
 platform:
   os: windows
