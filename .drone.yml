@@ -1654,7 +1654,7 @@ steps:
   commands:
   - "Invoke-Expression -Command \"./Delete-PthreadHeaders.ps1 -Triplet x86-windows-webkit\""
   - "Invoke-Expression -Command \"./Rename-WithBitSuffix.ps1 -Triplet x86-windows-webkit\""
-  - "Invoke-Expression -Command \"./Package-Requirements.ps1 -Triplet x86-windows-webkit -Output WinCairoRequirements.zip\""
+  - "Invoke-Expression -Command \"./Package-Requirements.ps1 -Triplet x86-windows-webkit -Output WinCairoRequirementsX86.zip\""
   depends_on:
   - cflite
 
