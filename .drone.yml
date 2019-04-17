@@ -24,6 +24,8 @@ steps:
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install zlib --triplet x64-windows-webkit
+  depends_on:
+  - vcpkg
 
 - name: zlib-config
   pull: never
@@ -34,6 +36,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - zlib
 
 - name: zlib-debug-build
   pull: never
@@ -44,6 +48,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - zlib
 
 - name: zlib-release-build
   pull: never
@@ -54,12 +60,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - zlib
 
 - name: brotli
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install brotli --triplet x64-windows-webkit
+  depends_on:
+  - zlib
 
 - name: brotli-config
   pull: never
@@ -70,6 +80,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - brotli
 
 - name: brotli-debug-build
   pull: never
@@ -80,6 +92,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - brotli
 
 - name: brotli-release-build
   pull: never
@@ -90,12 +104,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - brotli
 
 - name: libressl
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libressl --triplet x64-windows-webkit
+  depends_on:
+  - brotli
 
 - name: libressl-config
   pull: never
@@ -106,6 +124,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libressl
 
 - name: libressl-debug-build
   pull: never
@@ -116,6 +136,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libressl
 
 - name: libressl-release-build
   pull: never
@@ -126,12 +148,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libressl
 
 - name: nghttp2
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install nghttp2 --triplet x64-windows-webkit
+  depends_on:
+  - libressl
 
 - name: nghttp2-config
   pull: never
@@ -142,6 +168,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - nghttp2
 
 - name: nghttp2-debug-build
   pull: never
@@ -152,6 +180,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - nghttp2
 
 - name: nghttp2-release-build
   pull: never
@@ -162,12 +192,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - nghttp2
 
 - name: curl
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - "./vcpkg.exe install curl[ssl] --triplet x64-windows-webkit"
+  depends_on:
+  - nghttp2
 
 - name: curl-config
   pull: never
@@ -178,6 +212,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - curl
 
 - name: curl-debug-build
   pull: never
@@ -188,6 +224,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - curl
 
 - name: curl-release-build
   pull: never
@@ -198,12 +236,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - curl
 
 - name: icu
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install icu --triplet x64-windows-webkit
+  depends_on:
+  - curl
 
 - name: icu-config
   pull: never
@@ -214,6 +256,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - icu
 
 - name: icu-debug-build
   pull: never
@@ -224,6 +268,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - icu
 
 - name: icu-release-build
   pull: never
@@ -234,12 +280,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - icu
 
 - name: libxml2
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - "./vcpkg.exe install libxml2[xslt] --triplet x64-windows-webkit"
+  depends_on:
+  - icu
 
 - name: libxml2-config
   pull: never
@@ -250,6 +300,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libxml2
 
 - name: libxml2-debug-build
   pull: never
@@ -260,6 +312,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libxml2
 
 - name: libxml2-release-build
   pull: never
@@ -270,12 +324,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libxml2
 
 - name: libxslt
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libxslt --triplet x64-windows-webkit
+  depends_on:
+  - libxml2
 
 - name: libxslt-config
   pull: never
@@ -286,6 +344,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libxslt
 
 - name: libxslt-debug-build
   pull: never
@@ -296,6 +356,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libxslt
 
 - name: libxslt-release-build
   pull: never
@@ -306,12 +368,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libxslt
 
 - name: libpng
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libpng --triplet x64-windows-webkit
+  depends_on:
+  - libxslt
 
 - name: libpng-config
   pull: never
@@ -322,6 +388,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libpng
 
 - name: libpng-debug-build
   pull: never
@@ -332,6 +400,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libpng
 
 - name: libpng-release-build
   pull: never
@@ -342,12 +412,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libpng
 
 - name: libjpeg-turbo
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libjpeg-turbo --triplet x64-windows-webkit
+  depends_on:
+  - libpng
 
 - name: libjpeg-turbo-config
   pull: never
@@ -358,6 +432,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libjpeg-turbo
 
 - name: libjpeg-turbo-debug-build
   pull: never
@@ -368,6 +444,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libjpeg-turbo
 
 - name: libjpeg-turbo-release-build
   pull: never
@@ -378,12 +456,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libjpeg-turbo
 
 - name: libwebp
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libwebp --triplet x64-windows-webkit
+  depends_on:
+  - libjpeg-turbo
 
 - name: libwebp-config
   pull: never
@@ -394,6 +476,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libwebp
 
 - name: libwebp-debug-build
   pull: never
@@ -404,6 +488,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libwebp
 
 - name: libwebp-release-build
   pull: never
@@ -414,12 +500,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libwebp
 
 - name: openjpeg
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install openjpeg --triplet x64-windows-webkit
+  depends_on:
+  - libwebp
 
 - name: openjpeg-config
   pull: never
@@ -430,6 +520,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - openjpeg
 
 - name: openjpeg-debug-build
   pull: never
@@ -440,6 +532,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - openjpeg
 
 - name: openjpeg-release-build
   pull: never
@@ -450,12 +544,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - openjpeg
 
 - name: sqlite3
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install sqlite3 --triplet x64-windows-webkit
+  depends_on:
+  - openjpeg
 
 - name: sqlite3-config
   pull: never
@@ -466,6 +564,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - sqlite3
 
 - name: sqlite3-debug-build
   pull: never
@@ -476,6 +576,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - sqlite3
 
 - name: sqlite3-release-build
   pull: never
@@ -486,12 +588,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - sqlite3
 
 - name: pixman
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install pixman --triplet x64-windows-webkit
+  depends_on:
+  - sqlite3
 
 - name: pixman-config
   pull: never
@@ -502,6 +608,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - pixman
 
 - name: pixman-debug-build
   pull: never
@@ -512,6 +620,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - pixman
 
 - name: pixman-release-build
   pull: never
@@ -522,12 +632,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - pixman
 
 - name: cairo
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install cairo --triplet x64-windows-webkit
+  depends_on:
+  - pixman
 
 - name: cairo-config
   pull: never
@@ -538,6 +652,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - cairo
 
 - name: cairo-debug-build
   pull: never
@@ -548,6 +664,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - cairo
 
 - name: cairo-release-build
   pull: never
@@ -558,12 +676,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - cairo
 
 - name: libpsl
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install libpsl --triplet x64-windows-webkit
+  depends_on:
+  - cairo
 
 - name: libpsl-config
   pull: never
@@ -574,6 +696,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libpsl
 
 - name: libpsl-debug-build
   pull: never
@@ -584,6 +708,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libpsl
 
 - name: libpsl-release-build
   pull: never
@@ -594,12 +720,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - libpsl
 
 - name: pthreads
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install pthreads --triplet x64-windows-webkit
+  depends_on:
+  - libpsl
 
 - name: pthreads-config
   pull: never
@@ -610,6 +740,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - pthreads
 
 - name: pthreads-debug-build
   pull: never
@@ -620,6 +752,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - pthreads
 
 - name: pthreads-release-build
   pull: never
@@ -630,12 +764,16 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - pthreads
 
 - name: cflite
   pull: never
   image: webkitdev/msbuild:1809
   commands:
   - ./vcpkg.exe install cflite --triplet x64-windows-webkit
+  depends_on:
+  - pthreads
 
 - name: cflite-config
   pull: never
@@ -646,6 +784,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - cflite
 
 - name: cflite-debug-build
   pull: never
@@ -656,6 +796,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - cflite
 
 - name: cflite-release-build
   pull: never
@@ -666,6 +808,8 @@ steps:
     status:
     - success
     - failure
+  depends_on:
+  - cflite
 
 - name: bundle
   pull: never
@@ -674,6 +818,8 @@ steps:
   - "Invoke-Expression -Command \"./Delete-PthreadHeaders.ps1 -Triplet x64-windows-webkit\""
   - "Invoke-Expression -Command \"./Rename-WithBitSuffix.ps1 -Triplet x64-windows-webkit\""
   - "Invoke-Expression -Command \"./Package-Requirements.ps1 -Triplet x64-windows-webkit -Output WinCairoRequirements.zip\""
+  depends_on:
+  - cflite
 
 - name: release
   image: plugins/github-release
@@ -686,694 +832,5 @@ steps:
   when:
     event:
     - tag
-
----
-kind: pipeline
-name: x86
-
-platform:
-  os: windows
-  arch: amd64
-  version: 1809
-
-steps:
-- name: vcpkg
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - git clone https://github.com/Microsoft/vcpkg.git C:/vcpkg
-  - cd C:/vcpkg
-  - Invoke-Expression -Command ./scripts/bootstrap.ps1
-  - cp .vcpkg-root C:/drone/src
-  - cp vcpkg.exe C:/drone/src
-  - cp -r scripts C:/drone/src
-
-- name: zlib
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install zlib --triplet x86-windows-webkit
-
-- name: zlib-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/zlib/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: zlib-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/zlib/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: zlib-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/zlib/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: brotli
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install brotli --triplet x86-windows-webkit
-
-- name: brotli-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/brotli/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: brotli-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/brotli/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: brotli-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/brotli/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libressl
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install libressl --triplet x86-windows-webkit
-
-- name: libressl-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libressl/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libressl-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libressl/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libressl-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libressl/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: nghttp2
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install nghttp2 --triplet x86-windows-webkit
-
-- name: nghttp2-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/nghttp2/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: nghttp2-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/nghttp2/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: nghttp2-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/nghttp2/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: curl
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - "./vcpkg.exe install curl[ssl] --triplet x86-windows-webkit"
-
-- name: curl-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/curl/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: curl-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/curl/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: curl-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/curl/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: icu
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install icu --triplet x86-windows-webkit
-
-- name: icu-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/icu/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: icu-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/icu/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: icu-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/icu/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libxml2
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - "./vcpkg.exe install libxml2[xslt] --triplet x86-windows-webkit"
-
-- name: libxml2-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libxml2/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libxml2-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libxml2/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libxml2-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libxml2/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libxslt
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install libxslt --triplet x86-windows-webkit
-
-- name: libxslt-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libxslt/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libxslt-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libxslt/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libxslt-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libxslt/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libpng
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install libpng --triplet x86-windows-webkit
-
-- name: libpng-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libpng/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libpng-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libpng/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libpng-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libpng/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libjpeg-turbo
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install libjpeg-turbo --triplet x86-windows-webkit
-
-- name: libjpeg-turbo-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libjpeg-turbo/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libjpeg-turbo-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libjpeg-turbo/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libjpeg-turbo-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libjpeg-turbo/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libwebp
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install libwebp --triplet x86-windows-webkit
-
-- name: libwebp-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libwebp/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libwebp-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libwebp/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libwebp-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libwebp/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: openjpeg
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install openjpeg --triplet x86-windows-webkit
-
-- name: openjpeg-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/openjpeg/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: openjpeg-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/openjpeg/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: openjpeg-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/openjpeg/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: sqlite3
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install sqlite3 --triplet x86-windows-webkit
-
-- name: sqlite3-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/sqlite3/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: sqlite3-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/sqlite3/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: sqlite3-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/sqlite3/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: pixman
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install pixman --triplet x86-windows-webkit
-
-- name: pixman-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/pixman/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: pixman-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/pixman/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: pixman-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/pixman/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: cairo
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install cairo --triplet x86-windows-webkit
-
-- name: cairo-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/cairo/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: cairo-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/cairo/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: cairo-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/cairo/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libpsl
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install libpsl --triplet x86-windows-webkit
-
-- name: libpsl-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libpsl/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libpsl-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libpsl/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: libpsl-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/libpsl/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: pthreads
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install pthreads --triplet x86-windows-webkit
-
-- name: pthreads-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/pthreads/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: pthreads-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/pthreads/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: pthreads-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/pthreads/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: cflite
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - ./vcpkg.exe install cflite --triplet x86-windows-webkit
-
-- name: cflite-config
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/cflite/config-x86-windows-webkit-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: cflite-debug-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/cflite/install-x86-windows-webkit-dbg-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: cflite-release-build
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - Get-Content ./buildtrees/cflite/install-x86-windows-webkit-rel-out.log
-  when:
-    status:
-    - success
-    - failure
-
-- name: bundle
-  pull: never
-  image: webkitdev/msbuild:1809
-  commands:
-  - "Invoke-Expression -Command \"./Delete-PthreadHeaders.ps1 -Triplet x86-windows-webkit\""
-  - "Invoke-Expression -Command \"./Rename-WithBitSuffix.ps1 -Triplet x86-windows-webkit\""
-  - "Invoke-Expression -Command \"./Package-Requirements.ps1 -Triplet x86-windows-webkit -Output WinCairoRequirementsX86.zip\""
-
-- name: release
-  image: plugins/github-release
-  settings:
-    api_key:
-      from_secret: github_token
-    files:
-    - WinCairoRequirementsX86.zip
-    prerelease: true
-  when:
-    event:
-    - tag
-
-...
+  depends_on:
+  - bundle
