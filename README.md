@@ -1,6 +1,8 @@
 # WinCairoRequirements
 > Third party packages required for build the WinCairo port of WebKit. 
 
+[![Build Status](https://internal.cloud.drone.ci/api/badges/WebKitForWindows/WinCairoRequirements/status.svg)](https://internal.cloud.drone.ci/WebKitForWindows/WinCairoRequirements)
+
 ## Building
 
 1. Install `vckpg` by following [its installation instructions](https://github.com/Microsoft/vcpkg)
