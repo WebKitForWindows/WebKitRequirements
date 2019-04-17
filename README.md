@@ -32,6 +32,6 @@
 | [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.3.1 | 01-30-2019 | 
 | [pixman](http://www.pixman.org) | 0.38.0 | 02-11-2019 |
 | [cairo](https://www.cairographics.org) | 1.16.0 | 10-18-2018 |
-| [libpsl](https://github.com/rockdaboot/libpsl) | 0.20.2 | 04-26-2018 |
+| [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.0 | 04-16-2019 |
 | [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 07-12-2012 |
 | [OpenCFLite](https://github.com/fujii/OpenCFLite) | 0.0.2 | 12-11-2017 |
