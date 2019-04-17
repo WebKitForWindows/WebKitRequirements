@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(OPENJPEG_VERSION 2.3.0)
+set(OPENJPEG_VERSION 2.3.1)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/openjpeg-${OPENJPEG_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/uclouvain/openjpeg/archive/v${OPENJPEG_VERSION}.zip"
     FILENAME "openjpeg-${OPENJPEG_VERSION}.zip"
-    SHA512 d753479cc26ce6a3cf98daa50cd79825cb81afa819bfb94d9453583bd1b92f1480093cfa57b93cba26414047f198041311eef2dd112e3e0e898e33862276c38f
+    SHA512 809cff67e34893ccc13e41383f1bb3bb1fd9640d8e0997d6ec16afbbd326c7c4436e93a2e16ee8ebb22052c88c3e5765b473905cdc4699b8ae21b0310ea48138
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
