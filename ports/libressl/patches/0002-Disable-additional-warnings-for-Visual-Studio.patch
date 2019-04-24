@@ -1,0 +1,30 @@
+From 86511b203592ae4e817c6c890fcfb78772c46990 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Wed, 24 Apr 2019 13:48:58 -0700
+Subject: [PATCH 2/2] Disable additional warnings for Visual Studio
+
+Disabling C4464, C4668 and C4820.
+---
+ CMakeLists.txt | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a6a7554..8886a1e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -130,7 +130,12 @@ if(MSVC)
+ 			"C4267" # 'var' : conversion from 'size_t' to 'type',
+ 				# possible loss of data
+ 			"C4389" # 'operator' : signed/unsigned mismatch
++			"C4464" # A #include directive has a path that includes a '..'
++				# parent directory specifier.
++			"C4668" # 'symbol' is not defined as a preprocessor macro,
++			    # replacing with '0' for 'directives'
+ 			"C4706" # assignment within conditional expression
++			"C4820" # bytes' bytes padding added after construct 'member_name'
+ 			"C4996" # The POSIX name for this item is deprecated.
+ 				# Instead, use the ISO C and C++ conformant name
+ 		)
+-- 
+2.19.1.windows.1
+

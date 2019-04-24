@@ -1,7 +1,7 @@
-From 207f1d520d55104b3438c125ed74d58799c58633 Mon Sep 17 00:00:00 2001
+From 34d4523fa6efa64e63404c82f5c352903c06157e Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
-Date: Wed, 21 Mar 2018 12:41:34 -0700
-Subject: [PATCH 1/1] Remove postfix from archive name
+Date: Wed, 24 Apr 2019 13:47:38 -0700
+Subject: [PATCH 1/2] Remove postfix from archive name
 
 CMake can't detect a shared build on Windows when there is a postfix version number.
 ---
@@ -11,10 +11,10 @@ CMake can't detect a shared build on Windows when there is a postfix version num
  3 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/crypto/CMakeLists.txt b/crypto/CMakeLists.txt
-index 2fa08a5..a78eaff 100644
+index 0d65874..8d905e9 100644
 --- a/crypto/CMakeLists.txt
 +++ b/crypto/CMakeLists.txt
-@@ -818,7 +818,7 @@ if (BUILD_SHARED_LIBS)
+@@ -966,7 +966,7 @@ if (BUILD_SHARED_LIBS)
  	endif()
  	set_target_properties(crypto PROPERTIES
  		OUTPUT_NAME crypto${CRYPTO_POSTFIX}
@@ -24,10 +24,10 @@ index 2fa08a5..a78eaff 100644
  		${CRYPTO_VERSION} SOVERSION ${CRYPTO_MAJOR_VERSION})
  endif()
 diff --git a/ssl/CMakeLists.txt b/ssl/CMakeLists.txt
-index e87e0f6..21467e1 100644
+index 5c6460f..0904b1e 100644
 --- a/ssl/CMakeLists.txt
 +++ b/ssl/CMakeLists.txt
-@@ -57,7 +57,7 @@ if (BUILD_SHARED_LIBS)
+@@ -64,7 +64,7 @@ if (BUILD_SHARED_LIBS)
  	endif()
  	set_target_properties(ssl PROPERTIES
  		OUTPUT_NAME ssl${SSL_POSTFIX}
@@ -37,10 +37,10 @@ index e87e0f6..21467e1 100644
  		SOVERSION ${SSL_MAJOR_VERSION})
  endif()
 diff --git a/tls/CMakeLists.txt b/tls/CMakeLists.txt
-index 6c5303c..bc4b05d 100644
+index 94803ce..d2caeff 100644
 --- a/tls/CMakeLists.txt
 +++ b/tls/CMakeLists.txt
-@@ -46,7 +46,7 @@ if (BUILD_SHARED_LIBS)
+@@ -45,7 +45,7 @@ if (BUILD_SHARED_LIBS)
  	endif()
  	set_target_properties(tls PROPERTIES
  		OUTPUT_NAME tls${TLS_POSTFIX}
@@ -50,5 +50,5 @@ index 6c5303c..bc4b05d 100644
  		SOVERSION ${TLS_MAJOR_VERSION})
  endif()
 -- 
-2.14.1.windows.1
+2.19.1.windows.1
 
