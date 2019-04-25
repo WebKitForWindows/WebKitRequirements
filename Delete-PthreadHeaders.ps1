@@ -12,6 +12,6 @@ Param(
   [string] $triplet = 'x64-windows-webkit'
 )
 
-Remove-Item -Path ('installed/{0}/include/pthread.h' -f $triplet);
-Remove-Item -Path ('installed/{0}/include/sched.h' -f $triplet);
-Remove-Item -Path ('installed/{0}/include/semaphore.h' -f $triplet);
+Remove-Item -Path ('{0}/installed/{1}/include/pthread.h' -f $PSScriptRoot, $triplet);
+Remove-Item -Path ('{0}/installed/{1}/include/sched.h' -f $PSScriptRoot, $triplet);
+Remove-Item -Path ('{0}/installed/{1}/include/semaphore.h' -f $PSScriptRoot, $triplet);

@@ -18,8 +18,8 @@ if ($triplet.StartsWith('x64')) {
   $suffix = '32';
 }
 
-Rename-Item -Path ('installed/{0}/bin' -f $triplet) -NewName ('bin{0}' -f $suffix);
-Rename-Item -Path ('installed/{0}/lib' -f $triplet) -NewName ('lib{0}' -f $suffix);
+Rename-Item -Path ('{0}/installed/{1}/bin' -f $PSScriptRoot, $triplet) -NewName ('bin{0}' -f $suffix);
+Rename-Item -Path ('{0}/installed/{1}/lib' -f $PSScriptRoot, $triplet) -NewName ('lib{0}' -f $suffix);
 
-Rename-Item -Path ('installed/{0}/debug/bin' -f $triplet) -NewName ('bin{0}' -f $suffix);
-Rename-Item -Path ('installed/{0}/debug/lib' -f $triplet) -NewName ('lib{0}' -f $suffix);
+Rename-Item -Path ('{0}/installed/{1}/debug/bin' -f $PSScriptRoot, $triplet) -NewName ('bin{0}' -f $suffix);
+Rename-Item -Path ('{0}/installed/{1}/debug/lib' -f $PSScriptRoot, $triplet) -NewName ('lib{0}' -f $suffix);

@@ -26,6 +26,6 @@ $arguments += $triplet
 Write-Host ('vcpkg {0}' -f ($arguments -Join ' '))
 
 Start-Process -Wait -NoNewWindow `
-  -FilePath 'vcpkg.exe' `
+  -FilePath (Join-Path $PSScriptRoot 'vcpkg.exe') `
   -WorkingDirectory $PSScriptRoot `
   -ArgumentList $arguments

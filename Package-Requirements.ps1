@@ -15,4 +15,4 @@ Param(
 )
 
 Write-Host ('Creating archive {0}' -f $output)
-Compress-7Zip -ArchiveFileName $output -Path ('installed/{0}' -f $triplet)
+Compress-7Zip -ArchiveFileName $output -Path ('{0}/installed/{1}' -f $PSScriptRoot, $triplet)
