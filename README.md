@@ -1,5 +1,5 @@
 # WinCairoRequirements
-> Third party packages required for build the WinCairo port of WebKit. 
+> Third party packages required for build the WinCairo port of WebKit.
 
 [![Build Status](https://internal.cloud.drone.ci/api/badges/WebKitForWindows/WinCairoRequirements/status.svg)](https://internal.cloud.drone.ci/WebKitForWindows/WinCairoRequirements)
 
@@ -18,7 +18,7 @@
 | Library | Version | Release Date |
 |---|:---:|:---:|
 | [icu](http://site.icu-project.org) | 63.1 | 10-15-2018 |
-| [zlib](https://github.com/Dead2/zlib-ng) | N/A | 03-26-2019 |
+| [zlib](https://github.com/Dead2/zlib-ng) | N/A | 04-01-2019 |
 | [brotli](https://github.com/google/brotli) | 1.0.7 | 10-23-2018 |
 | [libressl](https://www.libressl.org) | 2.9.1 | 04-21-2018 |
 | [nghttp2](https://nghttp2.org) | 1.38.0 | 04-18-2019 |
@@ -31,7 +31,7 @@
 | [openjpeg](https://www.openjpeg.org/) | 2.3.1 | 04-02-2019 |
 | [sqlite](http://sqlite.org) | 3.28.0 | 04-16-2019 |
 | [freetype](https://www.freetype.org) | 2.10.0 | 03-15-2019 |
-| [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.4.0 | 03-29-2019 | 
+| [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.4.0 | 03-29-2019 |
 | [pixman](http://www.pixman.org) | 0.38.4 | 04-10-2019 |
 | [cairo](https://www.cairographics.org) | 1.16.0 | 10-18-2018 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.0 | 04-16-2019 |
