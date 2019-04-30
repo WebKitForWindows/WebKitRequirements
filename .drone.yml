@@ -815,9 +815,7 @@ steps:
   pull: never
   image: webkitdev/msbuild:1809
   commands:
-  - "Invoke-Expression -Command \"./Delete-PthreadHeaders.ps1 -Triplet x64-windows-webkit\""
-  - "Invoke-Expression -Command \"./Rename-WithBitSuffix.ps1 -Triplet x64-windows-webkit\""
-  - "Invoke-Expression -Command \"./Package-Requirements.ps1 -Triplet x64-windows-webkit -Output WinCairoRequirements.zip\""
+  - Invoke-Expression -Command "./Release-WinCairoRequirements.ps1 -Triplet x64-windows-webkit"
   depends_on:
   - cflite
 
@@ -1652,9 +1650,7 @@ steps:
   pull: never
   image: webkitdev/msbuild:1809
   commands:
-  - "Invoke-Expression -Command \"./Delete-PthreadHeaders.ps1 -Triplet x86-windows-webkit\""
-  - "Invoke-Expression -Command \"./Rename-WithBitSuffix.ps1 -Triplet x86-windows-webkit\""
-  - "Invoke-Expression -Command \"./Package-Requirements.ps1 -Triplet x86-windows-webkit -Output WinCairoRequirementsX86.zip\""
+  - Invoke-Expression -Command "./Release-WinCairoRequirements.ps1 -Triplet x86-windows-webkit"
   depends_on:
   - cflite
 
@@ -1664,7 +1660,7 @@ steps:
     api_key:
       from_secret: github_token
     files:
-    - WinCairoRequirementsX86.zip
+    - WinCairoRequirements32.zip
     prerelease: true
   when:
     event:
