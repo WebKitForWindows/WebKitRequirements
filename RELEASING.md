@@ -25,9 +25,16 @@ git push origin vYYYY.MM.DD
 
 Once the tag is pushed a release can be created within GitHub.
 
+## Continuous Integration
+
+The WinCairoRequirements repository uses [Drone](https://drone.io) to build the
+release when a tag is pushed. It will create a GitHub release associated with
+the tag and create the distribution for 32 and 64-bit WinCairo builds.
+
 # Manually creating a distribution
 
-The repository contains a number of scripts to create a distribution. These are used to build locally consistently.
+The repository contains a number of scripts to create a distribution. These are
+used to build locally consistently.
 
 All the scripts take a `triplet` value which specifies the toolchain. By
 default the `x64-windows-webkit` toolchain is used. For building 
@@ -59,8 +66,10 @@ accordingly.
 ```
 & Install-Requirements.ps1
 
-# TODO Remove
+# TODO Remove cflite from distribution
 .\vcpkg.exe install cflite --triplet x64-windows-webkit
+
+& Rename-WithBitSuffix.ps1
 & Delete-PthreadHeaders.ps1
 
 & Package-Requirements.ps1
