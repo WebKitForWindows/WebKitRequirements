@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(FREETYPE_VERSION 2.10.0)
+set(FREETYPE_VERSION 2.10.1)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/freetype-${FREETYPE_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://download.savannah.gnu.org/releases/freetype/freetype-${FREETYPE_VERSION}.tar.bz2"
-    FILENAME "freetype-${FREETYPE_VERSION}.tar.bz2"
-    SHA512 dfad66f419ea9577f09932e0730c0c887bdcbdbc8152fa7477a0c39d69a5b68476761deed6864ddcc5cf18d100a7a3f728049768e24afcb04b1a74b25b6acf7e
+    URLS "https://download.savannah.gnu.org/releases/freetype/freetype-${FREETYPE_VERSION}.tar.gz"
+    FILENAME "freetype-${FREETYPE_VERSION}.tar.gz"
+    SHA512 346c682744bcf06ca9d71265c108a242ad7d78443eff20142454b72eef47ba6d76671a6e931ed4c4c9091dd8f8515ebdd71202d94b073d77931345ff93cfeaa7
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
