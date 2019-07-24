@@ -1,13 +1,13 @@
 include(vcpkg_common_functions)
 
-set(CURL_VERSION 7.65.0)
+set(CURL_VERSION 7.65.3)
 string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/curl-${CURL_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${CURL_TAG}/curl-${CURL_VERSION}.zip"
     FILENAME "curl-${CURL_VERSION}.zip"
-    SHA512 66f99025476076fefce0c225c65adc1ea36bb49d3edb4956cec1d132ec374357c8a3da9c5791bfec0f3700ebffb7ba4db0d156542d8fac921771afbf051b23f4
+    SHA512 0fb24911af0aa86bd1bae88595e4d8336116889c3b08070976ea66acbfaa3b956f0b866264badd8c3a9c7c49cde5828ea86a45123e65bea2b2430aec2d83916f
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
@@ -16,8 +16,6 @@ vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES
         ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-        # Remove in next release
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-url-fix-bad-ifdef.patch
 )
 
 # Run CMake build
