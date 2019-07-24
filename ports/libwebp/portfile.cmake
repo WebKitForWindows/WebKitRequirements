@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(WEBP_VERSION 1.0.2)
+set(WEBP_VERSION 1.0.3)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libwebp-${WEBP_VERSION})
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/webmproject/libwebp/archive/v${WEBP_VERSION}.zip"
     FILENAME "libwebp-${WEBP_VERSION}.zip"
-    SHA512 01cc66f935a8a24143e10b8072595f8880bb839516e956e92614abb9508b05e61c0955c2c068a950d9e6fd3e0c5e0fb0c0202d8928a0072a63a14f776347392b
+    SHA512 e50d5aa43d9a94a7f89d526e57e0e5baa78164b6d7842a9e26ad22a9c03af61b99d8f98d759ab3dc487f8f5d836157f807ebd762abb65b134d138cbec2b5421d
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
