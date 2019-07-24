@@ -31,7 +31,7 @@
 | [openjpeg](https://www.openjpeg.org/) | 2.3.1 | 04-02-2019 |
 | [sqlite](http://sqlite.org) | 3.29.0 | 07-10-2019 |
 | [freetype](https://www.freetype.org) | 2.10.1 | 07-01-2019 |
-| [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.4.0 | 03-29-2019 |
+| [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.5.3 | 06-26-2019 |
 | [pixman](http://www.pixman.org) | 0.38.4 | 04-10-2019 |
 | [cairo](https://www.cairographics.org) | 1.16.0 | 10-18-2018 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.0 | 04-16-2019 |
