@@ -1,20 +1,25 @@
 include(vcpkg_common_functions)
 
-set(WEBP_VERSION 1.0.3)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libwebp-${WEBP_VERSION})
+set(LIBWEBP_VERSION 1.0.3)
 
+# Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/webmproject/libwebp/archive/v${WEBP_VERSION}.zip"
-    FILENAME "libwebp-${WEBP_VERSION}.zip"
+    URLS "https://github.com/webmproject/libwebp/archive/v${LIBWEBP_VERSION}.zip"
+    FILENAME "libwebp-${LIBWEBP_VERSION}.zip"
     SHA512 e50d5aa43d9a94a7f89d526e57e0e5baa78164b6d7842a9e26ad22a9c03af61b99d8f98d759ab3dc487f8f5d836157f807ebd762abb65b134d138cbec2b5421d
 )
-vcpkg_extract_source_archive(${ARCHIVE})
 
-# Apply patches
-vcpkg_apply_patches(
-    SOURCE_PATH ${SOURCE_PATH}
-    PATCHES
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-declspec-for-exporting-as-a-shared-library.patch
+# Patches
+set(LIBWEBP_PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-declspec-for-exporting-as-a-shared-library.patch
+)
+
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${LIBWEBP_VERSION}
+    PATCHES ${LIBWEBP_PATCHES}
 )
 
 # Run CMake build
