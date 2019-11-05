@@ -53,3 +53,4 @@ vcpkg_copy_pdbs()
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/sqlite3/copyright "SQLite is in the Public Domain.\nhttp://www.sqlite.org/copyright.html\n")
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/sqlite3/version ${SQLITE3_VERSION})
