@@ -29,7 +29,7 @@
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.0.3 | 09-04-2019 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.0.3 | 07-13-2019 |
 | [openjpeg](https://www.openjpeg.org/) | 2.3.1 | 04-02-2019 |
-| [sqlite](http://sqlite.org) | 3.29.0 | 07-10-2019 |
+| [sqlite](http://sqlite.org) | 3.30.1 | 10-11-2019 |
 | [freetype](https://www.freetype.org) | 2.10.1 | 07-01-2019 |
 | [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.5.3 | 06-26-2019 |
 | [pixman](http://www.pixman.org) | 0.38.4 | 04-10-2019 |
