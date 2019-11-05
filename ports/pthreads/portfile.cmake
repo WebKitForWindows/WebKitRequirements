@@ -62,3 +62,4 @@ file(INSTALL
     DESTINATION ${CURRENT_PACKAGES_DIR}/debug/lib/manual-link
     RENAME pthreads.lib
 )
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/pthreads/version ${PTHREADS_VERSION})
