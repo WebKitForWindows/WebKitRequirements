@@ -1,3 +1,5 @@
+include(vcpkg_common_functions)
+
 if(VCPKG_CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
   message(FATAL_ERROR "${PORT} does not currently support UWP")
 endif()
@@ -6,17 +8,27 @@ if(VCPKG_CMAKE_SYSTEM_NAME)
   return()
 endif()
 
-include(vcpkg_common_functions)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/pthreads-w32-2-9-1-release)
+set(PTHREADS_VERSION 2.9.1)
+string(REPLACE "." "-" PTHREADS_TAG ${PTHREADS_VERSION})
+
+# Get archive
 vcpkg_download_distfile(ARCHIVE
-  URLS "https://www.mirrorservice.org/sites/sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz"
-  FILENAME "pthreads-w32-2-9-1-release.tar.gz"
+  URLS "https://www.mirrorservice.org/sites/sourceware.org/pub/pthreads-win32/pthreads-w32-${PTHREADS_TAG}-release.tar.gz"
+  FILENAME "pthreads-w32-${PTHREADS_TAG}-release.tar.gz"
   SHA512 9c06e85310766834370c3dceb83faafd397da18a32411ca7645c8eb6b9495fea54ca2872f4a3e8d83cb5fdc5dea7f3f0464be5bb9af3222a6534574a184bd551
 )
-vcpkg_extract_source_archive(${ARCHIVE})
 
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${PTHREADS_VERSION}
+)
+
+# Add CMake sources
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt DESTINATION ${SOURCE_PATH})
 
+# Run CMake build
 vcpkg_configure_cmake(
   SOURCE_PATH ${SOURCE_PATH}
   PREFER_NINJA
@@ -25,9 +37,9 @@ vcpkg_configure_cmake(
 )
 
 vcpkg_install_cmake()
-
 vcpkg_copy_pdbs()
 
+# Prepare distribution
 file(GLOB HEADERS "${CURRENT_PACKAGES_DIR}/include/*.h")
 foreach(HEADER ${HEADERS})
   file(READ "${HEADER}" _contents)
