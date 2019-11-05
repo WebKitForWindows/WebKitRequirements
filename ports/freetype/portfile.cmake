@@ -46,3 +46,4 @@ file(INSTALL
     ${SOURCE_PATH}/docs/GPLv2.txt
     DESTINATION ${CURRENT_PACKAGES_DIR}/share/freetype
 )
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/freetype/version ${FREETYPE_VERSION})
