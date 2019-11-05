@@ -1,17 +1,22 @@
 include(vcpkg_common_functions)
 
 set(CFLITE_VERSION 0.0.2)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/OpenCFLite-${CFLITE_VERSION})
 
+# Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/fujii/OpenCFLite/archive/v${CFLITE_VERSION}.zip"
     FILENAME "OpenCFLite-${CFLITE_VERSION}.zip"
     SHA512 6655025baf720096841b7d9f537cc62e6ff42a953e0ca6a2788c61d1192186257a249e4550ec28b44cf5752baac1fb83b72a66226425af7d3153f7371c0412d3
 )
-vcpkg_extract_source_archive(${ARCHIVE})
+
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${CFLITE_VERSION}
+)
 
 # Run CMake build
-
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
