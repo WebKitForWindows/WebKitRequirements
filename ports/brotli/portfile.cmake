@@ -1,7 +1,6 @@
 include(vcpkg_common_functions)
 
 set(BROTLI_VERSION 1.0.7)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/brotli-${BROTLI_VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
@@ -9,14 +8,19 @@ vcpkg_download_distfile(ARCHIVE
     FILENAME "brotli-${BROTLI_VERSION}.zip"
     SHA512 8c43bd310c568c5a726a9e8accf6078a756e155b6eb32a4232332aa90f958258ae2b917713314caa33c9488185e8c854abe941fd4c63edfe017bba92240b896c
 )
-vcpkg_extract_source_archive(${ARCHIVE})
 
-# Apply patches
-vcpkg_apply_patches(
-    SOURCE_PATH ${SOURCE_PATH}
-    PATCHES
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-static-target.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-__has_declspec_attribute.patch
+# Patches
+set(BROTLI_PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-static-target.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-__has_declspec_attribute.patch
+)
+
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${BROTLI_VERSION}
+    PATCHES ${BROTLI_PATCHES}
 )
 
 # Run CMake build
