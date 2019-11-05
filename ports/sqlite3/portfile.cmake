@@ -3,7 +3,6 @@ include(vcpkg_common_functions)
 set(SQLITE3_VERSION 3.29.00)
 string(REPLACE "." "" SQLITE3_TAG ${SQLITE3_VERSION})
 string(CONCAT SQLITE3_TAG ${SQLITE3_TAG} "00")
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/sqlite-amalgamation-${SQLITE3_TAG})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
@@ -11,7 +10,13 @@ vcpkg_download_distfile(ARCHIVE
     FILENAME "sqlite-amalgamation-${SQLITE3_TAG}.zip"
     SHA512 3306ac3e37ec46f1b2ac74155756c82afadff7bf5b8b4c9b5516f5e8c1c785b5f50ec9b840482292f2f6c5d72cf6d9a78a0dfb727f0a9cf134b6c5522606e9b3
 )
-vcpkg_extract_source_archive(${ARCHIVE})
+
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${SQLITE3_VERSION}
+)
 
 # Add CMake sources
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
