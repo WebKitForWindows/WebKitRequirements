@@ -2,26 +2,30 @@ include(vcpkg_common_functions)
 
 set(ICU_VERSION 63.1)
 string(REPLACE "." "_" ICU_TAG ${ICU_VERSION})
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/icu)
 
-# Get the source archive
+# Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "http://download.icu-project.org/files/icu4c/${ICU_VERSION}/icu4c-${ICU_TAG}-src.tgz"
     FILENAME "icu4c-${ICU_TAG}-src.tgz"
     SHA512 9ab407ed840a00cdda7470dcc4c40299a125ad246ae4d019c4b1ede54781157fd63af015a8228cd95dbc47e4d15a0932b2c657489046a19788e5e8266eac079c
 )
-vcpkg_extract_source_archive(${ARCHIVE})
+
+# Patches
+set(ICU_PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-genccode-crashes-when-creating-assembly-files.patch
+)
+
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${ICU_VERSION}
+    PATCHES ${ICU_PATCHES}
+)
 
 # Add CMake sources
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/source DESTINATION ${SOURCE_PATH})
-
-# Apply patches
-vcpkg_apply_patches(
-    SOURCE_PATH ${SOURCE_PATH}
-    PATCHES
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-genccode-crashes-when-creating-assembly-files.patch
-)
 
 # Run CMake build
 set(BUILD_OPTIONS
