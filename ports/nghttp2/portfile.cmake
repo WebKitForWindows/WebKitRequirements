@@ -1,14 +1,20 @@
 include(vcpkg_common_functions)
 
 set(NGHTTP2_VERSION 1.39.1)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/nghttp2-${NGHTTP2_VERSION})
 
+# Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/nghttp2/nghttp2/archive/v${NGHTTP2_VERSION}.zip"
     FILENAME "nghttp2-${NGHTTP2_VERSION}.zip"
     SHA512 685537618b2ae2a3b74b17752283ed35f6e566179770c1459b5a09428932db2f467be6353e06b45bc25d09ba6e58ab3254e381ed609ebf3cde0b9c19e5357c4c
 )
-vcpkg_extract_source_archive(${ARCHIVE})
+
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${NGHTTP2_VERSION}
+)
 
 # Run CMake build
 set(BUILD_OPTIONS
