@@ -97,3 +97,4 @@ vcpkg_copy_pdbs()
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/libxml2 RENAME copyright)
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/libxml2/version ${LIBXML2_VERSION})
