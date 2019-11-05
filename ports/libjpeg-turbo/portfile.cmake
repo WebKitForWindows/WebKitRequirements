@@ -2,14 +2,26 @@ include(vcpkg_common_functions)
 include(${CMAKE_CURRENT_LIST_DIR}/vcpkg_acquire_gnuwin32_program.cmake)
 
 set(LIBJPEG_TURBO_VERSION 2.0.2)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libjpeg-turbo-${LIBJPEG_TURBO_VERSION})
 
+# Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/${LIBJPEG_TURBO_VERSION}.zip"
     FILENAME "libjpeg-turbo-${LIBJPEG_TURBO_VERSION}.zip"
     SHA512 2c0601a8b2c8ff7ab71fa8496407196063195acb61e7361a1e837d838284d2c54478f65b6ab3d965e79ba50e72f12531b0c9c48ec0c0ece9e2c48db5c9749893
 )
-vcpkg_extract_source_archive(${ARCHIVE})
+
+# Patches
+set(LIBJPEG_TURBO_PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Make-executables-conditional.patch
+)
+
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${LIBJPEG_TURBO_VERSION}
+    PATCHES ${LIBJPEG_TURBO_PATCHES}
+)
 
 # Find NASM and add to the path
 vcpkg_find_acquire_program(NASM)
@@ -22,13 +34,6 @@ vcpkg_acquire_gnuwin32_program(SED)
 get_filename_component(GREP_EXE_PATH ${GREP} DIRECTORY)
 get_filename_component(SED_EXE_PATH ${SED} DIRECTORY)
 set(ENV{PATH} "$ENV{PATH};${GREP_EXE_PATH};${SED_EXE_PATH}")
-
-# Apply patches
-vcpkg_apply_patches(
-    SOURCE_PATH ${SOURCE_PATH}
-    PATCHES
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Make-executables-conditional.patch
-)
 
 # Run CMake build
 set(BUILD_OPTIONS
