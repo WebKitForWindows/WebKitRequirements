@@ -1,14 +1,20 @@
 include(vcpkg_common_functions)
 
 set(LIBXSLT_VERSION 1.1.33)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libxslt-${LIBXSLT_VERSION})
 
+# Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "http://xmlsoft.org/sources/libxslt-${LIBXSLT_VERSION}.tar.gz"
     FILENAME "libxslt-${LIBXSLT_VERSION}.tar.gz"
     SHA512 ebbe438a38bf6355950167d3b580edc22baa46a77068c18c42445c1c9c716d42bed3b30c5cd5bec359ab32d03843224dae458e9e32dc61693e7cf4bab23536e0
 )
-vcpkg_extract_source_archive(${ARCHIVE})
+
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${LIBXSLT_VERSION}
+)
 
 # Add CMake sources
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
