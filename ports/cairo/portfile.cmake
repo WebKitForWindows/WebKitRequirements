@@ -14,7 +14,19 @@ vcpkg_download_distfile(ARCHIVE
     FILENAME "cairo-${CAIRO_VERSION}.tar.xz"
     SHA512 9eb27c4cf01c0b8b56f2e15e651f6d4e52c99d0005875546405b64f1132aed12fbf84727273f493d84056a13105e065009d89e94a8bfaf2be2649e232b82377f
 )
-vcpkg_extract_source_archive(${ARCHIVE})
+
+# Patches
+set(CAIRO_PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Rename-stat-to-stats.patch
+)
+
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${CAIRO_VERSION}
+    PATCHES ${CAIRO_PATCHES}
+)
 
 # Add CMake sources
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
@@ -29,13 +41,6 @@ file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/cmake/FindPixman.cmake DESTINATION ${S
 
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/src/CMakeLists.txt DESTINATION ${SOURCE_PATH}/src)
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/src/sources.cmake DESTINATION ${SOURCE_PATH}/src)
-
-# Apply patches
-vcpkg_apply_patches(
-    SOURCE_PATH ${SOURCE_PATH}
-    PATCHES
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Rename-stat-to-stats.patch
-)
 
 # Run CMake build
 vcpkg_configure_cmake(
