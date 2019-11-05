@@ -47,3 +47,4 @@ file(
         ${SOURCE_PATH}/apps/openssl/x509v3.cnf
     DESTINATION ${CURRENT_PACKAGES_DIR}/etc/ssl
 )
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/libressl/version ${LIBRESSL_VERSION})
