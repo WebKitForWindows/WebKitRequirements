@@ -1,20 +1,25 @@
 include(vcpkg_common_functions)
 
 set(FREETYPE_VERSION 2.10.1)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/freetype-${FREETYPE_VERSION})
 
+# Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://download.savannah.gnu.org/releases/freetype/freetype-${FREETYPE_VERSION}.tar.gz"
     FILENAME "freetype-${FREETYPE_VERSION}.tar.gz"
     SHA512 346c682744bcf06ca9d71265c108a242ad7d78443eff20142454b72eef47ba6d76671a6e931ed4c4c9091dd8f8515ebdd71202d94b073d77931345ff93cfeaa7
 )
-vcpkg_extract_source_archive(${ARCHIVE})
 
-# Apply patches
-vcpkg_apply_patches(
-    SOURCE_PATH ${SOURCE_PATH}
-    PATCHES
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+# Patches
+set(FREETYPE_PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+)
+
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${FREETYPE_VERSION}
+    PATCHES ${FREETYPE_PATCHES}
 )
 
 # Run CMake build
