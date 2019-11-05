@@ -1,21 +1,26 @@
 include(vcpkg_common_functions)
 
 set(LIBPNG_VERSION 1.6.37)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/libpng-${LIBPNG_VERSION})
 
+# Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://downloads.sourceforge.net/project/libpng/libpng16/${LIBPNG_VERSION}/libpng-${LIBPNG_VERSION}.tar.gz"
     FILENAME "libpng-${LIBPNG_VERSION}.tar.gz"
     SHA512 2ce2b855af307ca92a6e053f521f5d262c36eb836b4810cb53c809aa3ea2dcc08f834aee0ffd66137768a54397e28e92804534a74abb6fc9f6f3127f14c9c338
 )
-vcpkg_extract_source_archive(${ARCHIVE})
 
-# Apply patches
-vcpkg_apply_patches(
-    SOURCE_PATH ${SOURCE_PATH}
-    PATCHES
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Skip-install-symlink.patch
-        ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Do-not-append-static-to-library-name.patch
+# Patches
+set(LIBPNG_PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Skip-install-symlink.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Do-not-append-static-to-library-name.patch
+)
+
+# Extract archive
+vcpkg_extract_source_archive_ex(
+    OUT_SOURCE_PATH SOURCE_PATH
+    ARCHIVE ${ARCHIVE}
+    REF ${LIBPNG_VERSION}
+    PATCHES ${LIBPNG_PATCHES}
 )
 
 # Run CMake build
