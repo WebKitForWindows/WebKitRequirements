@@ -53,3 +53,4 @@ vcpkg_copy_pdbs()
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/libpng ${CURRENT_PACKAGES_DIR}/debug/lib/libpng)
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/libpng RENAME copyright)
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/libpng/version ${LIBPNG_VERSION})
