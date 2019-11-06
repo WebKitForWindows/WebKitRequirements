@@ -1,13 +1,13 @@
 include(vcpkg_common_functions)
 
-set(CURL_VERSION 7.65.3)
+set(CURL_VERSION 7.67.0)
 string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${CURL_TAG}/curl-${CURL_VERSION}.zip"
     FILENAME "curl-${CURL_VERSION}.zip"
-    SHA512 0fb24911af0aa86bd1bae88595e4d8336116889c3b08070976ea66acbfaa3b956f0b866264badd8c3a9c7c49cde5828ea86a45123e65bea2b2430aec2d83916f
+    SHA512 491e94f8c4add4135e3eadefbce4dacdd0db46ae1b03a0405c55beb89b9ed725b60334f913d522b495987e2c9098b684db13473c8bd81783b1347a1f22401dc5
 )
 
 # Patches
