@@ -24,7 +24,7 @@
 | [nghttp2](https://nghttp2.org) | 1.39.2 | 08-19-2019 |
 | [curl](https://curl.haxx.se) | 7.65.3 | 07-19-2019 |
 | [libxml2](http://xmlsoft.org/) | 2.9.10 | 10-30-2019 |
-| [libxslt](http://xmlsoft.org/libxslt) | 1.1.33 | 01-03-2019 |
+| [libxslt](http://xmlsoft.org/libxslt) | 1.1.34 | 10-30-2019 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.37 | 04-15-2019 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.0.3 | 09-04-2019 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.0.3 | 07-13-2019 |
