@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(LIBXML2_VERSION 2.9.9)
+set(LIBXML2_VERSION 2.9.10)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "http://xmlsoft.org/sources/libxml2-${LIBXML2_VERSION}.tar.gz"
     FILENAME "libxml2-${LIBXML2_VERSION}.tar.gz"
-    SHA512 cb7784ba4e72e942614e12e4f83f4ceb275f3d738b30e3b5c1f25edf8e9fa6789e854685974eed95b362049dbf6c8e7357e0327d64c681ed390534ac154e6810
+    SHA512 0adfd12bfde89cbd6296ba6e66b6bed4edb814a74b4265bda34d95c41d9d92c696ee7adb0c737aaf9cc6e10426a31a35079b2a23d26c074e299858da12c072ed
 )
 
 # Extract archive
