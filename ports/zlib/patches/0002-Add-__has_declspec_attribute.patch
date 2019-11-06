@@ -1,24 +1,27 @@
-From 02d1a649921e503d1128a6e3f9284a35bc5c7287 Mon Sep 17 00:00:00 2001
+From 8c15aaa16c86dbadac9f7df039baefa36ece3620 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
-Date: Thu, 15 Mar 2018 09:28:57 -0700
+Date: Wed, 6 Nov 2019 11:24:47 -0800
 Subject: [PATCH 2/2] Add __has_declspec_attribute
 
 Clang contains __has_declspec_attribute for MSVC compatibility. This can be
 used to determine whether __declspec is available.
 ---
- zconf-ng.h.in | 40 ++++++++++++++++++----------------------
- zconf.h.in    | 40 ++++++++++++++++++----------------------
+ zconf-ng.h.in | 50 ++++++++++++++++++++++++++++----------------------
+ zconf.h.in    | 51 +++++++++++++++++++++++++++++----------------------
  zutil.h       |  2 +-
- 3 files changed, 37 insertions(+), 45 deletions(-)
+ 3 files changed, 58 insertions(+), 45 deletions(-)
 
 diff --git a/zconf-ng.h.in b/zconf-ng.h.in
-index 73845ee..ebeeb84 100644
+index 5d0928d..b853ee6 100644
 --- a/zconf-ng.h.in
 +++ b/zconf-ng.h.in
-@@ -25,6 +25,10 @@
+@@ -25,6 +25,13 @@
  #  endif
  #endif
  
++/* Clang macro for detecting declspec support
++ * https://clang.llvm.org/docs/LanguageExtensions.html#has-declspec-attribute
++ */
 +#ifndef __has_declspec_attribute
 +#  define __has_declspec_attribute(x) 0
 +#endif
@@ -26,7 +29,7 @@ index 73845ee..ebeeb84 100644
  /* Maximum value for memLevel in deflateInit2 */
  #ifndef MAX_MEM_LEVEL
  #  define MAX_MEM_LEVEL 9
-@@ -55,30 +59,22 @@
+@@ -55,32 +62,31 @@
                          /* Type declarations */
  
  
@@ -41,8 +44,11 @@ index 73845ee..ebeeb84 100644
 -#      else
 -#        define ZEXTERN extern __declspec(dllimport)
 -#      endif
++/* If building or using zlib as a DLL, define ZLIB_DLL.
++ * This is not mandatory, but it offers a little performance increase.
++ */
 +#ifdef ZLIB_DLL
-+#  if defined(WIN32) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
++#  if (defined(WIN32) && (!defined(__BORLANDC__) || (__BORLANDC__ >= 0x500))) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
 +#    ifdef ZLIB_INTERNAL
 +#      define ZEXTERN extern __declspec(dllexport)
 +#    else
@@ -60,25 +66,35 @@ index 73845ee..ebeeb84 100644
 -#    define ZEXPORT WINAPI
 -#    define ZEXPORTVA WINAPIV
  #  endif
-+#endif  /* ZLIB_DLL */
-+
-+#ifdef ZLIB_WINAPI
+ #endif
+ 
++/* If building or using zlib with the WINAPI/WINAPIV calling convention,
++ * define ZLIB_WINAPI.
++ * Caution: the standard ZLIB1.DLL is NOT compiled using ZLIB_WINAPI.
++ */
++#if (defined(WINDOWS) || defined(WIN32)) && defined(ZLIB_WINAPI)
 +#  include <windows.h>
 +   /* No need for _export, use ZLIB.DEF instead. */
 +   /* For complete Windows compatibility, use WINAPI, not __stdcall. */
 +#  define ZEXPORT WINAPI
 +#  define ZEXPORTVA WINAPIV
- #endif
- 
++#endif
++
  #ifndef ZEXTERN
+ #  define ZEXTERN extern
+ #endif
 diff --git a/zconf.h.in b/zconf.h.in
-index 8f741c4..d7cbd13 100644
+index 79e4cc4..38a00a6 100644
 --- a/zconf.h.in
 +++ b/zconf.h.in
-@@ -25,6 +25,10 @@
+@@ -25,6 +25,14 @@
  #  endif
  #endif
  
++/* Clang macro for detecting declspec support
++ * https://clang.llvm.org/docs/LanguageExtensions.html#has-declspec-attribute
++ */
++
 +#ifndef __has_declspec_attribute
 +#  define __has_declspec_attribute(x) 0
 +#endif
@@ -86,7 +102,7 @@ index 8f741c4..d7cbd13 100644
  /* Maximum value for memLevel in deflateInit2 */
  #ifndef MAX_MEM_LEVEL
  #  define MAX_MEM_LEVEL 9
-@@ -55,30 +59,22 @@
+@@ -55,32 +63,31 @@
                          /* Type declarations */
  
  
@@ -101,8 +117,11 @@ index 8f741c4..d7cbd13 100644
 -#      else
 -#        define ZEXTERN extern __declspec(dllimport)
 -#      endif
++/* If building or using zlib as a DLL, define ZLIB_DLL.
++ * This is not mandatory, but it offers a little performance increase.
++ */
 +#ifdef ZLIB_DLL
-+#  if defined(WIN32) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
++#  if (defined(WIN32) && (!defined(__BORLANDC__) || (__BORLANDC__ >= 0x500))) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
 +#    ifdef ZLIB_INTERNAL
 +#      define ZEXTERN extern __declspec(dllexport)
 +#    else
@@ -120,23 +139,29 @@ index 8f741c4..d7cbd13 100644
 -#    define ZEXPORT WINAPI
 -#    define ZEXPORTVA WINAPIV
  #  endif
-+#endif  /* ZLIB_DLL */
-+
-+#ifdef ZLIB_WINAPI
+ #endif
+ 
++/* If building or using zlib with the WINAPI/WINAPIV calling convention,
++ * define ZLIB_WINAPI.
++ * Caution: the standard ZLIB1.DLL is NOT compiled using ZLIB_WINAPI.
++ */
++#if (defined(WINDOWS) || defined(WIN32)) && defined(ZLIB_WINAPI)
 +#  include <windows.h>
 +   /* No need for _export, use ZLIB.DEF instead. */
 +   /* For complete Windows compatibility, use WINAPI, not __stdcall. */
 +#  define ZEXPORT WINAPI
 +#  define ZEXPORTVA WINAPIV
- #endif
- 
++#endif
++
  #ifndef ZEXTERN
+ #  define ZEXTERN extern
+ #endif
 diff --git a/zutil.h b/zutil.h
-index 4889c21..73fa0a3 100644
+index f9cf3ff..97f2852 100644
 --- a/zutil.h
 +++ b/zutil.h
-@@ -208,7 +208,7 @@ void ZLIB_INTERNAL   zcfree(void *opaque, void *ptr);
- #  endif
+@@ -238,7 +238,7 @@ void ZLIB_INTERNAL   zng_cfree(void *opaque, void *ptr);
+ #    define PREFETCH_RW(addr)    addr
  #endif /* (un)likely */
  
 -#if defined(_MSC_VER)
@@ -145,5 +170,5 @@ index 4889c21..73fa0a3 100644
  #else
  #if defined(__GNUC__)
 -- 
-2.19.0.windows.1
+2.21.0.windows.1
 
