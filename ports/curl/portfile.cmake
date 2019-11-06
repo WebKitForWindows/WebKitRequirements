@@ -13,6 +13,8 @@ vcpkg_download_distfile(ARCHIVE
 # Patches
 set(CURL_PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    # Remove after https://github.com/curl/curl/pull/4557 lands in a release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-connecache-fix-multi-thread-use-of-shared-connection-cache.patch
 )
 
 # Extract archive
