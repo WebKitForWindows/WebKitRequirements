@@ -1,18 +1,19 @@
 include(vcpkg_common_functions)
 
-set(HARFBUZZ_VERSION 2.5.3)
+set(HARFBUZZ_VERSION 2.6.4)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${HARFBUZZ_VERSION}/harfbuzz-${HARFBUZZ_VERSION}.tar.xz"
     FILENAME "harfbuzz-${HARFBUZZ_VERSION}.tar.xz"
-    SHA512 a2e6cedbe0e505fa31b540e0d0bc6c0b07080bd39879c27e04d351103e21201d75a809dd2fad559bf994b82b311f67ad85778cbbfb670d7e2580beafa09e93ff
+    SHA512 d8664bb64fda11ff7646693070637e3827f8b3d1de50e11ecf108ce4d19c878b26b2ba4cff278da6e6cc0cb431e1630d9eaa7c32a9bebb9655a7aa8dabf7114f
 )
 
 # Patches
 set(HARFBUZZ_PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-harfbuzz-icu-library.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-cmake-Add-harfbuzz-icu-library.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Use-find_package-for-ICU.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Adjust-CMake-for-vcpkg.patch
 )
 
 # Extract archive
