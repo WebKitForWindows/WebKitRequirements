@@ -29,7 +29,7 @@ if (!$ouput) {
       $suffix = 'Win32';
     }
   } else {
-
+    Write-Error ('Unknown triplet {0}' -f $libraries);
   }
 
   $output = ('WebKitRequirements{0}.zip' -f $suffix);
