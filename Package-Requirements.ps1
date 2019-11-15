@@ -7,12 +7,33 @@
   The filename to output to. Defaults to 'WinCairoRequirements.zip'.
 #>
 
-Param(
+param(
+  [Parameter(Mandatory)]
+  [string]$triplet,
   [Parameter()]
-  [string] $triplet = 'x64-windows-webkit',
-  [Parameter()]
-  [string] $output = 'WinCairoRequirements.zip'
+  [string]$output
 )
 
+$ErrorActionPreference = 'Stop';
+
+if (!$ouput) {
+  $tripletSplit = $triplet -split '-',3;
+  $arch = $tripletSplit[0];
+  $platform = $tripletSplit[1];
+  $linkage = $tripletSplit[2];
+
+  if ($platform -eq 'windows') {
+    if ($arch -eq 'x64') {
+      $suffix = 'Win64';
+    } else {
+      $suffix = 'Win32';
+    }
+  } else {
+
+  }
+
+  $output = ('WebKitRequirements{0}.zip' -f $suffix);
+}
+
 Write-Host ('Creating archive {0}' -f $output)
-Compress-7Zip -ArchiveFileName $output -Path ('{0}/installed/{1}' -f $PSScriptRoot, $triplet)
+Compress-7Zip -ArchiveFileName $output -Path ('{0}/installed/{1}' -f $PSScriptRoot,$triplet)
