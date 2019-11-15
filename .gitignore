@@ -1,3 +1,8 @@
+# drone exec files
+.env
+.secrets
+.drone.yml
+
 # Ignore vcpkg paths
 buildtrees
 downloads
