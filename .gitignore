@@ -14,3 +14,6 @@ packages
 .vcpkg-root
 scripts
 vcpkg.exe
+
+# Packaging files
+*.zip
