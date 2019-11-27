@@ -15,6 +15,8 @@ set(CURL_PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
     # Remove after https://github.com/curl/curl/pull/4557 lands in a release
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-connecache-fix-multi-thread-use-of-shared-connection-cache.patch
+    # Remove after https://github.com/curl/curl/pull/4583 lands in a release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-7.67.0-multi-remove-handle-use-after-free.patch
 )
 
 # Extract archive
