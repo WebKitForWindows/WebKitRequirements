@@ -26,7 +26,7 @@
 | [libxml2](http://xmlsoft.org/) | 2.9.10 | 10-30-2019 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.34 | 10-30-2019 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.37 | 04-15-2019 |
-| [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.0.3 | 09-04-2019 |
+| [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.0.4 | 12-31-2019 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.1.0 | 01-06-2020 |
 | [openjpeg](https://www.openjpeg.org/) | 2.3.1 | 04-02-2019 |
 | [sqlite](http://sqlite.org) | 3.30.1 | 10-11-2019 |
