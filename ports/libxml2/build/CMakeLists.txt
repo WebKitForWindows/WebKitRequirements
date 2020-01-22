@@ -1,7 +1,7 @@
 # Simplified libxml2 CMake file
 #
 # This CMake implementation just does the minimum to build 
-# WinCairoRequirements and does not handle all the things possible when using
+# WebKitRequirements and does not handle all the things possible when using
 # the Makefile directly.
 #
 # Features missing:

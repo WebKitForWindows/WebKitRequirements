@@ -1,6 +1,6 @@
 # Creating a release
 
-The WinCairoRequirements repository uses GitHub releases to host a distribution
+The WebKitRequirements repository uses GitHub releases to host a distribution
 which are then downloaded by scripts contained in the WebKit repository. By
 default the latest release will be downloaded when doing a WebKit build. Each
 release corresponds to a tag within the git repository.
@@ -27,7 +27,7 @@ Once the tag is pushed a release can be created within GitHub.
 
 ## Continuous Integration
 
-The WinCairoRequirements repository uses [Drone](https://drone.io) to build the
+The WebKitRequirements repository uses [Drone](https://drone.io) to build the
 release when a tag is pushed. It will create a GitHub release associated with
 the tag and create the distribution for 32 and 64-bit WinCairo builds.
 
@@ -36,11 +36,10 @@ the tag and create the distribution for 32 and 64-bit WinCairo builds.
 The repository contains a number of scripts to create a distribution. These are
 used to build locally consistently.
 
-All the scripts take a `triplet` value which specifies the toolchain. By
-default the `x64-windows-webkit` toolchain is used. For building 
-WinCairoRequirements two toolchain files were created because there are some
-libraries that need to be built statically even when a dynamic build is wanted.
-Only the `x64-windows-webkit` toolchain is supported at this time.
+All the scripts take a `triplet` value which specifies the toolchain. For
+building WebKitRequirements two toolchain files were created because there are
+some libraries that need to be built statically even when a dynamic build is
+wanted.
 
 ## Install script
 
@@ -64,7 +63,7 @@ accordingly.
 ## Command listing
 
 ```
-& Install-Requirements.ps1
+& Install-Requirements.ps1 -triplet x64-windows-webkit
 
 # TODO Remove cflite from distribution
 .\vcpkg.exe install cflite --triplet x64-windows-webkit

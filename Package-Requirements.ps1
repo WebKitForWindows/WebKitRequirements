@@ -2,9 +2,10 @@
   .Synopsis
   Packages the requirements into a zip file.
   .Parameter Triplet
-  The vcpkg triplet to use. Defaults to 'x64-windows-webkit'
+  The vcpkg triplet to use.
   .Parameter Output
-  The filename to output to. Defaults to 'WinCairoRequirements.zip'.
+  The filename to output to. Defaults to the form
+  `WebKitRequirements${Platform}.zip`.
 #>
 
 param(
