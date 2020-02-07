@@ -13,7 +13,7 @@ cmake_minimum_required(VERSION 3.7)
 
 project(xml2)
 
-set(VERSION 1.1.32)
+set(VERSION 1.1.34)
 set(LIBXSLT_VERSION_NUMBER 10132)
 
 option(WITH_TRIO "Enable TRIO string manipulator" OFF)
