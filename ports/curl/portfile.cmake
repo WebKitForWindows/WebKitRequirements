@@ -15,6 +15,8 @@ set(CURL_PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
     # Remove after https://github.com/curl/curl/pull/4784 lands in a release
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-ConnectionExists-respect-the-max_concurrent_streams-limits.patch
+    # Remove after https://github.com/curl/curl/pull/4858 lands in a release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-multi_done-if-multiplexed-make-conn-data-point-to-another-transfer.patch
 )
 
 # Extract archive
