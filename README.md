@@ -18,7 +18,7 @@
 | [icu](http://site.icu-project.org) | 63.1 | 10-15-2018 |
 | [zlib](https://github.com/zlib-ng/zlib-ng) | N/A | 10-26-2019 |
 | [brotli](https://github.com/google/brotli) | 1.0.7 | 10-23-2018 |
-| [libressl](https://www.libressl.org) | 2.9.2 | 05-20-2019 |
+| [libressl](https://www.libressl.org) | 3.0.2 | 10-19-2019 |
 | [nghttp2](https://nghttp2.org) | 1.40.0 | 11-15-2019 |
 | [curl](https://curl.haxx.se) | 7.68.0 | 01-07-2020 |
 | [libxml2](http://xmlsoft.org/) | 2.9.10 | 10-30-2019 |
