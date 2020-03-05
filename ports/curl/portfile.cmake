@@ -1,22 +1,20 @@
 include(vcpkg_common_functions)
 
-set(CURL_VERSION 7.68.0)
+set(CURL_VERSION 7.69.0)
 string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${CURL_TAG}/curl-${CURL_VERSION}.zip"
     FILENAME "curl-${CURL_VERSION}.zip"
-    SHA512 a0c65f0a7657c95a673ce03f88c7a7db3c9362bfe495208f952676db9a4e438b3e5db41cb29b16d00cbbc923734ef894c03453d698a868417a3344571d01e2c8
+    SHA512 187d7db7acb814dcbcbfea047feec46a8640bb4c9b0a4e18e3d7d6c07001d003a26eb7074ab05aade78609beca0628ac9d06f252456725144f9fbe6dc575552d
 )
 
 # Patches
 set(CURL_PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    # Remove after https://github.com/curl/curl/pull/4784 lands in a release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-ConnectionExists-respect-the-max_concurrent_streams-limits.patch
-    # Remove after https://github.com/curl/curl/pull/4858 lands in a release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-multi_done-if-multiplexed-make-conn-data-point-to-another-transfer.patch
+    # Revert after https://github.com/curl/curl/pull/5045 lands in a release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Revert-force-drain-on-unpause.patch
 )
 
 # Extract archive
