@@ -1,20 +1,18 @@
 include(vcpkg_common_functions)
 
-set(CURL_VERSION 7.69.0)
+set(CURL_VERSION 7.69.1)
 string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${CURL_TAG}/curl-${CURL_VERSION}.zip"
     FILENAME "curl-${CURL_VERSION}.zip"
-    SHA512 187d7db7acb814dcbcbfea047feec46a8640bb4c9b0a4e18e3d7d6c07001d003a26eb7074ab05aade78609beca0628ac9d06f252456725144f9fbe6dc575552d
+    SHA512 6f655f73477d8d82d4ca4c0b6c110f8735eafa5ff1f5f0eaaa27cdbd293d708b53cf8c793cab14a178c262a50b5834c11585f44cdf2a84f18c4f089a118671e9
 )
 
 # Patches
 set(CURL_PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    # Revert after https://github.com/curl/curl/pull/5045 lands in a release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Revert-force-drain-on-unpause.patch
 )
 
 # Extract archive
