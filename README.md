@@ -1,5 +1,5 @@
 # WebKitRequirements
-> Third party packages required for build the WinCairo port of WebKit.
+> Third party packages required for building the open source WebKit port for Windows.
 
 ## Building
 
