@@ -47,16 +47,9 @@ The `Install-Requirements.ps1` script is a wrapper around `vcpkg` which will
 invoke `vcpkg install` with a list of requirements. The requirements are
 defined in a .json file which is nothing more than a list of port names.
 
-## Renaming bin/lib
-
-The WebKit Windows port assumes that the bin and lib directory both contain a
-suffix for whether it is a 64-bit or 32-bit build. The
-`Rename-WithBitSuffix.ps1` script will rename according to the triplet passed
-in.
-
 ## Creating the zip
 
-The `Package-Requirements.ps1` script creates a zip file containing the
+The `Release-Requirements.ps1` script creates a zip file containing the
 dependencies. If a different filename is required then set the `-Output` flag
 accordingly.
 
@@ -68,8 +61,5 @@ accordingly.
 # TODO Remove cflite from distribution
 .\vcpkg.exe install cflite --triplet x64-windows-webkit
 
-& Rename-WithBitSuffix.ps1
-& Delete-PthreadHeaders.ps1
-
-& Package-Requirements.ps1
+& Release-Requirements.ps1 -triplet x64-windows-webkit
 ```
