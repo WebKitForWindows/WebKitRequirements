@@ -1,12 +1,15 @@
 include(vcpkg_common_functions)
 
-set(ICU_VERSION 63.1)
-string(REPLACE "." "_" ICU_TAG ${ICU_VERSION})
+set(ICU_VERSION_MAJOR 63)
+set(ICU_VERSION_MINOR 1)
+set(VERSION "${ICU_VERSION_MAJOR}.${ICU_VERSION_MINOR}")
+set(VERSION2 "${ICU_VERSION_MAJOR}_${ICU_VERSION_MINOR}")
+set(VERSION3 "${ICU_VERSION_MAJOR}-${ICU_VERSION_MINOR}")
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "http://download.icu-project.org/files/icu4c/${ICU_VERSION}/icu4c-${ICU_TAG}-src.tgz"
-    FILENAME "icu4c-${ICU_TAG}-src.tgz"
+    URLS "https://github.com/unicode-org/icu/releases/download/release-${VERSION3}/icu4c-${VERSION2}-src.tgz"
+    FILENAME "icu4c-${VERSION2}-src.tgz"
     SHA512 9ab407ed840a00cdda7470dcc4c40299a125ad246ae4d019c4b1ede54781157fd63af015a8228cd95dbc47e4d15a0932b2c657489046a19788e5e8266eac079c
 )
 
@@ -19,7 +22,6 @@ set(ICU_PATCHES
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${ICU_VERSION}
     PATCHES ${ICU_PATCHES}
 )
 
@@ -102,4 +104,4 @@ endif ()
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/icu RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/icu/version "${ICU_VERSION}.0")
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/icu/version "${ICU_VERSION_MAJOR}.${ICU_VERSION_MINOR}.0")
