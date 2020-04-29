@@ -1,0 +1,31 @@
+From 9bc2c75e388fbb5e6e694ef4471bd63521c966ae Mon Sep 17 00:00:00 2001
+From: Viktor Szakats <vszakats@users.noreply.github.com>
+Date: Fri, 15 Nov 2019 21:50:43 +0100
+Subject: [PATCH] lib/CMakeLists.txt: Make hard-coded static lib suffix
+ optional
+
+It can be set via the `STATIC_LIB_SUFFIX` variable.
+
+This fixes every existing dependent project that relied on the name
+having no suffix and thus capable of using either a static or shared
+flavour depending on which one is present on this or how the linker
+is configured.
+
+Ref: https://github.com/nghttp2/nghttp2/pull/1394
+---
+ lib/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index 4e3f5da0f..4dc2fcdba 100644
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -62,7 +62,7 @@ if(HAVE_CUNIT OR ENABLE_STATIC_LIB)
+   set_target_properties(nghttp2_static PROPERTIES
+     COMPILE_FLAGS "${WARNCFLAGS}"
+     VERSION ${LT_VERSION} SOVERSION ${LT_SOVERSION}
+-    ARCHIVE_OUTPUT_NAME nghttp2_static
++    ARCHIVE_OUTPUT_NAME nghttp2${STATIC_LIB_SUFFIX}
+   )
+   target_compile_definitions(nghttp2_static PUBLIC "-DNGHTTP2_STATICLIB")
+   if(ENABLE_STATIC_LIB)

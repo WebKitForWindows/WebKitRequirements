@@ -9,6 +9,14 @@ vcpkg_download_distfile(ARCHIVE
     SHA512 94e61c9bf94cd699433fb414d40a1136aef179ea8b9b1f4816c3e67012eaac7094cdebc66f2e050c912c5acba19ee0d451dce20abf778c160b8603fbb9638f67
 )
 
+# Patches
+set(NGHTTP2_PATCHES
+    # Remove after https://github.com/nghttp2/nghttp2/pull/1418 lands in a release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Make_hard-coded_static_lib_suffix.patch
+    # Remove after https://github.com/nghttp2/nghttp2/pull/1444 lands in a release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-fix-recv-window-flow-control-issue.patch
+)
+
 # Extract archive
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
