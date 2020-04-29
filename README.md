@@ -30,7 +30,7 @@
 | [sqlite](http://sqlite.org) | 3.31.1 | 01-27-2020 |
 | [freetype](https://www.freetype.org) | 2.10.1 | 07-01-2019 |
 | [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.6.4 | 10-29-2019 |
-| [pixman](http://www.pixman.org) | 0.38.4 | 04-10-2019 |
+| [pixman](http://www.pixman.org) | 0.40.0 | 04-19-2020 |
 | [cairo](https://www.cairographics.org) | 1.16.0 | 10-18-2018 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.0 | 04-16-2019 |
 | [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 07-12-2012 |
