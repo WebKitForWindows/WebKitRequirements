@@ -1,6 +1,6 @@
-From 34d4523fa6efa64e63404c82f5c352903c06157e Mon Sep 17 00:00:00 2001
-From: Don <don.j.olmstead@gmail.com>
-Date: Wed, 24 Apr 2019 13:47:38 -0700
+From 598fa552b35df72cc568253974b874197c89c21b Mon Sep 17 00:00:00 2001
+From: Don Olmstead <don.olmstead@sony.com>
+Date: Wed, 29 Apr 2020 11:23:15 -0700
 Subject: [PATCH 1/2] Remove postfix from archive name
 
 CMake can't detect a shared build on Windows when there is a postfix version number.
@@ -11,44 +11,44 @@ CMake can't detect a shared build on Windows when there is a postfix version num
  3 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/crypto/CMakeLists.txt b/crypto/CMakeLists.txt
-index 0d65874..8d905e9 100644
+index e6cfc65..9fb6000 100644
 --- a/crypto/CMakeLists.txt
 +++ b/crypto/CMakeLists.txt
-@@ -966,7 +966,7 @@ if (BUILD_SHARED_LIBS)
- 	endif()
- 	set_target_properties(crypto PROPERTIES
- 		OUTPUT_NAME crypto${CRYPTO_POSTFIX}
--		ARCHIVE_OUTPUT_NAME crypto${CRYPTO_POSTFIX})
-+		ARCHIVE_OUTPUT_NAME crypto)
- 	set_target_properties(crypto PROPERTIES VERSION
- 		${CRYPTO_VERSION} SOVERSION ${CRYPTO_MAJOR_VERSION})
+@@ -990,7 +990,7 @@ if (WIN32)
  endif()
+ set_target_properties(crypto PROPERTIES
+ 	OUTPUT_NAME crypto${CRYPTO_POSTFIX}
+-	ARCHIVE_OUTPUT_NAME crypto${CRYPTO_POSTFIX})
++	ARCHIVE_OUTPUT_NAME crypto)
+ set_target_properties(crypto PROPERTIES VERSION
+ 	${CRYPTO_VERSION} SOVERSION ${CRYPTO_MAJOR_VERSION})
+ 
 diff --git a/ssl/CMakeLists.txt b/ssl/CMakeLists.txt
-index 5c6460f..0904b1e 100644
+index 39f8192..b7c80c3 100644
 --- a/ssl/CMakeLists.txt
 +++ b/ssl/CMakeLists.txt
-@@ -64,7 +64,7 @@ if (BUILD_SHARED_LIBS)
- 	endif()
- 	set_target_properties(ssl PROPERTIES
- 		OUTPUT_NAME ssl${SSL_POSTFIX}
--		ARCHIVE_OUTPUT_NAME ssl${SSL_POSTFIX})
-+		ARCHIVE_OUTPUT_NAME ssl)
- 	set_target_properties(ssl PROPERTIES VERSION ${SSL_VERSION}
- 		SOVERSION ${SSL_MAJOR_VERSION})
+@@ -67,7 +67,7 @@ if (WIN32)
  endif()
+ set_target_properties(ssl PROPERTIES
+ 	OUTPUT_NAME ssl${SSL_POSTFIX}
+-	ARCHIVE_OUTPUT_NAME ssl${SSL_POSTFIX})
++	ARCHIVE_OUTPUT_NAME ssl)
+ set_target_properties(ssl PROPERTIES VERSION ${SSL_VERSION}
+ 	SOVERSION ${SSL_MAJOR_VERSION})
+ 
 diff --git a/tls/CMakeLists.txt b/tls/CMakeLists.txt
-index 94803ce..d2caeff 100644
+index f64b1c3..fa22a00 100644
 --- a/tls/CMakeLists.txt
 +++ b/tls/CMakeLists.txt
-@@ -45,7 +45,7 @@ if (BUILD_SHARED_LIBS)
- 	endif()
- 	set_target_properties(tls PROPERTIES
- 		OUTPUT_NAME tls${TLS_POSTFIX}
--		ARCHIVE_OUTPUT_NAME tls${TLS_POSTFIX})
-+		ARCHIVE_OUTPUT_NAME tls)
- 	set_target_properties(tls PROPERTIES VERSION ${TLS_VERSION}
- 		SOVERSION ${TLS_MAJOR_VERSION})
+@@ -44,7 +44,7 @@ if (WIN32)
  endif()
+ set_target_properties(tls PROPERTIES
+ 	OUTPUT_NAME tls${TLS_POSTFIX}
+-	ARCHIVE_OUTPUT_NAME tls${TLS_POSTFIX})
++	ARCHIVE_OUTPUT_NAME tls)
+ set_target_properties(tls PROPERTIES VERSION ${TLS_VERSION}
+ 	SOVERSION ${TLS_MAJOR_VERSION})
+ 
 -- 
-2.19.1.windows.1
+2.25.0.windows.1
 
