@@ -1,21 +1,21 @@
-From 8c15aaa16c86dbadac9f7df039baefa36ece3620 Mon Sep 17 00:00:00 2001
+From 3d273731325ed8b93578654406c9ea6080f8ef89 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
-Date: Wed, 6 Nov 2019 11:24:47 -0800
+Date: Wed, 29 Apr 2020 13:31:15 -0700
 Subject: [PATCH 2/2] Add __has_declspec_attribute
 
 Clang contains __has_declspec_attribute for MSVC compatibility. This can be
 used to determine whether __declspec is available.
 ---
- zconf-ng.h.in | 50 ++++++++++++++++++++++++++++----------------------
+ zconf-ng.h.in | 51 +++++++++++++++++++++++++++++----------------------
  zconf.h.in    | 51 +++++++++++++++++++++++++++++----------------------
  zutil.h       |  2 +-
- 3 files changed, 58 insertions(+), 45 deletions(-)
+ 3 files changed, 59 insertions(+), 45 deletions(-)
 
 diff --git a/zconf-ng.h.in b/zconf-ng.h.in
-index 5d0928d..b853ee6 100644
+index 49075b7..a469a1c 100644
 --- a/zconf-ng.h.in
 +++ b/zconf-ng.h.in
-@@ -25,6 +25,13 @@
+@@ -23,6 +23,13 @@
  #  endif
  #endif
  
@@ -29,7 +29,7 @@ index 5d0928d..b853ee6 100644
  /* Maximum value for memLevel in deflateInit2 */
  #ifndef MAX_MEM_LEVEL
  #  define MAX_MEM_LEVEL 9
-@@ -55,32 +62,31 @@
+@@ -53,29 +60,29 @@
                          /* Type declarations */
  
  
@@ -65,36 +65,33 @@ index 5d0928d..b853ee6 100644
 -     /* For complete Windows compatibility, use WINAPI, not __stdcall. */
 -#    define ZEXPORT WINAPI
 -#    define ZEXPORTVA WINAPIV
- #  endif
- #endif
- 
++#  endif
++#endif  /* ZLIB_DLL */
++
 +/* If building or using zlib with the WINAPI/WINAPIV calling convention,
 + * define ZLIB_WINAPI.
 + * Caution: the standard ZLIB1.DLL is NOT compiled using ZLIB_WINAPI.
 + */
-+#if (defined(WINDOWS) || defined(WIN32)) && defined(ZLIB_WINAPI)
++#if defined(WINDOWS) || defined(WIN32) && defined(ZLIB_WINAPI)
 +#  include <windows.h>
 +   /* No need for _export, use ZLIB.DEF instead. */
 +   /* For complete Windows compatibility, use WINAPI, not __stdcall. */
 +#  define ZEXPORT WINAPI
 +#  define ZEXPORTVA WINAPIV
-+#endif
-+
- #ifndef ZEXTERN
- #  define ZEXTERN extern
+ #  endif
  #endif
+ 
 diff --git a/zconf.h.in b/zconf.h.in
-index 79e4cc4..38a00a6 100644
+index f890fcd..1489477 100644
 --- a/zconf.h.in
 +++ b/zconf.h.in
-@@ -25,6 +25,14 @@
+@@ -23,6 +23,13 @@
  #  endif
  #endif
  
 +/* Clang macro for detecting declspec support
 + * https://clang.llvm.org/docs/LanguageExtensions.html#has-declspec-attribute
 + */
-+
 +#ifndef __has_declspec_attribute
 +#  define __has_declspec_attribute(x) 0
 +#endif
@@ -102,9 +99,9 @@ index 79e4cc4..38a00a6 100644
  /* Maximum value for memLevel in deflateInit2 */
  #ifndef MAX_MEM_LEVEL
  #  define MAX_MEM_LEVEL 9
-@@ -55,32 +63,31 @@
-                         /* Type declarations */
- 
+@@ -57,29 +64,29 @@
+ #  define OF(args)  args
+ #endif
  
 -#if defined(WINDOWS) || defined(WIN32)
 -   /* If building or using zlib as a DLL, define ZLIB_DLL.
@@ -138,37 +135,35 @@ index 79e4cc4..38a00a6 100644
 -     /* For complete Windows compatibility, use WINAPI, not __stdcall. */
 -#    define ZEXPORT WINAPI
 -#    define ZEXPORTVA WINAPIV
- #  endif
- #endif
- 
++#  endif
++#endif  /* ZLIB_DLL */
++
 +/* If building or using zlib with the WINAPI/WINAPIV calling convention,
 + * define ZLIB_WINAPI.
 + * Caution: the standard ZLIB1.DLL is NOT compiled using ZLIB_WINAPI.
 + */
-+#if (defined(WINDOWS) || defined(WIN32)) && defined(ZLIB_WINAPI)
++#if defined(WINDOWS) || defined(WIN32) && defined(ZLIB_WINAPI)
 +#  include <windows.h>
 +   /* No need for _export, use ZLIB.DEF instead. */
 +   /* For complete Windows compatibility, use WINAPI, not __stdcall. */
 +#  define ZEXPORT WINAPI
 +#  define ZEXPORTVA WINAPIV
-+#endif
-+
- #ifndef ZEXTERN
- #  define ZEXTERN extern
+ #  endif
  #endif
+ 
 diff --git a/zutil.h b/zutil.h
-index f9cf3ff..97f2852 100644
+index 8e9d056..4a456fb 100644
 --- a/zutil.h
 +++ b/zutil.h
-@@ -238,7 +238,7 @@ void ZLIB_INTERNAL   zng_cfree(void *opaque, void *ptr);
- #    define PREFETCH_RW(addr)    addr
+@@ -236,7 +236,7 @@ void ZLIB_INTERNAL   zng_cfree(void *opaque, void *ptr);
+ #  define PREFETCH_RW(addr)     addr
  #endif /* (un)likely */
  
 -#if defined(_MSC_VER)
 +#if defined(_MSC_VER) || __has_declspec_attribute(align)
- #define ALIGNED_(x) __declspec(align(x))
+ #  define ALIGNED_(x) __declspec(align(x))
  #else
- #if defined(__GNUC__)
+ #  if defined(__GNUC__)
 -- 
-2.21.0.windows.1
+2.25.0.windows.1
 
