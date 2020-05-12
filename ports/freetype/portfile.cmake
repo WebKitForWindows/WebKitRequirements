@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(FREETYPE_VERSION 2.10.1)
+set(FREETYPE_VERSION 2.10.2)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://download.savannah.gnu.org/releases/freetype/freetype-${FREETYPE_VERSION}.tar.gz"
     FILENAME "freetype-${FREETYPE_VERSION}.tar.gz"
-    SHA512 346c682744bcf06ca9d71265c108a242ad7d78443eff20142454b72eef47ba6d76671a6e931ed4c4c9091dd8f8515ebdd71202d94b073d77931345ff93cfeaa7
+    SHA512 cbb1b6bb7f99f6ecb473ce6027ec5f2868af939f793dd7b083b23e9823e18c4bcbac0b92483ebe70804ad7f4ef5bf4ea5c6b476e7f631a3e6a1b3e904a41e1a5
 )
 
 # Patches
@@ -23,14 +23,23 @@ vcpkg_extract_source_archive_ex(
 )
 
 # Run CMake build
+set(BUILD_OPTIONS
+    -DFT_WITH_ZLIB=ON
+    -DFT_WITH_BZip2=OFF
+    -DFT_WITH_PNG=ON
+    -DFT_WITH_HarfBuzz=OFF
+)
+
+if (woff2 IN_LIST FEATURES)
+    message(STATUS "Enabling woff2")
+    set(BUILD_OPTIONS ${BUILD_OPTIONS} -DFT_WITH_BROTLI=ON)
+endif ()
+
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
     OPTIONS
-        -DFT_WITH_ZLIB=ON
-        -DFT_WITH_BZip2=OFF
-        -DFT_WITH_PNG=ON
-        -DFT_WITH_HarfBuzz=OFF
+        ${BUILD_OPTIONS}
     OPTIONS_DEBUG
         -DSKIP_INSTALL_HEADERS=ON
 )

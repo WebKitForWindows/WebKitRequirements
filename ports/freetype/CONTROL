@@ -1,5 +1,10 @@
 Source: freetype
-Version: 2.10.1
+Version: 2.10.2
 Build-Depends: zlib, libpng
 Description: |
   A library to render fonts.
+
+Feature: woff2
+Build-Depends: brotli
+Description: |
+  Enable WOFF2 font support.
