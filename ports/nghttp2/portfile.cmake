@@ -22,6 +22,7 @@ vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
     REF ${NGHTTP2_VERSION}
+    PATCHES ${NGHTTP2_PATCHES}
 )
 
 # Run CMake build
