@@ -29,7 +29,7 @@ index 49075b7..a469a1c 100644
  /* Maximum value for memLevel in deflateInit2 */
  #ifndef MAX_MEM_LEVEL
  #  define MAX_MEM_LEVEL 9
-@@ -53,29 +60,29 @@
+@@ -53,29 +60,28 @@
                          /* Type declarations */
  
  
@@ -78,7 +78,7 @@ index 49075b7..a469a1c 100644
 +   /* For complete Windows compatibility, use WINAPI, not __stdcall. */
 +#  define ZEXPORT WINAPI
 +#  define ZEXPORTVA WINAPIV
- #  endif
+-#  endif
  #endif
  
 diff --git a/zconf.h.in b/zconf.h.in
@@ -99,7 +99,7 @@ index f890fcd..1489477 100644
  /* Maximum value for memLevel in deflateInit2 */
  #ifndef MAX_MEM_LEVEL
  #  define MAX_MEM_LEVEL 9
-@@ -57,29 +64,29 @@
+@@ -57,29 +64,28 @@
  #  define OF(args)  args
  #endif
  
@@ -148,7 +148,7 @@ index f890fcd..1489477 100644
 +   /* For complete Windows compatibility, use WINAPI, not __stdcall. */
 +#  define ZEXPORT WINAPI
 +#  define ZEXPORTVA WINAPIV
- #  endif
+-#  endif
  #endif
  
 diff --git a/zutil.h b/zutil.h

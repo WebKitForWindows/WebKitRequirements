@@ -15,7 +15,7 @@ vcpkg_from_github(
     REPO zlib-ng/zlib-ng
     REF ${ZLIB_GIT_REF}
     SHA512 bd2af682a80fea01ab3f7d1843e1944da69a524fb983522716883f74efb430d1ceb578bab1c70b945715850ca5722896c84fdc886c2d4e736987e98139fac188
-    PATCHES ${PATCHES}
+    PATCHES ${ZLIB_PATCHES}
 )
 
 # Run CMake build
