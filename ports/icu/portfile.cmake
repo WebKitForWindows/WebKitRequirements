@@ -14,7 +14,7 @@ vcpkg_download_distfile(ARCHIVE
 )
 
 # Patches
-set(ICU_PATCHES
+set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-genccode-crashes-when-creating-assembly-files.patch
 )
 
@@ -22,7 +22,7 @@ set(ICU_PATCHES
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    PATCHES ${ICU_PATCHES}
+    PATCHES ${PATCHES}
 )
 
 # Add CMake sources

@@ -10,7 +10,7 @@ vcpkg_download_distfile(ARCHIVE
 )
 
 # Patches
-set(LIBRESSL_PATCHES
+set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-postfix-from-archive-name.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Disable-additional-warnings-for-Visual-Studio.patch
 )
@@ -20,7 +20,7 @@ vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
     REF ${VERSION}
-    PATCHES ${LIBRESSL_PATCHES}
+    PATCHES ${PATCHES}
 )
 
 # Run CMake build

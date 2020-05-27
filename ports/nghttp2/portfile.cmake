@@ -10,7 +10,7 @@ vcpkg_download_distfile(ARCHIVE
 )
 
 # Patches
-set(NGHTTP2_PATCHES
+set(PATCHES
     # Remove after https://github.com/nghttp2/nghttp2/pull/1418 lands in a release
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Make_hard-coded_static_lib_suffix.patch
     # Remove after https://github.com/nghttp2/nghttp2/pull/1444 lands in a release
@@ -22,7 +22,7 @@ vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
     REF ${VERSION}
-    PATCHES ${NGHTTP2_PATCHES}
+    PATCHES ${PATCHES}
 )
 
 # Run CMake build

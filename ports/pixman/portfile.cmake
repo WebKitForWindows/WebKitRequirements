@@ -10,7 +10,7 @@ vcpkg_download_distfile(ARCHIVE
 )
 
 # Patches
-set(PIXMAN_PATCHES
+set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-__has_declspec_attribute.patch
 )
 
@@ -19,7 +19,7 @@ vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
     REF ${VERSION}
-    PATCHES ${PIXMAN_PATCHES}
+    PATCHES ${PATCHES}
 )
 
 # Add CMake sources

@@ -10,7 +10,7 @@ vcpkg_download_distfile(ARCHIVE
 )
 
 # Patches
-set(LIBPNG_PATCHES
+set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Skip-install-symlink.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Do-not-append-static-to-library-name.patch
 )
@@ -20,7 +20,7 @@ vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
     REF ${VERSION}
-    PATCHES ${LIBPNG_PATCHES}
+    PATCHES ${PATCHES}
 )
 
 # Run CMake build

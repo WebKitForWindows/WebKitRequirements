@@ -10,7 +10,7 @@ vcpkg_download_distfile(ARCHIVE
 )
 
 # Patches
-set(BROTLI_PATCHES
+set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-static-target.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-__has_declspec_attribute.patch
 )
@@ -20,7 +20,7 @@ vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
     REF ${VERSION}
-    PATCHES ${BROTLI_PATCHES}
+    PATCHES ${PATCHES}
 )
 
 # Run CMake build

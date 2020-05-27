@@ -11,7 +11,7 @@ vcpkg_download_distfile(ARCHIVE
 )
 
 # Patches
-set(CURL_PATCHES
+set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
 )
 
@@ -20,7 +20,7 @@ vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
     REF ${VERSION}
-    PATCHES ${CURL_PATCHES}
+    PATCHES ${PATCHES}
 )
 
 # Run CMake build

@@ -16,7 +16,7 @@ vcpkg_download_distfile(ARCHIVE
 )
 
 # Patches
-set(CAIRO_PATCHES
+set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Rename-stat-to-stats.patch
 )
 
@@ -25,7 +25,7 @@ vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
     REF ${VERSION}
-    PATCHES ${CAIRO_PATCHES}
+    PATCHES ${PATCHES}
 )
 
 # Add CMake sources
