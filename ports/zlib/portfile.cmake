@@ -1,6 +1,6 @@
 include(vcpkg_common_functions)
 
-set(ZLIB_VERSION 1.2.11)
+set(VERSION 1.2.11)
 set(ZLIB_GIT_REF 641491adedec68079d728728a1e9b2c76c2fae1d)
 
 # Patches
@@ -35,4 +35,4 @@ vcpkg_copy_pdbs()
 
 # Prepare distribution
 file(INSTALL ${SOURCE_PATH}/LICENSE.md DESTINATION ${CURRENT_PACKAGES_DIR}/share/zlib RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/zlib/version "${ZLIB_VERSION}-${ZLIB_GIT_REF}")
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/zlib/version "${VERSION}-${ZLIB_GIT_REF}")

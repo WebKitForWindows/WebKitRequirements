@@ -1,7 +1,7 @@
 include(vcpkg_common_functions)
 
-set(CAIRO_VERSION 1.16.0)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/cairo-${CAIRO_VERSION})
+set(VERSION 1.16.0)
+set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/cairo-${VERSION})
 
 # Cairo uses even numbered minor numbers for releases and odd minor numbers for
 # development snapshots
@@ -10,8 +10,8 @@ set(RELEASE_DIR releases)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://cairographics.org/${RELEASE_DIR}/cairo-${CAIRO_VERSION}.tar.xz"
-    FILENAME "cairo-${CAIRO_VERSION}.tar.xz"
+    URLS "https://cairographics.org/${RELEASE_DIR}/cairo-${VERSION}.tar.xz"
+    FILENAME "cairo-${VERSION}.tar.xz"
     SHA512 9eb27c4cf01c0b8b56f2e15e651f6d4e52c99d0005875546405b64f1132aed12fbf84727273f493d84056a13105e065009d89e94a8bfaf2be2649e232b82377f
 )
 
@@ -24,7 +24,7 @@ set(CAIRO_PATCHES
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${CAIRO_VERSION}
+    REF ${VERSION}
     PATCHES ${CAIRO_PATCHES}
 )
 
@@ -54,4 +54,4 @@ vcpkg_copy_pdbs()
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/cairo RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/cairo/version ${CAIRO_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/cairo/version ${VERSION})

@@ -8,8 +8,8 @@ if(VCPKG_CMAKE_SYSTEM_NAME)
   return()
 endif()
 
-set(PTHREADS_VERSION 2.9.1)
-string(REPLACE "." "-" PTHREADS_TAG ${PTHREADS_VERSION})
+set(VERSION 2.9.1)
+string(REPLACE "." "-" PTHREADS_TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
@@ -22,7 +22,7 @@ vcpkg_download_distfile(ARCHIVE
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${PTHREADS_VERSION}
+    REF ${VERSION}
 )
 
 # Add CMake sources
@@ -62,4 +62,4 @@ file(INSTALL
     DESTINATION ${CURRENT_PACKAGES_DIR}/debug/lib/manual-link
     RENAME pthreads.lib
 )
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/pthreads/version ${PTHREADS_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/pthreads/version ${VERSION})

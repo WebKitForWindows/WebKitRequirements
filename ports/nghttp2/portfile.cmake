@@ -1,11 +1,11 @@
 include(vcpkg_common_functions)
 
-set(NGHTTP2_VERSION 1.40.0)
+set(VERSION 1.40.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/nghttp2/nghttp2/archive/v${NGHTTP2_VERSION}.zip"
-    FILENAME "nghttp2-${NGHTTP2_VERSION}.zip"
+    URLS "https://github.com/nghttp2/nghttp2/archive/v${VERSION}.zip"
+    FILENAME "nghttp2-${VERSION}.zip"
     SHA512 94e61c9bf94cd699433fb414d40a1136aef179ea8b9b1f4816c3e67012eaac7094cdebc66f2e050c912c5acba19ee0d451dce20abf778c160b8603fbb9638f67
 )
 
@@ -21,7 +21,7 @@ set(NGHTTP2_PATCHES
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${NGHTTP2_VERSION}
+    REF ${VERSION}
     PATCHES ${NGHTTP2_PATCHES}
 )
 
@@ -67,4 +67,4 @@ file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/share/man)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/share/doc)
 file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/nghttp2 RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/nghttp2/version ${NGHTTP2_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/nghttp2/version ${VERSION})

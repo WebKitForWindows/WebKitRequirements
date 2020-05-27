@@ -1,11 +1,11 @@
 include(vcpkg_common_functions)
 
-set(HARFBUZZ_VERSION 2.6.5)
+set(VERSION 2.6.5)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${HARFBUZZ_VERSION}/harfbuzz-${HARFBUZZ_VERSION}.tar.xz"
-    FILENAME "harfbuzz-${HARFBUZZ_VERSION}.tar.xz"
+    URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${VERSION}/harfbuzz-${VERSION}.tar.xz"
+    FILENAME "harfbuzz-${VERSION}.tar.xz"
     SHA512 ae66211f9b4233c1da4b22b703ab4912f684390294c5c88113e6c927d5aeda8960da3ff607a7c7be5968d9fbb5a95b1f6933070d0aab2aa442a3ec8a112cd16f
 )
 
@@ -19,7 +19,7 @@ set(HARFBUZZ_PATCHES
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${HARFBUZZ_VERSION}
+    REF ${VERSION}
     PATCHES ${HARFBUZZ_PATCHES}
 )
 
@@ -43,4 +43,4 @@ vcpkg_copy_pdbs()
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/harfbuzz RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/harfbuzz/version ${HARFBUZZ_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/harfbuzz/version ${VERSION})

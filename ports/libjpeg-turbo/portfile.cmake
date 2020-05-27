@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 include(${CMAKE_CURRENT_LIST_DIR}/vcpkg_acquire_gnuwin32_program.cmake)
 
-set(LIBJPEG_TURBO_VERSION 2.0.4)
+set(VERSION 2.0.4)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/${LIBJPEG_TURBO_VERSION}.zip"
-    FILENAME "libjpeg-turbo-${LIBJPEG_TURBO_VERSION}.zip"
+    URLS "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/${VERSION}.zip"
+    FILENAME "libjpeg-turbo-${VERSION}.zip"
     SHA512 4fdb6ff3b441925d3df4e7c4cc2c7d4cf0a5ddaf7a59a60099deb1822b6224af96cca48ccfcc8c1f7ea8ed22cedf074fc1bd494dc09acc0d9f5fc20d0ad38722
 )
 
@@ -19,7 +19,7 @@ set(LIBJPEG_TURBO_PATCHES
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${LIBJPEG_TURBO_VERSION}
+    REF ${VERSION}
     PATCHES ${LIBJPEG_TURBO_PATCHES}
 )
 
@@ -67,4 +67,4 @@ vcpkg_copy_pdbs()
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(INSTALL ${SOURCE_PATH}/LICENSE.md DESTINATION ${CURRENT_PACKAGES_DIR}/share/libjpeg-turbo RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/libjpeg-turbo/version ${LIBJPEG_TURBO_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/libjpeg-turbo/version ${VERSION})

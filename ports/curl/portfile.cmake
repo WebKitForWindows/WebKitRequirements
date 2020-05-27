@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(CURL_VERSION 7.70.0)
-string(REPLACE "." "_" CURL_TAG ${CURL_VERSION})
+set(VERSION 7.70.0)
+string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/curl/curl/releases/download/curl-${CURL_TAG}/curl-${CURL_VERSION}.zip"
-    FILENAME "curl-${CURL_VERSION}.zip"
+    URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
+    FILENAME "curl-${VERSION}.zip"
     SHA512 f0bad08c024d0a6e2b13373968e62f2fed5e08618391d94ac6bba946849dd5ec37819f1b158a5cce32e1c07904300970d31f6fc654adb0faec7d96fe8f5ba5b0
 )
 
@@ -19,7 +19,7 @@ set(CURL_PATCHES
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${CURL_VERSION}
+    REF ${VERSION}
     PATCHES ${CURL_PATCHES}
 )
 
@@ -118,4 +118,4 @@ vcpkg_copy_pdbs()
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/curl RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/curl/version ${CURL_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/curl/version ${VERSION})

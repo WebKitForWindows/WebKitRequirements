@@ -1,11 +1,11 @@
 include(vcpkg_common_functions)
 
-set(LIBXML2_VERSION 2.9.10)
+set(VERSION 2.9.10)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "http://xmlsoft.org/sources/libxml2-${LIBXML2_VERSION}.tar.gz"
-    FILENAME "libxml2-${LIBXML2_VERSION}.tar.gz"
+    URLS "http://xmlsoft.org/sources/libxml2-${VERSION}.tar.gz"
+    FILENAME "libxml2-${VERSION}.tar.gz"
     SHA512 0adfd12bfde89cbd6296ba6e66b6bed4edb814a74b4265bda34d95c41d9d92c696ee7adb0c737aaf9cc6e10426a31a35079b2a23d26c074e299858da12c072ed
 )
 
@@ -13,7 +13,7 @@ vcpkg_download_distfile(ARCHIVE
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${LIBXML2_VERSION}
+    REF ${VERSION}
 )
 
 # Add CMake sources
@@ -101,4 +101,4 @@ vcpkg_copy_pdbs()
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/libxml2 RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/libxml2/version ${LIBXML2_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/libxml2/version ${VERSION})

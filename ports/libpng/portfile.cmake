@@ -1,11 +1,11 @@
 include(vcpkg_common_functions)
 
-set(LIBPNG_VERSION 1.6.37)
+set(VERSION 1.6.37)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://downloads.sourceforge.net/project/libpng/libpng16/${LIBPNG_VERSION}/libpng-${LIBPNG_VERSION}.tar.gz"
-    FILENAME "libpng-${LIBPNG_VERSION}.tar.gz"
+    URLS "https://downloads.sourceforge.net/project/libpng/libpng16/${VERSION}/libpng-${VERSION}.tar.gz"
+    FILENAME "libpng-${VERSION}.tar.gz"
     SHA512 2ce2b855af307ca92a6e053f521f5d262c36eb836b4810cb53c809aa3ea2dcc08f834aee0ffd66137768a54397e28e92804534a74abb6fc9f6f3127f14c9c338
 )
 
@@ -19,7 +19,7 @@ set(LIBPNG_PATCHES
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${LIBPNG_VERSION}
+    REF ${VERSION}
     PATCHES ${LIBPNG_PATCHES}
 )
 
@@ -53,4 +53,4 @@ vcpkg_copy_pdbs()
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/libpng ${CURRENT_PACKAGES_DIR}/debug/lib/libpng)
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/libpng RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/libpng/version ${LIBPNG_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/libpng/version ${VERSION})

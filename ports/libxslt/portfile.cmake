@@ -1,11 +1,11 @@
 include(vcpkg_common_functions)
 
-set(LIBXSLT_VERSION 1.1.34)
+set(VERSION 1.1.34)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "http://xmlsoft.org/sources/libxslt-${LIBXSLT_VERSION}.tar.gz"
-    FILENAME "libxslt-${LIBXSLT_VERSION}.tar.gz"
+    URLS "http://xmlsoft.org/sources/libxslt-${VERSION}.tar.gz"
+    FILENAME "libxslt-${VERSION}.tar.gz"
     SHA512 1516a11ad608b04740674060d2c5d733b88889de5e413b9a4e8bf8d1a90d712149df6d2b1345b615f529d7c7d3fa6dae12e544da828b39c7d415e54c0ee0776b
 )
 
@@ -13,7 +13,7 @@ vcpkg_download_distfile(ARCHIVE
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${LIBXSLT_VERSION}
+    REF ${VERSION}
 )
 
 # Add CMake sources
@@ -47,4 +47,4 @@ vcpkg_copy_pdbs()
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/libxslt RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/libxslt/version ${LIBXSLT_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/libxslt/version ${VERSION})

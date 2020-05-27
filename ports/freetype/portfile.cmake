@@ -1,11 +1,11 @@
 include(vcpkg_common_functions)
 
-set(FREETYPE_VERSION 2.10.2)
+set(VERSION 2.10.2)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://download.savannah.gnu.org/releases/freetype/freetype-${FREETYPE_VERSION}.tar.gz"
-    FILENAME "freetype-${FREETYPE_VERSION}.tar.gz"
+    URLS "https://download.savannah.gnu.org/releases/freetype/freetype-${VERSION}.tar.gz"
+    FILENAME "freetype-${VERSION}.tar.gz"
     SHA512 cbb1b6bb7f99f6ecb473ce6027ec5f2868af939f793dd7b083b23e9823e18c4bcbac0b92483ebe70804ad7f4ef5bf4ea5c6b476e7f631a3e6a1b3e904a41e1a5
 )
 
@@ -18,7 +18,7 @@ set(FREETYPE_PATCHES
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${FREETYPE_VERSION}
+    REF ${VERSION}
     PATCHES ${FREETYPE_PATCHES}
 )
 
@@ -55,4 +55,4 @@ file(INSTALL
     ${SOURCE_PATH}/docs/GPLv2.txt
     DESTINATION ${CURRENT_PACKAGES_DIR}/share/freetype
 )
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/freetype/version ${FREETYPE_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/freetype/version ${VERSION})

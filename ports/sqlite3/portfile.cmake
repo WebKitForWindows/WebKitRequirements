@@ -1,13 +1,13 @@
 include(vcpkg_common_functions)
 
-set(SQLITE3_VERSION 3.31.01)
-string(REPLACE "." "" SQLITE3_TAG ${SQLITE3_VERSION})
-string(CONCAT SQLITE3_TAG ${SQLITE3_TAG} "00")
+set(VERSION 3.31.01)
+string(REPLACE "." "" TAG ${VERSION})
+string(CONCAT TAG ${TAG} "00")
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://sqlite.org/2020/sqlite-amalgamation-${SQLITE3_TAG}.zip"
-    FILENAME "sqlite-amalgamation-${SQLITE3_TAG}.zip"
+    URLS "https://sqlite.org/2020/sqlite-amalgamation-${TAG}.zip"
+    FILENAME "sqlite-amalgamation-${TAG}.zip"
     SHA512 3a44168a9973896d26880bc49469c3b9a120fd39dbeb27521c216b900fd32c5b3ca19ba51648e8c7715899b173cf01b4ae6e03a16cb3a7058b086147389437af
 )
 
@@ -15,7 +15,7 @@ vcpkg_download_distfile(ARCHIVE
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${SQLITE3_VERSION}
+    REF ${VERSION}
 )
 
 # Add CMake sources
@@ -53,4 +53,4 @@ vcpkg_copy_pdbs()
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/sqlite3/copyright "SQLite is in the Public Domain.\nhttp://www.sqlite.org/copyright.html\n")
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/sqlite3/version ${SQLITE3_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/sqlite3/version ${VERSION})

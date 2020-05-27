@@ -1,11 +1,11 @@
 include(vcpkg_common_functions)
 
-set(LIBRESSL_VERSION 3.1.1)
+set(VERSION 3.1.1)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${LIBRESSL_VERSION}.tar.gz"
-    FILENAME "libressl-${LIBRESSL_VERSION}.tar.gz"
+    URLS "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${VERSION}.tar.gz"
+    FILENAME "libressl-${VERSION}.tar.gz"
     SHA512 353a5c95bb0c160b698b95b91d6857ddb63a75b0685a233ed2515f46ad8369d40857aa1ff8407aa9bc78a5c3c29c25376e7a55a3c96fce40840633411944fb1d
 )
 
@@ -19,7 +19,7 @@ set(LIBRESSL_PATCHES
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
-    REF ${LIBRESSL_VERSION}
+    REF ${VERSION}
     PATCHES ${LIBRESSL_PATCHES}
 )
 
@@ -47,4 +47,4 @@ file(
         ${SOURCE_PATH}/apps/openssl/x509v3.cnf
     DESTINATION ${CURRENT_PACKAGES_DIR}/etc/ssl
 )
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/libressl/version ${LIBRESSL_VERSION})
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/libressl/version ${VERSION})
