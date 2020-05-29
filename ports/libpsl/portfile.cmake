@@ -40,7 +40,7 @@ vcpkg_configure_cmake(
     PREFER_NINJA
     OPTIONS
         -DPSL_SOURCE_PATH=${PSL_SOURCE_PATH}
-        -VERSION=${VERSION}
+        -DLIBPSL_VERSION=${VERSION}
 )
 
 vcpkg_install_cmake()
