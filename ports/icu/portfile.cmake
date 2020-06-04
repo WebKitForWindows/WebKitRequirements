@@ -1,6 +1,6 @@
 include(vcpkg_common_functions)
 
-set(VERSION_MAJOR 63)
+set(VERSION_MAJOR 67)
 set(VERSION_MINOR 1)
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
 set(VERSION2 "${VERSION_MAJOR}_${VERSION_MINOR}")
@@ -10,12 +10,15 @@ set(VERSION3 "${VERSION_MAJOR}-${VERSION_MINOR}")
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/unicode-org/icu/releases/download/release-${VERSION3}/icu4c-${VERSION2}-src.tgz"
     FILENAME "icu4c-${VERSION2}-src.tgz"
-    SHA512 9ab407ed840a00cdda7470dcc4c40299a125ad246ae4d019c4b1ede54781157fd63af015a8228cd95dbc47e4d15a0932b2c657489046a19788e5e8266eac079c
+    SHA512 4779f1ce1ca7976f6fad6768853ea8c540da54d11509e3b6cfd864a04b5f2db1c3d4b546387f91ad02fb90804525bc37d2543173f0d705d6ca11dc6f2b7640a8
 )
 
 # Patches
 set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-genccode-crashes-when-creating-assembly-files.patch
+    # Remove when separated source lists are released (68.0?)
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-buildsystemupdate.patch
+    # CMake files
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-cmake.patch
 )
 
 # Extract archive
@@ -24,10 +27,6 @@ vcpkg_extract_source_archive_ex(
     ARCHIVE ${ARCHIVE}
     PATCHES ${PATCHES}
 )
-
-# Add CMake sources
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/source DESTINATION ${SOURCE_PATH})
 
 # Run CMake build
 set(BUILD_OPTIONS
@@ -69,22 +68,22 @@ vcpkg_copy_pdbs()
 if (ENABLE_TOOLS)
     # Rearrange location of tools
     set(TOOLS
-        derb
         genbrk
-        genccode
         gencfu
-        gencmn
         gencnval
         gendict
-        gennorm2
         genrb
-        gensprep
         gentest
         pkgdata
         makeconv
-        icupkg
         icuinfo
     )
+    set(STOOLS
+        genccode
+        gencmn
+        gennorm2
+        gensprep
+        icupkg)
 
     set(TOOL_EXTENSION .exe)
 
@@ -92,9 +91,15 @@ if (ENABLE_TOOLS)
 
     foreach (tool ${TOOLS})
         # Remove debug versions
-        file(REMOVE ${CURRENT_PACKAGES_DIR}/debug/bin/${tool}${TOOL_EXTENSION})
+        file(REMOVE ${CURRENT_PACKAGES_DIR}/debug/bin64/${tool}${TOOL_EXTENSION})
         # Move into the tools directory
-        file(RENAME ${CURRENT_PACKAGES_DIR}/bin/${tool}${TOOL_EXTENSION} ${CURRENT_PACKAGES_DIR}/tools/icu/${tool}${TOOL_EXTENSION})
+        file(RENAME ${CURRENT_PACKAGES_DIR}/bin64/${tool}${TOOL_EXTENSION} ${CURRENT_PACKAGES_DIR}/tools/icu/${tool}${TOOL_EXTENSION})
+    endforeach()
+    foreach (tool ${STOOLS})
+        # Remove debug versions
+        file(REMOVE ${CURRENT_PACKAGES_DIR}/debug/sbin/${tool}${TOOL_EXTENSION})
+        # Move into the tools directory
+        file(RENAME ${CURRENT_PACKAGES_DIR}/sbin/${tool}${TOOL_EXTENSION} ${CURRENT_PACKAGES_DIR}/tools/icu/${tool}${TOOL_EXTENSION})
     endforeach()
 
     vcpkg_copy_tool_dependencies(${CURRENT_PACKAGES_DIR}/tools/icu)
@@ -103,5 +108,20 @@ endif ()
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/sbin)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/sbin)
+
+# Merge cmake configs
+file(COPY
+    DESTINATION ${CURRENT_PACKAGES_DIR}/share/icu
+    PATTERN ${CURRENT_PACKAGES_DIR}/debug/lib/cmake/*.cmake
+)
+file(COPY
+    DESTINATION ${CURRENT_PACKAGES_DIR}/share/icu
+    PATTERN ${CURRENT_PACKAGES_DIR}/lib/cmake/*.cmake
+)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/lib/cmake)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/cmake)
+
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/icu RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/icu/version "${VERSION_MAJOR}.${VERSION_MINOR}.0")
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/icu/version "${ICU_VERSION_MAJOR}.${ICU_VERSION_MINOR}.0")
