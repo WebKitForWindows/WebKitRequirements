@@ -19,6 +19,8 @@ set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-buildsystemupdate.patch
     # CMake files
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-cmake.patch
+    # patch specifically for vcpkg on top of above
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-non-suffixed-install-dir.patch
 )
 
 # Extract archive
@@ -30,6 +32,7 @@ vcpkg_extract_source_archive_ex(
 
 # Run CMake build
 set(BUILD_OPTIONS
+    -DICU_ENABLE_PLUGINS=OFF
     -DICU_ENABLE_EXTRAS=OFF
     -DICU_ENABLE_SAMPLES=OFF
     -DICU_ENABLE_TESTS=OFF
@@ -91,9 +94,9 @@ if (ENABLE_TOOLS)
 
     foreach (tool ${TOOLS})
         # Remove debug versions
-        file(REMOVE ${CURRENT_PACKAGES_DIR}/debug/bin64/${tool}${TOOL_EXTENSION})
+        file(REMOVE ${CURRENT_PACKAGES_DIR}/debug/bin/${tool}${TOOL_EXTENSION})
         # Move into the tools directory
-        file(RENAME ${CURRENT_PACKAGES_DIR}/bin64/${tool}${TOOL_EXTENSION} ${CURRENT_PACKAGES_DIR}/tools/icu/${tool}${TOOL_EXTENSION})
+        file(RENAME ${CURRENT_PACKAGES_DIR}/bin/${tool}${TOOL_EXTENSION} ${CURRENT_PACKAGES_DIR}/tools/icu/${tool}${TOOL_EXTENSION})
     endforeach()
     foreach (tool ${STOOLS})
         # Remove debug versions
@@ -124,4 +127,4 @@ file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/lib/cmake)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/cmake)
 
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/icu RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/icu/version "${ICU_VERSION_MAJOR}.${ICU_VERSION_MINOR}.0")
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/icu/version "${VERSION_MAJOR}.${VERSION_MINOR}.0")

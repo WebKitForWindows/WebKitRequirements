@@ -2233,7 +2233,7 @@ new file mode 100644
 index 0000000000..0141553a73
 --- /dev/null
 +++ b/source/data/CMakeLists.txt
-@@ -0,0 +1,360 @@
+@@ -0,0 +1,358 @@
 +# Copyright (c) 2018, NikitaFeodonit. All rights reserved.
 +#
 +## ICU build file for CMake build tools
@@ -2466,14 +2466,12 @@ index 0000000000..0141553a73
 +    add_custom_command(
 +      OUTPUT ${PKGDATA_LIST} ${pkgdata_list_STAMP}
 +      COMMAND ${CMAKE_COMMAND} -E remove -f ${PKGDATA_LIST}
-+      COMMAND echo B
 +      COMMAND ${TOOLBINDIR}/icupkg
 +        -d ${BUILDDIR}  # --destdir
 +        --list
 +        -x ${extract_pattern}  # --extract
 +        ${ICUDATA_SOURCE_ARCHIVE}
 +        -o ${PKGDATA_LIST}  # --outlist
-+      COMMAND echo C
 +      COMMAND ${CMAKE_COMMAND} -E touch ${pkgdata_list_STAMP}
 +      DEPENDS ${deps_icupkg} ${ICUDATA_SOURCE_ARCHIVE}
 +        ${icudata_source_archive_STAMP} # ${BUILD_DIRS}
@@ -20168,10 +20166,10 @@ index 0000000000..dccb2bf692
 +)
 diff --git a/source/tools/icuinfo/CMakeLists.txt b/source/tools/icuinfo/CMakeLists.txt
 new file mode 100644
-index 0000000000..375d86d62d
+index 0000000000..0f82b81b82
 --- /dev/null
 +++ b/source/tools/icuinfo/CMakeLists.txt
-@@ -0,0 +1,52 @@
+@@ -0,0 +1,54 @@
 +# Copyright (c) 2018, NikitaFeodonit. All rights reserved.
 +#
 +## ICU build file for CMake build tools
@@ -20207,23 +20205,25 @@ index 0000000000..375d86d62d
 +)
 +
 +# TODO: fix plugin
-+set(plugin_NAME plugin)
-+add_library(${plugin_NAME} SHARED "")
-+target_include_directories(${plugin_NAME} PRIVATE
-+  ${PROJECT_SOURCE_DIR}/common
-+  ${PROJECT_SOURCE_DIR}/tools/toolutil
-+  ${PROJECT_SOURCE_DIR}/tools/ctestfw
-+  ${PROJECT_SOURCE_DIR}/i18n
-+)
-+setup_icu_target("${plugin_NAME}" "${CMAKE_CURRENT_LIST_DIR}/plugin_sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
-+install(
-+  TARGETS ${plugin_NAME}
-+  EXPORT "${TARGETS_EXPORT_NAME}"
-+  ARCHIVE  DESTINATION "${libdir}"
-+  LIBRARY  DESTINATION "${libdir}"
-+  RUNTIME  DESTINATION "${bindir}"
-+  INCLUDES DESTINATION "${includedir}"
-+)
++if (ICU_ENABLE_PLUGINS)
++  set(plugin_NAME plugin)
++  add_library(${plugin_NAME} SHARED "")
++  target_include_directories(${plugin_NAME} PRIVATE
++    ${PROJECT_SOURCE_DIR}/common
++    ${PROJECT_SOURCE_DIR}/tools/toolutil
++    ${PROJECT_SOURCE_DIR}/tools/ctestfw
++    ${PROJECT_SOURCE_DIR}/i18n
++  )
++  setup_icu_target("${plugin_NAME}" "${CMAKE_CURRENT_LIST_DIR}/plugin_sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++  install(
++    TARGETS ${plugin_NAME}
++    EXPORT "${TARGETS_EXPORT_NAME}"
++    ARCHIVE  DESTINATION "${libdir}"
++    LIBRARY  DESTINATION "${libdir}"
++    RUNTIME  DESTINATION "${bindir}"
++    INCLUDES DESTINATION "${includedir}"
++  )
++endif()
 diff --git a/source/tools/icupkg/CMakeLists.txt b/source/tools/icupkg/CMakeLists.txt
 new file mode 100644
 index 0000000000..e58daa2e37
