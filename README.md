@@ -27,7 +27,7 @@
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.0.4 | 12-31-2019 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.1.0 | 01-06-2020 |
 | [openjpeg](https://www.openjpeg.org/) | 2.3.1 | 04-02-2019 |
-| [sqlite](http://sqlite.org) | 3.32.1 | 05-25-2020 |
+| [sqlite](http://sqlite.org) | 3.32.2 | 06-04-2020 |
 | [freetype](https://www.freetype.org) | 2.10.2 | 05-09-2020 |
 | [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.6.6 | 05-11-2020 |
 | [pixman](http://www.pixman.org) | 0.40.0 | 04-19-2020 |
