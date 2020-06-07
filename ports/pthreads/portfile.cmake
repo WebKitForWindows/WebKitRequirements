@@ -8,6 +8,9 @@ if(VCPKG_CMAKE_SYSTEM_NAME)
   return()
 endif()
 
+# The pthread port creates headers that are restricted by vcpkg under normal operation
+set(VCPKG_POLICY_ALLOW_RESTRICTED_HEADERS enabled)
+
 set(VERSION 2.9.1)
 string(REPLACE "." "-" PTHREADS_TAG ${VERSION})
 
