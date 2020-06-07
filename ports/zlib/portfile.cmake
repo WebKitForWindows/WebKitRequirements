@@ -1,7 +1,7 @@
 include(vcpkg_common_functions)
 
 set(VERSION 1.2.11)
-set(ZLIB_GIT_REF 641491adedec68079d728728a1e9b2c76c2fae1d)
+set(REF 0ebe2fafdda0470d0a11aa0e5b84f8b6c500d584)
 
 # Patches
 set(PATCHES
@@ -13,8 +13,8 @@ set(PATCHES
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO zlib-ng/zlib-ng
-    REF ${ZLIB_GIT_REF}
-    SHA512 bd2af682a80fea01ab3f7d1843e1944da69a524fb983522716883f74efb430d1ceb578bab1c70b945715850ca5722896c84fdc886c2d4e736987e98139fac188
+    REF ${REF}
+    SHA512 0b18e92f1d2231140dde7dc3a934542d8a27990ea9007e13ec674205b7532d0ebf3e81f3a00e771d0ada8f8b9e05e7dec08938bfbeee7f9af9a9fc45d4ccce36
     PATCHES ${PATCHES}
 )
 
@@ -35,4 +35,4 @@ vcpkg_copy_pdbs()
 
 # Prepare distribution
 file(INSTALL ${SOURCE_PATH}/LICENSE.md DESTINATION ${CURRENT_PACKAGES_DIR}/share/zlib RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/zlib/version "${VERSION}-${ZLIB_GIT_REF}")
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/zlib/version "${VERSION}-${REF}")
