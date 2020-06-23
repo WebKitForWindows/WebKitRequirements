@@ -36,22 +36,27 @@ foreach ($tool in $tools) {
   if ($tool.os -eq 'windows') {
     foreach ($download in $downloads) {
       if ($tool.Name -eq $download) {
-        $toolName = $tool.name;
-        
+        $toolName = $tool.Name;
+
         # Download the tool
-        Write-Host ('Downloading {0} from {1}' -f $toolName, $tool.url);
         $downloadTo = (Join-Path $downloadPath $tool.archiveName);
-        Invoke-WebFileRequest -url $tool.url -DestinationPath $downloadTo;
-        Write-Host('Downloaded {0} to {1}' -f $toolName, $downloadTo);
-        
-        # Extract the tool
-        $extractTo = (Join-Path $toolsPath ('{0}-{1}-windows' -f $toolName, $tool.version));
-        if ($toolName -eq '7zip') {
-           $extractTo = Join-Path $extractTo ($tool.exeRelativePath -split '\\')[0];
+
+        if (!(Test-Path $downloadTo)) {
+          Write-Host ('Downloading {0} from {1}' -f $toolName,$tool.url);
+          Invoke-WebFileRequest -url $tool.url -DestinationPath $downloadTo;
+          Write-Host ('Downloaded {0} to {1}' -f $toolName,$downloadTo);
+
+          # Extract the tool
+          $extractTo = (Join-Path $toolsPath ('{0}-{1}-windows' -f $toolName,$tool.version));
+          if ($toolName -eq '7zip') {
+            $extractTo = Join-Path $extractTo ($tool.exeRelativePath -split '\\')[0];
+          }
+          Write-Host ('Extracting {0} from {1}' -f $toolName,$downloadTo);
+          Expand-7Zip -ArchiveFileName $downloadTo -TargetPath $extractTo;
+          Write-Host ('Extracted {0} to {1}' -f $toolName,$extractTo);
+        } else {
+          Write-Host ('Skipping download of {0}' -f $toolName)
         }
-        Write-Host('Extracting {0} from {1}' -f $toolName, $downloadTo);
-        Expand-7Zip -ArchiveFileName $downloadTo -TargetPath $extractTo;
-        Write-Host('Extracted {0} to {1}' -f $toolName, $extractTo);
       }
     }
   }
