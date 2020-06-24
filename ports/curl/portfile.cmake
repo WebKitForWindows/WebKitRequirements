@@ -1,18 +1,20 @@
 include(vcpkg_common_functions)
 
-set(VERSION 7.70.0)
+set(VERSION 7.71.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 f0bad08c024d0a6e2b13373968e62f2fed5e08618391d94ac6bba946849dd5ec37819f1b158a5cce32e1c07904300970d31f6fc654adb0faec7d96fe8f5ba5b0
+    SHA512 b167c1361c7c262355e5d6e10bbdb927e82c4449c53cb46b66a7f2e9630184b5ca8095e4a7c9df0678a264f2ed74eed0dd6fea7732ed7961f031b3e4537f8008
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    # Remove after https://github.com/curl/curl/pull/5591 lands
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-https-set-the-correct-URL-in-pushed-transfers.patch
 )
 
 # Extract archive
