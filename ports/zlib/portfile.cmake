@@ -1,12 +1,11 @@
 include(vcpkg_common_functions)
 
 set(VERSION 1.2.11)
-set(REF 0ebe2fafdda0470d0a11aa0e5b84f8b6c500d584)
+set(REF c5dd84bd3bd711748881490005d5f01d5eb837bc)
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-static-target.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-__has_declspec_attribute.patch
 )
 
 # Get from github commit until a release happens
@@ -14,7 +13,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO zlib-ng/zlib-ng
     REF ${REF}
-    SHA512 0b18e92f1d2231140dde7dc3a934542d8a27990ea9007e13ec674205b7532d0ebf3e81f3a00e771d0ada8f8b9e05e7dec08938bfbeee7f9af9a9fc45d4ccce36
+    SHA512 041083bff788149e7faa2c71e1cc4e2d3ef12b420d33b0ecc8b1d7df99efbaeed00875f8754c365a2bb289d2ae1b7a087487e0d53c2c3b2ba7cdf7dfbb338a83
     PATCHES ${PATCHES}
 )
 
