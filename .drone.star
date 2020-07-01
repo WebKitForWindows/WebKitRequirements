@@ -36,6 +36,7 @@ def build_config(triplet):
       'libwebp',
       'openjpeg',
       'sqlite3',
+      'woff2',
       'pixman',
       'cairo',
       'libpsl',

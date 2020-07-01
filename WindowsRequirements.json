@@ -12,6 +12,7 @@
     "libwebp",
     "openjpeg",
     "sqlite3",
+    "woff2",
     "pixman",
     "cairo",
     "libpsl"
