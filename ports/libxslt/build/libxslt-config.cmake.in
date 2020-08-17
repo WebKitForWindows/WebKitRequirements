@@ -1,0 +1,73 @@
+set(LIBXSLT_VERSION "@VERSION@")
+set(LIBXSLT_VERSION_MAJOR "@LIBXSLT_MAJOR_VERSION@")
+set(LIBXSLT_VERSION_MINOR "@LIBXSLT_MINOR_VERSION@")
+set(LIBXSLT_VERSION_PATCH "@LIBXSLT_MICRO_VERSION@")
+
+set(LIBEXSLT_VERSION "@LIBEXSLT_VERSION@")
+set(LIBEXSLT_VERSION_MAJOR "@LIBEXSLT_MAJOR_VERSION@")
+set(LIBEXSLT_VERSION_MINOR "@LIBEXSLT_MINOR_VERSION@")
+set(LIBEXSLT_VERSION_PATCH "@LIBEXSLT_MICRO_VERSION@")
+
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/libxslt-export.cmake")
+
+set(LIBXSLT_DEFINITIONS "")
+set(LIBXSLT_INCLUDE_DIRS "${PACKAGE_PREFIX_DIR}/@CMAKE_INSTALL_INCLUDEDIR@")
+set(LIBXSLT_LIBRARY_DIRS "${PACKAGE_PREFIX_DIR}/@CMAKE_INSTALL_LIBDIR@")
+
+macro(select_library_location target basename)
+	foreach(property IN ITEMS IMPORTED_LOCATION IMPORTED_IMPLIB)
+		get_target_property(${basename}_${property}_DEBUG ${target} ${property}_DEBUG)
+		get_target_property(${basename}_${property}_MINSIZEREL ${target} ${property}_MINSIZEREL)
+		get_target_property(${basename}_${property}_RELEASE ${target} ${property}_RELEASE)
+		get_target_property(${basename}_${property}_RELWITHDEBINFO ${target} ${property}_RELWITHDEBINFO)
+		
+		if(${basename}_${property}_DEBUG AND ${basename}_${property}_RELEASE)
+			set(${basename}_LIBRARIES debug ${${basename}_${property}_DEBUG} optimized ${${basename}_${property}_RELEASE})
+		elseif(${basename}_${property}_DEBUG AND ${basename}_${property}_RELWITHDEBINFO)
+			set(${basename}_LIBRARIES debug ${${basename}_${property}_DEBUG} optimized ${${basename}_${property}_RELWITHDEBINFO})
+		elseif(${basename}_${property}_DEBUG AND ${basename}_${property}_MINSIZEREL)
+			set(${basename}_LIBRARIES debug ${${basename}_${property}_DEBUG} optimized ${${basename}_${property}_MINSIZEREL})
+		elseif(${basename}_${property}_RELEASE)
+			set(${basename}_LIBRARIES ${${basename}_${property}_RELEASE})
+		elseif(${basename}_${property}_RELWITHDEBINFO)
+			set(${basename}_LIBRARIES ${${basename}_${property}_RELWITHDEBINFO})
+		elseif(${basename}_${property}_MINSIZEREL)
+			set(${basename}_LIBRARIES ${${basename}_${property}_MINSIZEREL})
+		elseif(${basename}_${property}_DEBUG)
+			set(${basename}_LIBRARIES ${${basename}_${property}_DEBUG})
+		endif()
+	endforeach()
+endmacro()
+
+select_library_location(LibXslt::LibXslt LIBXSLT)
+select_library_location(LibXslt::LibExslt LIBXSLT_EXSLT)
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(LibXml2)
+list(APPEND LIBXSLT_INCLUDE_DIRS ${LIBXML2_INCLUDE_DIRS})
+list(APPEND LIBXSLT_LIBRARIES ${LIBXML2_LIBRARIES})
+
+if(NOT @BUILD_SHARED_LIBS@)
+	if(@Threads_FOUND@)
+		find_dependency(Threads)
+		list(APPEND LIBXSLT_LIBRARIES ${CMAKE_THREAD_LIBS_INIT})
+	endif()
+
+	if(@LIBXSLT_WITH_CRYPTO@)
+		list(APPEND LIBXSLT_LIBRARIES gcrypt)
+		list(APPEND LIBXSLT_EXSLT_LIBRARIES gcrypt)
+	endif()
+
+	if(UNIX)
+		list(APPEND LIBXSLT_LIBRARIES m)
+		list(APPEND LIBXSLT_EXSLT_LIBRARIES m)
+	endif()
+
+	if(WIN32)
+		list(APPEND LIBXSLT_LIBRARIES ws2_32)
+		list(APPEND LIBXSLT_EXSLT_LIBRARIES ws2_32)
+	endif()
+endif()

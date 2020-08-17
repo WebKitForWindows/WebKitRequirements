@@ -19,18 +19,26 @@ vcpkg_extract_source_archive_ex(
 
 # Add CMake sources
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/libxslt/xsltconfig.h.cmake.in DESTINATION ${SOURCE_PATH}/libxslt)
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/config.h.cmake.in DESTINATION ${SOURCE_PATH})
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/libxslt-config.cmake.in DESTINATION ${SOURCE_PATH})
+#file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/libxslt/xsltconfig.h.cmake.in DESTINATION ${SOURCE_PATH}/libxslt)
 
 # Run CMake build
 set(BUILD_OPTIONS
-    -DWITH_TRIO=OFF
-    -DWITH_XSLT_DEBUG=OFF
-    -DWITH_MEM_DEBUG=OFF
-    -DWITH_DEBUGGER=OFF
-    -DWITH_ICONV=OFF
-    -DWITH_ZLIB=OFF
-    -DWITH_CRYPTO=OFF
-    -DWITH_MODULES=OFF
+    # Use CMAKE_DISABLE_FIND_PACKAGE_XXX=TRUE to disable dependencies in FreeType
+    # Otherwise libxslt will attempt to use it if available
+    -DCMAKE_DISABLE_FIND_PACKAGE_Iconv=TRUE
+    -DCMAKE_DISABLE_FIND_PACKAGE_Python=TRUE
+    -DCMAKE_DISABLE_FIND_PACKAGE_Thread=TRUE
+
+    # Options
+    -DLIBXSLT_WITH_DEBUGGER=OFF
+    -DLIBXSLT_WITH_CRYPTO=OFF
+    -DLIBXSLT_WITH_MEM_DEBUG=OFF
+    -DLIBXSLT_WITH_MODULES=OFF
+    -DLIBXSLT_WITH_PROFILER=OFF
+    -DLIBXSLT_WITH_TRIO=OFF
+    -DLIBXSLT_WITH_XSLT_DEBUG=OFF
 )
 
 # Disable parallel configure due to configure file writing back into the
@@ -47,5 +55,6 @@ vcpkg_copy_pdbs()
 
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/libxslt RENAME copyright)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/libxslt/version ${VERSION})
