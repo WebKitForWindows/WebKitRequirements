@@ -30,7 +30,7 @@
 | [sqlite](http://sqlite.org) | 3.33.0 | 08-14-2020 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 11-13-2017 |
 | [freetype](https://www.freetype.org) | 2.10.2 | 05-09-2020 |
-| [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.6.8 | 06-22-2020 |
+| [harbuzz](https://www.freedesktop.org/wiki/Software/HarfBuzz) | 2.7.1 | 08-13-2020 |
 | [pixman](http://www.pixman.org) | 0.40.0 | 04-19-2020 |
 | [cairo](https://www.cairographics.org) | 1.16.0 | 10-18-2018 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.0 | 04-16-2019 |
