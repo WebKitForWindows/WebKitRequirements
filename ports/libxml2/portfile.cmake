@@ -25,7 +25,7 @@ file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/include/libxml/xmlwin32version.h.in DE
 
 # Run CMake build
 set(BUILD_OPTIONS
-    # Use CMAKE_DISABLE_FIND_PACKAGE_XXX=TRUE to disable dependencies in FreeType
+    # Use CMAKE_DISABLE_FIND_PACKAGE_XXX=TRUE to disable dependencies in libxml2
     # Otherwise libxml2 will attempt to use it if available
     -DCMAKE_DISABLE_FIND_PACKAGE_Iconv=TRUE
     -DCMAKE_DISABLE_FIND_PACKAGE_LibLZMA=TRUE
