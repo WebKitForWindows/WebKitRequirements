@@ -16,7 +16,7 @@
 | Library | Version | Release Date |
 |---|:---:|:---:|
 | [icu](http://site.icu-project.org) | 67.1 | 04-22-2020 |
-| [zlib](https://github.com/zlib-ng/zlib-ng) | N/A | 06-24-2020 |
+| [zlib](https://github.com/zlib-ng/zlib-ng) | N/A | 08-16-2020 |
 | [brotli](https://github.com/google/brotli) | 1.0.7 | 10-23-2018 |
 | [libressl](https://www.libressl.org) | 3.2.0 | 05-31-2020 |
 | [nghttp2](https://nghttp2.org) | 1.41.0 | 06-02-2020 |
