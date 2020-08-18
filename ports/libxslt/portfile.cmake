@@ -21,11 +21,10 @@ vcpkg_extract_source_archive_ex(
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/config.h.cmake.in DESTINATION ${SOURCE_PATH})
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/libxslt-config.cmake.in DESTINATION ${SOURCE_PATH})
-#file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/libxslt/xsltconfig.h.cmake.in DESTINATION ${SOURCE_PATH}/libxslt)
 
 # Run CMake build
 set(BUILD_OPTIONS
-    # Use CMAKE_DISABLE_FIND_PACKAGE_XXX=TRUE to disable dependencies in FreeType
+    # Use CMAKE_DISABLE_FIND_PACKAGE_XXX=TRUE to disable dependencies in libxslt
     # Otherwise libxslt will attempt to use it if available
     -DCMAKE_DISABLE_FIND_PACKAGE_Iconv=TRUE
     -DCMAKE_DISABLE_FIND_PACKAGE_Python=TRUE
