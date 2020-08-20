@@ -23,6 +23,10 @@ vcpkg_extract_source_archive_ex(
     PATCHES ${PATCHES}
 )
 
+# Add CMake find module for Brotli that's missing from the distribution
+# Remove once https://github.com/curl/curl/pull/5836 lands in a release
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMake/FindBrotli.cmake DESTINATION ${SOURCE_PATH}/CMake)
+
 # Run CMake build
 set(BUILD_OPTIONS
     # BUILD options
