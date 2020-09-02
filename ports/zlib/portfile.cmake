@@ -1,7 +1,7 @@
 include(vcpkg_common_functions)
 
 set(VERSION 1.2.11)
-set(REF da1ab79e1d9608d669297a9964644a6a39526be1)
+set(REF 52eb835d0b6c049a93bc690e2fc05c34cb7dfae8)
 
 # Patches
 set(PATCHES
@@ -13,7 +13,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO zlib-ng/zlib-ng
     REF ${REF}
-    SHA512 7ad18018b8dd8607670c42028d564bc6d7057da32ad56854d6e3a188b2054303885c67604fcd47d2d81c88262e6a86ef332aef9fedb36d53b504e5de4a4abeb7
+    SHA512 c4811748482dfc503a0e2ed41b90392bee6750ea3818098f1332638187cf0035eea9da63e0b9a832513e9a6c9f24ebcb79c37406b99e6fbcbc8bb2c4ae1ee421
     PATCHES ${PATCHES}
 )
 
