@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(VERSION 1.0.7)
+set(VERSION 1.0.9)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/google/brotli/archive/v${VERSION}.zip"
     FILENAME "brotli-${VERSION}.zip"
-    SHA512 8c43bd310c568c5a726a9e8accf6078a756e155b6eb32a4232332aa90f958258ae2b917713314caa33c9488185e8c854abe941fd4c63edfe017bba92240b896c
+    SHA512 42b909a1aa5f99f370fb9e5f9e97b4a5d349aaf6fc5bf0939bbe3ced5ab3c9b6bc76d70ce0819b01f4298d10de22ae311e5d429ac7826b1d8ea107e24178b8fd
 )
 
 # Patches
