@@ -8,9 +8,6 @@ triplets = [
   'x86-windows-webkit',
 ]
 
-# Current Windows version to use
-windows_version = 1809
-
 #--------------------------------------------------------------------------
 # Build config
 #--------------------------------------------------------------------------
@@ -191,14 +188,13 @@ def build_pipeline(triplet):
 
   return current
 
-def _windows_pipeline(version):
+def _windows_pipeline():
   return {
     'kind': 'pipeline',
     'type': 'docker',
     'platform': {
       'os': 'windows',
-      'arch': 'amd64',
-      'version': version
+      'arch': 'amd64'
     }
   }
 
