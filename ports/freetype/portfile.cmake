@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(VERSION 2.10.2)
+set(VERSION 2.10.3)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://download.savannah.gnu.org/releases/freetype/freetype-${VERSION}.tar.gz"
     FILENAME "freetype-${VERSION}.tar.gz"
-    SHA512 cbb1b6bb7f99f6ecb473ce6027ec5f2868af939f793dd7b083b23e9823e18c4bcbac0b92483ebe70804ad7f4ef5bf4ea5c6b476e7f631a3e6a1b3e904a41e1a5
+    SHA512 0ee157d4a0ee2cc02b6273b022704919d2eba05b44c16f53051f892faad0566006a6e0aae43c88307fd47aa5a2100b67cb4fc2803068d0f2b1bd7c3a17b1d8de
 )
 
 # Patches
