@@ -1,19 +1,24 @@
 include(vcpkg_common_functions)
 
-set(VERSION 1.2.11)
-set(REF 52eb835d0b6c049a93bc690e2fc05c34cb7dfae8)
+set(VERSION 1.9.9-b1)
+
+# Get archive
+vcpkg_download_distfile(ARCHIVE
+    URLS "https://github.com/zlib-ng/zlib-ng/archive/${VERSION}.zip"
+    FILENAME "zlib-ng-${VERSION}.zip"
+    SHA512 4aaec4fe5c2fd566f47520a622aae9bbf4a6cbea69439bef30ceddc5902719d1e441a2be2d0cb23ceb2c31ebdaedd7ff1542b30b50efbf14f2d0a78fb9002a2c
+)
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-static-target.patch
 )
 
-# Get from github commit until a release happens
-vcpkg_from_github(
+# Extract archive
+vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO zlib-ng/zlib-ng
-    REF ${REF}
-    SHA512 c4811748482dfc503a0e2ed41b90392bee6750ea3818098f1332638187cf0035eea9da63e0b9a832513e9a6c9f24ebcb79c37406b99e6fbcbc8bb2c4ae1ee421
+    ARCHIVE ${ARCHIVE}
+    REF ${VERSION}
     PATCHES ${PATCHES}
 )
 

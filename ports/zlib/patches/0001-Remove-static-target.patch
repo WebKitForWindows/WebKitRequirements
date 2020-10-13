@@ -1,7 +1,7 @@
-From ef32f08ee26bf669a14d330f862fec113a7de385 Mon Sep 17 00:00:00 2001
+From a5bb8170d71f133a87467b9244ee14560d15ccf7 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 7 Nov 2019 16:51:38 -0800
-Subject: [PATCH 1/2] Remove static target
+Subject: [PATCH] Remove static target
 
 This makes the CMake build target use BUILD_SHARED_LIBS exclusively for determining the library type created.
 ---
@@ -9,11 +9,11 @@ This makes the CMake build target use BUILD_SHARED_LIBS exclusively for determin
  1 file changed, 2 insertions(+), 9 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 44f2a74..b531acb 100644
+index ce103f6..b7f6303 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -831,16 +831,9 @@ if(WITH_GZFILEOP)
-     list(APPEND ZLIB_ALL_SRCS ${ZLIB_GZFILE_SRCS})
+@@ -908,16 +908,9 @@ if(WITH_GZFILEOP)
+     list(APPEND ZLIB_ALL_SRCS ${ZLIB_GZFILE_PRIVATE_HDRS} ${ZLIB_GZFILE_SRCS})
  endif()
  
 -if(NOT DEFINED BUILD_SHARED_LIBS)
@@ -32,5 +32,5 @@ index 44f2a74..b531acb 100644
  foreach(ZLIB_INSTALL_LIBRARY ${ZLIB_INSTALL_LIBRARIES})
      target_include_directories(${ZLIB_INSTALL_LIBRARY} PUBLIC
 -- 
-2.25.0.windows.1
+2.26.2.windows.1
 
