@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(VERSION 2.7.1)
+set(VERSION 2.7.2)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${VERSION}/harfbuzz-${VERSION}.tar.xz"
     FILENAME "harfbuzz-${VERSION}.tar.xz"
-    SHA512 9a89e44b228c334b1bdeff9b712a0d8122b23a89e76b7d9877c37103f11f90b2924b79bf89450879ec9870d84c0cccdcc967646924e049b1ff2013b0817c61a9
+    SHA512 6600e3868df2da37644fe683839ffce129144332b6949795e71004318159582bd2c03da8510b6577b117a66aff155f8559de144dc2ffb010a59ccd7509d66399
 )
 
 # Patches
