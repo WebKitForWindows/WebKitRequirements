@@ -1,13 +1,13 @@
 include(vcpkg_common_functions)
 
-set(VERSION 7.72.0)
+set(VERSION 7.73.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 3018061bd33c1c1b8d8b45122540a36846b556a8ade75d176532114f26973aed0b643c8baa0166493519ebcc29385e4b6e8bfcd761e594003971cdbe807d49f3
+    SHA512 66fe22da8a24199f244c501007f51a7188c1f5ae145ad88a247254ee2f612ae3a71c636a5214a2e8518eeaf54849a992f1b8eab1ef9a4b7bac08419931d28185
 )
 
 # Patches
@@ -22,10 +22,6 @@ vcpkg_extract_source_archive_ex(
     REF ${VERSION}
     PATCHES ${PATCHES}
 )
-
-# Add CMake find module for Brotli that's missing from the distribution
-# Remove once https://github.com/curl/curl/pull/5836 lands in a release
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMake/FindBrotli.cmake DESTINATION ${SOURCE_PATH}/CMake)
 
 # Run CMake build
 set(BUILD_OPTIONS
@@ -52,17 +48,29 @@ set(BUILD_OPTIONS
     -DCURL_DISABLE_POP3=ON
     -DCURL_DISABLE_PROXY=OFF
     -DCURL_DISABLE_RTSP=ON
+    -DCURL_DISABLE_SMB=ON
     -DCURL_DISABLE_SMTP=ON
     -DCURL_DISABLE_TELNET=ON
     -DCURL_DISABLE_TFTP=ON
+    -DCURL_ENABLE_MQTT=OFF
     # ENABLE options
     -DENABLE_ARES=OFF
     -DENABLE_MANUAL=OFF
     -DENABLE_THREADED_RESOLVER=ON
+    -DENABLE_UNIX_SOCKETS=OFF
     # USE options
     -DUSE_NGHTTP2=ON
     -DUSE_WIN32_LDAP=OFF
 )
+
+# Check for ca-bundle feature
+if (ca-bundle IN_LIST FEATURES)
+    message(STATUS "Enabling CA bundle")
+    set(BUILD_OPTIONS ${BUILD_OPTIONS} -DCURL_CA_BUNDLE=auto -DCURL_CA_PATH=auto)
+else ()
+    message(STATUS "Disabling CA bundle")
+    set(BUILD_OPTIONS ${BUILD_OPTIONS} -DCURL_CA_BUNDLE=none -DCURL_CA_PATH=none)
+endif ()
 
 # Check for IPV6 feature
 if (ipv6 IN_LIST FEATURES)
@@ -87,7 +95,7 @@ if (NOT ssl IN_LIST FEATURES)
 
     if (VCPKG_WINDOWS)
         set(USE_OPENSSL OFF)
-        set(USE_WINSSL ON)
+        set(USE_SCHANNEL ON)
     endif ()
 endif ()
 
@@ -110,7 +118,7 @@ vcpkg_configure_cmake(
         ${BUILD_OPTIONS}
         -DCURL_STATICLIB=${CURL_STATICLIB}
         -DCMAKE_USE_OPENSSL=${USE_OPENSSL}
-        -DCMAKE_USE_WINSSL=${USE_WINSSL}
+        -DCMAKE_USE_SCHANNEL=${USE_SCHANNEL}
     OPTIONS_DEBUG
         -DENABLE_DEBUG=ON
 )
