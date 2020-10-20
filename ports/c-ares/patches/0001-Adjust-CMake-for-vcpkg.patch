@@ -1,0 +1,25 @@
+From 943edd340786181a2911103f9b203b255320e95f Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Tue, 20 Oct 2020 16:42:08 -0700
+Subject: [PATCH] Adjust CMake for vcpkg
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b8e91c2..8a2bd42 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -707,7 +707,7 @@ ENDIF ()
+ 
+ # Export targets
+ IF (CARES_INSTALL)
+-	SET (CMAKECONFIG_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
++	SET (CMAKECONFIG_INSTALL_DIR "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/cmake")
+ 	INCLUDE (CMakePackageConfigHelpers)
+ 	CONFIGURE_PACKAGE_CONFIG_FILE (${PROJECT_NAME}-config.cmake.in ${PROJECT_NAME}-config.cmake
+ 		INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+-- 
+2.26.2.windows.1
+

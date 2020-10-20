@@ -3,16 +3,21 @@ Version: 7.73.0
 Build-Depends: zlib, brotli, nghttp2
 Description: A library for transferring data with URLs
 
+Feature: ares
+Build-Depends: c-ares
+Description: |
+  Enable c-ares for asynchronous DNS requests.
+
 Feature: ca-bundle
 Description: |
   Use the provided certificate bundle.
+
+Feature: ipv6
+Description: |
+  Enable IPV6 support.
 
 Feature: ssl
 Build-Depends: libressl
 Description: |
   SSL support through libressl. If not specified then the system SSL library
   will be used.
-
-Feature: ipv6
-Description: |
-  Enable IPV6 support.
