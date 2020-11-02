@@ -1,3 +1,116 @@
+From 672774b5b832efe5a5cc037eea848588d7f16e02 Mon Sep 17 00:00:00 2001
+From: foopoiuyt <github@zombiestormtrooper.com>
+Date: Tue, 3 Nov 2020 08:58:19 -0800
+Subject: [PATCH 1/2] Add CMake platform
+
+Modified version of the LibCMaker ICU files.
+---
+ icu4c/CMakeLists.txt                          |    7 +
+ icu4c/LICENSE_CMakeLists                      |   60 +
+ icu4c/README_CMakeLists.txt                   |  146 +
+ source/CMakeLists.txt                         |  202 +
+ source/cmake/Config.in.cmake                  |  134 +
+ source/common/CMakeLists.txt                  |  107 +
+ source/common_icu_lib_flags.cmake             |   91 +
+ source/common_icu_lib_includes.cmake          |   10 +
+ source/common_tools_exe_flags.cmake           |   62 +
+ source/common_tools_exe_libs.cmake            |    9 +
+ source/configure_1st.cmake                    |  137 +
+ source/configure_2nd.cmake                    | 1193 +++
+ source/data/CMakeLists.txt                    |  358 +
+ source/data/cmake-brkitr-index-txt-content.in |   21 +
+ source/data/cmake-coll-index-txt-content.in   |  168 +
+ source/data/cmake-curr-index-txt-content.in   |  550 ++
+ source/data/cmake-icudata-list-content.in     | 3815 ++++++++
+ source/data/cmake-lang-index-txt-content.in   |  480 +
+ .../data/cmake-locales-index-txt-content.in   |  841 ++
+ source/data/cmake-rbnf-index-txt-content.in   |  113 +
+ source/data/cmake-region-index-txt-content.in |  479 +
+ source/data/cmake-unit-index-txt-content.in   |  470 +
+ source/data/cmake-zone-index-txt-content.in   |  480 +
+ source/data/icupkg.inc.cmake                  |   17 +
+ source/data/rules.cmake                       | 8509 +++++++++++++++++
+ source/i18n/CMakeLists.txt                    |   88 +
+ source/icudefs.cmake                          |  268 +
+ source/icufunctions.cmake                     |   67 +
+ source/io/CMakeLists.txt                      |   78 +
+ source/layoutex/CMakeLists.txt                |   87 +
+ source/stubdata/CMakeLists.txt                |   67 +
+ source/test/CMakeLists.txt                    |   34 +
+ source/test/testdata/CMakeLists.txt           |   52 +
+ source/test/testdata/rules.cmake              |  187 +
+ source/tools/CMakeLists.txt                   |   39 +
+ source/tools/ctestfw/CMakeLists.txt           |   65 +
+ source/tools/escapesrc/CMakeLists.txt         |   38 +
+ source/tools/genbrk/CMakeLists.txt            |   31 +
+ source/tools/genccode/CMakeLists.txt          |   31 +
+ source/tools/gencfu/CMakeLists.txt            |   32 +
+ source/tools/gencmn/CMakeLists.txt            |   31 +
+ source/tools/gencnval/CMakeLists.txt          |   31 +
+ source/tools/gendict/CMakeLists.txt           |   31 +
+ source/tools/gennorm2/CMakeLists.txt          |   32 +
+ source/tools/genrb/CMakeLists.txt             |   63 +
+ source/tools/gensprep/CMakeLists.txt          |   32 +
+ source/tools/gentest/CMakeLists.txt           |   40 +
+ source/tools/icuinfo/CMakeLists.txt           |   54 +
+ source/tools/icupkg/CMakeLists.txt            |   31 +
+ source/tools/makeconv/CMakeLists.txt          |   32 +
+ source/tools/pkgdata/CMakeLists.txt           |   41 +
+ source/tools/toolutil/CMakeLists.txt          |   61 +
+ 52 files changed, 20102 insertions(+)
+ create mode 100644 icu4c/CMakeLists.txt
+ create mode 100644 icu4c/LICENSE_CMakeLists
+ create mode 100644 icu4c/README_CMakeLists.txt
+ create mode 100644 source/CMakeLists.txt
+ create mode 100644 source/cmake/Config.in.cmake
+ create mode 100644 source/common/CMakeLists.txt
+ create mode 100644 source/common_icu_lib_flags.cmake
+ create mode 100644 source/common_icu_lib_includes.cmake
+ create mode 100644 source/common_tools_exe_flags.cmake
+ create mode 100644 source/common_tools_exe_libs.cmake
+ create mode 100644 source/configure_1st.cmake
+ create mode 100644 source/configure_2nd.cmake
+ create mode 100644 source/data/CMakeLists.txt
+ create mode 100644 source/data/cmake-brkitr-index-txt-content.in
+ create mode 100644 source/data/cmake-coll-index-txt-content.in
+ create mode 100644 source/data/cmake-curr-index-txt-content.in
+ create mode 100644 source/data/cmake-icudata-list-content.in
+ create mode 100644 source/data/cmake-lang-index-txt-content.in
+ create mode 100644 source/data/cmake-locales-index-txt-content.in
+ create mode 100644 source/data/cmake-rbnf-index-txt-content.in
+ create mode 100644 source/data/cmake-region-index-txt-content.in
+ create mode 100644 source/data/cmake-unit-index-txt-content.in
+ create mode 100644 source/data/cmake-zone-index-txt-content.in
+ create mode 100644 source/data/icupkg.inc.cmake
+ create mode 100644 source/data/rules.cmake
+ create mode 100644 source/i18n/CMakeLists.txt
+ create mode 100644 source/icudefs.cmake
+ create mode 100644 source/icufunctions.cmake
+ create mode 100644 source/io/CMakeLists.txt
+ create mode 100644 source/layoutex/CMakeLists.txt
+ create mode 100644 source/stubdata/CMakeLists.txt
+ create mode 100644 source/test/CMakeLists.txt
+ create mode 100644 source/test/testdata/CMakeLists.txt
+ create mode 100644 source/test/testdata/rules.cmake
+ create mode 100644 source/tools/CMakeLists.txt
+ create mode 100644 source/tools/ctestfw/CMakeLists.txt
+ create mode 100644 source/tools/escapesrc/CMakeLists.txt
+ create mode 100644 source/tools/genbrk/CMakeLists.txt
+ create mode 100644 source/tools/genccode/CMakeLists.txt
+ create mode 100644 source/tools/gencfu/CMakeLists.txt
+ create mode 100644 source/tools/gencmn/CMakeLists.txt
+ create mode 100644 source/tools/gencnval/CMakeLists.txt
+ create mode 100644 source/tools/gendict/CMakeLists.txt
+ create mode 100644 source/tools/gennorm2/CMakeLists.txt
+ create mode 100644 source/tools/genrb/CMakeLists.txt
+ create mode 100644 source/tools/gensprep/CMakeLists.txt
+ create mode 100644 source/tools/gentest/CMakeLists.txt
+ create mode 100644 source/tools/icuinfo/CMakeLists.txt
+ create mode 100644 source/tools/icupkg/CMakeLists.txt
+ create mode 100644 source/tools/makeconv/CMakeLists.txt
+ create mode 100644 source/tools/pkgdata/CMakeLists.txt
+ create mode 100644 source/tools/toolutil/CMakeLists.txt
+
 diff --git a/icu4c/CMakeLists.txt b/icu4c/CMakeLists.txt
 new file mode 100644
 index 0000000000..86d84498df
@@ -579,7 +692,7 @@ index 0000000000..a95b284915
 +endif()
 diff --git a/source/common/CMakeLists.txt b/source/common/CMakeLists.txt
 new file mode 100644
-index 0000000000..229a978670
+index 0000000000..58e156a9c4
 --- /dev/null
 +++ b/source/common/CMakeLists.txt
 @@ -0,0 +1,107 @@
@@ -667,7 +780,7 @@ index 0000000000..229a978670
 +# After ICULIBS_DT or ICULIBS_STUBDT
 +target_link_libraries(${lib_NAME} PUBLIC ${DEFAULT_LIBS})
 +
-+setup_icu_lib_target("${lib_NAME}" "${private_src_DIR}/sources.lst" "${private_src_DIR}" "${public_src_DIR}")
++setup_icu_lib_target("${lib_NAME}" "${private_src_DIR}/sources.txt" "${private_src_DIR}" "${public_src_DIR}")
 +
 +install(
 +  FILES ${${lib_NAME}_PUBLIC_HEADERS}
@@ -2230,7 +2343,7 @@ index 0000000000..710875729f
 +endif()
 diff --git a/source/data/CMakeLists.txt b/source/data/CMakeLists.txt
 new file mode 100644
-index 0000000000..0141553a73
+index 0000000000..210db80d64
 --- /dev/null
 +++ b/source/data/CMakeLists.txt
 @@ -0,0 +1,358 @@
@@ -18609,7 +18722,7 @@ index 0000000000..6b3965fe26
 +
 diff --git a/source/i18n/CMakeLists.txt b/source/i18n/CMakeLists.txt
 new file mode 100644
-index 0000000000..b8ff9d6f52
+index 0000000000..6ce842d16d
 --- /dev/null
 +++ b/source/i18n/CMakeLists.txt
 @@ -0,0 +1,88 @@
@@ -18678,8 +18791,8 @@ index 0000000000..b8ff9d6f52
 +# LIBS = $(LIBICUUC) $(DEFAULT_LIBS)
 +target_link_libraries(${lib_NAME} PUBLIC ${ICULIBS_UC})
 +
-+#setup_icu_target("${lib_NAME}" "${private_src_DIR}/sources.lst" "${private_src_DIR}")
-+setup_icu_lib_target("${lib_NAME}" "${private_src_DIR}/sources.lst" "${private_src_DIR}" "${public_src_DIR}")
++#setup_icu_target("${lib_NAME}" "${private_src_DIR}/sources.txt" "${private_src_DIR}")
++setup_icu_lib_target("${lib_NAME}" "${private_src_DIR}/sources.txt" "${private_src_DIR}" "${public_src_DIR}")
 +
 +install(
 +  FILES ${${lib_NAME}_PUBLIC_HEADERS}
@@ -19051,7 +19164,7 @@ index 0000000000..b5b507249d
 \ No newline at end of file
 diff --git a/source/io/CMakeLists.txt b/source/io/CMakeLists.txt
 new file mode 100644
-index 0000000000..f2a5fb978f
+index 0000000000..0c13593604
 --- /dev/null
 +++ b/source/io/CMakeLists.txt
 @@ -0,0 +1,78 @@
@@ -19109,7 +19222,7 @@ index 0000000000..f2a5fb978f
 +# LIBS = $(LIBICUUC) $(LIBICUI18N) $(DEFAULT_LIBS)
 +target_link_libraries(${lib_NAME} PUBLIC ${ICULIBS_I18N})
 +
-+setup_icu_lib_target("${lib_NAME}" "${private_src_DIR}/sources.lst" "${private_src_DIR}" "${public_src_DIR}")
++setup_icu_lib_target("${lib_NAME}" "${private_src_DIR}/sources.txt" "${private_src_DIR}" "${public_src_DIR}")
 +
 +install(
 +  FILES ${${lib_NAME}_PUBLIC_HEADERS}
@@ -19135,7 +19248,7 @@ index 0000000000..f2a5fb978f
 +)
 diff --git a/source/layoutex/CMakeLists.txt b/source/layoutex/CMakeLists.txt
 new file mode 100644
-index 0000000000..918c2d0b0b
+index 0000000000..a43a1a6305
 --- /dev/null
 +++ b/source/layoutex/CMakeLists.txt
 @@ -0,0 +1,87 @@
@@ -19203,7 +19316,7 @@ index 0000000000..918c2d0b0b
 +# LIBS = $(LIBICUUC) $(LIBICULE) $(DEFAULT_LIBS)
 +target_link_libraries(${lib_NAME} PUBLIC ${ICULIBS_UC} ${ICULIBS_LE})
 +
-+setup_icu_target("${lib_NAME}" "${private_src_DIR}/sources.lst" "${private_src_DIR}")
++setup_icu_target("${lib_NAME}" "${private_src_DIR}/sources.txt" "${private_src_DIR}")
 +
 +install(
 +  FILES ${${lib_NAME}_PUBLIC_HEADERS}
@@ -19228,7 +19341,7 @@ index 0000000000..918c2d0b0b
 +)
 diff --git a/source/stubdata/CMakeLists.txt b/source/stubdata/CMakeLists.txt
 new file mode 100644
-index 0000000000..b27b569883
+index 0000000000..250160fe57
 --- /dev/null
 +++ b/source/stubdata/CMakeLists.txt
 @@ -0,0 +1,67 @@
@@ -19273,7 +19386,7 @@ index 0000000000..b27b569883
 +  ${PROJECT_SOURCE_DIR}/common
 +)
 +
-+setup_icu_target("${lib_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${lib_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +if(CMAKE_HOST_WIN32 AND BUILD_SHARED_LIBS AND (MSVC OR MINGW))
 +  add_custom_command(TARGET ${lib_NAME} POST_BUILD
@@ -19637,7 +19750,7 @@ index 0000000000..2c9590903c
 +#include(${CMAKE_CURRENT_LIST_DIR}/tzcode/CMakeLists.txt)
 diff --git a/source/tools/ctestfw/CMakeLists.txt b/source/tools/ctestfw/CMakeLists.txt
 new file mode 100644
-index 0000000000..37a29ee8e1
+index 0000000000..fe06630db8
 --- /dev/null
 +++ b/source/tools/ctestfw/CMakeLists.txt
 @@ -0,0 +1,65 @@
@@ -19696,7 +19809,7 @@ index 0000000000..37a29ee8e1
 +# LIBS = $(LIBICUTOOLUTIL) $(LIBICUI18N) $(LIBICUUC) $(DEFAULT_LIBS)
 +target_link_libraries(${lib_NAME} PUBLIC ${ICULIBS_TOOLUTIL})
 +
-+setup_icu_lib_target("${lib_NAME}" "${private_src_DIR}/sources.lst" "${private_src_DIR}" "${public_src_DIR}")
++setup_icu_lib_target("${lib_NAME}" "${private_src_DIR}/sources.txt" "${private_src_DIR}" "${public_src_DIR}")
 +
 +install(
 +  TARGETS ${lib_NAME}
@@ -19708,7 +19821,7 @@ index 0000000000..37a29ee8e1
 +)
 diff --git a/source/tools/escapesrc/CMakeLists.txt b/source/tools/escapesrc/CMakeLists.txt
 new file mode 100644
-index 0000000000..49f5507686
+index 0000000000..dffc3201f6
 --- /dev/null
 +++ b/source/tools/escapesrc/CMakeLists.txt
 @@ -0,0 +1,38 @@
@@ -19740,7 +19853,7 @@ index 0000000000..49f5507686
 +#LIBS += $(DEFAULT_LIBS) $(LIB_M)
 +target_link_libraries(${exe_NAME} PRIVATE ${DEFAULT_LIBS} ${LIB_M})
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -19752,7 +19865,7 @@ index 0000000000..49f5507686
 +)
 diff --git a/source/tools/genbrk/CMakeLists.txt b/source/tools/genbrk/CMakeLists.txt
 new file mode 100644
-index 0000000000..68d5765fbb
+index 0000000000..054c028959
 --- /dev/null
 +++ b/source/tools/genbrk/CMakeLists.txt
 @@ -0,0 +1,31 @@
@@ -19777,7 +19890,7 @@ index 0000000000..68d5765fbb
 +  ${PROJECT_SOURCE_DIR}/tools/toolutil
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -19789,7 +19902,7 @@ index 0000000000..68d5765fbb
 +)
 diff --git a/source/tools/genccode/CMakeLists.txt b/source/tools/genccode/CMakeLists.txt
 new file mode 100644
-index 0000000000..f1da8864e6
+index 0000000000..13fed24c88
 --- /dev/null
 +++ b/source/tools/genccode/CMakeLists.txt
 @@ -0,0 +1,31 @@
@@ -19814,7 +19927,7 @@ index 0000000000..f1da8864e6
 +  ${PROJECT_SOURCE_DIR}/tools/toolutil
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -19826,7 +19939,7 @@ index 0000000000..f1da8864e6
 +)
 diff --git a/source/tools/gencfu/CMakeLists.txt b/source/tools/gencfu/CMakeLists.txt
 new file mode 100644
-index 0000000000..b03ad87e7c
+index 0000000000..e13b6b9916
 --- /dev/null
 +++ b/source/tools/gencfu/CMakeLists.txt
 @@ -0,0 +1,32 @@
@@ -19852,7 +19965,7 @@ index 0000000000..b03ad87e7c
 +  ${PROJECT_SOURCE_DIR}/tools/toolutil
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -19864,7 +19977,7 @@ index 0000000000..b03ad87e7c
 +)
 diff --git a/source/tools/gencmn/CMakeLists.txt b/source/tools/gencmn/CMakeLists.txt
 new file mode 100644
-index 0000000000..094052638c
+index 0000000000..7d5626729e
 --- /dev/null
 +++ b/source/tools/gencmn/CMakeLists.txt
 @@ -0,0 +1,31 @@
@@ -19889,7 +20002,7 @@ index 0000000000..094052638c
 +  ${PROJECT_SOURCE_DIR}/tools/toolutil
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -19901,7 +20014,7 @@ index 0000000000..094052638c
 +)
 diff --git a/source/tools/gencnval/CMakeLists.txt b/source/tools/gencnval/CMakeLists.txt
 new file mode 100644
-index 0000000000..1c87f2686a
+index 0000000000..0bc2e3e134
 --- /dev/null
 +++ b/source/tools/gencnval/CMakeLists.txt
 @@ -0,0 +1,31 @@
@@ -19926,7 +20039,7 @@ index 0000000000..1c87f2686a
 +  ${PROJECT_SOURCE_DIR}/tools/toolutil
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -19938,7 +20051,7 @@ index 0000000000..1c87f2686a
 +)
 diff --git a/source/tools/gendict/CMakeLists.txt b/source/tools/gendict/CMakeLists.txt
 new file mode 100644
-index 0000000000..73713e9c7d
+index 0000000000..f7e7a71bca
 --- /dev/null
 +++ b/source/tools/gendict/CMakeLists.txt
 @@ -0,0 +1,31 @@
@@ -19963,7 +20076,7 @@ index 0000000000..73713e9c7d
 +  ${PROJECT_SOURCE_DIR}/tools/toolutil
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -19975,7 +20088,7 @@ index 0000000000..73713e9c7d
 +)
 diff --git a/source/tools/gennorm2/CMakeLists.txt b/source/tools/gennorm2/CMakeLists.txt
 new file mode 100644
-index 0000000000..233c6b4144
+index 0000000000..082d976556
 --- /dev/null
 +++ b/source/tools/gennorm2/CMakeLists.txt
 @@ -0,0 +1,32 @@
@@ -20001,7 +20114,7 @@ index 0000000000..233c6b4144
 +  ${PROJECT_SOURCE_DIR}/tools/toolutil
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -20013,7 +20126,7 @@ index 0000000000..233c6b4144
 +)
 diff --git a/source/tools/genrb/CMakeLists.txt b/source/tools/genrb/CMakeLists.txt
 new file mode 100644
-index 0000000000..fd07ec2af4
+index 0000000000..39ef73960d
 --- /dev/null
 +++ b/source/tools/genrb/CMakeLists.txt
 @@ -0,0 +1,63 @@
@@ -20066,9 +20179,9 @@ index 0000000000..fd07ec2af4
 +  include(${PROJECT_SOURCE_DIR}/common_tools_exe_libs.cmake)
 +
 +  if(exe_NAME STREQUAL "derb")
-+    setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/derb_sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++    setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/derb_sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +  else()
-+    setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++    setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +  endif()
 +
 +  install(
@@ -20082,7 +20195,7 @@ index 0000000000..fd07ec2af4
 +endforeach()
 diff --git a/source/tools/gensprep/CMakeLists.txt b/source/tools/gensprep/CMakeLists.txt
 new file mode 100644
-index 0000000000..af85b98193
+index 0000000000..1c13f6016f
 --- /dev/null
 +++ b/source/tools/gensprep/CMakeLists.txt
 @@ -0,0 +1,32 @@
@@ -20108,7 +20221,7 @@ index 0000000000..af85b98193
 +  ${PROJECT_SOURCE_DIR}/tools/toolutil
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -20120,7 +20233,7 @@ index 0000000000..af85b98193
 +)
 diff --git a/source/tools/gentest/CMakeLists.txt b/source/tools/gentest/CMakeLists.txt
 new file mode 100644
-index 0000000000..dccb2bf692
+index 0000000000..6f253e2443
 --- /dev/null
 +++ b/source/tools/gentest/CMakeLists.txt
 @@ -0,0 +1,40 @@
@@ -20154,7 +20267,7 @@ index 0000000000..dccb2bf692
 +# Common libs must be after the ${ICULIBS_CTESTFW}
 +include(${PROJECT_SOURCE_DIR}/common_tools_exe_libs.cmake)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -20166,7 +20279,7 @@ index 0000000000..dccb2bf692
 +)
 diff --git a/source/tools/icuinfo/CMakeLists.txt b/source/tools/icuinfo/CMakeLists.txt
 new file mode 100644
-index 0000000000..0f82b81b82
+index 0000000000..66baf30378
 --- /dev/null
 +++ b/source/tools/icuinfo/CMakeLists.txt
 @@ -0,0 +1,54 @@
@@ -20193,7 +20306,7 @@ index 0000000000..0f82b81b82
 +  ${PROJECT_SOURCE_DIR}/i18n
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -20214,7 +20327,7 @@ index 0000000000..0f82b81b82
 +    ${PROJECT_SOURCE_DIR}/tools/ctestfw
 +    ${PROJECT_SOURCE_DIR}/i18n
 +  )
-+  setup_icu_target("${plugin_NAME}" "${CMAKE_CURRENT_LIST_DIR}/plugin_sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++  setup_icu_target("${plugin_NAME}" "${CMAKE_CURRENT_LIST_DIR}/plugin_sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +  install(
 +    TARGETS ${plugin_NAME}
 +    EXPORT "${TARGETS_EXPORT_NAME}"
@@ -20226,7 +20339,7 @@ index 0000000000..0f82b81b82
 +endif()
 diff --git a/source/tools/icupkg/CMakeLists.txt b/source/tools/icupkg/CMakeLists.txt
 new file mode 100644
-index 0000000000..e58daa2e37
+index 0000000000..ac999b78c9
 --- /dev/null
 +++ b/source/tools/icupkg/CMakeLists.txt
 @@ -0,0 +1,31 @@
@@ -20251,7 +20364,7 @@ index 0000000000..e58daa2e37
 +  ${PROJECT_SOURCE_DIR}/tools/toolutil
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -20263,7 +20376,7 @@ index 0000000000..e58daa2e37
 +)
 diff --git a/source/tools/makeconv/CMakeLists.txt b/source/tools/makeconv/CMakeLists.txt
 new file mode 100644
-index 0000000000..bb5cdb4889
+index 0000000000..3593fb7285
 --- /dev/null
 +++ b/source/tools/makeconv/CMakeLists.txt
 @@ -0,0 +1,32 @@
@@ -20289,7 +20402,7 @@ index 0000000000..bb5cdb4889
 +  ${PROJECT_SOURCE_DIR}/tools/toolutil
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -20301,7 +20414,7 @@ index 0000000000..bb5cdb4889
 +)
 diff --git a/source/tools/pkgdata/CMakeLists.txt b/source/tools/pkgdata/CMakeLists.txt
 new file mode 100644
-index 0000000000..d43ec7a6f6
+index 0000000000..5236d8f278
 --- /dev/null
 +++ b/source/tools/pkgdata/CMakeLists.txt
 @@ -0,0 +1,41 @@
@@ -20336,7 +20449,7 @@ index 0000000000..d43ec7a6f6
 +  ${PROJECT_SOURCE_DIR}/tools/toolutil
 +)
 +
-+setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${exe_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${exe_NAME}
@@ -20348,7 +20461,7 @@ index 0000000000..d43ec7a6f6
 +)
 diff --git a/source/tools/toolutil/CMakeLists.txt b/source/tools/toolutil/CMakeLists.txt
 new file mode 100644
-index 0000000000..31ea2db4c7
+index 0000000000..eb22a9aee2
 --- /dev/null
 +++ b/source/tools/toolutil/CMakeLists.txt
 @@ -0,0 +1,61 @@
@@ -20403,7 +20516,7 @@ index 0000000000..31ea2db4c7
 +# LIBS = $(LIBICUI18N) $(LIBICUUC) $(DEFAULT_LIBS)
 +target_link_libraries(${lib_NAME} PUBLIC ${ICULIBS_I18N})
 +
-+setup_icu_target("${lib_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.lst" "${CMAKE_CURRENT_LIST_DIR}")
++setup_icu_target("${lib_NAME}" "${CMAKE_CURRENT_LIST_DIR}/sources.txt" "${CMAKE_CURRENT_LIST_DIR}")
 +
 +install(
 +  TARGETS ${lib_NAME}
@@ -20413,3 +20526,6 @@ index 0000000000..31ea2db4c7
 +  RUNTIME  DESTINATION "${bindir}"
 +  INCLUDES DESTINATION "${includedir}"
 +)
+-- 
+2.29.2.windows.1
+

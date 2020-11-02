@@ -1,6 +1,6 @@
 include(vcpkg_common_functions)
 
-set(VERSION_MAJOR 67)
+set(VERSION_MAJOR 68)
 set(VERSION_MINOR 1)
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
 set(VERSION2 "${VERSION_MAJOR}_${VERSION_MINOR}")
@@ -10,17 +10,15 @@ set(VERSION3 "${VERSION_MAJOR}-${VERSION_MINOR}")
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/unicode-org/icu/releases/download/release-${VERSION3}/icu4c-${VERSION2}-src.tgz"
     FILENAME "icu4c-${VERSION2}-src.tgz"
-    SHA512 4779f1ce1ca7976f6fad6768853ea8c540da54d11509e3b6cfd864a04b5f2db1c3d4b546387f91ad02fb90804525bc37d2543173f0d705d6ca11dc6f2b7640a8
+    SHA512 24ff4ce5947c41fc12a168e15d4037556562c7f32c1da0bbedd705232476174a3b2318955a7124426a63c2034eb9ae077e728a5dbada8b9433d7173cac3db307
 )
 
 # Patches
 set(PATCHES
-    # Remove when separated source lists are released (68.0?)
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-buildsystemupdate.patch
     # CMake files
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-cmake.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-platform.patch
     # patch specifically for vcpkg on top of above
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-non-suffixed-install-dir.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Remove-install-suffix-on-Windows.patch
 )
 
 # Extract archive
