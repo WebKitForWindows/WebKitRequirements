@@ -27,7 +27,7 @@
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.37 | 2019-04-15 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.0.6 | 2020-11-16 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.1.0 | 2020-01-06 |
-| [openjpeg](https://www.openjpeg.org/) | 2.3.1 | 2019-04-02 |
+| [openjpeg](https://www.openjpeg.org/) | 2.4.0 | 2020-12-28 |
 | [sqlite](http://sqlite.org) | 3.34.0 | 2020-12-01 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
 | [freetype](https://www.freetype.org) | 2.10.4 | 2020-10-20 |

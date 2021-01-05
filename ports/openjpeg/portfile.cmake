@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(VERSION 2.3.1)
+set(VERSION 2.4.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/uclouvain/openjpeg/archive/v${VERSION}.zip"
     FILENAME "openjpeg-${VERSION}.zip"
-    SHA512 809cff67e34893ccc13e41383f1bb3bb1fd9640d8e0997d6ec16afbbd326c7c4436e93a2e16ee8ebb22052c88c3e5765b473905cdc4699b8ae21b0310ea48138
+    SHA512 afddc0a9cdcb74c71e3f369375064b80d8065ca24fb0f381dcf57de1bc6fbb7cd703c4374c386089ba53d8df66c076de2e2b9450ebba8af49fa19c9f2d3459e7
 )
 
 # Extract archive
