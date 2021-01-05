@@ -3,7 +3,7 @@
     "brotli",
     "libressl",
     "nghttp2",
-    "curl[ares,ca-bundle,ssl,ipv6]",
+    "curl[ares,ssl,ipv6]",
     "icu",
     "libxml2[xslt]",
     "libxslt",
