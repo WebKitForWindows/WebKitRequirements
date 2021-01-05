@@ -1,18 +1,18 @@
 include(vcpkg_common_functions)
 
-set(VERSION 1.16.0)
+set(VERSION 1.17.4)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/cairo-${VERSION})
 
 # Cairo uses even numbered minor numbers for releases and odd minor numbers for
 # development snapshots
-set(RELEASE_DIR releases)
-#set(RELEASE_DIR snapshots)
+#set(RELEASE_DIR releases)
+set(RELEASE_DIR snapshots)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://cairographics.org/${RELEASE_DIR}/cairo-${VERSION}.tar.xz"
     FILENAME "cairo-${VERSION}.tar.xz"
-    SHA512 9eb27c4cf01c0b8b56f2e15e651f6d4e52c99d0005875546405b64f1132aed12fbf84727273f493d84056a13105e065009d89e94a8bfaf2be2649e232b82377f
+    SHA512 843dce4f1cb5d9fb0c33240dff658ba2723bf04697045d16669e4b7674a5287ef0eb3d960a688a129902fb714230263e35d085186dc220b65307b5ad7fa09d23
 )
 
 # Patches

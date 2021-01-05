@@ -33,7 +33,7 @@
 | [freetype](https://www.freetype.org) | 2.10.4 | 2020-10-20 |
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 2.7.4 | 2020-12-26 |
 | [pixman](http://www.pixman.org) | 0.40.0 | 2020-04-19 |
-| [cairo](https://www.cairographics.org) | 1.16.0 | 2018-10-18 |
+| [cairo](https://www.cairographics.org) | 1.17.4 | 2020-11-27 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.1 | 2020-07-18 |
 | [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 2012-07-12 |
 | [OpenCFLite](https://github.com/fujii/OpenCFLite) | 0.0.2 | 2017-12-11 |

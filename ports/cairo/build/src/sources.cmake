@@ -1,4 +1,4 @@
-set(cairo_headers cairo.h cairo-deprecated.h)
+set(cairo_headers cairo.h cairo-deprecated.h cairo-version.h)
 
 set(cairo_private
     cairoint.h
