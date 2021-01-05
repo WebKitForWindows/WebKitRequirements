@@ -642,7 +642,6 @@ install(
 install(
     FILES
         ${enabled_cairo_headers}
-        ${CMAKE_SOURCE_DIR}/cairo-version.h
         ${CMAKE_BINARY_DIR}/cairo-features.h 
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cairo
 )
