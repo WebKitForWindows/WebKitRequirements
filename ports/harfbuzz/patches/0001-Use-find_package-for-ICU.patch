@@ -1,4 +1,4 @@
-From 102e5086bf89281f8fd148ef8b753f559d528e54 Mon Sep 17 00:00:00 2001
+From 403112a4fd1d49d30116267616503cc448966803 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 5 Nov 2019 16:56:34 -0800
 Subject: [PATCH 1/2] Use find_package for ICU
@@ -8,14 +8,14 @@ Subject: [PATCH 1/2] Use find_package for ICU
  1 file changed, 1 insertion(+), 6 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 2cdfd4b3..2a538efb 100644
+index 11118595f..5c0620d78 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -237,12 +237,7 @@ endif ()
+@@ -233,12 +233,7 @@ endif ()
  if (HB_HAVE_ICU)
    add_definitions(-DHAVE_ICU)
  
--  # https://github.com/WebKit/webkit/blob/master/Source/cmake/FindICU.cmake
+-  # https://github.com/WebKit/webkit/blob/fdd7733f2f30eab7fe096a9791f98c60f62f49c0/Source/cmake/FindICU.cmake
 -  find_package(PkgConfig)
 -  pkg_check_modules(PC_ICU QUIET icu-uc)
 -
@@ -26,5 +26,5 @@ index 2cdfd4b3..2a538efb 100644
    include_directories(${ICU_INCLUDE_DIR})
  
 -- 
-2.25.0.windows.1
+2.29.2.windows.1
 
