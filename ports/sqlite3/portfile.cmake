@@ -1,14 +1,14 @@
 include(vcpkg_common_functions)
 
-set(VERSION 3.34.00)
+set(VERSION 3.34.01)
 string(REPLACE "." "" TAG ${VERSION})
 string(CONCAT TAG ${TAG} "00")
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://sqlite.org/2020/sqlite-amalgamation-${TAG}.zip"
+    URLS "https://sqlite.org/2021/sqlite-amalgamation-${TAG}.zip"
     FILENAME "sqlite-amalgamation-${TAG}.zip"
-    SHA512 645f3a0fd8162dcfd10170edfa951a0d388662bd47517e19460546420f2bf3cfcb94ccf21d3b8e73f743887c530d1b3458b1d376b73caeb2a5f0324f114a875c
+    SHA512 8a936f1c34fc9036cadf5bd53f9ee594135c2efdef1d2c82bd4fdf3e0218afde710fc4c436cfc992687d008e6086a697da0487352ed88809d677e05d824940dd
 )
 
 # Extract archive
