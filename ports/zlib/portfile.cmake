@@ -1,12 +1,12 @@
 include(vcpkg_common_functions)
 
-set(VERSION 1.9.9-b1)
+set(VERSION 2.0.0-RC2)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/zlib-ng/zlib-ng/archive/${VERSION}.zip"
+    URLS "https://github.com/zlib-ng/zlib-ng/archive/v${VERSION}.zip"
     FILENAME "zlib-ng-${VERSION}.zip"
-    SHA512 4aaec4fe5c2fd566f47520a622aae9bbf4a6cbea69439bef30ceddc5902719d1e441a2be2d0cb23ceb2c31ebdaedd7ff1542b30b50efbf14f2d0a78fb9002a2c
+    SHA512 9463d239f9db9bdb1648a02c1268a7828c52420636c9bb137549bfd4b59d7759e06ca53b207bc19ac47a45bea43d097d94f50f05509881ba03b15af1c4067c2c
 )
 
 # Patches
@@ -39,4 +39,4 @@ vcpkg_copy_pdbs()
 
 # Prepare distribution
 file(INSTALL ${SOURCE_PATH}/LICENSE.md DESTINATION ${CURRENT_PACKAGES_DIR}/share/zlib RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/zlib/version "${VERSION}-${REF}")
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/zlib/version "${VERSION}")
