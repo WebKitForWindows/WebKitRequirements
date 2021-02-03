@@ -1,5 +1,3 @@
-include(vcpkg_common_functions)
-
 set(VERSION 1.17.4)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/cairo-${VERSION})
 

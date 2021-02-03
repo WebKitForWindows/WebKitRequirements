@@ -1,5 +1,3 @@
-include(vcpkg_common_functions)
-
 set(VERSION_MAJOR 68)
 set(VERSION_MINOR 2)
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")

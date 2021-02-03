@@ -1,5 +1,3 @@
-include(vcpkg_common_functions)
-
 set(VERSION 7.75.0)
 string(REPLACE "." "_" TAG ${VERSION})
 

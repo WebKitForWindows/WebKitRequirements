@@ -1,5 +1,3 @@
-include(vcpkg_common_functions)
-
 set(VERSION 1.0.2)
 
 # The woff2 library does not support shared libraries

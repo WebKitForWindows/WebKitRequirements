@@ -1,5 +1,3 @@
-include(vcpkg_common_functions)
-
 set(VERSION 3.34.01)
 string(REPLACE "." "" TAG ${VERSION})
 string(CONCAT TAG ${TAG} "00")
