@@ -1,18 +1,20 @@
 include(vcpkg_common_functions)
 
-set(VERSION 7.74.0)
+set(VERSION 7.75.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 fa69f66d10af5d6365d82f16a5d3807ff2004d388b5c88932d9d18f9c63322eb49e55dabd9e7183e1fabeb975ccecd378feea2e74b7e900e1def8e1fc72b00c1
+    SHA512 f07a9c62de9ae526ead0af2cfe0e0b868c8c58f5f04a4488782e2515648648cd8dde43daef30c42bacc67961079e8bf3b37d55d8d0f31cc2d5f90e59d2a729eb
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    # Remove after 7.76.0 release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-file-Support-unicode-urls-on-windows.patch
 )
 
 # Extract archive
