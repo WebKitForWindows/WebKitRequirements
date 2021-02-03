@@ -89,6 +89,9 @@ Copy-Item '.vcpkg-root' -Force -Destination $PSScriptRoot;
 Copy-DirectoryStructure `
    -Path (Join-Path $vcpkgPath 'scripts') `
    -Destination (Join-Path $PSScriptRoot 'scripts');
+Copy-DirectoryStructure `
+   -Path (Join-Path $vcpkgPath -ChildPath 'triplets' | Join-Path -ChildPath 'community') `
+   -Destination (Join-Path $PSScriptRoot -ChildPath 'triplets' | Join-Path -ChildPath 'community');
 
 # Restore location
 Set-Location $currentPath;
