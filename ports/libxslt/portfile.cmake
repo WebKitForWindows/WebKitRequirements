@@ -1,5 +1,3 @@
-include(vcpkg_common_functions)
-
 set(VERSION 1.1.34)
 
 # Get archive

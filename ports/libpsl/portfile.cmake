@@ -1,4 +1,3 @@
-include(vcpkg_common_functions)
 include(${CMAKE_CURRENT_LIST_DIR}/psl.cmake)
 
 set(VERSION 0.21.1)

@@ -1,4 +1,3 @@
-include(vcpkg_common_functions)
 include(${CMAKE_CURRENT_LIST_DIR}/vcpkg_acquire_gnuwin32_program.cmake)
 
 set(VERSION 2.0.6)
