@@ -1,32 +1,36 @@
-From e33f195bff1fcd5990e323b59bb7db95bccf4c76 Mon Sep 17 00:00:00 2001
+From 1931aa64cc91215aa73c7f76d7fc15f3787c0a56 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 7 Nov 2019 16:51:38 -0800
 Subject: [PATCH] Remove static target
 
 This makes the CMake build target use BUILD_SHARED_LIBS exclusively for determining the library type created.
 ---
- CMakeLists.txt | 11 ++---------
- 1 file changed, 2 insertions(+), 9 deletions(-)
+ CMakeLists.txt | 16 ++--------------
+ 1 file changed, 2 insertions(+), 14 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 006ff1b..09eddac 100644
+index 88a57d8..f8d0826 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -902,16 +902,9 @@ if(WITH_GZFILEOP)
+@@ -892,20 +892,8 @@ if(WITH_GZFILEOP)
      list(APPEND ZLIB_ALL_SRCS ${ZLIB_GZFILE_PRIVATE_HDRS} ${ZLIB_GZFILE_SRCS})
  endif()
  
 -if(NOT DEFINED BUILD_SHARED_LIBS)
 -    add_library(zlib SHARED ${ZLIB_ALL_SRCS})
 -    add_library(zlibstatic STATIC ${ZLIB_ALL_SRCS})
-+add_library(zlib ${ZLIB_ALL_SRCS})
- 
+-
 -    set(ZLIB_INSTALL_LIBRARIES zlib zlibstatic)
 -else()
 -    add_library(zlib ${ZLIB_ALL_SRCS})
 -
+-    if(NOT BUILD_SHARED_LIBS)
+-        add_library(zlibstatic ALIAS zlib)
+-    endif()
+-
 -    set(ZLIB_INSTALL_LIBRARIES zlib)
 -endif()
++add_library(zlib ${ZLIB_ALL_SRCS})
 +set(ZLIB_INSTALL_LIBRARIES zlib)
  
  foreach(ZLIB_INSTALL_LIBRARY ${ZLIB_INSTALL_LIBRARIES})

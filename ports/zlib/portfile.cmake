@@ -1,10 +1,12 @@
-set(VERSION 2.0.0-RC2)
+include(vcpkg_common_functions)
+
+set(VERSION 2.0.2)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/zlib-ng/zlib-ng/archive/v${VERSION}.zip"
+    URLS "https://github.com/zlib-ng/zlib-ng/archive/refs/tags/${VERSION}.zip"
     FILENAME "zlib-ng-${VERSION}.zip"
-    SHA512 9463d239f9db9bdb1648a02c1268a7828c52420636c9bb137549bfd4b59d7759e06ca53b207bc19ac47a45bea43d097d94f50f05509881ba03b15af1c4067c2c
+    SHA512 eb2e68c492d080e9d1a46f1617908bac0b0bb47a1ff7779ac2b24d149988c8a4862a8342912e1ee42fa01abd4bc88fb70398be3e5c57c7f36064f7bc6f4a193e
 )
 
 # Patches
