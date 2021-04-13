@@ -11,6 +11,8 @@ vcpkg_download_distfile(ARCHIVE
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-postfix-from-archive-name.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Disable-additional-warnings-for-Visual-Studio.patch
+    # Remove after next libressl release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Avoid-clobbering-the-error-code-when-sending-an-alert.patch
 )
 
 # Extract archive
