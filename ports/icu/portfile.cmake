@@ -1,5 +1,5 @@
-set(VERSION_MAJOR 68)
-set(VERSION_MINOR 2)
+set(VERSION_MAJOR 69)
+set(VERSION_MINOR 1)
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
 set(VERSION2 "${VERSION_MAJOR}_${VERSION_MINOR}")
 set(VERSION3 "${VERSION_MAJOR}-${VERSION_MINOR}")
@@ -8,7 +8,7 @@ set(VERSION3 "${VERSION_MAJOR}-${VERSION_MINOR}")
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/unicode-org/icu/releases/download/release-${VERSION3}/icu4c-${VERSION2}-src.tgz"
     FILENAME "icu4c-${VERSION2}-src.tgz"
-    SHA512 24f3b7981667b37df58118f56ae76a09b719358c1efa8d6f044d28ef8df1c722a894957acadfb3c37aee39ac845893924fc3370d6bbe09875aec8d937059f84b
+    SHA512 d4aeb781715144ea6e3c6b98df5bbe0490bfa3175221a1d667f3e6851b7bd4a638fa4a37d4a921ccb31f02b5d15a6dded9464d98051964a86f7b1cde0ff0aab7
 )
 
 # Patches
