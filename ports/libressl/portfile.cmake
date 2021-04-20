@@ -1,18 +1,16 @@
-set(VERSION 3.3.1)
+set(VERSION 3.3.2)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${VERSION}.tar.gz"
     FILENAME "libressl-${VERSION}.tar.gz"
-    SHA512 a0a6c10af71c6932a63381f33b2d0fe38b28d1c3c62c0c2de770695152f6eb3c558fdedd2fb6cdf34bd9a2dd3887aec615b652cbc3c1eed6c3c973c787a0c294
+    SHA512 16a06771a38d7f88e755878875ec38e814a9bdfe5ec5d0b9b4a7a7ce3ee4a9c3d395f82cee2803ebc418c9ea27c0ac3aa5c34197e048ea91cd8d9a707da56f77
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-postfix-from-archive-name.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Disable-additional-warnings-for-Visual-Studio.patch
-    # Remove after next libressl release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Avoid-clobbering-the-error-code-when-sending-an-alert.patch
 )
 
 # Extract archive
@@ -48,19 +46,20 @@ vcpkg_copy_pdbs()
 # Prepare distribution
 if (tools IN_LIST FEATURES)
     vcpkg_copy_tools(TOOL_NAMES openssl AUTO_CLEAN)
-
-    # Empty directory created during install to house certificated
-    file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/etc/ssl/certs)
 else ()
     # Config and pem files are not installed without the apps
     file(
         INSTALL
-            ${SOURCE_PATH}/apps/openssl/cert.pem
-            ${SOURCE_PATH}/apps/openssl/openssl.cnf
-            ${SOURCE_PATH}/apps/openssl/x509v3.cnf
+            ${SOURCE_PATH}/cert.pem
+            ${SOURCE_PATH}/openssl.cnf
+            ${SOURCE_PATH}/x509v3.cnf
         DESTINATION ${CURRENT_PACKAGES_DIR}/etc/ssl
     )
 endif ()
+
+# Empty directory created during install to house certificates
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/etc/ssl/certs)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/etc/ssl/certs)
 
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
