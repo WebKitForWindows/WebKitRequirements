@@ -7,6 +7,14 @@ vcpkg_download_distfile(ARCHIVE
     SHA512 0adfd12bfde89cbd6296ba6e66b6bed4edb814a74b4265bda34d95c41d9d92c696ee7adb0c737aaf9cc6e10426a31a35079b2a23d26c074e299858da12c072ed
 )
 
+# Patches
+set(PATCHES
+    # Remove CMake platform and ICU patch after next release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-platform.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Adjust-CMake-for-vcpkg.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Fix-building-with-ICU-68.patch
+)
+
 # Extract archive
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
@@ -15,22 +23,11 @@ vcpkg_extract_source_archive_ex(
     PATCHES ${PATCHES}
 )
 
-# Add CMake sources
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/config.h.cmake.in DESTINATION ${SOURCE_PATH})
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/libxml2-config.cmake.cmake.in DESTINATION ${SOURCE_PATH})
+# The xmlwin32version.h file is not in the archive
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/include/libxml/xmlwin32version.h.in DESTINATION ${SOURCE_PATH}/include/libxml)
 
 # Run CMake build
 set(BUILD_OPTIONS
-    # Use CMAKE_DISABLE_FIND_PACKAGE_XXX=TRUE to disable dependencies in libxml2
-    # Otherwise libxml2 will attempt to use it if available
-    -DCMAKE_DISABLE_FIND_PACKAGE_Iconv=TRUE
-    -DCMAKE_DISABLE_FIND_PACKAGE_LibLZMA=TRUE
-    -DCMAKE_DISABLE_FIND_PACKAGE_Python=TRUE
-    -DCMAKE_DISABLE_FIND_PACKAGE_Thread=TRUE
-    -DCMAKE_DISABLE_FIND_PACKAGE_ZLIB=TRUE
-
     # Require ICU
     -DLIBXML2_WITH_ICU=ON
 
@@ -45,6 +42,7 @@ set(BUILD_OPTIONS
     -DLIBXML2_WITH_DOCB=OFF
     -DLIBXML2_WITH_FTP=OFF
     -DLIBXML2_WITH_HTTP=OFF
+    -DLIBXML2_WITH_ICONV=OFF
     -DLIBXML2_WITH_ISO8859X=ON
     -DLIBXML2_WITH_LEGACY=OFF
     -DLIBXML2_WITH_LZMA=OFF
@@ -53,17 +51,20 @@ set(BUILD_OPTIONS
     -DLIBXML2_WITH_OUTPUT=ON
     -DLIBXML2_WITH_PATTERN=OFF
     -DLIBXML2_WITH_PUSH=ON
+    -DLIBXML2_WITH_PYTHON=OFF
     -DLIBXML2_WITH_READER=OFF
     -DLIBXML2_WITH_REGEXPS=ON
     -DLIBXML2_WITH_RUN_DEBUG=OFF
     -DLIBXML2_WITH_SAX1=ON
     -DLIBXML2_WITH_SCHEMAS=OFF
     -DLIBXML2_WITH_SCHEMATRON=OFF
+    -DLIBXML2_WITH_THREADS=ON
     -DLIBXML2_WITH_THREAD_ALLOC=OFF
     -DLIBXML2_WITH_VALID=OFF
     -DLIBXML2_WITH_WRITER=OFF
     -DLIBXML2_WITH_XINCLUDE=OFF
     -DLIBXML2_WITH_XPTR=OFF
+    -DLIBXML2_WITH_ZLIB=OFF
 )
 
 # libxslt requires certain features to be turned on
