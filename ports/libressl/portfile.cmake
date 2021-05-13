@@ -1,10 +1,10 @@
-set(VERSION 3.3.2)
+set(VERSION 3.3.3)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${VERSION}.tar.gz"
     FILENAME "libressl-${VERSION}.tar.gz"
-    SHA512 16a06771a38d7f88e755878875ec38e814a9bdfe5ec5d0b9b4a7a7ce3ee4a9c3d395f82cee2803ebc418c9ea27c0ac3aa5c34197e048ea91cd8d9a707da56f77
+    SHA512 2d0b5f4cfe37d573bc64d5967abb77f536dbe581fbad9637d925332bcdfd185fe6810335b2af80a89f92d7e6edaa8ea3ba2492c60a117e47ea1b2d6aacf01f0f
 )
 
 # Patches
