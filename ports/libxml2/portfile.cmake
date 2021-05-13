@@ -1,18 +1,15 @@
-set(VERSION 2.9.10)
+set(VERSION 2.9.11)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "http://xmlsoft.org/sources/libxml2-${VERSION}.tar.gz"
     FILENAME "libxml2-${VERSION}.tar.gz"
-    SHA512 0adfd12bfde89cbd6296ba6e66b6bed4edb814a74b4265bda34d95c41d9d92c696ee7adb0c737aaf9cc6e10426a31a35079b2a23d26c074e299858da12c072ed
+    SHA512 d9c71d75d1cd0708f56fef47802ce53d6c64c4580469458edb2fc12b699319235bcff62bc1be1f0a01f4077726e37ad2cf5e4dee4bca36a9d5d3b21d12253ba5
 )
 
 # Patches
 set(PATCHES
-    # Remove CMake platform and ICU patch after next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-platform.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Adjust-CMake-for-vcpkg.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Fix-building-with-ICU-68.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
 )
 
 # Extract archive
