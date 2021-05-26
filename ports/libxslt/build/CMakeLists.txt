@@ -30,6 +30,7 @@ set(LIBEXSLT_VERSION ${LIBEXSLT_DOTTED_VERSION})
 
 find_package(Iconv)
 find_package(LibXml2 REQUIRED)
+find_package(ICU REQUIRED COMPONENTS data i18n uc)
 find_package(Python2 COMPONENTS Interpreter Development)
 find_package(Threads)
 
@@ -220,7 +221,7 @@ if(Iconv_FOUND)
 	target_link_libraries(LibXslt PUBLIC Iconv::Iconv)
 endif()
 
-target_link_libraries(LibXslt PUBLIC LibXml2::LibXml2)
+target_link_libraries(LibXslt PUBLIC LibXml2::LibXml2 ICU::uc)
 
 if(UNIX)
 	target_link_libraries(LibXslt PRIVATE m)
