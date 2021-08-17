@@ -1,4 +1,4 @@
 Source: harfbuzz
-Version: 2.8.1
+Version: 2.8.2
 Build-Depends: freetype, icu
 Description: HarfBuzz OpenType text shaping engine

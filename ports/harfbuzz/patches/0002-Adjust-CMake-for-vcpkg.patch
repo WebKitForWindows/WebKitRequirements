@@ -1,4 +1,4 @@
-From 03aa435bd70951009be9abb470f9cc600f31f1e8 Mon Sep 17 00:00:00 2001
+From 3a7e50b68f74c7a395144fb9f069df967107f696 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 5 Nov 2019 16:57:32 -0800
 Subject: [PATCH 2/2] Adjust CMake for vcpkg
@@ -8,10 +8,10 @@ Subject: [PATCH 2/2] Adjust CMake for vcpkg
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 5c0620d78..f84cbc54a 100644
+index c4dbf91f2..1989ea4e7 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -708,7 +708,7 @@ if (NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
+@@ -683,7 +683,7 @@ if (NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
    )
    install(EXPORT harfbuzzConfig
        NAMESPACE harfbuzz::
