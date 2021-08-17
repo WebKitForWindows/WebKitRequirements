@@ -1,10 +1,10 @@
-set(VERSION 2.10.4)
+set(VERSION 2.11.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://download.savannah.gnu.org/releases/freetype/freetype-${VERSION}.tar.gz"
     FILENAME "freetype-${VERSION}.tar.gz"
-    SHA512 de3d9cb1711fcc443c16c131b785a286427ee001a5d729b30cd11cce872054829cdb750cb8f7c370cd6665aff0757c6c6aa221be5251ec03de36acc7e1f8af5c
+    SHA512 620de6ac0aef24e5e203a6bfa50a166c8b11c0b7b859c45644b439b0ea9d7f747192d5a3e5af6cd016297fbd521f35ab0407728777b600e7e09d0ecbe0128d3c
 )
 
 # Patches
@@ -54,7 +54,7 @@ vcpkg_copy_pdbs()
 
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
-file(INSTALL ${SOURCE_PATH}/docs/LICENSE.txt DESTINATION ${CURRENT_PACKAGES_DIR}/share/freetype RENAME copyright)
+file(INSTALL ${SOURCE_PATH}/LICENSE.txt DESTINATION ${CURRENT_PACKAGES_DIR}/share/freetype RENAME copyright)
 file(INSTALL 
     ${SOURCE_PATH}/docs/FTL.txt
     ${SOURCE_PATH}/docs/GPLv2.txt
