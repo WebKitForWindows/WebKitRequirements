@@ -19,7 +19,7 @@
 | [zlib](https://github.com/zlib-ng/zlib-ng) | 2.0.5 | 2021-06-25 |
 | [brotli](https://github.com/google/brotli) | 1.0.9 | 2020-08-27 |
 | [libressl](https://www.libressl.org) | 3.3.3 | 2021-05-03 |
-| [nghttp2](https://nghttp2.org) | 1.43.0 | 2021-02-02 |
+| [nghttp2](https://nghttp2.org) | 1.44.0 | 2021-07-17 |
 | [c-ares](https://c-ares.haxx.se) | 1.17.1 | 2020-11-19 |
 | [curl](https://curl.se) | 7.77.0 | 2021-05-26 |
 | [libxml2](http://xmlsoft.org/) | 2.9.11 | 2021-05-13 |
