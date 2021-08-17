@@ -1,11 +1,11 @@
-set(VERSION 1.17.1)
+set(VERSION 1.17.2)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/c-ares/c-ares/releases/download/cares-${TAG}/c-ares-${VERSION}.tar.gz"
     FILENAME "c-ares-${VERSION}.tar.gz"
-    SHA512 b11887bcc9274d368088e1a8b6aca62414f20675cf0bc58e948f54fa04c327c39dd23cefe7509eec6397db14b550a3f6b77f5c18b3d735b3eef48ce2da1dcd00
+    SHA512 f625e0ef8508af6475d3e83b51ab29be8a4878e2a87e7f518bea046b76a74bfde7043ca6ec2a9e714c898ab9e5d4a5a678c3347a9f9eb68980438f7ca8ae3fc8
 )
 
 # Patches
