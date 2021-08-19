@@ -95,8 +95,8 @@ Copy-DirectoryStructure `
    -Path (Join-Path $vcpkgPath 'scripts') `
    -Destination (Join-Path $PSScriptRoot 'scripts');
 Copy-DirectoryStructure `
-   -Path (Join-Path $vcpkgPath -ChildPath 'triplets' | Join-Path -ChildPath 'community') `
-   -Destination (Join-Path $PSScriptRoot -ChildPath 'triplets' | Join-Path -ChildPath 'community');
+   -Path (Join-Path $vcpkgPath -ChildPath 'triplets') `
+   -Destination (Join-Path $PSScriptRoot -ChildPath 'triplets');
 
 # Restore location
 Set-Location $currentPath;
