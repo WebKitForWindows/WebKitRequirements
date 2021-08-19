@@ -24,6 +24,11 @@ $currentPath = Get-Location;
 if (!(Test-Path $vcpkgPath)) {
   Write-Host ('Repository not found at {0}' -f $vcpkgPath);
 
+  if ((Get-Command "git.exe" -ErrorAction SilentlyContinue) -eq $null) {
+    Write-Error 'Unable to clone repository; git not present in path';
+    return;
+  }
+
   $arguments = @('clone','https://github.com/microsoft/vcpkg.git',$vcpkgPath);
   Write-Host ('git {0}' -f ($arguments -join ' '))
   Start-Process -Wait -NoNewWindow `
