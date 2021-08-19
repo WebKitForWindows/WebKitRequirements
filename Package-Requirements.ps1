@@ -21,7 +21,6 @@ if (!$ouput) {
   $tripletSplit = $triplet -split '-',3;
   $arch = $tripletSplit[0];
   $platform = $tripletSplit[1];
-  $linkage = $tripletSplit[2];
 
   if ($platform -eq 'windows') {
     if ($arch -eq 'x64') {
