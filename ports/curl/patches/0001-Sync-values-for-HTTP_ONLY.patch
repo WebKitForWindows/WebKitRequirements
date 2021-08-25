@@ -1,0 +1,96 @@
+From 4886962fb14382e8f4dd20c38a3cbc5c6f0f4f1b Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Fri, 20 Aug 2021 09:29:10 -0700
+Subject: [PATCH] curl_setup.h: sync values for HTTP_ONLY
+
+The values for HTTP_ONLY differed between CMakeLists.txt and
+curl_setup.h. Sync them and sort the values in curl_setup.h to make it
+easier to spot differences.
+
+Closes #7601
+---
+ CMakeLists.txt   |  1 +
+ lib/curl_setup.h | 40 +++++++++++++++++++++++-----------------
+ 2 files changed, 24 insertions(+), 17 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c85295e1154b..587478217d45 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -194,6 +194,7 @@ mark_as_advanced(CURL_DISABLE_MQTT)
+ option(CURL_ENABLE_EXPORT_TARGET "to enable cmake export target" ON)
+ mark_as_advanced(CURL_ENABLE_EXPORT_TARGET)
+ 
++# Corresponds to HTTP_ONLY in lib/curl_setup.h
+ if(HTTP_ONLY)
+   set(CURL_DISABLE_DICT ON)
+   set(CURL_DISABLE_FILE ON)
+diff --git a/lib/curl_setup.h b/lib/curl_setup.h
+index c0861d79b7d1..99048c489a3d 100644
+--- a/lib/curl_setup.h
++++ b/lib/curl_setup.h
+@@ -166,41 +166,47 @@
+  */
+ 
+ #ifdef HTTP_ONLY
+-#  ifndef CURL_DISABLE_TFTP
+-#    define CURL_DISABLE_TFTP
++#  ifndef CURL_DISABLE_DICT
++#    define CURL_DISABLE_DICT
++#  endif
++#  ifndef CURL_DISABLE_FILE
++#    define CURL_DISABLE_FILE
+ #  endif
+ #  ifndef CURL_DISABLE_FTP
+ #    define CURL_DISABLE_FTP
+ #  endif
++#  ifndef CURL_DISABLE_GOPHER
++#    define CURL_DISABLE_GOPHER
++#  endif
++#  ifndef CURL_DISABLE_IMAP
++#    define CURL_DISABLE_IMAP
++#  endif
+ #  ifndef CURL_DISABLE_LDAP
+ #    define CURL_DISABLE_LDAP
+ #  endif
+-#  ifndef CURL_DISABLE_TELNET
+-#    define CURL_DISABLE_TELNET
++#  ifndef CURL_DISABLE_LDAPS
++#    define CURL_DISABLE_LDAPS
+ #  endif
+-#  ifndef CURL_DISABLE_DICT
+-#    define CURL_DISABLE_DICT
++#  ifndef CURL_DISABLE_MQTT
++#    define CURL_DISABLE_MQTT
+ #  endif
+-#  ifndef CURL_DISABLE_FILE
+-#    define CURL_DISABLE_FILE
++#  ifndef CURL_DISABLE_POP3
++#    define CURL_DISABLE_POP3
+ #  endif
+ #  ifndef CURL_DISABLE_RTSP
+ #    define CURL_DISABLE_RTSP
+ #  endif
+-#  ifndef CURL_DISABLE_POP3
+-#    define CURL_DISABLE_POP3
+-#  endif
+-#  ifndef CURL_DISABLE_IMAP
+-#    define CURL_DISABLE_IMAP
++#  ifndef CURL_DISABLE_SMB
++#    define CURL_DISABLE_SMB
+ #  endif
+ #  ifndef CURL_DISABLE_SMTP
+ #    define CURL_DISABLE_SMTP
+ #  endif
+-#  ifndef CURL_DISABLE_GOPHER
+-#    define CURL_DISABLE_GOPHER
++#  ifndef CURL_DISABLE_TELNET
++#    define CURL_DISABLE_TELNET
+ #  endif
+-#  ifndef CURL_DISABLE_SMB
+-#    define CURL_DISABLE_SMB
++#  ifndef CURL_DISABLE_TFTP
++#    define CURL_DISABLE_TFTP
+ #  endif
+ #endif
+ 

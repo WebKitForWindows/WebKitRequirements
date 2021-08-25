@@ -10,7 +10,10 @@ vcpkg_download_distfile(ARCHIVE
 
 # Patches
 set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Sync-values-for-HTTP_ONLY.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Sync-CURL_DISABLE-options.patch
+    # Remove above after 7.79.0 release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Adjust-CMake-for-vcpkg.patch
 )
 
 # Extract archive
