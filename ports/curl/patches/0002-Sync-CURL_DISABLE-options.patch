@@ -1,0 +1,314 @@
+From 62dbfa30ba0342ad7586c9c83b432afac49b9d5b Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Tue, 24 Aug 2021 11:27:39 -0700
+Subject: [PATCH] cmake: sync CURL_DISABLE options
+
+Adds the full listing of CURL_DISABLE options to the CMake build. Moves
+all option code, except for CURL_DISABLE_OPENSSL_AUTO_LOA_CONFIG which
+resides near OpenSSL configuration, to the same block of code. Also
+sorts the options here and in the cmake config header.
+
+Additionally sorted the CURL-DISABLE listing and fixed the
+CURL_DISABLE_POP3 option.
+
+Closes #7624
+---
+ CMakeLists.txt          | 101 ++++++++++++++++++++++++----------------
+ docs/CURL-DISABLE.md    |  12 ++---
+ lib/curl_config.h.cmake |  73 ++++++++++++++++++++---------
+ 3 files changed, 117 insertions(+), 69 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 587478217d45..d8084de8e912 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -156,45 +156,78 @@ endif()
+ 
+ include(CurlSymbolHiding)
+ 
+-option(HTTP_ONLY "disables all protocols except HTTP (This overrides all CURL_DISABLE_* options)" OFF)
+-mark_as_advanced(HTTP_ONLY)
+-option(CURL_DISABLE_FTP "disables FTP" OFF)
+-mark_as_advanced(CURL_DISABLE_FTP)
+-option(CURL_DISABLE_LDAP "disables LDAP" OFF)
+-mark_as_advanced(CURL_DISABLE_LDAP)
+-option(CURL_DISABLE_TELNET "disables Telnet" OFF)
+-mark_as_advanced(CURL_DISABLE_TELNET)
++option(CURL_ENABLE_EXPORT_TARGET "to enable cmake export target" ON)
++mark_as_advanced(CURL_ENABLE_EXPORT_TARGET)
++
++option(CURL_DISABLE_ALTSVC "disables alt-svc support" OFF)
++mark_as_advanced(CURL_DISABLE_ALTSVC)
++option(CURL_DISABLE_COOKIES "disables cookies support" OFF)
++mark_as_advanced(CURL_DISABLE_COOKIES)
++option(CURL_DISABLE_CRYPTO_AUTH "disables cryptographic authentication" OFF)
++mark_as_advanced(CURL_DISABLE_CRYPTO_AUTH)
+ option(CURL_DISABLE_DICT "disables DICT" OFF)
+ mark_as_advanced(CURL_DISABLE_DICT)
++option(CURL_DISABLE_DOH "disables DNS-over-HTTPS" OFF)
++mark_as_advanced(CURL_DISABLE_DOH)
+ option(CURL_DISABLE_FILE "disables FILE" OFF)
+ mark_as_advanced(CURL_DISABLE_FILE)
+-option(CURL_DISABLE_TFTP "disables TFTP" OFF)
+-mark_as_advanced(CURL_DISABLE_TFTP)
++option(CURL_DISABLE_FTP "disables FTP" OFF)
++mark_as_advanced(CURL_DISABLE_FTP)
++option(CURL_DISABLE_GETOPTIONS "disables curl_easy_options API for existing options to curl_easy_setopt" OFF)
++mark_as_advanced(CURL_DISABLE_GETOPTIONS)
++option(CURL_DISABLE_GOPHER "disables Gopher" OFF)
++mark_as_advanced(CURL_DISABLE_GOPHER)
++option(CURL_DISABLE_HSTS "disables HSTS support" OFF)
++mark_as_advanced(CURL_DISABLE_HSTS)
+ option(CURL_DISABLE_HTTP "disables HTTP" OFF)
+ mark_as_advanced(CURL_DISABLE_HTTP)
+-
+-option(CURL_DISABLE_LDAPS "to disable LDAPS" OFF)
++option(CURL_DISABLE_HTTP_AUTH "disables all HTTP authentication methods" OFF)
++mark_as_advanced(CURL_DISABLE_HTTP_AUTH)
++option(CURL_DISABLE_IMAP "disables IMAP" OFF)
++mark_as_advanced(CURL_DISABLE_IMAP)
++option(CURL_DISABLE_LDAP "disables LDAP" OFF)
++mark_as_advanced(CURL_DISABLE_LDAP)
++option(CURL_DISABLE_LDAPS "disables LDAPS" OFF)
+ mark_as_advanced(CURL_DISABLE_LDAPS)
+-
+-option(CURL_DISABLE_RTSP "to disable RTSP" OFF)
+-mark_as_advanced(CURL_DISABLE_RTSP)
+-option(CURL_DISABLE_PROXY "to disable proxy" OFF)
+-mark_as_advanced(CURL_DISABLE_PROXY)
+-option(CURL_DISABLE_POP3 "to disable POP3" OFF)
++option(CURL_DISABLE_LIBCURL_OPTION "disables --libcurl option from the curl tool" OFF)
++mark_as_advanced(CURL_DISABLE_LIBCURL_OPTION)
++option(CURL_DISABLE_MIME "disables MIME support" OFF)
++mark_as_advanced(CURL_DISABLE_MIME)
++option(CURL_DISABLE_MQTT "disables MQTT" OFF)
++mark_as_advanced(CURL_DISABLE_MQTT)
++option(CURL_DISABLE_NETRC "disables netrc parser" OFF)
++mark_as_advanced(CURL_DISABLE_NETRC)
++option(CURL_DISABLE_NTLM "disables NTLM support" OFF)
++mark_as_advanced(CURL_DISABLE_NTLM)
++option(CURL_DISABLE_PARSEDATE "disables date parsing" OFF)
++mark_as_advanced(CURL_DISABLE_PARSEDATE)
++option(CURL_DISABLE_POP3 "disables POP3" OFF)
+ mark_as_advanced(CURL_DISABLE_POP3)
+-option(CURL_DISABLE_IMAP "to disable IMAP" OFF)
+-mark_as_advanced(CURL_DISABLE_IMAP)
+-option(CURL_DISABLE_SMTP "to disable SMTP" OFF)
++option(CURL_DISABLE_PROGRESS_METER "disables built-in progress meter" OFF)
++mark_as_advanced(CURL_DISABLE_PROGRESS_METER)
++option(CURL_DISABLE_PROXY "disables proxy support" OFF)
++mark_as_advanced(CURL_DISABLE_PROXY)
++option(CURL_DISABLE_RTSP "disables RTSP" OFF)
++mark_as_advanced(CURL_DISABLE_RTSP)
++option(CURL_DISABLE_SHUFFLE_DNS "disables shuffle DNS feature" OFF)
++mark_as_advanced(CURL_DISABLE_SHUFFLE_DNS)
++option(CURL_DISABLE_SMB "disables SMB" OFF)
++mark_as_advanced(CURL_DISABLE_SMB)
++option(CURL_DISABLE_SMTP "disables SMTP" OFF)
+ mark_as_advanced(CURL_DISABLE_SMTP)
+-option(CURL_DISABLE_GOPHER "to disable Gopher" OFF)
+-mark_as_advanced(CURL_DISABLE_GOPHER)
+-option(CURL_DISABLE_MQTT "to disable MQTT" OFF)
+-mark_as_advanced(CURL_DISABLE_MQTT)
+-
+-option(CURL_ENABLE_EXPORT_TARGET "to enable cmake export target" ON)
+-mark_as_advanced(CURL_ENABLE_EXPORT_TARGET)
++option(CURL_DISABLE_SOCKETPAIR "disables use of socketpair for curl_multi_poll" OFF)
++mark_as_advanced(CURL_DISABLE_SOCKETPAIR)
++option(CURL_DISABLE_TELNET "disables Telnet" OFF)
++mark_as_advanced(CURL_DISABLE_TELNET)
++option(CURL_DISABLE_TFTP "disables TFTP" OFF)
++mark_as_advanced(CURL_DISABLE_TFTP)
++option(CURL_DISABLE_VERBOSE_STRINGS "disables verbose strings" OFF)
++mark_as_advanced(CURL_DISABLE_VERBOSE_STRINGS)
+ 
+ # Corresponds to HTTP_ONLY in lib/curl_setup.h
++option(HTTP_ONLY "disables all protocols except HTTP (This overrides all CURL_DISABLE_* options)" OFF)
++mark_as_advanced(HTTP_ONLY)
++
+ if(HTTP_ONLY)
+   set(CURL_DISABLE_DICT ON)
+   set(CURL_DISABLE_FILE ON)
+@@ -212,18 +245,6 @@ if(HTTP_ONLY)
+   set(CURL_DISABLE_TFTP ON)
+ endif()
+ 
+-option(CURL_DISABLE_ALTSVC "to disable alt-svc support" OFF)
+-mark_as_advanced(CURL_DISABLE_ALTSVC)
+-option(CURL_DISABLE_HSTS "to disable HSTS support" OFF)
+-mark_as_advanced(CURL_DISABLE_HSTS)
+-option(CURL_DISABLE_COOKIES "to disable cookies support" OFF)
+-mark_as_advanced(CURL_DISABLE_COOKIES)
+-option(CURL_DISABLE_CRYPTO_AUTH "to disable cryptographic authentication" OFF)
+-mark_as_advanced(CURL_DISABLE_CRYPTO_AUTH)
+-option(CURL_DISABLE_NTLM "to disable NTLM support" OFF)
+-mark_as_advanced(CURL_DISABLE_NTLM)
+-option(CURL_DISABLE_VERBOSE_STRINGS "to disable verbose strings" OFF)
+-mark_as_advanced(CURL_DISABLE_VERBOSE_STRINGS)
+ option(ENABLE_IPV6 "Define if you want to enable IPv6 support" ON)
+ mark_as_advanced(ENABLE_IPV6)
+ if(ENABLE_IPV6 AND NOT WIN32)
+diff --git a/docs/CURL-DISABLE.md b/docs/CURL-DISABLE.md
+index 5967d7b79c34..a2e75f198db5 100644
+--- a/docs/CURL-DISABLE.md
++++ b/docs/CURL-DISABLE.md
+@@ -12,10 +12,6 @@ Disable support for HTTP cookies.
+ 
+ Disable support for authentication methods using crypto.
+ 
+-## CURL_DISABLE_NTLM
+-
+-Disable support for NTLM.
+-
+ ## CURL_DISABLE_DICT
+ 
+ Disable the DICT protocol
+@@ -82,6 +78,10 @@ Disable MQTT support.
+ 
+ Disable the netrc parser.
+ 
++## CURL_DISABLE_NTLM
++
++Disable support for NTLM.
++
+ ## CURL_DISABLE_OPENSSL_AUTO_LOAD_CONFIG
+ 
+ Disable the auto load config support in the OpenSSL backend.
+@@ -90,9 +90,9 @@ Disable the auto load config support in the OpenSSL backend.
+ 
+ Disable date parsing
+ 
+-## CURL_DISABLE_POP
++## CURL_DISABLE_POP3
+ 
+-Disable the POP(S) protocols
++Disable the POP3 protocol
+ 
+ ## CURL_DISABLE_PROGRESS_METER
+ 
+diff --git a/lib/curl_config.h.cmake b/lib/curl_config.h.cmake
+index 89e11e18a64e..4ef4883b2cac 100644
+--- a/lib/curl_config.h.cmake
++++ b/lib/curl_config.h.cmake
+@@ -33,61 +33,91 @@
+ /* Location of default ca path */
+ #cmakedefine CURL_CA_PATH "${CURL_CA_PATH}"
+ 
+-/* to disable cookies support */
++/* disables alt-svc */
++#cmakedefine CURL_DISABLE_ALTSVC 1
++
++/* disables cookies support */
+ #cmakedefine CURL_DISABLE_COOKIES 1
+ 
+-/* to disable cryptographic authentication */
++/* disables cryptographic authentication */
+ #cmakedefine CURL_DISABLE_CRYPTO_AUTH 1
+ 
+-/* to disable DICT */
++/* disables DICT */
+ #cmakedefine CURL_DISABLE_DICT 1
+ 
+-/* to disable FILE */
++/* disables DNS-over-HTTPS */
++#cmakedefine CURL_DISABLE_DOH 1
++
++/* disables FILE */
+ #cmakedefine CURL_DISABLE_FILE 1
+ 
+-/* to disable FTP */
++/* disables FTP */
+ #cmakedefine CURL_DISABLE_FTP 1
+ 
+-/* to disable GOPHER */
++/* disables GOPHER */
+ #cmakedefine CURL_DISABLE_GOPHER 1
+ 
+-/* to disable IMAP */
+-#cmakedefine CURL_DISABLE_IMAP 1
++/* disables HSTS support */
++#cmakedefine CURL_DISABLE_HSTS 1
+ 
+-/* to disable HTTP */
++/* disables HTTP */
+ #cmakedefine CURL_DISABLE_HTTP 1
+ 
+-/* to disable LDAP */
++/* disables IMAP */
++#cmakedefine CURL_DISABLE_IMAP 1
++
++/* disables LDAP */
+ #cmakedefine CURL_DISABLE_LDAP 1
+ 
+-/* to disable LDAPS */
++/* disables LDAPS */
+ #cmakedefine CURL_DISABLE_LDAPS 1
+ 
+-/* to disable MQTT */
++/* disables --libcurl option from the curl tool */
++#cmakedefine CURL_DISABLE_LIBCURL_OPTION 1
++
++/* disables MIME support */
++#cmakedefine CURL_DISABLE_MIME 1
++
++/* disables MQTT */
+ #cmakedefine CURL_DISABLE_MQTT 1
+ 
+-/* to disable POP3 */
++/* disables netrc parser */
++#cmakedefine CURL_DISABLE_NETRC 1
++
++/* disables NTLM support */
++#cmakedefine CURL_DISABLE_NTLM 1
++
++/* disables date parsing */
++#cmakedefine CURL_DISABLE_PARSEDATE 1
++
++/* disables POP3 */
+ #cmakedefine CURL_DISABLE_POP3 1
+ 
+-/* to disable proxies */
++/* disables built-in progress meter */
++#cmakedefine CURL_DISABLE_PROGRESS_METER 1
++
++/* disables proxies */
+ #cmakedefine CURL_DISABLE_PROXY 1
+ 
+-/* to disable RTSP */
++/* disables RTSP */
+ #cmakedefine CURL_DISABLE_RTSP 1
+ 
+-/* to disable SMB */
++/* disables SMB */
+ #cmakedefine CURL_DISABLE_SMB 1
+ 
+-/* to disable SMTP */
++/* disables SMTP */
+ #cmakedefine CURL_DISABLE_SMTP 1
+ 
+-/* to disable TELNET */
++/* disables use of socketpair for curl_multi_poll */
++#cmakedefine CURL_DISABLE_SOCKETPAIR 1
++
++/* disables TELNET */
+ #cmakedefine CURL_DISABLE_TELNET 1
+ 
+-/* to disable TFTP */
++/* disables TFTP */
+ #cmakedefine CURL_DISABLE_TFTP 1
+ 
+-/* to disable verbose strings */
++/* disables verbose strings */
+ #cmakedefine CURL_DISABLE_VERBOSE_STRINGS 1
+ 
+ /* to make a symbol visible */
+@@ -925,9 +955,6 @@ ${SIZEOF_TIME_T_CODE}
+ /* if Unix domain sockets are enabled  */
+ #cmakedefine USE_UNIX_SOCKETS
+ 
+-/* to disable alt-svc */
+-#cmakedefine CURL_DISABLE_ALTSVC 1
+-
+ /* Define to 1 if you are building a Windows target with large file support. */
+ #cmakedefine USE_WIN32_LARGE_FILES 1
+ 
