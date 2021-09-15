@@ -1,19 +1,16 @@
-set(VERSION 7.78.0)
+set(VERSION 7.79.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 997b38e135384b3aa14c9d4cf2a8670e0b7ae45621f890024a59193a56f6d6277ec1543c889c060107e503d96f11e646b2a88b5dd845361e31c9d6744343caec
+    SHA512 206a01b86e9bacd24a6c80386e2e8dd9be51b3f0cb8e7e11d183b7c27c9952606808f0f28f008f75e3d2a4edabca8830734cc2026865c3151940a1d5f1473f01
 )
 
 # Patches
 set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Sync-values-for-HTTP_ONLY.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Sync-CURL_DISABLE-options.patch
-    # Remove above after 7.79.0 release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Adjust-CMake-for-vcpkg.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
 )
 
 # Extract archive
