@@ -1,4 +1,4 @@
-From 3a7e50b68f74c7a395144fb9f069df967107f696 Mon Sep 17 00:00:00 2001
+From 413b36e69521cf76db560a07aa0b0f54fdbd0fbb Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 5 Nov 2019 16:57:32 -0800
 Subject: [PATCH 2/2] Adjust CMake for vcpkg
@@ -21,5 +21,5 @@ index c4dbf91f2..1989ea4e7 100644
    if (HB_HAVE_ICU)
      install(TARGETS harfbuzz-icu
 -- 
-2.29.2.windows.1
+2.33.0.windows.2
 
