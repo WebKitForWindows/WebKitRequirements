@@ -1,6 +1,6 @@
-From 9e3cf1a4c1e5dff7e6904d439109d2fb11869d9c Mon Sep 17 00:00:00 2001
+From 9d655b5e1af75db87e3e84116e604c9f36dd527c Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
-Date: Wed, 25 Aug 2021 13:19:51 -0700
+Date: Mon, 26 Nov 2018 16:32:05 -0800
 Subject: [PATCH] Adjust CMake for vcpkg
 
 ---
@@ -21,5 +21,5 @@ index d8084de8e..50a73f2dc 100644
  set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
  set(project_config "${generated_dir}/${PROJECT_NAME}Config.cmake")
 -- 
-2.29.2.windows.1
+2.33.0.windows.2
 
