@@ -63,6 +63,7 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_fixup_pkgconfig()
 
 if (ENABLE_TOOLS)
     # Rearrange location of tools
