@@ -42,6 +42,7 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
 if (tools IN_LIST FEATURES)
