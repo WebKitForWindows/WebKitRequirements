@@ -18,7 +18,7 @@
 | [icu](http://site.icu-project.org) | 69.1 | 2021-03-18 |
 | [zlib](https://github.com/zlib-ng/zlib-ng) | 2.0.5 | 2021-06-25 |
 | [brotli](https://github.com/google/brotli) | 1.0.9 | 2020-08-27 |
-| [libressl](https://www.libressl.org) | 3.4.0 | 2021-09-15 |
+| [libressl](https://www.libressl.org) | 3.4.1 | 2021-10-14 |
 | [nghttp2](https://nghttp2.org) | 1.46.0 | 2021-10-19 |
 | [c-ares](https://c-ares.haxx.se) | 1.17.2 | 2021-08-10 |
 | [curl](https://curl.se) | 7.79.1 | 2021-09-22 |
