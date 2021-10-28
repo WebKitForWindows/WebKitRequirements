@@ -20,7 +20,7 @@
 | [brotli](https://github.com/google/brotli) | 1.0.9 | 2020-08-27 |
 | [libressl](https://www.libressl.org) | 3.4.1 | 2021-10-14 |
 | [nghttp2](https://nghttp2.org) | 1.46.0 | 2021-10-19 |
-| [c-ares](https://c-ares.haxx.se) | 1.18.0 | 2021-10-25 |
+| [c-ares](https://c-ares.org) | 1.18.1 | 2021-10-27 |
 | [curl](https://curl.se) | 7.79.1 | 2021-09-22 |
 | [libxml2](http://xmlsoft.org/) | 2.9.11 | 2021-05-13 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.34 | 2019-10-30 |
