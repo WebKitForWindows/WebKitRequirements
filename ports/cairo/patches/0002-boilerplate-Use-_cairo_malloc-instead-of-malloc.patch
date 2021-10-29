@@ -1,0 +1,176 @@
+From ca613dc5f15ed74573ec821b72c97c021d5073d5 Mon Sep 17 00:00:00 2001
+From: Bryce Harrington <bryce@osg.samsung.com>
+Date: Mon, 7 May 2018 17:11:24 -0700
+Subject: [PATCH 02/11] boilerplate: Use _cairo_malloc instead of malloc
+
+This changes most instances of malloc() calls to use Cairo's safer
+_cairo_malloc().  The malloc() call in the implementation of
+boilerplate's xmalloc() is not changed since it already includes a
+size=0 check.
+
+Signed-off-by: Bryce Harrington <bryce@osg.samsung.com>
+---
+ boilerplate/cairo-boilerplate-cogl.c           | 5 +++--
+ boilerplate/cairo-boilerplate-vg.c             | 3 ++-
+ boilerplate/cairo-boilerplate-win32-printing.c | 3 ++-
+ boilerplate/cairo-boilerplate-xcb.c            | 3 ++-
+ boilerplate/cairo-boilerplate-xlib.c           | 3 ++-
+ boilerplate/cairo-boilerplate.c                | 7 ++++---
+ 6 files changed, 15 insertions(+), 9 deletions(-)
+
+diff --git a/boilerplate/cairo-boilerplate-cogl.c b/boilerplate/cairo-boilerplate-cogl.c
+index 0982e4133..2339dd883 100644
+--- a/boilerplate/cairo-boilerplate-cogl.c
++++ b/boilerplate/cairo-boilerplate-cogl.c
+@@ -31,6 +31,7 @@
+  */
+ 
+ #include "cairo-boilerplate-private.h"
++#include "cairo-malloc-private.h"
+ 
+ #include <cairo-cogl.h>
+ #include <cogl/cogl2-experimental.h>
+@@ -80,7 +81,7 @@ _cairo_boilerplate_cogl_create_offscreen_color_surface (const char		*name,
+     /* The device will take a reference on the context */
+     cogl_object_unref (context);
+ 
+-    closure = malloc (sizeof (cogl_closure_t));
++    closure = _cairo_malloc (sizeof (cogl_closure_t));
+     *abstract_closure = closure;
+     closure->device = device;
+     closure->surface = cairo_cogl_offscreen_surface_create (device,
+@@ -151,7 +152,7 @@ _cairo_boilerplate_cogl_create_onscreen_color_surface (const char	       *name,
+     /* The device will take a reference on the context */
+     cogl_object_unref (context);
+ 
+-    closure = malloc (sizeof (cogl_closure_t));
++    closure = _cairo_malloc (sizeof (cogl_closure_t));
+     *abstract_closure = closure;
+     closure->device = device;
+     closure->surface = cairo_cogl_onscreen_surface_create (device,
+diff --git a/boilerplate/cairo-boilerplate-vg.c b/boilerplate/cairo-boilerplate-vg.c
+index 692765745..4ea6ba46b 100644
+--- a/boilerplate/cairo-boilerplate-vg.c
++++ b/boilerplate/cairo-boilerplate-vg.c
+@@ -31,6 +31,7 @@
+  */
+ 
+ #include "cairo-boilerplate-private.h"
++#include "cairo-malloc-private.h"
+ 
+ #include <cairo-vg.h>
+ 
+@@ -105,7 +106,7 @@ _cairo_boilerplate_vg_create_surface_glx (const char		    *name,
+     cairo_vg_context_t *context;
+     vg_closure_glx_t *vgc;
+ 
+-    vgc = malloc (sizeof (vg_closure_glx_t));
++    vgc = _cairo_malloc (sizeof (vg_closure_glx_t));
+     *closure = vgc;
+ 
+     if (width == 0)
+diff --git a/boilerplate/cairo-boilerplate-win32-printing.c b/boilerplate/cairo-boilerplate-win32-printing.c
+index 4bc1dd459..3d815167f 100644
+--- a/boilerplate/cairo-boilerplate-win32-printing.c
++++ b/boilerplate/cairo-boilerplate-win32-printing.c
+@@ -35,6 +35,7 @@
+ #endif
+ 
+ #include "cairo-boilerplate-private.h"
++#include "cairo-malloc-private.h"
+ 
+ #if CAIRO_CAN_TEST_WIN32_PRINTING_SURFACE
+ 
+@@ -131,7 +132,7 @@ create_printer_dc (win32_target_closure_t *ptc)
+ 
+     ptc->dc = NULL;
+     GetDefaultPrinter (NULL, &size);
+-    printer_name = malloc (size);
++    printer_name = _cairo_malloc (size);
+ 
+     if (printer_name == NULL)
+ 	return;
+diff --git a/boilerplate/cairo-boilerplate-xcb.c b/boilerplate/cairo-boilerplate-xcb.c
+index cc9b422e9..de9583ff3 100644
+--- a/boilerplate/cairo-boilerplate-xcb.c
++++ b/boilerplate/cairo-boilerplate-xcb.c
+@@ -25,6 +25,7 @@
+  */
+ 
+ #include "cairo-boilerplate-private.h"
++#include "cairo-malloc-private.h"
+ 
+ #include <cairo-xcb.h>
+ 
+@@ -206,7 +207,7 @@ _cairo_boilerplate_xcb_create_similar (cairo_surface_t *other,
+     xcb_render_pictforminfo_t *render_format;
+     int depth;
+ 
+-    similar = malloc (sizeof (*similar));
++    similar = _cairo_malloc (sizeof (*similar));
+ 
+     switch (content) {
+     default:
+diff --git a/boilerplate/cairo-boilerplate-xlib.c b/boilerplate/cairo-boilerplate-xlib.c
+index f3d559806..5d2498ccd 100644
+--- a/boilerplate/cairo-boilerplate-xlib.c
++++ b/boilerplate/cairo-boilerplate-xlib.c
+@@ -26,6 +26,7 @@
+ 
+ #include "cairo-boilerplate-private.h"
+ #include "cairo-boilerplate-xlib.h"
++#include "cairo-malloc-private.h"
+ 
+ #include <cairo-xlib.h>
+ #if CAIRO_HAS_XLIB_XRENDER_SURFACE
+@@ -244,7 +245,7 @@ _cairo_boilerplate_xlib_create_similar (cairo_surface_t		*other,
+     struct similar *similar;
+     cairo_surface_t *surface;
+ 
+-    similar = malloc (sizeof (*similar));
++    similar = _cairo_malloc (sizeof (*similar));
+     similar->dpy = cairo_xlib_surface_get_display (other);
+ 
+     switch (content) {
+diff --git a/boilerplate/cairo-boilerplate.c b/boilerplate/cairo-boilerplate.c
+index 383606177..30f0f6b01 100644
+--- a/boilerplate/cairo-boilerplate.c
++++ b/boilerplate/cairo-boilerplate.c
+@@ -26,6 +26,7 @@
+ 
+ #include "cairo-boilerplate-private.h"
+ #include "cairo-boilerplate-scaled-font.h"
++#include "cairo-malloc-private.h"
+ 
+ #include <pixman.h>
+ 
+@@ -177,7 +178,7 @@ _cairo_boilerplate_image_create_similar (cairo_surface_t *other,
+     }
+ 
+     stride = cairo_format_stride_for_width(format, width);
+-    ptr = malloc (stride* height);
++    ptr = _cairo_malloc (stride * height);
+ 
+     surface = cairo_image_surface_create_for_data (ptr, format,
+ 						   width, height, stride);
+@@ -226,7 +227,7 @@ _cairo_boilerplate_image16_create_similar (cairo_surface_t *other,
+     }
+ 
+     stride = cairo_format_stride_for_width(format, width);
+-    ptr = malloc (stride* height);
++    ptr = _cairo_malloc (stride * height);
+ 
+     surface = cairo_image_surface_create_for_data (ptr, format,
+ 						   width, height, stride);
+@@ -239,7 +240,7 @@ static char *
+ _cairo_boilerplate_image_describe (void *closure)
+ {
+     char *s;
+-  
++
+     xasprintf (&s, "pixman %s", pixman_version_string ());
+ 
+     return s;
+-- 
+2.33.0.windows.2
+
