@@ -1,0 +1,41 @@
+From b9d58e31e3fbfe9d4a1b1080b457986df9d7250b Mon Sep 17 00:00:00 2001
+From: Uli Schlachter <psychon@znc.in>
+Date: Fri, 25 Dec 2020 16:09:19 +0100
+Subject: [PATCH 03/11] Add a bounds check to cairo_cff_parse_charstring()
+
+The code in cairo-cff-subset.c parses a binary font format without
+seeming to bother much verifying the data. The result is that poppler
+can be used to cause an out-of-bounds access in
+cairo_cff_parse_charstring() via a crafted font file. Fix this by adding
+the needed length check.
+
+The other code in the file also contains lots of similar things. Since I
+cannot really fix everything properly, I'll just fix the one instance
+that was found by a fuzzer.
+
+No testcase is added, because this depends on a broken font that is
+quite large. Adding something this big to the test suite does not seem
+sensible.
+
+Fixes: https://gitlab.freedesktop.org/cairo/cairo/-/issues/444
+Signed-off-by: Uli Schlachter <psychon@znc.in>
+---
+ src/cairo-cff-subset.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/cairo-cff-subset.c b/src/cairo-cff-subset.c
+index fce4195e9..f85190f77 100644
+--- a/src/cairo-cff-subset.c
++++ b/src/cairo-cff-subset.c
+@@ -1604,6 +1604,8 @@ cairo_cff_parse_charstring (cairo_cff_font_t *font,
+ 		}
+             } else {
+                 sub_num = font->type2_stack_top_value + font->local_sub_bias;
++		if (sub_num >= _cairo_array_num_elements(&font->local_sub_index))
++		    return CAIRO_INT_STATUS_UNSUPPORTED;
+                 element = _cairo_array_index (&font->local_sub_index, sub_num);
+                 if (! font->local_subs_used[sub_num] ||
+ 		    (need_width && !font->type2_found_width))
+-- 
+2.33.0.windows.2
+

@@ -16,6 +16,17 @@ vcpkg_download_distfile(ARCHIVE
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Rename-stat-to-stats.patch
+    # Remove after next release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-boilerplate-Use-_cairo_malloc-instead-of-malloc.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Add-a-bounds-check-to-cairo_cff_parse_charstring.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Slightly-improve-dealing-with-error-snapshots.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0005-Add-a-bounds-check-to-cairo_cff_font_read_fdselect.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0006-Avoid-a-use-after-free.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0007-Avoid-a-use-after-scope.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0008-Fix-undefined-left-shifts.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0009-Fix-out-of-bounds-access-in-cairo_type1_font_subset_.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0010-Fix-memory-leak-in-cairo_cff_font_read_cid_fontdict.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0011-cff-Check-subroutine-number-is-valid-before-using-as.patch
 )
 
 # Extract archive

@@ -1,0 +1,370 @@
+From efef7ee575accb6390f26ce41bd152e228dcdb5d Mon Sep 17 00:00:00 2001
+From: Heiko Lewin <hlewin@worldiety.de>
+Date: Wed, 31 Mar 2021 12:20:34 +0200
+Subject: [PATCH 08/11] Fix undefined left-shifts
+
+---
+ src/cairo-base85-stream.c           | 2 +-
+ src/cairo-beos-surface.cpp          | 2 +-
+ src/cairo-box-inline.h              | 2 +-
+ src/cairo-cff-subset.c              | 2 +-
+ src/cairo-gl-gradient.c             | 6 +++---
+ src/cairo-gl-shaders.c              | 2 +-
+ src/cairo-image-compositor.c        | 4 ++--
+ src/cairo-png.c                     | 4 ++--
+ src/cairo-truetype-subset-private.h | 2 +-
+ src/cairo-type1-subset.c            | 8 ++++----
+ src/cairo-vg-surface.c              | 2 +-
+ src/cairo-xcb-surface-render.c      | 2 +-
+ src/cairo-xlib-render-compositor.c  | 2 +-
+ src/cairo-xlib-source.c             | 4 ++--
+ src/cairo-xlib-surface.c            | 2 +-
+ src/cairoint.h                      | 2 +-
+ src/drm/cairo-drm-i915-private.h    | 4 ++--
+ src/drm/cairo-drm-i915-shader.c     | 4 ++--
+ src/drm/cairo-drm-i965-shader.c     | 2 +-
+ src/win32/cairo-win32-font.c        | 2 +-
+ 20 files changed, 30 insertions(+), 30 deletions(-)
+
+diff --git a/src/cairo-base85-stream.c b/src/cairo-base85-stream.c
+index 3202f1e5f..c7f02ca50 100644
+--- a/src/cairo-base85-stream.c
++++ b/src/cairo-base85-stream.c
+@@ -53,7 +53,7 @@ _expand_four_tuple_to_five (unsigned char four_tuple[4],
+     uint32_t value;
+     int digit, i;
+ 
+-    value = four_tuple[0] << 24 | four_tuple[1] << 16 | four_tuple[2] << 8 | four_tuple[3];
++    value = (uint32_t)four_tuple[0] << 24 | four_tuple[1] << 16 | four_tuple[2] << 8 | four_tuple[3];
+     if (all_zero)
+ 	*all_zero = TRUE;
+     for (i = 0; i < 5; i++) {
+diff --git a/src/cairo-beos-surface.cpp b/src/cairo-beos-surface.cpp
+index c97641685..65db0b97a 100644
+--- a/src/cairo-beos-surface.cpp
++++ b/src/cairo-beos-surface.cpp
+@@ -284,7 +284,7 @@ premultiply_bgra (unsigned char* data,
+ 		    green = multiply_alpha (alpha, green);
+ 		    red   = multiply_alpha (alpha, red);
+ 		}
+-		p = (alpha << 0) | (red << 8) | (green << 16) | (blue << 24);
++		p = (alpha << 0) | (red << 8) | (green << 16) | ((uint32_t)blue << 24);
+ 	    }
+ 	    memcpy (&out[4*i], &p, sizeof (uint32_t));
+ 	}
+diff --git a/src/cairo-box-inline.h b/src/cairo-box-inline.h
+index 59e5a0d5f..40bfdd74f 100644
+--- a/src/cairo-box-inline.h
++++ b/src/cairo-box-inline.h
+@@ -111,7 +111,7 @@ static inline cairo_bool_t
+ _cairo_box_is_pixel_aligned (const cairo_box_t *box)
+ {
+ #if CAIRO_FIXED_FRAC_BITS <= 8 && 0
+-    return ((box->p1.x & CAIRO_FIXED_FRAC_MASK) << 24 |
++    return ((uint32_t)(box->p1.x & CAIRO_FIXED_FRAC_MASK) << 24 |
+ 	    (box->p1.y & CAIRO_FIXED_FRAC_MASK) << 16 |
+ 	    (box->p2.x & CAIRO_FIXED_FRAC_MASK) << 8 |
+ 	    (box->p2.y & CAIRO_FIXED_FRAC_MASK) << 0) == 0;
+diff --git a/src/cairo-cff-subset.c b/src/cairo-cff-subset.c
+index d536f25c9..d0597c213 100644
+--- a/src/cairo-cff-subset.c
++++ b/src/cairo-cff-subset.c
+@@ -250,7 +250,7 @@ decode_integer (unsigned char *p, int *integer)
+         *integer = (int)(p[1]<<8 | p[2]);
+         p += 3;
+     } else if (*p == 29) {
+-        *integer = (int)((p[1] << 24) | (p[2] << 16) | (p[3] << 8) | p[4]);
++        *integer = (int)(((uint32_t)p[1] << 24) | (p[2] << 16) | (p[3] << 8) | p[4]);
+         p += 5;
+     } else if (*p >= 32 && *p <= 246) {
+         *integer = *p++ - 139;
+diff --git a/src/cairo-gl-gradient.c b/src/cairo-gl-gradient.c
+index 6107bea1e..1bbd8dd0e 100644
+--- a/src/cairo-gl-gradient.c
++++ b/src/cairo-gl-gradient.c
+@@ -39,7 +39,7 @@
+  */
+ 
+ #include "cairoint.h"
+-
++#include <stdint.h>
+ #include "cairo-error-private.h"
+ #include "cairo-gl-gradient-private.h"
+ #include "cairo-gl-private.h"
+@@ -99,9 +99,9 @@ static uint32_t color_stop_to_pixel(const cairo_gradient_stop_t *stop)
+     b = premultiply(stop->color.blue,  stop->color.alpha);
+ 
+     if (_cairo_is_little_endian ())
+-	return a << 24 | r << 16 | g << 8 | b << 0;
++	return (uint32_t)a << 24 | r << 16 | g << 8 | b << 0;
+     else
+-	return a << 0 | r << 8 | g << 16 | b << 24;
++	return a << 0 | r << 8 | g << 16 | (uint32_t)b << 24;
+ }
+ 
+ static cairo_status_t
+diff --git a/src/cairo-gl-shaders.c b/src/cairo-gl-shaders.c
+index f789ae1d9..513ad8543 100644
+--- a/src/cairo-gl-shaders.c
++++ b/src/cairo-gl-shaders.c
+@@ -122,7 +122,7 @@ _cairo_gl_shader_cache_equal_gles2 (const void *key_a, const void *key_b)
+ static unsigned long
+ _cairo_gl_shader_cache_hash (const cairo_shader_cache_entry_t *entry)
+ {
+-    return ((entry->src << 24) | (entry->mask << 16) | (entry->dest << 8) | (entry->in << 1) | entry->use_coverage) ^ entry->vertex;
++    return (((uint32_t)entry->src << 24) | (entry->mask << 16) | (entry->dest << 8) | (entry->in << 1) | entry->use_coverage) ^ entry->vertex;
+ }
+ 
+ static void
+diff --git a/src/cairo-image-compositor.c b/src/cairo-image-compositor.c
+index 79ad69f68..4d94018e4 100644
+--- a/src/cairo-image-compositor.c
++++ b/src/cairo-image-compositor.c
+@@ -130,7 +130,7 @@ static inline uint32_t
+ color_to_uint32 (const cairo_color_t *color)
+ {
+     return
+-        (color->alpha_short >> 8 << 24) |
++        ((uint32_t)color->alpha_short >> 8 << 24) |
+         (color->red_short >> 8 << 16)   |
+         (color->green_short & 0xff00)   |
+         (color->blue_short >> 8);
+@@ -891,7 +891,7 @@ composite_glyphs (void				*_dst,
+     for (i = 0; i < info->num_glyphs; i++) {
+ 	unsigned long index = info->glyphs[i].index;
+ 	const void *glyph;
+-        int xphase, yphase;
++        uint32_t xphase, yphase;
+ 
+         xphase = PHASE(info->glyphs[i].x);
+         yphase = PHASE(info->glyphs[i].y);
+diff --git a/src/cairo-png.c b/src/cairo-png.c
+index 0037dd531..f576047b1 100644
+--- a/src/cairo-png.c
++++ b/src/cairo-png.c
+@@ -595,7 +595,7 @@ premultiply_data (png_structp   png,
+ 		green = multiply_alpha (alpha, green);
+ 		blue  = multiply_alpha (alpha, blue);
+ 	    }
+-	    p = (alpha << 24) | (red << 16) | (green << 8) | (blue << 0);
++	    p = ((uint32_t)alpha << 24) | (red << 16) | (green << 8) | (blue << 0);
+ 	}
+ 	memcpy (base, &p, sizeof (uint32_t));
+     }
+@@ -614,7 +614,7 @@ convert_bytes_to_data (png_structp png, png_row_infop row_info, png_bytep data)
+ 	uint8_t  blue  = base[2];
+ 	uint32_t pixel;
+ 
+-	pixel = (0xff << 24) | (red << 16) | (green << 8) | (blue << 0);
++	pixel = (0xffu << 24) | (red << 16) | (green << 8) | (blue << 0);
+ 	memcpy (base, &pixel, sizeof (uint32_t));
+     }
+ }
+diff --git a/src/cairo-truetype-subset-private.h b/src/cairo-truetype-subset-private.h
+index dc9573216..d97cf9162 100644
+--- a/src/cairo-truetype-subset-private.h
++++ b/src/cairo-truetype-subset-private.h
+@@ -52,7 +52,7 @@
+  * if you add new tables/structs that should be packed.
+  */
+ 
+-#define MAKE_TT_TAG(a, b, c, d)    (a<<24 | b<<16 | c<<8 | d)
++#define MAKE_TT_TAG(a, b, c, d)    ((int)((uint32_t)a<<24 | b<<16 | c<<8 | d))
+ #define TT_TAG_CFF    MAKE_TT_TAG('C','F','F',' ')
+ #define TT_TAG_cmap   MAKE_TT_TAG('c','m','a','p')
+ #define TT_TAG_cvt    MAKE_TT_TAG('c','v','t',' ')
+diff --git a/src/cairo-type1-subset.c b/src/cairo-type1-subset.c
+index 068b59e99..2f04c8e10 100644
+--- a/src/cairo-type1-subset.c
++++ b/src/cairo-type1-subset.c
+@@ -222,18 +222,18 @@ cairo_type1_font_subset_find_segments (cairo_type1_font_subset_t *font)
+     font->type1_end = font->type1_data + font->type1_length;
+     if (p[0] == 0x80 && p[1] == 0x01) {
+ 	font->header_segment_size =
+-	    p[2] | (p[3] << 8) | (p[4] << 16) | (p[5] << 24);
++	    p[2] | (p[3] << 8) | (p[4] << 16) | ((uint32_t)p[5] << 24);
+ 	font->header_segment = (char *) p + 6;
+ 
+ 	p += 6 + font->header_segment_size;
+ 	font->eexec_segment_size =
+-	    p[2] | (p[3] << 8) | (p[4] << 16) | (p[5] << 24);
++	    p[2] | (p[3] << 8) | (p[4] << 16) | ((uint32_t)p[5] << 24);
+ 	font->eexec_segment = (char *) p + 6;
+ 	font->eexec_segment_is_ascii = (p[1] == 1);
+ 
+         p += 6 + font->eexec_segment_size;
+         while (p < (unsigned char *) (font->type1_end) && p[1] != 0x03) {
+-            size = p[2] | (p[3] << 8) | (p[4] << 16) | (p[5] << 24);
++            size = p[2] | (p[3] << 8) | (p[4] << 16) | ((uint32_t)p[5] << 24);
+             p += 6 + size;
+         }
+         font->type1_end = (char *) p;
+@@ -714,7 +714,7 @@ cairo_type1_font_subset_decode_integer (const unsigned char *p, int *integer)
+         *integer = -(p[0] - 251) * 256 - p[1] - 108;
+         p += 2;
+     } else {
+-        *integer = (p[1] << 24) | (p[2] << 16) | (p[3] << 8) | p[4];
++        *integer = ((uint32_t)p[1] << 24) | (p[2] << 16) | (p[3] << 8) | p[4];
+         p += 5;
+     }
+ 
+diff --git a/src/cairo-vg-surface.c b/src/cairo-vg-surface.c
+index 77986331a..cbff748fe 100644
+--- a/src/cairo-vg-surface.c
++++ b/src/cairo-vg-surface.c
+@@ -1373,7 +1373,7 @@ premultiply_argb (uint8_t   *data,
+ 		uint8_t r = multiply_alpha (alpha, (p >> 16) & 0xff);
+ 		uint8_t g = multiply_alpha (alpha, (p >>  8) & 0xff);
+ 		uint8_t b = multiply_alpha (alpha, (p >>  0) & 0xff);
+-		row[i] = (alpha << 24) | (r << 16) | (g << 8) | (b << 0);
++		row[i] = ((uint32_t)alpha << 24) | (r << 16) | (g << 8) | (b << 0);
+ 	    }
+ 	}
+ 
+diff --git a/src/cairo-xcb-surface-render.c b/src/cairo-xcb-surface-render.c
+index 42f27c71f..09137814a 100644
+--- a/src/cairo-xcb-surface-render.c
++++ b/src/cairo-xcb-surface-render.c
+@@ -627,7 +627,7 @@ _solid_picture (cairo_xcb_surface_t *target,
+ 	    gc = _cairo_xcb_screen_get_gc (target->screen, pixmap, 32);
+ 
+ 	    /* XXX byte ordering? */
+-	    pixel = ((color->alpha_short >> 8) << 24) |
++	    pixel = (((uint32_t)color->alpha_short >> 8) << 24) |
+ 		    ((color->red_short   >> 8) << 16) |
+ 		    ((color->green_short >> 8) << 8) |
+ 		    ((color->blue_short  >> 8) << 0);
+diff --git a/src/cairo-xlib-render-compositor.c b/src/cairo-xlib-render-compositor.c
+index bce0ff6db..d9f3233e4 100644
+--- a/src/cairo-xlib-render-compositor.c
++++ b/src/cairo-xlib-render-compositor.c
+@@ -1607,7 +1607,7 @@ composite_glyphs (void				*surface,
+     op = _render_operator (op),
+     _cairo_xlib_surface_ensure_picture (dst);
+     for (i = 0; i < num_glyphs; i++) {
+-        int xphase, yphase;
++        uint32_t xphase, yphase;
+ 	int this_x, this_y;
+ 	int old_width;
+ 
+diff --git a/src/cairo-xlib-source.c b/src/cairo-xlib-source.c
+index 6269edca5..4c3b99d9e 100644
+--- a/src/cairo-xlib-source.c
++++ b/src/cairo-xlib-source.c
+@@ -487,7 +487,7 @@ color_source (cairo_xlib_surface_t *dst, const cairo_color_t *color)
+ 	    }
+ 
+ 	    gcv.foreground = 0;
+-	    gcv.foreground |= color->alpha_short >> 8 << 24;
++	    gcv.foreground |= (uint32_t)color->alpha_short >> 8 << 24;
+ 	    gcv.foreground |= color->red_short   >> 8 << 16;
+ 	    gcv.foreground |= color->green_short >> 8 << 8;
+ 	    gcv.foreground |= color->blue_short  >> 8 << 0;
+@@ -567,7 +567,7 @@ transparent_source (cairo_xlib_surface_t *dst, const cairo_color_t *color)
+ {
+     cairo_xlib_display_t *display = dst->display;
+     uint32_t pixel =
+-	color->alpha_short >> 8 << 24 |
++	(uint32_t)color->alpha_short >> 8 << 24 |
+ 	color->red_short   >> 8 << 16 |
+ 	color->green_short >> 8 << 8 |
+ 	color->blue_short  >> 8 << 0;
+diff --git a/src/cairo-xlib-surface.c b/src/cairo-xlib-surface.c
+index 2a6d896d3..b3314d4a5 100644
+--- a/src/cairo-xlib-surface.c
++++ b/src/cairo-xlib-surface.c
+@@ -986,7 +986,7 @@ _get_image_surface (cairo_xlib_surface_t    *surface,
+ 		in_pixel = XGetPixel (ximage, x, y);
+ 		if (visual_info == NULL) {
+ 		    out_pixel = (
+-			_field_to_8 (in_pixel & a_mask, a_width, a_shift) << 24 |
++			(uint32_t)_field_to_8 (in_pixel & a_mask, a_width, a_shift) << 24 |
+ 			_field_to_8_undither (in_pixel & r_mask, r_width, r_shift, dither_adjustment) << 16 |
+ 			_field_to_8_undither (in_pixel & g_mask, g_width, g_shift, dither_adjustment) << 8 |
+ 			_field_to_8_undither (in_pixel & b_mask, b_width, b_shift, dither_adjustment));
+diff --git a/src/cairoint.h b/src/cairoint.h
+index 7c1000556..c97ad57fa 100644
+--- a/src/cairoint.h
++++ b/src/cairoint.h
+@@ -256,7 +256,7 @@ static inline uint16_t get_unaligned_be16 (const unsigned char *p)
+ 
+ static inline uint32_t get_unaligned_be32 (const unsigned char *p)
+ {
+-    return p[0] << 24 | p[1] << 16 | p[2] << 8 | p[3];
++    return (uint32_t)p[0] << 24 | p[1] << 16 | p[2] << 8 | p[3];
+ }
+ 
+ static inline void put_unaligned_be16 (uint16_t v, unsigned char *p)
+diff --git a/src/drm/cairo-drm-i915-private.h b/src/drm/cairo-drm-i915-private.h
+index c750cf4cf..7585756dc 100644
+--- a/src/drm/cairo-drm-i915-private.h
++++ b/src/drm/cairo-drm-i915-private.h
+@@ -147,7 +147,7 @@
+ #define SRC_ZERO     4
+ #define SRC_ONE      5
+ 
+-#define A1_SRC0_CHANNEL_X_NEGATE         (1<<31)
++#define A1_SRC0_CHANNEL_X_NEGATE         ((int)(1u<<31))
+ #define A1_SRC0_CHANNEL_X_SHIFT          28
+ #define A1_SRC0_CHANNEL_Y_NEGATE         (1<<27)
+ #define A1_SRC0_CHANNEL_Y_SHIFT          24
+@@ -162,7 +162,7 @@
+ #define A1_SRC1_CHANNEL_Y_NEGATE         (1<<3)
+ #define A1_SRC1_CHANNEL_Y_SHIFT          0
+ 
+-#define A2_SRC1_CHANNEL_Z_NEGATE         (1<<31)
++#define A2_SRC1_CHANNEL_Z_NEGATE         ((int)(1u<<31))
+ #define A2_SRC1_CHANNEL_Z_SHIFT          28
+ #define A2_SRC1_CHANNEL_W_NEGATE         (1<<27)
+ #define A2_SRC1_CHANNEL_W_SHIFT          24
+diff --git a/src/drm/cairo-drm-i915-shader.c b/src/drm/cairo-drm-i915-shader.c
+index 045ca5264..a3f01fdf2 100644
+--- a/src/drm/cairo-drm-i915-shader.c
++++ b/src/drm/cairo-drm-i915-shader.c
+@@ -2239,7 +2239,7 @@ i915_set_shader_constants (i915_device_t *device,
+ 	uint32_t diffuse;
+ 
+ 	diffuse =
+-	    ((shader->source.solid.color.alpha_short >> 8) << 24) |
++	    ((uint32_t)(shader->source.solid.color.alpha_short >> 8) << 24) |
+ 	    ((shader->source.solid.color.red_short   >> 8) << 16) |
+ 	    ((shader->source.solid.color.green_short >> 8) << 8) |
+ 	    ((shader->source.solid.color.blue_short  >> 8) << 0);
+@@ -2364,7 +2364,7 @@ i915_shader_needs_update (const i915_shader_t *shader,
+ 	uint32_t diffuse;
+ 
+ 	diffuse =
+-	    ((shader->source.solid.color.alpha_short >> 8) << 24) |
++	    ((uint32_t)(shader->source.solid.color.alpha_short >> 8) << 24) |
+ 	    ((shader->source.solid.color.red_short   >> 8) << 16) |
+ 	    ((shader->source.solid.color.green_short >> 8) << 8) |
+ 	    ((shader->source.solid.color.blue_short  >> 8) << 0);
+diff --git a/src/drm/cairo-drm-i965-shader.c b/src/drm/cairo-drm-i965-shader.c
+index eed5f5f09..8fa3b4bd2 100644
+--- a/src/drm/cairo-drm-i965-shader.c
++++ b/src/drm/cairo-drm-i965-shader.c
+@@ -1370,7 +1370,7 @@ i965_wm_kernel_hash (const i965_shader_t *shader)
+ 	(shader->mask.type.fragment & 0xff) << 8 |
+ 	(shader->clip.type.fragment & 0xff) << 16;
+     if (shader->need_combine)
+-	hash |= (1 + shader->op) << 24;
++	hash |= (1u + shader->op) << 24;
+ 
+     return hash;
+ }
+diff --git a/src/win32/cairo-win32-font.c b/src/win32/cairo-win32-font.c
+index 1f217573b..41f236b23 100644
+--- a/src/win32/cairo-win32-font.c
++++ b/src/win32/cairo-win32-font.c
+@@ -1344,7 +1344,7 @@ _cairo_win32_scaled_font_load_truetype_table (void	       *abstract_font,
+     hdc = _get_global_font_dc ();
+     assert (hdc != NULL);
+ 
+-    tag = (tag&0x000000ff)<<24 | (tag&0x0000ff00)<<8 | (tag&0x00ff0000)>>8 | (tag&0xff000000)>>24;
++    tag = (tag&0x000000ffu)<<24 | (tag&0x0000ff00)<<8 | (tag&0x00ff0000)>>8 | (tag&0xff000000)>>24;
+     status = cairo_win32_scaled_font_select_font (&scaled_font->base, hdc);
+     if (status)
+ 	return status;
+-- 
+2.33.0.windows.2
+

@@ -1,7 +1,7 @@
-From f66dcdf0567f087b7e4bc63d06e9ece1d1c7ef51 Mon Sep 17 00:00:00 2001
+From 5f8a2874c8cec0aa3d7fa3c1064a0027c994020a Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 2 Apr 2018 14:58:45 -0700
-Subject: [PATCH] Rename stat to stats
+Subject: [PATCH 01/11] Rename stat to stats
 
 There is a struct stat in sys/stat.h that can conflict when building cairo-surface-observer. Rename to avoid this issue.
 ---
@@ -41,7 +41,7 @@ index 6ed0c18d1..7d7dd8d4c 100644
  	unsigned int noop;
  
 diff --git a/src/cairo-surface-observer.c b/src/cairo-surface-observer.c
-index 89c7525c7..d63094e51 100644
+index 9c4432e24..6bd2d4ec7 100644
 --- a/src/cairo-surface-observer.c
 +++ b/src/cairo-surface-observer.c
 @@ -58,7 +58,7 @@ static const cairo_surface_backend_t _cairo_surface_observer_backend;
@@ -63,5 +63,5 @@ index 89c7525c7..d63094e51 100644
      if (v < s->min)
  	s->min = v;
 -- 
-2.14.1.windows.1
+2.33.0.windows.2
 

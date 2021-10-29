@@ -1,0 +1,56 @@
+From a5c049bbd5b00ad8c3a5e199369324152a526bc2 Mon Sep 17 00:00:00 2001
+From: Uli Schlachter <psychon@znc.in>
+Date: Sat, 26 Dec 2020 16:09:16 +0100
+Subject: [PATCH 04/11] Slightly improve dealing with error snapshots
+
+An error in _cairo_surface_snapshot_copy_on_write() results in a
+snapshot in an error state and the snapshot's ->target could now point
+to a surface from _cairo_surface_create_in_error(). These surfaces e.g.
+have ->backend == NULL. Thus, anything looking at ->backend->type now
+explodes. This commit deals with two places which caused segfaults in
+this situation.
+
+There is no test case for this, because
+_cairo_surface_snapshot_copy_on_write() really is not supposed to fail.
+
+Found-while-investigating: https://gitlab.freedesktop.org/cairo/cairo/-/issues/448
+Signed-off-by: Uli Schlachter <psychon@znc.in>
+---
+ src/cairo-recording-surface.c | 5 +++++
+ src/cairo-surface-snapshot.c  | 4 +++-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/src/cairo-recording-surface.c b/src/cairo-recording-surface.c
+index 6df8b0821..3e8b8e780 100644
+--- a/src/cairo-recording-surface.c
++++ b/src/cairo-recording-surface.c
+@@ -1764,6 +1764,11 @@ _cairo_recording_surface_merge_source_attributes (cairo_recording_surface_t  *su
+ 	if (_cairo_surface_is_snapshot (surf))
+ 	    free_me = surf = _cairo_surface_snapshot_get_target (surf);
+ 
++	if (unlikely (surf->status))
++	    // There was some kind of error and the surface could be a nil error
++	    // surface with various "problems" (e.g. ->backend == NULL).
++	    return;
++
+ 	if (surf->type == CAIRO_SURFACE_TYPE_RECORDING) {
+ 	    cairo_recording_surface_t *rec_surf = (cairo_recording_surface_t *) surf;
+ 
+diff --git a/src/cairo-surface-snapshot.c b/src/cairo-surface-snapshot.c
+index a8b8c0e45..b2908f6bc 100644
+--- a/src/cairo-surface-snapshot.c
++++ b/src/cairo-surface-snapshot.c
+@@ -71,7 +71,9 @@ _cairo_surface_snapshot_flush (void *abstract_surface, unsigned flags)
+     cairo_status_t status;
+ 
+     target = _cairo_surface_snapshot_get_target (&surface->base);
+-    status = _cairo_surface_flush (target, flags);
++    status = target->status;
++    if (status == CAIRO_STATUS_SUCCESS)
++	status = _cairo_surface_flush (target, flags);
+     cairo_surface_destroy (target);
+ 
+     return status;
+-- 
+2.33.0.windows.2
+
