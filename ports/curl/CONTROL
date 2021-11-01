@@ -12,6 +12,10 @@ Feature: ca-bundle
 Description: |
   Use the provided certificate bundle.
 
+Feature: cookies
+Description: |
+  Enable cookie support.
+
 Feature: ipv6
 Description: |
   Enable IPV6 support.

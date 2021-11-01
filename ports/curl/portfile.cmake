@@ -34,7 +34,6 @@ set(BUILD_OPTIONS
     -DCURL_BROTLI=ON
     -DCURL_ZLIB=ON
     -DCURL_DISABLE_ALTSVC=OFF
-    -DCURL_DISABLE_COOKIES=ON
     -DCURL_DISABLE_CRYPTO_AUTH=OFF
     -DCURL_DISABLE_DICT=ON
     -DCURL_DISABLE_DOH=ON
@@ -77,6 +76,15 @@ if (ca-bundle IN_LIST FEATURES)
 else ()
     message(STATUS "Disabling CA bundle")
     list(APPEND BUILD_OPTIONS -DCURL_CA_BUNDLE=none -DCURL_CA_PATH=none)
+endif ()
+
+# Check for cookies feature
+if (cookies IN_LIST FEATURES)
+    message(STATUS "Enabling cookie handling")
+    list(APPEND BUILD_OPTIONS -DCURL_DISABLE_COOKIES=OFF)
+else ()
+    message(STATUS "Disabling cookie handling")
+    list(APPEND BUILD_OPTIONS -DCURL_DISABLE_COOKIES=ON)
 endif ()
 
 # Check for IPV6 feature
