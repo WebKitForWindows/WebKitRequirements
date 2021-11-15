@@ -24,6 +24,7 @@
 | [curl](https://curl.se) | 7.80.0 | 2021-11-10 |
 | [libxml2](http://xmlsoft.org/) | 2.9.11 | 2021-05-13 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.34 | 2019-10-30 |
+| [highway](https://github.com/google/highway) | 0.15.0 | 2021-11-11 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.37 | 2019-04-15 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.1.1 | 2021-08-09 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.2.1 | 2021-08-13 |
