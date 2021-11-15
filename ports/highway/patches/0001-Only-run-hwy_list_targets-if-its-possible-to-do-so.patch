@@ -1,0 +1,28 @@
+From 3ef9f6a08b6c9f4579db0a4a8465fb4b990fac0f Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Thu, 11 Nov 2021 17:30:35 -0800
+Subject: [PATCH 1/4] Only run hwy_list_targets if its possible to do so
+
+When `CMAKE_CROSSCOMPILING` there may not be any value for `CMAKE_CROSSCOMPILING_EMULATOR`. Only run the command if its not a cross compile or when an emulator is available.
+---
+ CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d910e3c..43047aa 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -219,8 +219,10 @@ target_include_directories(hwy_list_targets PRIVATE
+ # Naked target also not always could be run (due to the lack of '.\' prefix)
+ # Thus effective command to run should contain the full path
+ # and emulator prefix (if any).
++if (NOT CMAKE_CROSSCOMPILING OR CMAKE_CROSSCOMPILING_EMULATOR)
+ add_custom_command(TARGET hwy_list_targets POST_BUILD
+     COMMAND ${CMAKE_CROSSCOMPILING_EMULATOR} $<TARGET_FILE:hwy_list_targets> || (exit 0))
++endif()
+ 
+ # --------------------------------------------------------
+ # Allow skipping the following sections for projects that do not need them:
+-- 
+2.33.0.windows.2
+
