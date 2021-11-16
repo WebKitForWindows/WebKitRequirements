@@ -1,0 +1,24 @@
+From 81b6b890271585f072ebbef96ba0eb9d249ec220 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Tue, 16 Nov 2021 17:38:53 -0800
+Subject: [PATCH] Remove setting of CMAKE_FIND_LIBRARY_SUFFIXES
+
+---
+ CMakeLists.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f667719..3750e97 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -157,7 +157,6 @@ message(STATUS
+ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+ 
+ if(JPEGXL_STATIC)
+-  set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
+   set(BUILD_SHARED_LIBS 0)
+   # Clang developers say that in case to use "static" we have to build stdlib
+   # ourselves; for real use case we don't care about stdlib, as it is "granted",
+-- 
+2.34.0.windows.1
+
