@@ -1,0 +1,45 @@
+From 3b3f7df1736263669e242eb71f4999743d3af2bf Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Fri, 12 Nov 2021 17:17:16 -0800
+Subject: [PATCH 5/5] Install runtimes in bin
+
+---
+ lib/jxl.cmake         | 4 +++-
+ lib/jxl_threads.cmake | 6 ++++--
+ 2 files changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/lib/jxl.cmake b/lib/jxl.cmake
+index c0290ab..3c27ff2 100644
+--- a/lib/jxl.cmake
++++ b/lib/jxl.cmake
+@@ -549,7 +549,9 @@ endforeach()
+ # contains symbols also in libjxl which would conflict if programs try to use
+ # both.
+ install(TARGETS jxl
+-  DESTINATION ${CMAKE_INSTALL_LIBDIR})
++  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+ else()
+ add_library(jxl ALIAS jxl-static)
+ add_library(jxl_dec ALIAS jxl_dec-static)
+diff --git a/lib/jxl_threads.cmake b/lib/jxl_threads.cmake
+index 85ceda4..a254aad 100644
+--- a/lib/jxl_threads.cmake
++++ b/lib/jxl_threads.cmake
+@@ -43,8 +43,10 @@ set_target_properties(${_target} PROPERTIES
+ if (NOT WIN32)
+   set_target_properties(${_target} PROPERTIES OUTPUT_NAME "jxl_threads")
+ endif()
+-install(TARGETS ${_target} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+-
++install(TARGETS ${_target}
++  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+ endfunction()
+ 
+ 
+-- 
+2.34.0.windows.1
+
