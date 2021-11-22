@@ -1,0 +1,42 @@
+From cbc4ea23f3b4cb6e6b28cc910747027ca7a3b6db Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Tue, 16 Nov 2021 17:03:18 -0800
+Subject: [PATCH 2/2] Remove library suffix on Windows
+
+---
+ CMakeLists.txt | 19 -------------------
+ 1 file changed, 19 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2051621b..b444d4eb 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -496,25 +496,6 @@ set_target_properties(
+ 	VERSION ${PROJECT_VERSION}
+ )
+ 
+-if(MSVC)
+-	if(BUILD_SHARED_LIBS)
+-		set_target_properties(
+-			LibXml2
+-			PROPERTIES
+-			DEBUG_POSTFIX d
+-		)
+-	else()
+-		set_target_properties(
+-			LibXml2
+-			PROPERTIES
+-			DEBUG_POSTFIX sd
+-			MINSIZEREL_POSTFIX s
+-			RELEASE_POSTFIX s
+-			RELWITHDEBINFO_POSTFIX s
+-		)
+-	endif()
+-endif()
+-
+ install(FILES ${LIBXML2_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/libxml2/libxml COMPONENT development)
+ 
+ install(
+-- 
+2.34.0.windows.1
+
