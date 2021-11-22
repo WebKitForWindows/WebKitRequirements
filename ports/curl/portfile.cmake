@@ -11,6 +11,8 @@ vcpkg_download_distfile(ARCHIVE
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    # Remove after next release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Dont-set-_USRDLL-on-a-static-Windows-build.patch
 )
 
 # Extract archive
@@ -29,7 +31,6 @@ set(BUILD_OPTIONS
     # CMAKE options
     -DCMAKE_USE_GSSAPI=OFF
     -DCMAKE_USE_LIBSSH2=OFF
-    -DCMAKE_USE_OPENLDAP=OFF
     # CURL options
     -DCURL_BROTLI=ON
     -DCURL_ZLIB=ON
@@ -149,6 +150,18 @@ vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
+if (VCPKG_LIBRARY_LINKAGE STREQUAL "static")
+    vcpkg_replace_string("${CURRENT_PACKAGES_DIR}/include/curl/curl.h"
+        "#ifdef CURL_STATICLIB"
+        "#if 1"
+    )
+
+    file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin")
+    file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/bin")
+else ()
+    file(REMOVE "${CURRENT_PACKAGES_DIR}/bin/curl-config")
+endif()
+
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/curl RENAME copyright)
