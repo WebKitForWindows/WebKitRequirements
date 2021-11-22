@@ -1,0 +1,32 @@
+From c70bb0ecfcf823320301dd52b1e69b5451a11915 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Wed, 17 Nov 2021 13:21:28 -0800
+Subject: [PATCH] Don't set _USRDLL on a static Windows build
+
+---
+ lib/CMakeLists.txt | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index 2575288f7091..46973bf2b875 100644
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -95,10 +95,6 @@ endif()
+ 
+ target_link_libraries(${LIB_NAME} ${CURL_LIBS})
+ 
+-if(WIN32)
+-  add_definitions(-D_USRDLL)
+-endif()
+-
+ set_target_properties(${LIB_NAME} PROPERTIES
+   COMPILE_DEFINITIONS BUILDING_LIBCURL
+   OUTPUT_NAME ${LIBCURL_OUTPUT_NAME}
+@@ -121,6 +117,7 @@ endif()
+ 
+ if(WIN32)
+   if(BUILD_SHARED_LIBS)
++    set_property(TARGET ${LIB_NAME} APPEND PROPERTY COMPILE_DEFINITIONS "_USRDLL")
+     if(MSVC)
+       # Add "_imp" as a suffix before the extension to avoid conflicting with
+       # the statically linked "libcurl.lib"
