@@ -1,4 +1,4 @@
-From 5b510b62929af486c19e9495aaa8bcc315b08613 Mon Sep 17 00:00:00 2001
+From 6f98d4c841f5922d833b52353961983fa964e0a0 Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.olmstead@sony.com>
 Date: Wed, 29 Apr 2020 11:23:15 -0700
 Subject: [PATCH 1/2] Remove postfix from archive name
@@ -50,5 +50,5 @@ index 9aa10e1..53941af 100644
  	SOVERSION ${TLS_MAJOR_VERSION})
  
 -- 
-2.33.0.windows.2
+2.34.0.windows.1
 
