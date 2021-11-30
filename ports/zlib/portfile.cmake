@@ -26,7 +26,6 @@ vcpkg_configure_cmake(
     PREFER_NINJA
     OPTIONS
         -DZLIB_COMPAT=ON
-        -DSKIP_INSTALL_FILES=ON
         -DZLIB_ENABLE_TESTS=OFF
     OPTIONS_DEBUG
         -DSKIP_INSTALL_HEADERS=ON
