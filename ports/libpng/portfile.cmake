@@ -11,6 +11,7 @@ vcpkg_download_distfile(ARCHIVE
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Skip-install-symlink.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Do-not-append-static-to-library-name.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Fix-pkgconfig-on-Windows.patch
 )
 
 # Extract archive
@@ -39,7 +40,6 @@ vcpkg_configure_cmake(
         -DPNG_TESTS=OFF
         -DSKIP_INSTALL_PROGRAMS=ON
         -DSKIP_INSTALL_EXECUTABLES=ON
-        -DSKIP_INSTALL_FILES=ON
         -DSKIP_INSTALL_SYMLINK=ON
     OPTIONS_DEBUG
         -DSKIP_INSTALL_HEADERS=ON
@@ -51,5 +51,6 @@ vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/libpng ${CURRENT_PACKAGES_DIR}/debug/lib/libpng)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/libpng RENAME copyright)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/libpng/version ${VERSION})

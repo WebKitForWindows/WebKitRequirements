@@ -1,0 +1,69 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f1b977966..9a605e0f8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -812,20 +812,30 @@ endif()
+ # Only do this on Windows for Cygwin - the files don't make much sense outside
+ # of a UNIX look-alike.
+ if(NOT WIN32 OR CYGWIN OR MINGW)
+-  set(prefix      ${CMAKE_INSTALL_PREFIX})
+-  set(exec_prefix ${CMAKE_INSTALL_PREFIX})
+-  set(libdir      ${CMAKE_INSTALL_FULL_LIBDIR})
+-  set(includedir  ${CMAKE_INSTALL_FULL_INCLUDEDIR})
+-  set(LIBS        "-lz -lm")
+-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng.pc.in
+-    ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc @ONLY)
+-  create_symlink(libpng.pc FILE ${PNGLIB_NAME}.pc)
+-
+-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng-config.in
+-    ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}-config @ONLY)
+-  create_symlink(libpng-config FILE ${PNGLIB_NAME}-config)
++  set(LIBS "-lz")
++  if(NOT APPLE)
++    string(APPEND LIBS " -lm")
++  endif()
++else()
++  if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
++    set(LIBS "-lzlibd")
++  else()
++    set(LIBS "-lzlib")
++  endif()
+ endif()
+ 
++set(prefix      ${CMAKE_INSTALL_PREFIX})
++set(exec_prefix ${CMAKE_INSTALL_PREFIX})
++set(libdir      ${CMAKE_INSTALL_FULL_LIBDIR})
++set(includedir  ${CMAKE_INSTALL_FULL_INCLUDEDIR})
++configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng.pc.in
++  ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc @ONLY)
++create_symlink(libpng.pc FILE ${PNGLIB_NAME}.pc)
++
++configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng-config.in
++  ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}-config @ONLY)
++create_symlink(libpng-config FILE ${PNGLIB_NAME}-config)
++
+ # SET UP LINKS
+ if(PNG_SHARED)
+   set_target_properties(png PROPERTIES
+@@ -892,15 +902,15 @@ if(NOT SKIP_INSTALL_FILES AND NOT SKIP_INSTALL_ALL)
+   install(FILES libpng.3 libpngpf.3 DESTINATION ${PNG_MAN_DIR}/man3)
+   install(FILES png.5 DESTINATION ${PNG_MAN_DIR}/man5)
+   # Install pkg-config files
++  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libpng.pc
++          DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
++  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc
++          DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+   if(NOT CMAKE_HOST_WIN32 OR CYGWIN OR MINGW)
+-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libpng.pc
+-            DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+     install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/libpng-config
+-            DESTINATION bin)
+-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc
+-            DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
++            DESTINATION tools/libpng)
+     install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}-config
+-            DESTINATION bin)
++            DESTINATION tools/libpng)
+   endif()
+ endif()
+ 
