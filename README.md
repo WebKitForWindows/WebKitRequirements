@@ -27,7 +27,7 @@
 | [lcms](https://www.littlecms.com/) | 2.12 | 2021-02-06 |
 | [highway](https://github.com/google/highway) | 0.15.0 | 2021-11-11 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.37 | 2019-04-15 |
-| [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.1.1 | 2021-08-09 |
+| [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.1.2 | 2021-11-18 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.2.1 | 2021-08-13 |
 | [openjpeg](https://www.openjpeg.org/) | 2.4.0 | 2020-12-28 |
 | [sqlite](http://sqlite.org) | 3.37.0 | 2021-11-27 |
