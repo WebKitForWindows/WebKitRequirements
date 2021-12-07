@@ -32,7 +32,7 @@
 | [openjpeg](https://www.openjpeg.org/) | 2.4.0 | 2020-12-28 |
 | [sqlite](http://sqlite.org) | 3.37.0 | 2021-11-27 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
-| [freetype](https://www.freetype.org) | 2.11.0 | 2021-07-19 |
+| [freetype](https://www.freetype.org) | 2.11.1 | 2021-12-02 |
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 3.1.2 | 2021-11-26 |
 | [pixman](http://www.pixman.org) | 0.40.0 | 2020-04-19 |
 | [cairo](https://www.cairographics.org) | 1.17.4 | 2020-11-27 |
