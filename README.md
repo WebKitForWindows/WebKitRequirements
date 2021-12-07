@@ -32,7 +32,6 @@
 | [openjpeg](https://www.openjpeg.org/) | 2.4.0 | 2020-12-28 |
 | [libjxl](https://github.com/libjxl/libjxl) | 0.6.1 | 2021-10-29 |
 | [sqlite](http://sqlite.org) | 3.37.0 | 2021-11-27 |
-| [sqlite](http://sqlite.org) | 3.36.0 | 2021-06-18 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
 | [freetype](https://www.freetype.org) | 2.11.1 | 2021-12-02 |
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 3.1.2 | 2021-11-26 |
