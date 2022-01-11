@@ -1,4 +1,4 @@
-From 1931aa64cc91215aa73c7f76d7fc15f3787c0a56 Mon Sep 17 00:00:00 2001
+From 120fd129fb6fe297619b562fa1195c2be5cb0f23 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 7 Nov 2019 16:51:38 -0800
 Subject: [PATCH] Remove static target
@@ -9,10 +9,10 @@ This makes the CMake build target use BUILD_SHARED_LIBS exclusively for determin
  1 file changed, 2 insertions(+), 14 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 88a57d8..f8d0826 100644
+index 8e5646d..a525688 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -892,20 +892,8 @@ if(WITH_GZFILEOP)
+@@ -984,20 +984,8 @@ if(WITH_GZFILEOP)
      list(APPEND ZLIB_ALL_SRCS ${ZLIB_GZFILE_PRIVATE_HDRS} ${ZLIB_GZFILE_SRCS})
  endif()
  
@@ -36,5 +36,5 @@ index 88a57d8..f8d0826 100644
  foreach(ZLIB_INSTALL_LIBRARY ${ZLIB_INSTALL_LIBRARIES})
      target_include_directories(${ZLIB_INSTALL_LIBRARY} PUBLIC
 -- 
-2.29.2.windows.1
+2.34.1.windows.1
 
