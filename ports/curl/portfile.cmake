@@ -1,18 +1,16 @@
-set(VERSION 7.80.0)
+set(VERSION 7.81.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 679b1bf69412adf282757749e5f7a7cd91d131ee876a97729f81166824f21fac74474b25a51ac4ca3940a4536dd8712346cb7bb3f4d68f8e9af7f0cae45b399e
+    SHA512 4b273f1f38b067e16b0df142f8676d8b0e831c92437c3e02ebbcac1df16879a27dd829fe7c08fee1fdc3dd4bb085e07e4e6b4424aaaace273c2dc4da0ea18afb
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    # Remove after next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Dont-set-_USRDLL-on-a-static-Windows-build.patch
 )
 
 # Extract archive
@@ -28,9 +26,6 @@ set(BUILD_OPTIONS
     # BUILD options
     -DBUILD_CURL_EXE=OFF
     -DBUILD_TESTING=OFF
-    # CMAKE options
-    -DCMAKE_USE_GSSAPI=OFF
-    -DCMAKE_USE_LIBSSH2=OFF
     # CURL options
     -DCURL_BROTLI=ON
     -DCURL_ZLIB=ON
@@ -54,6 +49,8 @@ set(BUILD_OPTIONS
     -DCURL_DISABLE_SMTP=ON
     -DCURL_DISABLE_TELNET=ON
     -DCURL_DISABLE_TFTP=ON
+    -DCURL_USE_GSSAPI=OFF
+    -DCURL_USE_LIBSSH2=OFF
     # ENABLE options
     -DENABLE_MANUAL=OFF
     -DENABLE_UNIX_SOCKETS=OFF
@@ -139,8 +136,8 @@ vcpkg_configure_cmake(
     OPTIONS 
         ${BUILD_OPTIONS}
         -DCURL_STATICLIB=${CURL_STATICLIB}
-        -DCMAKE_USE_OPENSSL=${USE_OPENSSL}
-        -DCMAKE_USE_SCHANNEL=${USE_SCHANNEL}
+        -DCURL_USE_OPENSSL=${USE_OPENSSL}
+        -DCURL_USE_SCHANNEL=${USE_SCHANNEL}
     OPTIONS_DEBUG
         -DENABLE_DEBUG=ON
 )

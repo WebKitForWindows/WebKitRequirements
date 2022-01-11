@@ -21,7 +21,7 @@
 | [libressl](https://www.libressl.org) | 3.4.2 | 2021-11-25 |
 | [nghttp2](https://nghttp2.org) | 1.46.0 | 2021-10-19 |
 | [c-ares](https://c-ares.org) | 1.18.1 | 2021-10-27 |
-| [curl](https://curl.se) | 7.80.0 | 2021-11-10 |
+| [curl](https://curl.se) | 7.81.0 | 2022-01-05 |
 | [libxml2](http://xmlsoft.org/) | 2.9.11 | 2021-05-13 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.34 | 2019-10-30 |
 | [lcms](https://www.littlecms.com/) | 2.12 | 2021-02-06 |
