@@ -1,5 +1,5 @@
 Source: sqlite3
-Version: 3.37.0
+Version: 3.37.2
 Description: |
   SQLite is an in-process library that implements a self-contained, serverless,
   zero-configuration, transactional SQL database engine. The code for SQLite is
