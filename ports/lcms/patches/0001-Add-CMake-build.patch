@@ -1,4 +1,4 @@
-From 5f94bc21df3b6930baf2af22c70a5eeaa54ce112 Mon Sep 17 00:00:00 2001
+From ad88957cfb13fefab836c60b8be571fe450c081e Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 11 Nov 2021 14:31:22 -0800
 Subject: [PATCH] Add CMake build
@@ -10,14 +10,14 @@ Subject: [PATCH] Add CMake build
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 new file mode 100644
-index 0000000..3dc352f
+index 0000000..24c7457
 --- /dev/null
 +++ b/CMakeLists.txt
 @@ -0,0 +1,96 @@
 +cmake_minimum_required(VERSION 3.15)
 +
 +project(little-cms
-+    VERSION 2.12.0
++    VERSION 2.13.0
 +    LANGUAGES C
 +)
 +
@@ -111,5 +111,5 @@ index 0000000..3dc352f
 +    DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
 +)
 -- 
-2.33.0.windows.2
+2.35.1.windows.2
 
