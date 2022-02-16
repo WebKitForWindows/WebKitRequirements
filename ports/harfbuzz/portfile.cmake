@@ -1,10 +1,10 @@
-set(VERSION 3.2.0)
+set(VERSION 3.4.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${VERSION}/harfbuzz-${VERSION}.tar.xz"
     FILENAME "harfbuzz-${VERSION}.tar.xz"
-    SHA512 c9d88068d8017046842f444f02f31dbae109026ede943aaf265db5508de8b4b2be84203950f274a237f515bf7cbd361629d2032c6e8ee8f50354b430bba3a8ca
+    SHA512 f300d041aa4af8f7957d5b352af399b9e411804a33ac710b3728247e23a02b867514537cc2b6fcf00746e71ac7a5a2a4b1392253bb5a888baa39b8a0193144c0
 )
 
 # Patches
@@ -30,7 +30,6 @@ vcpkg_configure_cmake(
         -DHB_HAVE_ICU=ON
         -DHB_BUILD_UTILS=OFF
         -DHB_BUILD_SUBSET=OFF
-        -DHB_BUILD_TESTS=OFF
     OPTIONS_DEBUG
         -DSKIP_INSTALL_HEADERS=ON
 )
