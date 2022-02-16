@@ -1,4 +1,4 @@
-From 5ecbd18cdd6b55198964323d6b799ad5356bc441 Mon Sep 17 00:00:00 2001
+From df65baae6f6acde9179251d589df2d7c7d89d8f3 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 23 Apr 2018 18:49:42 -0700
 Subject: [PATCH] Add declspec for exporting as a shared library
@@ -10,10 +10,10 @@ This adds a default declaration of __declspec to WEBP_EXTERN. Also removes an er
  2 files changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/src/dsp/dsp.h b/src/dsp/dsp.h
-index 513e159b..924645d9 100644
+index c4f57e4d..ee9868c4 100644
 --- a/src/dsp/dsp.h
 +++ b/src/dsp/dsp.h
-@@ -256,7 +256,7 @@ typedef enum {
+@@ -261,7 +261,7 @@ typedef enum {
  } CPUFeature;
  // returns true if the CPU supports the feature.
  typedef int (*VP8CPUInfo)(CPUFeature feature);
@@ -45,5 +45,5 @@ index 47f7f2b0..b53e67d6 100644
  # else
  #  define WEBP_EXTERN extern
 -- 
-2.29.2.windows.1
+2.35.1.windows.2
 
