@@ -26,7 +26,7 @@ file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/src/CMakeLists.txt DESTINATION ${SOURC
 # Install Python
 vcpkg_find_acquire_program(PYTHON2)
 get_filename_component(PYTHON2_EXE_PATH ${PYTHON2} DIRECTORY)
-set(ENV{PATH} "$ENV{PATH};${PYTHON2_EXE_PATH}")
+vcpkg_add_to_path(${PYTHON2_EXE_PATH})
 
 # Run CMake build
 vcpkg_configure_cmake(

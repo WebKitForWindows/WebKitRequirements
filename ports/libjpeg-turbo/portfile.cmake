@@ -26,14 +26,15 @@ vcpkg_extract_source_archive_ex(
 # Find NASM and add to the path
 vcpkg_find_acquire_program(NASM)
 get_filename_component(NASM_EXE_PATH ${NASM} DIRECTORY)
-set(ENV{PATH} "$ENV{PATH};${NASM_EXE_PATH}")
+vcpkg_add_to_path(${NASM_EXE_PATH})
 
 # Find gnutools and add to the path
 vcpkg_acquire_gnuwin32_program(GREP)
 vcpkg_acquire_gnuwin32_program(SED)
 get_filename_component(GREP_EXE_PATH ${GREP} DIRECTORY)
 get_filename_component(SED_EXE_PATH ${SED} DIRECTORY)
-set(ENV{PATH} "$ENV{PATH};${GREP_EXE_PATH};${SED_EXE_PATH}")
+vcpkg_add_to_path(${GREP_EXE_PATH})
+vcpkg_add_to_path(${SED_EXE_PATH})
 
 # Run CMake build
 set(BUILD_OPTIONS
