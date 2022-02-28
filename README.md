@@ -24,7 +24,7 @@
 | [curl](https://curl.se) | 7.81.0 | 2022-01-05 |
 | [libxml2](http://xmlsoft.org/) | 2.9.11 | 2021-05-13 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.34 | 2019-10-30 |
-| [lcms](https://www.littlecms.com/) | 2.13 | 2022-01-28 |
+| [lcms](https://www.littlecms.com/) | 2.13.1 | 2022-01-28 |
 | [highway](https://github.com/google/highway) | 0.15.0 | 2021-11-11 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.37 | 2019-04-15 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.1.2 | 2021-11-18 |

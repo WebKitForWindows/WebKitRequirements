@@ -1,10 +1,10 @@
-set(VERSION 2.13)
+set(VERSION 2.13.1)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/mm2/Little-CMS/releases/download/lcms${VERSION}/lcms2-${VERSION}.tar.gz"
     FILENAME "lcms2-${VERSION}.tar.gz"
-    SHA512 28cc5310b54b6254447c04ec8072878eb59e539095c400c05a15975b636f2f49daa2e5fa9021a3f9886a1b50e6c85bd950cefa8f171e3f4ee3be269a8dadc4d2
+    SHA512 214ec63fa086b580a6507d493a54ccf5faf02c40e149d71e41f9fc8510efdb16554621c96d91cc886f09682c9631b10aa194b4b67eb6ffcc871d5d4666b05617
 )
 
 # Patches
