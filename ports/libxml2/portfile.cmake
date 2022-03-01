@@ -1,16 +1,21 @@
-set(VERSION 2.9.11)
+set(VERSION_MAJOR 2)
+set(VERSION_MINOR 9)
+set(VERSION_PATCH 13)
+set(VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "http://xmlsoft.org/sources/libxml2-${VERSION}.tar.gz"
-    FILENAME "libxml2-${VERSION}.tar.gz"
-    SHA512 d9c71d75d1cd0708f56fef47802ce53d6c64c4580469458edb2fc12b699319235bcff62bc1be1f0a01f4077726e37ad2cf5e4dee4bca36a9d5d3b21d12253ba5
+    URLS "https://download.gnome.org/sources/libxml2/${VERSION_MAJOR}.${VERSION_MINOR}/libxml2-${VERSION}.tar.xz"
+    FILENAME "libxml2-${VERSION}.tar.xz"
+    SHA512 fc51980cb9222bd3b5242f73d28b55fa15a80e68e52e1c45274f1eda11500ed385853209edb3b2a1f06b9de0be304c159a9bd898c7d84b0899eacb00723d98b5
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Remove-library-suffix-on-Windows.patch
+    # Remove after next release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Fix-without-valid-build.patch
 )
 
 # Extract archive
@@ -20,9 +25,6 @@ vcpkg_extract_source_archive_ex(
     REF ${VERSION}
     PATCHES ${PATCHES}
 )
-
-# The xmlwin32version.h file is not in the archive
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/include/libxml/xmlwin32version.h.in DESTINATION ${SOURCE_PATH}/include/libxml)
 
 # Run CMake build
 set(BUILD_OPTIONS
