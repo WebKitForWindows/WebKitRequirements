@@ -1,4 +1,4 @@
-From e98e4b71842b0c2a9aa69689f9bec344a07e0867 Mon Sep 17 00:00:00 2001
+From a6efa919f213ef85491ad7ce93aebb3b2f01224a Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 5 Nov 2019 16:56:34 -0800
 Subject: [PATCH 1/2] Use find_package for ICU
