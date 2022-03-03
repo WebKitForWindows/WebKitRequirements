@@ -22,22 +22,17 @@ vcpkg_extract_source_archive_ex(
 
 # Run CMake build
 set(BUILD_OPTIONS
-    -DFT_WITH_ZLIB=ON
-    -DFT_WITH_BZip2=OFF
-    -DFT_WITH_PNG=ON
-    -DFT_WITH_HarfBuzz=OFF
-
-    # Use CMAKE_DISABLE_FIND_PACKAGE_XXX=TRUE to disable dependencies in FreeType
-    # Otherwise FreeType will attempt to use it if available
-    -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE
-    -DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE
+    -DFT_DISABLE_BZIP2=ON
+    -DFT_DISABLE_HARFBUZZ=ON
+    -DFT_REQUIRE_PNG=ON
+    -DFT_REQUIRE_ZLIB=ON
 )
 
 if (woff2 IN_LIST FEATURES)
     message(STATUS "Enabling woff2")
-    set(BUILD_OPTIONS ${BUILD_OPTIONS} -DFT_WITH_BROTLI=ON)
+    set(BUILD_OPTIONS ${BUILD_OPTIONS} -DFT_REQUIRE_BROTLI=ON)
 else ()
-    set(BUILD_OPTIONS ${BUILD_OPTIONS} -DFT_WITH_BROTLI=OFF -DCMAKE_DISABLE_FIND_PACKAGE_BrotliDec=TRUE)
+    set(BUILD_OPTIONS ${BUILD_OPTIONS} -DFT_DISABLE_BROTLI=ON)
 endif ()
 
 vcpkg_configure_cmake(
