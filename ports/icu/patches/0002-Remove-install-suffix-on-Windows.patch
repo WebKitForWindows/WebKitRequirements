@@ -1,4 +1,4 @@
-From 98751190c76e3de00486313bb5f1e482c7630884 Mon Sep 17 00:00:00 2001
+From 3e69d7a7d60ad4aa4fab388c742ef607538d942a Mon Sep 17 00:00:00 2001
 From: foopoiuyt <github@zombiestormtrooper.com>
 Date: Tue, 3 Nov 2020 09:02:25 -0800
 Subject: [PATCH 2/2] Remove install suffix on Windows
@@ -8,24 +8,24 @@ Subject: [PATCH 2/2] Remove install suffix on Windows
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/source/icudefs.cmake b/source/icudefs.cmake
-index 0272844248..b11c203b93 100644
+index 34688e4317..f1e1ba7b13 100644
 --- a/source/icudefs.cmake
 +++ b/source/icudefs.cmake
-@@ -13,10 +13,10 @@ set(includedir  ${CMAKE_INSTALL_INCLUDEDIR})
- set(mandir      ${CMAKE_INSTALL_MANDIR})
- set(sysconfdir  ${CMAKE_INSTALL_SYSCONFDIR})
+@@ -13,10 +13,10 @@ set(includedir ${CMAKE_INSTALL_INCLUDEDIR})
+ set(mandir ${CMAKE_INSTALL_MANDIR})
+ set(sysconfdir ${CMAKE_INSTALL_SYSCONFDIR})
  
 -if(MSVC AND "${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
--  set(bindir "bin64")
--  set(libdir "lib64")
+-    set(bindir "bin64")
+-    set(libdir "lib64")
 -endif()
 +#if(MSVC AND "${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-+#  set(bindir "bin64")
-+#  set(libdir "lib64")
++#    set(bindir "bin64")
++#    set(libdir "lib64")
 +#endif()
  
  # Package information
  set(PACKAGE_ICU_DESCRIPTION "International Components for Unicode")
 -- 
-2.29.2.windows.1
+2.35.1.windows.2
 
