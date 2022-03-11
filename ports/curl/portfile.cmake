@@ -157,6 +157,7 @@ if (VCPKG_LIBRARY_LINKAGE STREQUAL "static")
     file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/bin")
 else ()
     file(REMOVE "${CURRENT_PACKAGES_DIR}/bin/curl-config")
+    file(REMOVE "${CURRENT_PACKAGES_DIR}/debug/bin/curl-config")
 endif()
 
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
