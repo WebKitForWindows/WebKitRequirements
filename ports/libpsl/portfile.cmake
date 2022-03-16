@@ -9,6 +9,15 @@ vcpkg_download_distfile(ARCHIVE
     SHA512 a5084b9df4ff2a0b1f5074b20972efe0da846473396d27b57967c7f6aa190ab3c910b4bfc4f8f03802f08decbbad5820d850c36ad59610262ae37fe77de0c7f5
 )
 
+# Patches
+set(PATCHES
+    # Can be removed on next libpsl release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Increase-label-size.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Fix-write-buffer-overflow.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Fix-stack-buffer-overflow.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Avoid-8-bit-overflow.patch
+)
+
 # Extract archive
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH

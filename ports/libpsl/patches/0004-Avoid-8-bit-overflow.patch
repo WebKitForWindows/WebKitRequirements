@@ -1,0 +1,26 @@
+From 55d0ae04dea0856311b05ea03567d65bf8b9e45d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Tim=20R=C3=BChsen?= <tim.ruehsen@gmx.de>
+Date: Sun, 16 Jan 2022 12:51:33 +0100
+Subject: [PATCH] Avoid 8bit overflow in is_public_suffix()
+
+---
+ src/psl.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/src/psl.c b/src/psl.c
+index 7bfc3cb..dcc92ee 100644
+--- a/src/psl.c
++++ b/src/psl.c
+@@ -835,8 +835,11 @@ static int is_public_suffix(const psl_ctx_t *psl, const char *domain, int type)
+ 	suffix.nlabels = 1;
+ 
+ 	for (p = domain; *p; p++) {
+-		if (*p == '.')
++		if (*p == '.') {
++			if (suffix.nlabels == 255) // weird input, avoid 8bit overflow
++				return 0;
+ 			suffix.nlabels++;
++		}
+ 		else if (*((unsigned char *)p) >= 128)
+ 			need_conversion = 1; /* in case domain is non-ascii we need a toASCII conversion */
+ 	}
