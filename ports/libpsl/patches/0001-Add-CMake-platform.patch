@@ -1,0 +1,144 @@
+From d242644b81558dbd2acfd25fe9ba20c8f9ea089c Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Tue, 29 Mar 2022 16:37:06 -0700
+Subject: [PATCH 1/2] Add CMake platform
+
+This mirrors the meson build files as closely as possible. It ignores options that aren't supported like non-ICU backends.
+---
+ CMakeLists.txt         |  68 ++++++++++++++++++++++++
+ config.h.in            | 114 +++++++++++++++++++++++++++++++++++++++++
+ include/CMakeLists.txt |  15 ++++++
+ src/CMakeLists.txt     |  23 +++++++++
+ 4 files changed, 220 insertions(+)
+ create mode 100644 CMakeLists.txt
+ create mode 100644 config.h.in
+ create mode 100644 include/CMakeLists.txt
+ create mode 100644 src/CMakeLists.txt
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+new file mode 100644
+index 0000000..5fa05ac
+--- /dev/null
++++ b/CMakeLists.txt
+@@ -0,0 +1,68 @@
++cmake_minimum_required(VERSION 3.13)
++project(
++    psl
++    VERSION 0.21.1
++    LANGUAGES C
++)
++
++set(PSL_SOURCE_PATH
++    ""
++    CACHE STRING "Path to the Public Suffix List"
++)
++
++include(CheckIncludeFile)
++include(CheckFunctionExists)
++include(CheckSymbolExists)
++include(GNUInstallDirs)
++
++add_library(psl)
++
++find_package(ICU 59.1 REQUIRED COMPONENTS uc)
++target_link_libraries(psl PRIVATE ICU::uc)
++
++if (WIN32)
++    target_link_libraries(psl PRIVATE ws2_32)
++endif ()
++
++# Config file
++set(PACKAGE_VERSION ${PROJECT_VERSION})
++set(WITH_LIBICU ON)
++check_include_file("alloca.h" HAVE_ALLOCA_H)
++check_include_file("inttypes.h" HAVE_INTTYPES_H)
++check_include_file("langinfo.h" HAVE_LANGINFO_H)
++check_include_file("memory.h" HAVE_MEMORY_H)
++check_include_file("stdint.h" HAVE_STDINT_H)
++check_include_file("stdlib.h" HAVE_STDLIB_H)
++check_include_file("string.h" HAVE_STRING_H)
++check_include_file("strings.h" HAVE_STRINGS_H)
++check_include_file("sys/mman.h" HAVE_SYS_MMAN_H)
++check_include_file("sys/stat.h" HAVE_SYS_STAT_H)
++check_include_file("sys/types.h" HAVE_SYS_TYPES_H)
++check_include_file("unistd.h" HAVE_UNISTD_H)
++
++check_symbol_exists("alloca" "alloca.h" HAVE_ALLOCA)
++check_symbol_exists("clock_gettime" "time.h" HAVE_CLOCK_GETTIME)
++check_symbol_exists("fmemopen" "stdio.h" HAVE_FMEMOPEN)
++check_symbol_exists("nl_langinfo" "langinfo.h" HAVE_NL_LANGINFO)
++check_symbol_exists("strndup" "string.h" HAVE_STRNDUP)
++
++configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h)
++target_include_directories(psl PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
++
++# MSVC
++if (MSVC)
++    target_compile_definitions(psl PRIVATE _CRT_SECURE_NO_WARNINGS)
++
++    check_symbol_exists("snprintf" "stdio.h" HAVE_SNPRINTF)
++    if (NOT HAVE_SNPRINTF)
++        check_symbol_exists("_snprintf" "stdio.h" HAVE__SNPRINTF)
++        if (HAVE__SNPRINTF)
++            target_compile_definitions(psl PRIVATE "snprintf=_snprintf")
++        endif ()
++    endif ()
++    # Doing check_symbol_exists for _alloca fails so just set the value
++    target_compile_definitions(psl PRIVATE "alloca=_alloca")
++endif ()
++
++add_subdirectory(include)
++add_subdirectory(src)
+diff --git a/include/CMakeLists.txt b/include/CMakeLists.txt
+new file mode 100644
+index 0000000..a6e9402
+--- /dev/null
++++ b/include/CMakeLists.txt
+@@ -0,0 +1,15 @@
++set(LIBPSL_VERSION ${PROJECT_VERSION})
++set(LIBPSL_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
++set(LIBPSL_VERSION_MINOR ${PROJECT_VERSION_MINOR})
++set(LIBPSL_VERSION_PATCH ${PROJECT_VERSION_PATCH})
++
++math(EXPR LIBPSL_VERSION_NUMBER
++     "(${PROJECT_VERSION_MAJOR} << 16) + (${PROJECT_VERSION_MINOR} << 8) +  (${PROJECT_VERSION_PATCH})"
++     OUTPUT_FORMAT HEXADECIMAL
++)
++
++configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpsl.h.in ${CMAKE_CURRENT_BINARY_DIR}/libpsl.h)
++
++target_include_directories(psl PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
++
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libpsl.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+new file mode 100644
+index 0000000..e26d18f
+--- /dev/null
++++ b/src/CMakeLists.txt
+@@ -0,0 +1,23 @@
++find_package(Python3 COMPONENTS Interpreter)
++
++add_custom_command(
++    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/suffixes_dafsa.h
++    DEPENDS ${PSL_SOURCE_PATH}/public_suffix_list.dat
++    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/psl-make-dafsa --output-format=cxx+
++            ${PSL_SOURCE_PATH}/public_suffix_list.dat ${CMAKE_CURRENT_BINARY_DIR}/suffixes_dafsa.h
++    VERBATIM
++)
++
++add_custom_target(generate-dafsa DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/suffixes_dafsa.h)
++
++target_sources(psl PRIVATE lookup_string_in_fixed_set.c psl.c)
++target_include_directories(psl PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
++target_compile_definitions(psl PRIVATE "HAVE_CONFIG_H" "BUILDING_PSL")
++add_dependencies(psl generate-dafsa)
++
++install(
++    TARGETS psl
++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++)
+-- 
+2.35.1.windows.2
+

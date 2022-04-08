@@ -11,11 +11,12 @@ vcpkg_download_distfile(ARCHIVE
 
 # Patches
 set(PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-platform.patch
     # Can be removed on next libpsl release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Increase-label-size.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Fix-write-buffer-overflow.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Fix-stack-buffer-overflow.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Avoid-8-bit-overflow.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Increase-label-size.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Fix-write-buffer-overflow.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Fix-stack-buffer-overflow.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0005-Avoid-8-bit-overflow.patch
 )
 
 # Extract archive
@@ -26,16 +27,13 @@ vcpkg_extract_source_archive_ex(
     PATCHES ${PATCHES}
 )
 
-# Add CMake sources
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/config.h.cmake DESTINATION ${SOURCE_PATH})
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/cmake DESTINATION ${SOURCE_PATH})
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/src/CMakeLists.txt DESTINATION ${SOURCE_PATH}/src)
+# Replace the config.h.in found in the release distribution
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/config.h.in DESTINATION ${SOURCE_PATH})
 
 # Install Python
-vcpkg_find_acquire_program(PYTHON2)
-get_filename_component(PYTHON2_EXE_PATH ${PYTHON2} DIRECTORY)
-vcpkg_add_to_path(${PYTHON2_EXE_PATH})
+vcpkg_find_acquire_program(PYTHON3)
+get_filename_component(PYTHON3_EXE_PATH ${PYTHON3} DIRECTORY)
+vcpkg_add_to_path(${PYTHON3_EXE_PATH})
 
 # Run CMake build
 vcpkg_configure_cmake(
