@@ -34,7 +34,7 @@
 | [sqlite](http://sqlite.org) | 3.38.2 | 2022-03-26 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
 | [freetype](https://www.freetype.org) | 2.12.0 | 2022-03-31 |
-| [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 4.0.0 | 2022-03-01 |
+| [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 4.2.0 | 2022-03-30 |
 | [pixman](http://www.pixman.org) | 0.40.0 | 2020-04-19 |
 | [cairo](https://www.cairographics.org) | 1.17.4 | 2020-11-27 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.1 | 2020-07-18 |
