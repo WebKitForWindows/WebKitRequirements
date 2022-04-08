@@ -1,4 +1,4 @@
-set(VERSION_MAJOR 70)
+set(VERSION_MAJOR 71)
 set(VERSION_MINOR 1)
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
 set(VERSION2 "${VERSION_MAJOR}_${VERSION_MINOR}")
@@ -8,14 +8,14 @@ set(VERSION3 "${VERSION_MAJOR}-${VERSION_MINOR}")
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/unicode-org/icu/releases/download/release-${VERSION3}/icu4c-${VERSION2}-src.tgz"
     FILENAME "icu4c-${VERSION2}-src.tgz"
-    SHA512 0b26ae7207155cb65a8fdb25f7b2fa4431e74b12bccbed0884a17feaae3c96833d12451064dd152197fd6ea5fd3adfd95594284a463e66c82e0d860f645880c9
+    SHA512 1fd2a20aef48369d1f06e2bb74584877b8ad0eb529320b976264ec2db87420bae242715795f372dbc513ea80047bc49077a064e78205cd5e8b33d746fd2a2912
 )
 
 # Patches
 set(PATCHES
     # CMake files
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-platform.patch
-    # patch specifically for vcpkg on top of above
+    # Patch specifically for vcpkg on top of above
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Remove-install-suffix-on-Windows.patch
 )
 
