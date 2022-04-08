@@ -1,0 +1,59 @@
+From 70921df31c07f5b165f93769e9a0cbb347595f6c Mon Sep 17 00:00:00 2001
+From: Werner Lemberg <wl@gnu.org>
+Date: Thu, 31 Mar 2022 20:52:43 +0200
+Subject: [PATCH] CMakeList.txt: Update code to handle recent changes for
+ `freetype.pc`.
+
+Fixes #1144.
+---
+ CMakeLists.txt | 26 ++++++++++++++++++++++----
+ 1 file changed, 22 insertions(+), 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f1e9ae163..efae83188 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -498,7 +498,9 @@ if (BUILD_FRAMEWORK)
+ endif ()
+ 
+ 
++set(PKGCONFIG_REQUIRES "")
+ set(PKGCONFIG_REQUIRES_PRIVATE "")
++set(PKGCONFIG_LIBS "-L\${libdir} -lfreetype")
+ set(PKGCONFIG_LIBS_PRIVATE "")
+ 
+ if (ZLIB_FOUND)
+@@ -569,10 +571,26 @@ if (NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
+           FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
+   string(REPLACE "%ft_version%" "${LIBTOOL_CURRENT}.${LIBTOOL_REVISION}.${LIBTOOL_AGE}"
+           FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
+-  string(REPLACE "%REQUIRES_PRIVATE%" "${PKGCONFIG_REQUIRES_PRIVATE}"
+-          FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
+-  string(REPLACE "%LIBS_PRIVATE%" "${PKGCONFIG_LIBS_PRIVATE}"
+-          FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
++
++  if (BUILD_SHARED_LIBS)
++    string(REPLACE "%PKGCONFIG_REQUIRES%" "${PKGCONFIG_REQUIRES}"
++            FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
++    string(REPLACE "%PKGCONFIG_REQUIRES_PRIVATE%" "${PKGCONFIG_REQUIRES_PRIVATE}"
++            FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
++    string(REPLACE "%PKGCONFIG_LIBS%" "${PKGCONFIG_LIBS}"
++            FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
++    string(REPLACE "%PKGCONFIG_LIBS_PRIVATE%" "${PKGCONFIG_LIBS_PRIVATE}"
++            FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
++  else ()
++    string(REPLACE "%PKGCONFIG_REQUIRES%" "${PKGCONFIG_REQUIRES} ${PKGCONFIG_REQUIRES_PRIVATE}"
++            FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
++    string(REPLACE "%PKGCONFIG_REQUIRES_PRIVATE%" ""
++            FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
++    string(REPLACE "%PKGCONFIG_LIBS%" "${PKGCONFIG_LIBS} ${PKGCONFIG_LIBS_PRIVATE}"
++            FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
++    string(REPLACE "%PKGCONFIG_LIBS_PRIVATE%" ""
++            FREETYPE2_PC_IN ${FREETYPE2_PC_IN})
++  endif ()
+ 
+   set(FREETYPE2_PC_IN_NAME "${PROJECT_BINARY_DIR}/freetype2.pc")
+   if (EXISTS "${FREETYPE2_PC_IN_NAME}")
+-- 
+2.35.1.windows.2
+
