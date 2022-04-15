@@ -6,12 +6,24 @@
   used into requirements repository.  
   .Parameter VcpkgPath
   Path to the directory containing the vcpkg source code.
+  .Parameter Clone
+  Repository to clone vpckg from, defaults to GitHub's microsoft/vcpkg.
+
+  Ignored when a checkout is already present at `VcpkgPath`.
+  .Parameter Build
+  Whether to build the vcpkg.exe, defaults to `true`.
+  .Parameter Update
+  Whether to update the checkout of vcpkg.
 #>
 
 param(
   [Parameter(Mandatory)]
   [string]$vcpkgPath,
-  [Parameter]
+  [Parameter()]
+  [string]$clone,
+  [Parameter()]
+  [switch]$build=[switch]::Present,
+  [Parameter()]
   [switch]$update
 )
 
@@ -29,7 +41,10 @@ if (!(Test-Path $vcpkgPath)) {
     return;
   }
 
-  $arguments = @('clone','https://github.com/microsoft/vcpkg.git',$vcpkgPath);
+  if (!$clone) {
+    $clone = 'https://github.com/microsoft/vcpkg.git';
+  }
+  $arguments = @('clone',$clone,$vcpkgPath);
   Write-Host ('git {0}' -f ($arguments -join ' '))
   Start-Process -Wait -NoNewWindow `
      -FilePath 'git' `
@@ -52,7 +67,9 @@ if ($update) {
 }
 
 # Build the repository
-Invoke-Expression -Command ./scripts/bootstrap.ps1;
+if ($build) {
+  Invoke-Expression -Command ./scripts/bootstrap.ps1;
+}
 
 # Copy files and folders into directory
 function Copy-DirectoryStructure {
