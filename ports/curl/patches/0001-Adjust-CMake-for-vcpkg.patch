@@ -1,4 +1,4 @@
-From 6da8476847d4e60aa3efc00b23dd62005c83159b Mon Sep 17 00:00:00 2001
+From 782d9c711a711aec8ee78ac18fc450fd11043172 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 26 Nov 2018 16:32:05 -0800
 Subject: [PATCH] Adjust CMake for vcpkg
@@ -8,10 +8,10 @@ Subject: [PATCH] Adjust CMake for vcpkg
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b77de6d5e..fa681774b 100644
+index 6957f619d..67479efef 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -1349,7 +1349,7 @@ endfunction()
+@@ -1359,7 +1359,7 @@ endfunction()
  
  include(GNUInstallDirs)
  
@@ -21,5 +21,5 @@ index b77de6d5e..fa681774b 100644
  set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
  set(project_config "${generated_dir}/${PROJECT_NAME}Config.cmake")
 -- 
-2.35.1.windows.2
+2.36.0.windows.1
 

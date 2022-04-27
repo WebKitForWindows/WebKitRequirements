@@ -1,18 +1,16 @@
-set(VERSION 7.82.0)
+set(VERSION 7.83.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 d96f1f03eadd02201713db731aec9041b19d00caf31cf7c4c461370e72cc6ba965b691639b973a2e87bb34911f869c1c629df4f4b4c29d3bcd0b57cd1def72b0
+    SHA512 0cce4bbeae94e5d324bc5d630a11ccd21822556ad3f2730d6f3fe952fb999f01a4cda20163da6b9114170c21798f14db73b7d573bc95650a9b7c8611445f7279
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    # Remove when 7.83.0 is released
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-openssl-fix-CN-check-error-code.patch
 )
 
 # Extract archive
