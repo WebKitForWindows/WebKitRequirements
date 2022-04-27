@@ -24,7 +24,7 @@ def build_config(triplet):
       "brotli",
       "libressl[tools]",
       "nghttp2",
-      "curl[ssl,ipv6]",
+      "curl[libressl,ipv6]",
       "icu",
       "libxml2[xslt]",
       "libxslt",

@@ -108,8 +108,10 @@ if (VCPKG_WINDOWS)
     list(APPEND BUILD_OPTIONS -DCURL_STATIC_CRT=${CURL_STATICLIB})
 endif ()
 
+# Each port of an OpenSSL equivalent checks to see that no other variant is installed so
+# just check to see if any OpenSSL variants are requested and if not use the system one
 set(USE_OPENSSL ON)
-if (NOT ssl IN_LIST FEATURES)
+if (NOT libressl IN_LIST FEATURES)
     message(STATUS "Using system SSL library")
 
     if (VCPKG_WINDOWS)

@@ -20,8 +20,8 @@ Feature: ipv6
 Description: |
   Enable IPV6 support.
 
-Feature: ssl
+Feature: libressl
 Build-Depends: libressl
 Description: |
-  SSL support through libressl. If not specified then the system SSL library
-  will be used.
+  SSL support through libressl. If no SSL libraries are specified then the
+  system SSL library will be used.

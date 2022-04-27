@@ -1,3 +1,7 @@
+if (EXISTS "${CURRENT_INSTALLED_DIR}/include/openssl/ssl.h")
+    message(FATAL_ERROR "Can't build LibreSSL if another OpenSSL equivalent is installed. Please remove the OpenSSL variant, and try to install LibreSSL again if you need it. Build will continue since LibreSSL is a drop-in replacement for OpenSSL")
+endif()
+
 set(VERSION 3.5.2)
 
 # Get archive
