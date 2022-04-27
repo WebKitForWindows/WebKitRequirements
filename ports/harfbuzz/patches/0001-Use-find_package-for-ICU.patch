@@ -1,4 +1,4 @@
-From a6efa919f213ef85491ad7ce93aebb3b2f01224a Mon Sep 17 00:00:00 2001
+From 651c1712c410585d9f356cae102e296521aa7aa4 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 5 Nov 2019 16:56:34 -0800
 Subject: [PATCH 1/2] Use find_package for ICU
@@ -8,7 +8,7 @@ Subject: [PATCH 1/2] Use find_package for ICU
  1 file changed, 1 insertion(+), 6 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 3259ca90c..bd094eada 100644
+index 9a1d9032f..5ca958130 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -245,12 +245,7 @@ endif ()
@@ -26,5 +26,5 @@ index 3259ca90c..bd094eada 100644
    include_directories(${ICU_INCLUDE_DIR})
  
 -- 
-2.35.1.windows.2
+2.36.0.windows.1
 
