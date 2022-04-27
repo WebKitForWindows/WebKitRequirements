@@ -50,5 +50,5 @@ index 9aa10e1..53941af 100644
  	SOVERSION ${TLS_MAJOR_VERSION})
  
 -- 
-2.34.0.windows.1
+2.36.0.windows.1
 
