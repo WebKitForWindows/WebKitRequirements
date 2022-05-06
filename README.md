@@ -33,7 +33,7 @@
 | [libjxl](https://github.com/libjxl/libjxl) | 0.6.1 | 2021-10-29 |
 | [sqlite](http://sqlite.org) | 3.38.3 | 2022-04-27 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
-| [freetype](https://www.freetype.org) | 2.12.0 | 2022-03-31 |
+| [freetype](https://www.freetype.org) | 2.12.1 | 2022-04-30 |
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 4.2.1 | 2022-04-23 |
 | [pixman](http://www.pixman.org) | 0.40.0 | 2020-04-19 |
 | [cairo](https://www.cairographics.org) | 1.17.4 | 2020-11-27 |

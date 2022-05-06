@@ -1,18 +1,15 @@
-set(VERSION 2.12.0)
+set(VERSION 2.12.1)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://download.savannah.gnu.org/releases/freetype/freetype-${VERSION}.tar.gz"
     FILENAME "freetype-${VERSION}.tar.gz"
-    SHA512 e256901c00ae5b01735d9255ac83926d466270d617b9e828aebad608759f137c89bf120d2071aa4209f7447b60d15b4ee8fb66834b61a0ed4d32e10aaf01e2a4
+    SHA512 4f923c82121940e866022c1ee6afb97f447b83ab8b54188df169029f37589e3bad0768a3bfb3095982804db1eec582f05aa846dfb32639697e231af8d52676cc
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    # Remove in next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-CMakeLists.txt-s-PKG_CONFIG-PKGCONFIG-s-REQUIRED_-RE.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-CMakeList.txt-Update-code-to-handle-recent-changes-f.patch
 )
 
 # Extract archive
