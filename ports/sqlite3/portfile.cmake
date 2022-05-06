@@ -1,4 +1,4 @@
-set(VERSION 3.38.03)
+set(VERSION 3.38.05)
 string(REPLACE "." "" TAG ${VERSION})
 string(CONCAT TAG ${TAG} "00")
 
@@ -6,7 +6,7 @@ string(CONCAT TAG ${TAG} "00")
 vcpkg_download_distfile(ARCHIVE
     URLS "https://sqlite.org/2022/sqlite-amalgamation-${TAG}.zip"
     FILENAME "sqlite-amalgamation-${TAG}.zip"
-    SHA512 d59d8cdaad422f12c61324fab981ef8c7015ad78ef11a4b0abbbf1b2adeaabb0800c9ab03f1280da447d8ef4e7915975cfc30df5c5c7995c1feff47840191432
+    SHA512 4fc2992e4c1ca1664a9b01e07c9b944003c4ed0612978e471eff262a7114e4a0699244d91e71ae4ad2b5e1fc9829917cd7d5f0313aa5859036905f974548d94a
 )
 
 # Extract archive
