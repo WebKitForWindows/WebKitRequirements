@@ -22,7 +22,7 @@
 | [nghttp2](https://nghttp2.org) | 1.47.0 | 2022-02-23 |
 | [c-ares](https://c-ares.org) | 1.18.1 | 2021-10-27 |
 | [curl](https://curl.se) | 7.83.0 | 2022-04-27 |
-| [libxml2](http://xmlsoft.org/) | 2.9.13 | 2022-02-19 |
+| [libxml2](http://xmlsoft.org/) | 2.9.14 | 2022-05-02 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.35 | 2022-02-16 |
 | [lcms](https://www.littlecms.com/) | 2.13.1 | 2022-01-28 |
 | [highway](https://github.com/google/highway) | 0.15.0 | 2021-11-11 |
