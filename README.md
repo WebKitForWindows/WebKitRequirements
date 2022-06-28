@@ -31,7 +31,7 @@
 | [libwebp](https://github.com/webmproject/libwebp) | 1.2.2 | 2022-01-19 |
 | [openjpeg](https://www.openjpeg.org/) | 2.5.0 | 2022-05-13 |
 | [libjxl](https://github.com/libjxl/libjxl) | 0.6.1 | 2021-10-29 |
-| [sqlite](http://sqlite.org) | 3.38.5 | 2022-05-06 |
+| [sqlite](http://sqlite.org) | 3.39.0 | 2022-06-25 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
 | [freetype](https://www.freetype.org) | 2.12.1 | 2022-04-30 |
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 4.2.1 | 2022-04-23 |
