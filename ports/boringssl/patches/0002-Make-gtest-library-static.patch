@@ -1,0 +1,25 @@
+From 1e2d9b09eb58a078c052ee38dc6e37ceea5de340 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Mon, 28 Feb 2022 11:11:17 -0800
+Subject: [PATCH 2/5] Make gtest library static
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 35ff4c112..ccfdf3404 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -560,7 +560,7 @@ endif()
+ 
+ # Add minimal googletest targets. The provided one has many side-effects, and
+ # googletest has a very straightforward build.
+-add_library(boringssl_gtest third_party/googletest/src/gtest-all.cc)
++add_library(boringssl_gtest STATIC third_party/googletest/src/gtest-all.cc)
+ target_include_directories(boringssl_gtest PRIVATE third_party/googletest)
+ 
+ include_directories(third_party/googletest/include)
+-- 
+2.37.0.windows.1
+

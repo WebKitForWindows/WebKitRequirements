@@ -1,0 +1,27 @@
+From 65288d0c7995d451494e27506dd3ec7769b8afd7 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Tue, 28 Jun 2022 18:02:25 -0700
+Subject: [PATCH 1/5] Find threading library
+
+Use the FindThreads module instead of just linking with pthread directly.
+---
+ crypto/CMakeLists.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/crypto/CMakeLists.txt b/crypto/CMakeLists.txt
+index 312c08007..461f34b70 100644
+--- a/crypto/CMakeLists.txt
++++ b/crypto/CMakeLists.txt
+@@ -461,7 +461,8 @@ endif()
+ SET_TARGET_PROPERTIES(crypto PROPERTIES LINKER_LANGUAGE C)
+ 
+ if(NOT WIN32 AND NOT ANDROID)
+-  target_link_libraries(crypto pthread)
++  find_package(Threads REQUIRED)
++  target_link_libraries(crypto Threads::Threads)
+ endif()
+ 
+ # Every target depends on crypto, so we add libcxx as a dependency here to
+-- 
+2.37.0.windows.1
+

@@ -1,0 +1,26 @@
+From d956769f9a9f2b86819fe5c5ca801660d1d781bc Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Tue, 28 Jun 2022 18:06:37 -0700
+Subject: [PATCH 4/5] Make building tools optional
+
+---
+ tool/CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/tool/CMakeLists.txt b/tool/CMakeLists.txt
+index a591b7def..929a9ca53 100644
+--- a/tool/CMakeLists.txt
++++ b/tool/CMakeLists.txt
+@@ -1,3 +1,4 @@
++if(ENABLE_TOOLS)
+ include_directories(../include)
+ 
+ add_executable(
+@@ -38,3 +39,4 @@ else()
+     target_link_libraries(bssl ssl crypto)
+   endif()
+ endif()
++endif()
+-- 
+2.37.0.windows.1
+
