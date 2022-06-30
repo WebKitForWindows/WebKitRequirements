@@ -8,6 +8,12 @@ Build-Depends: c-ares
 Description: |
   Enable c-ares for asynchronous DNS requests.
 
+Feature: boringssl
+Build-Depends: boringssl
+Description: |
+  SSL support through boringssl. If no SSL libraries are specified then the
+  system SSL library will be used.
+
 Feature: ca-bundle
 Description: |
   Use the provided certificate bundle.
