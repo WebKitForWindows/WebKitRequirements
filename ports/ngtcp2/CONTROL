@@ -1,0 +1,4 @@
+Source: ngtcp2
+Version: 0.6.0
+Build-Depends: boringssl
+Description: An effort to implement RFC9000 QUIC protocol.
