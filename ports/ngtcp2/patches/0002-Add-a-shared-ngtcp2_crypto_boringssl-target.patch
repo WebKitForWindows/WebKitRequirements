@@ -1,0 +1,43 @@
+From 68675d2ad057bbdcf8bfd54cd4f5d525b6fb83c3 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Mon, 27 Jun 2022 18:34:05 -0700
+Subject: [PATCH 2/2] Add a shared ngtcp2_crypto_boringssl target
+
+---
+ crypto/boringssl/CMakeLists.txt | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/crypto/boringssl/CMakeLists.txt b/crypto/boringssl/CMakeLists.txt
+index ebaae3de..004fb6a9 100644
+--- a/crypto/boringssl/CMakeLists.txt
++++ b/crypto/boringssl/CMakeLists.txt
+@@ -43,6 +43,26 @@ foreach(name libngtcp2_crypto_boringssl.pc)
+   configure_file("${name}.in" "${name}" @ONLY)
+ endforeach()
+ 
++# Public shared library
++if(ENABLE_SHARED_LIB)
++  add_library(ngtcp2_crypto_boringssl SHARED ${ngtcp2_crypto_boringssl_SOURCES})
++  set_target_properties(ngtcp2_crypto_boringssl PROPERTIES
++    COMPILE_FLAGS "${WARNCFLAGS}"
++    VERSION ${LT_VERSION}
++    SOVERSION ${LT_VERSION}
++    C_VISIBILITY_PRESET hidden
++    POSITION_INDEPENDENT_CODE ON
++  )
++  target_include_directories(ngtcp2_crypto_boringssl PUBLIC
++    ${ngtcp2_crypto_boringssl_INCLUDE_DIRS})
++  target_link_libraries(ngtcp2_crypto_boringssl ngtcp2 ${BORINGSSL_LIBRARIES})
++
++  install(TARGETS ngtcp2_crypto_boringssl
++    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
++endif()
++
+ if(ENABLE_STATIC_LIB)
+   # Public static library
+   add_library(ngtcp2_crypto_boringssl_static ${ngtcp2_crypto_boringssl_SOURCES})
+-- 
+2.37.0.windows.1
+

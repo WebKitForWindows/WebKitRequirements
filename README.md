@@ -54,6 +54,7 @@ the requirements.
 | [libressl](https://www.libressl.org) | 3.5.2 | 2022-04-23 |
 | [nghttp2](https://nghttp2.org) | 1.48.0 | 2022-06-24 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.5.0 | 2022-06-20 |
+| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.6.0 | 2022-06-20 |
 | [c-ares](https://c-ares.org) | 1.18.1 | 2021-10-27 |
 | [curl](https://curl.se) | 7.84.0 | 2022-06-27 |
 | [libxml2](http://xmlsoft.org/) | 2.9.14 | 2022-05-02 |
