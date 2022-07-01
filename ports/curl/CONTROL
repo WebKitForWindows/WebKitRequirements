@@ -22,6 +22,11 @@ Feature: cookies
 Description: |
   Enable cookie support.
 
+Feature: http3
+Build-Depends: nghttp3, ngtcp2
+Description: |
+  Enable HTTP/3 support.
+
 Feature: ipv6
 Description: |
   Enable IPV6 support.

@@ -11,6 +11,8 @@ vcpkg_download_distfile(ARCHIVE
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    # Remove after https://github.com/curl/curl/pull/9065 lands in a release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-cmake-support-ngtcp2-boringssl-backend.patch
 )
 
 # Extract archive
@@ -85,6 +87,15 @@ if (cookies IN_LIST FEATURES)
 else ()
     message(STATUS "Disabling cookie handling")
     list(APPEND BUILD_OPTIONS -DCURL_DISABLE_COOKIES=ON)
+endif ()
+
+# Check for http3 feature
+if (http3 IN_LIST FEATURES)
+    message(STATUS "Enabling HTTP/3 support")
+    list(APPEND BUILD_OPTIONS -DUSE_NGTCP2=ON)
+else ()
+    message(STATUS "Disabling HTTP/3 support")
+    list(APPEND BUILD_OPTIONS -DUSE_NGTCP2=OFF)
 endif ()
 
 # Check for IPV6 feature
