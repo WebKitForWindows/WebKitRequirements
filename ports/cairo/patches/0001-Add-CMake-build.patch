@@ -1,0 +1,870 @@
+From 426db6e2ee750fd8c937b78f88cf270bb4e85728 Mon Sep 17 00:00:00 2001
+From: Don Olmstead <don.olmstead@sony.com>
+Date: Thu, 7 Jul 2022 11:14:19 -0700
+Subject: [PATCH 1/2] Add CMake build
+
+Port the meson build over to CMake. Features that aren't relevant at all, like the gl backend, aren't ported over. Everything else just follows along with the files.
+---
+ CMakeLists.txt          | 339 ++++++++++++++++++++++++++++++++++++++++
+ cmake/FindPixman.cmake  |  90 +++++++++++
+ src/CMakeLists.txt      | 254 ++++++++++++++++++++++++++++++
+ src/config.cmake.h.in   |  94 +++++++++++
+ src/features.cmake.h.in |  41 +++++
+ 5 files changed, 818 insertions(+)
+ create mode 100644 CMakeLists.txt
+ create mode 100644 cmake/FindPixman.cmake
+ create mode 100644 src/CMakeLists.txt
+ create mode 100644 src/config.cmake.h.in
+ create mode 100644 src/features.cmake.h.in
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+new file mode 100644
+index 000000000..3548e68fe
+--- /dev/null
++++ b/CMakeLists.txt
+@@ -0,0 +1,339 @@
++# Port of Meson build system to CMake
++#
++# Notes about the port
++#
++# Values added to feature_conf correspond to cairo-features.h
++# Values added to conf correspond to config.h
++
++cmake_minimum_required(VERSION 3.20)
++
++project(
++    cairo
++    VERSION 1.17.6
++    LANGUAGES C
++)
++
++include(CMakePushCheckState)
++include(CheckIncludeFile)
++include(CheckCCompilerFlag)
++include(CheckFunctionExists)
++include(CheckSourceCompiles)
++include(CheckSymbolExists)
++include(CheckTypeSize)
++include(GNUInstallDirs)
++
++set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
++
++# Relevant options from meson_options.txt
++option(CAIRO_ENABLE_FONTCONFIG "Enable support for Fontconfig" OFF)
++option(CAIRO_ENABLE_FREETYPE "Enable support for FreeType fonts" OFF)
++option(CAIRO_ENABLE_PNG "Enable support for png and svg surfaces" ON)
++option(CAIRO_ENABLE_ZLIB "Enable script, ps, pdf, and xml surfaces" OFF)
++
++# Compiler flags
++function (get_supported_arguments flags var)
++    unset(_supported)
++    foreach (_flag IN LISTS flags)
++        check_c_compiler_flag(${_flag} c_compiler_supports_${_flag})
++        if (c_compiler_supports_${_flag})
++            list(APPEND _supported ${_flag})
++        endif ()
++    endforeach ()
++    set(${var}
++        ${_supported}
++        PARENT_SCOPE
++    )
++endfunction ()
++
++if (NOT MSVC)
++    set(cairo_c_flags
++        -Wmissing-declarations
++        -Werror-implicit-function-declaration
++        -Wpointer-arith
++        -Wwrite-strings
++        -Wsign-compare
++        -Wpacked
++        -Wswitch-enum
++        -Wmissing-format-attribute
++        -Wvolatile-register-var
++        -Wstrict-aliasing=2
++        -Winit-self
++        -Wunsafe-loop-optimizations
++        -Wno-missing-field-initializers
++        -Wno-unused-parameter
++        -Wno-attributes
++        -Wno-long-long
++        -Winline
++    )
++
++    list(APPEND cairo_c_flags -Wno-unused-but-set-variable -Wno-enum-conversion)
++
++    list(APPEND cairo_c_flags -fno-strict-aliasing -fno-common)
++
++    get_supported_arguments("${cairo_c_flags}" cairo_c_flags)
++
++    if (-Wno-attributes IN_LIST cairo_c_flags)
++        cmake_push_check_state()
++        set(CMAKE_REQUIRED_FLAGS -Wno-attributes -Werror)
++        file(READ meson-cc-tests/check-unused-result.c WARN_UNUSED_RESULT_TEST)
++        check_source_compiles(C "${WARN_UNUSED_RESULT_TEST}" HAVE_WARN_UNUSED_RESULT)
++        if (HAVE_WARN_UNUSED_RESULT)
++            set(WARN_UNUSED_RESULT "__attribute__((__warn_unused_result__))")
++        endif ()
++        cmake_pop_check_state()
++    endif ()
++else ()
++    set(cairo_c_flags
++        /wd4244 /wd4146
++        # Dont warn about double -> float truncation
++        /wd4305
++    )
++endif ()
++
++set(cairo_private_definitions _GNU_SOURCE HAVE_CONFIG_H)
++
++# Check for sizes
++check_type_size("int" SIZEOF_INT)
++check_type_size("long" SIZEOF_LONG)
++check_type_size("long long" SIZEOF_LONG_LONG)
++check_type_size("size_t" SIZEOF_SIZE_T)
++check_type_size("void *" SIZEOF_VOID_P)
++
++cmake_push_check_state()
++set(CMAKE_EXTRA_INCLUDE_FILES stdint.h)
++check_type_size("__uint128_t" SIZEOF___UINT128_T)
++check_type_size("uint128_t" SIZEOF_UINT128_T)
++check_type_size("uint64_t" SIZEOF_UINT64_T)
++cmake_pop_check_state()
++
++if (SIZEOF___UINT128_T)
++    set(HAVE___UINT128_T 1)
++endif ()
++if (SIZEOF_UINT128_T)
++    set(HAVE_UINT128_T 1)
++endif ()
++if (SIZEOF_UINT64_T)
++    set(HAVE_UINT64_T 1)
++endif ()
++
++# Check for headers
++check_include_file(stdint.h HAVE_STDINT_H)
++check_include_file(inttypes.h HAVE_INTTYPES_H)
++check_include_file(sys/int_types.h HAVE_SYS_INT_TYPES_H)
++check_include_file(fcntl.h HAVE_FCNTL_H)
++check_include_file(unistd.h HAVE_UNISTD_H)
++check_include_file(signal.h HAVE_SIGNAL_H)
++check_include_file(sys/stat.h HAVE_SYS_STAT_H)
++check_include_file(sys/socket.h HAVE_SYS_SOCKET_H)
++check_include_file(poll.h HAVE_POLL_H)
++check_include_file(sys/poll.h HAVE_SYS_POLL_H)
++check_include_file(sys/un.h HAVE_SYS_UN_H)
++check_include_file(sched.h HAVE_SCHED_H)
++if (HAVE_SCHED_H)
++    check_symbol_exists(sched_getaffinity sched.H HAVE_SCHED_GETAFFINITY)
++endif ()
++check_include_file(sys/mman.h HAVE_SYS_MMAN_H)
++if (HAVE_SYS_MMAN_H)
++    check_symbol_exists(mmap sys/mman.h HAVE_SCHED_GETAFFINITY)
++endif ()
++check_include_file(time.h HAVE_TIME_H)
++if (HAVE_TIME_H)
++    check_symbol_exists(clock_gettime time.h HAVE_CLOCK_GETTIME)
++endif ()
++check_include_file(libgen.h HAVE_LIBGEN_H)
++check_include_file(byteswap.h HAVE_BYTESWAP_H)
++check_include_file(signal.h HAVE_SIGNAL_H)
++check_include_file(setjmp.h HAVE_SETJMP_H)
++check_include_file(fenv.h HAVE_FENV_H)
++check_include_file(sys/wait.h HAVE_SYS_WAIT_H)
++check_include_file(sys/stat.h HAVE_SYS_STAT_H)
++check_include_file(io.h HAVE_IO_H)
++check_include_file(fenv.h HAVE_FENV_H)
++if (HAVE_FENV_H)
++    check_symbol_exists(feenableexcept fenv.h HAVE_FEENABLEEXCEPT)
++    check_symbol_exists(fedisableexcept fenv.h HAVE_FEDISABLEEXCEPT)
++    check_symbol_exists(feclearexcept fenv.h HAVE_FECLEAREXCEPT)
++endif ()
++check_include_file(xlocale.h HAVE_XLOCALE_H)
++check_include_file(sys/ioctl.h HAVE_SYS_IOCTL_H)
++check_include_file(intsafe.h HAVE_INTSAFE_H)
++
++# Check for functions
++check_function_exists(alarm HAVE_ALARM)
++check_function_exists(ctime_r HAVE_CTIME_R)
++check_function_exists(localtime_r HAVE_LOCALTIME_R)
++check_function_exists(gmtime_r HAVE_GMTIME_R)
++check_function_exists(drand48 HAVE_DRAND48)
++check_function_exists(flockfile HAVE_FLOCKFILE)
++check_function_exists(funlockfile HAVE_FUNLOCKFILE)
++check_function_exists(getline HAVE_GETLINE)
++check_function_exists(link HAVE_LINK)
++check_function_exists(fork HAVE_FORK)
++check_function_exists(waitpid HAVE_WAITPID)
++check_function_exists(raise HAVE_RAISE)
++check_function_exists(newlocale HAVE_NEWLOCALE)
++check_function_exists(strtod_l HAVE_STRTOD_L)
++
++# Endian
++if (CMAKE_C_BYTE_ORDER MATCHES BIG_ENDIAN)
++    set(WORDS_BIGENDIAN ON)
++    set(FLOAT_WORDS_BIGENDIAN ON)
++endif ()
++
++# lzo2 related configuration
++# Ignoring
++
++# dl related configuration
++# Ignoring
++
++if (CAIRO_ENABLE_ZLIB)
++    find_package(ZLIB REQUIRED)
++    set(CAIRO_HAS_SCRIPT_SURFACE ON)
++    set(CAIRO_HAS_PS_SURFACE ON)
++    set(CAIRO_HAS_PDF_SURFACE ON)
++    set(CAIRO_HAS_INTERPRETER ON)
++    list(APPEND built_features cairo_script cairo_ps cairo_pdf)
++    list(APPEND cairo_libraries ZLIB::ZLIB)
++endif ()
++
++if (CAIRO_ENABLE_PNG)
++    find_package(PNG REQUIRED)
++    set(CAIRO_HAS_SVG_SURFACE ON)
++    set(CAIRO_HAS_PNG_FUNCTIONS ON)
++    list(APPEND built_features cairo_png cairo_svg)
++    list(APPEND cairo_libraries PNG::PNG)
++endif ()
++
++if (CAIRO_ENABLE_FONTCONFIG)
++    find_package(Fontconfig REQUIRED)
++
++    cmake_push_check_state()
++    set(CMAKE_REQUIRED_INCLUDES ${Fontconfig_INCLUDE_DIRS})
++    set(CMAKE_REQUIRED_LIBRARIES ${Fontconfig_LIBRARIES})
++
++    set(fc_check_funcs FcInit FcFini)
++
++    foreach (_func IN ITEMS ${fc_check_funcs})
++        string(TOUPPER HAVE_${_func} _have_check)
++        check_symbol_exists(${_func} "fontconfig/fontconfig.h" ${_have_check})
++    endforeach ()
++    cmake_pop_check_state()
++
++    set(CAIRO_HAS_FC_FONT ON)
++    list(APPEND built_features cairo_fc)
++    list(APPEND cairo_libraries Fontconfig::Fontconfig)
++endif ()
++
++if (CAIRO_ENABLE_FREETYPE)
++    find_package(Freetype REQUIRED)
++
++    cmake_push_check_state()
++    set(CMAKE_REQUIRED_INCLUDES ${FREETYPE_INCLUDE_DIRS})
++    set(CMAKE_REQUIRED_LIBRARIES ${FREETYPE_LIBRARIES})
++
++    set(ft_check_funcs
++        FT_Get_X11_Font_Format
++        FT_GlyphSlot_Embolden
++        FT_GlyphSlot_Oblique
++        FT_Load_Sfnt_Table
++        FT_Library_SetLcdFilter
++        FT_Get_Var_Design_Coordinates
++        FT_Done_MM_Var
++        FT_Palette_Set_Foreground_Color
++    )
++    set(ft_headers
++        ft2build.h
++        freetype/freetype.h
++        freetype/ftoutln.h
++        freetype/ftimage.h
++        freetype/ftbitmap.h
++        freetype/tttables.h
++        freetype/ftfntfmt.h
++        freetype/ftmm.h
++        freetype/ftsynth.h
++        freetype/ftlcdfil.h
++    )
++
++    foreach (_func IN ITEMS ${ft_check_funcs})
++        string(TOUPPER HAVE_${_func} _have_check)
++        check_symbol_exists(${_func} "${ft_headers}" ${_have_check})
++    endforeach ()
++
++    file(READ meson-cc-tests/ft_has_color.c FT_HAS_COLOR_TEST)
++    check_source_compiles(C "${FT_HAS_COLOR_TEST}" FT_HAS_COLOR)
++
++    cmake_pop_check_state()
++
++    set(CAIRO_HAS_FT_FONT ON)
++    list(APPEND built_features cairo_ft)
++    list(APPEND cairo_libraries Freetype::Freetype)
++endif ()
++
++# X11 related configuration
++# Ignoring
++
++# Quartz related configuration
++# Ignoring
++
++# Windows configuration
++if (WIN32)
++    set(CAIRO_HAS_WIN32_SURFACE ON)
++    set(CAIRO_HAS_WIN32_FONT ON)
++    list(APPEND built_features cairo_win32 cairo_win32_font)
++    list(APPEND cairo_libraries gdi32 msimg32)
++
++    # DirectX configuration
++    # TODO
++endif ()
++
++# GL backend
++# Ignoring
++
++# Pixman configuration
++find_package(Pixman REQUIRED)
++if (Pixman_FOUND)
++    set(CAIRO_HAS_IMAGE_SURFACE ON)
++    list(APPEND cairo_private_definitions HAS_PIXMAN_GLYPHS)
++    list(APPEND cairo_libraries Pixman::Pixman)
++endif ()
++
++set(CAIRO_HAS_USER_FONT ON)
++set(CAIRO_HAS_MIME_SURFACE ON)
++set(CAIRO_HAS_RECORDING_SURFACE ON)
++set(CAIRO_HAS_OBSERVER_SURFACE ON)
++
++# Tee surface
++# Ignoring
++
++# Checks for sizeof, headers and functions
++# In CMake this has already happened so this can be ignored, however there are
++# a few additional checks done at this point in the meson.build so they are
++# done here to keep symmetry
++
++check_symbol_exists(strndup string.h HAVE_STRNDUP)
++
++# POSIX threads check
++find_package(Threads)
++
++if (CMAKE_USE_PTHREADS_INIT)
++    set(CAIRO_HAS_PTHREAD ON)
++endif ()
++
++# Determine the atomic primative to use as only one can be set
++file(READ meson-cc-tests/atomic-ops-cxx11.c CXX11_ATOMIC_PRIMITIVES_TEST)
++check_source_compiles(C "${CXX11_ATOMIC_PRIMITIVES_TEST}" HAVE_CXX11_ATOMIC_PRIMITIVES)
++
++if (NOT HAVE_CXX11_ATOMIC_PRIMITIVES)
++    file(READ meson-cc-tests/atomic-ops-gcc-legacy.c GCC_LEGACY_ATOMICS_TEST)
++    check_source_compiles(C "${GCC_LEGACY_ATOMICS_TEST}" HAVE_GCC_LEGACY_ATOMICS)
++
++    if (NOT HAVE_GCC_LEGACY_ATOMICS)
++        check_include_file(atomic_ops.h HAVE_LIB_ATOMIC_OPS)
++
++        if (NOT HAVE_LIB_ATOMIC_OPS)
++            check_include_file(libkern/OSAtomic.h HAVE_OS_ATOMIC_OPS)
++        endif ()
++    endif ()
++endif ()
++
++add_subdirectory(src)
+diff --git a/cmake/FindPixman.cmake b/cmake/FindPixman.cmake
+new file mode 100644
+index 000000000..61738006c
+--- /dev/null
++++ b/cmake/FindPixman.cmake
+@@ -0,0 +1,90 @@
++#[=======================================================================[.rst:
++FindPixman
++--------------
++
++Find Pixman headers and libraries.
++
++Imported Targets
++^^^^^^^^^^^^^^^^
++
++``Pixman::Pixman``
++  The Pixman library, if found.
++
++Result Variables
++^^^^^^^^^^^^^^^^
++
++This will define the following variables in your project:
++
++``Pixman_FOUND``
++  true if (the requested version of) Pixman is available.
++``Pixman_VERSION``
++  the version of Pixman.
++``Pixman_LIBRARIES``
++  the libraries to link against to use Pixman.
++``Pixman_INCLUDE_DIRS``
++  where to find the Pixman headers.
++``Pixman_COMPILE_OPTIONS``
++  this should be passed to target_compile_options(), if the
++  target is not used for linking
++
++#]=======================================================================]
++
++find_package(PkgConfig QUIET)
++pkg_check_modules(PC_PIXMAN QUIET pixman)
++set(Pixman_COMPILE_OPTIONS ${PC_PIXMAN_CFLAGS_OTHER})
++set(Pixman_VERSION ${PC_PIXMAN_VERSION})
++
++find_path(
++    Pixman_INCLUDE_DIR
++    NAMES pixman.h
++    HINTS ${PC_PIXMAN_INCLUDEDIR} ${PC_PIXMAN_INCLUDE_DIR}
++    PATH_SUFFIXES pixman-1
++)
++
++find_library(
++    Pixman_LIBRARY
++    NAMES pixman-1 pixman-1d pixman-1_static pixman-1_staticd
++    HINTS ${PC_PIXMAN_LIBDIR} ${PC_PIXMAN_LIBRARY_DIRS}
++)
++
++if (Pixman_INCLUDE_DIR AND NOT Pixman_VERSION)
++    if (EXISTS "${Pixman_INCLUDE_DIR}/pixman-version.h")
++        file(READ "${Pixman_INCLUDE_DIR}/pixman-version.h" PIXMAN_VERSION_CONTENT)
++
++        string(REGEX MATCH "#define +PIXMAN_VERSION_MAJOR +([0-9]+)" _dummy "${PIXMAN_VERSION_CONTENT}")
++        set(PIXMAN_VERSION_MAJOR "${CMAKE_MATCH_1}")
++
++        string(REGEX MATCH "#define +PIXMAN_VERSION_MINOR +([0-9]+)" _dummy "${PIXMAN_VERSION_CONTENT}")
++        set(PIXMAN_VERSION_MINOR "${CMAKE_MATCH_1}")
++
++        string(REGEX MATCH "#define +PIXMAN_VERSION_MICRO +([0-9]+)" _dummy "${PIXMAN_VERSION_CONTENT}")
++        set(PIXMAN_VERSION_MICRO "${CMAKE_MATCH_1}")
++
++        set(PIXMAN_VERSION "${PIXMAN_VERSION_MAJOR}.${PIXMAN_VERSION_MINOR}.${PIXMAN_VERSION_MICRO}")
++    endif ()
++endif ()
++
++include(FindPackageHandleStandardArgs)
++find_package_handle_standard_args(
++    Pixman
++    FOUND_VAR Pixman_FOUND
++    REQUIRED_VARS Pixman_LIBRARY Pixman_INCLUDE_DIR
++    VERSION_VAR Pixman_VERSION
++)
++
++if (Pixman_LIBRARY AND NOT TARGET Pixman::Pixman)
++    add_library(Pixman::Pixman UNKNOWN IMPORTED GLOBAL)
++    set_target_properties(
++        Pixman::Pixman
++        PROPERTIES IMPORTED_LOCATION "${Pixman_LIBRARY}"
++                   INTERFACE_COMPILE_OPTIONS "${Pixman_COMPILE_OPTIONS}"
++                   INTERFACE_INCLUDE_DIRECTORIES "${Pixman_INCLUDE_DIR}"
++    )
++endif ()
++
++mark_as_advanced(Pixman_INCLUDE_DIR Pixman_LIBRARY)
++
++if (Pixman_FOUND)
++    set(Pixman_LIBRARIES ${Pixman_LIBRARY})
++    set(Pixman_INCLUDE_DIRS ${Pixman_INCLUDE_DIR})
++endif ()
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+new file mode 100644
+index 000000000..ca036f735
+--- /dev/null
++++ b/src/CMakeLists.txt
+@@ -0,0 +1,254 @@
++# Porting of the meson.build file to CMake
++
++set(cairo_sources
++    cairo-analysis-surface.c
++    cairo-arc.c
++    cairo-array.c
++    cairo-atomic.c
++    cairo-base64-stream.c
++    cairo-base85-stream.c
++    cairo-bentley-ottmann-rectangular.c
++    cairo-bentley-ottmann-rectilinear.c
++    cairo-bentley-ottmann.c
++    cairo-botor-scan-converter.c
++    cairo-boxes-intersect.c
++    cairo-boxes.c
++    cairo-cache.c
++    cairo-clip-boxes.c
++    cairo-clip-polygon.c
++    cairo-clip-region.c
++    cairo-clip-surface.c
++    cairo-clip-tor-scan-converter.c
++    cairo-clip.c
++    cairo-color.c
++    cairo-composite-rectangles.c
++    cairo-compositor.c
++    cairo-contour.c
++    cairo-damage.c
++    cairo-debug.c
++    cairo-default-context.c
++    cairo-device.c
++    cairo-error.c
++    cairo-fallback-compositor.c
++    cairo-fixed.c
++    cairo-font-face-twin-data.c
++    cairo-font-face-twin.c
++    cairo-font-face.c
++    cairo-font-options.c
++    cairo-freed-pool.c
++    cairo-freelist.c
++    cairo-gstate.c
++    cairo-hash.c
++    cairo-hull.c
++    cairo-image-compositor.c
++    cairo-image-info.c
++    cairo-image-source.c
++    cairo-image-surface.c
++    cairo-line.c
++    cairo-lzw.c
++    cairo-mask-compositor.c
++    cairo-matrix.c
++    cairo-mempool.c
++    cairo-mesh-pattern-rasterizer.c
++    cairo-misc.c
++    cairo-mono-scan-converter.c
++    cairo-mutex.c
++    cairo-no-compositor.c
++    cairo-observer.c
++    cairo-output-stream.c
++    cairo-paginated-surface.c
++    cairo-path-bounds.c
++    cairo-path-fill.c
++    cairo-path-fixed.c
++    cairo-path-in-fill.c
++    cairo-path-stroke-boxes.c
++    cairo-path-stroke-polygon.c
++    cairo-path-stroke-traps.c
++    cairo-path-stroke-tristrip.c
++    cairo-path-stroke.c
++    cairo-path.c
++    cairo-pattern.c
++    cairo-pen.c
++    cairo-polygon-intersect.c
++    cairo-polygon-reduce.c
++    cairo-polygon.c
++    cairo-raster-source-pattern.c
++    cairo-recording-surface.c
++    cairo-rectangle.c
++    cairo-rectangular-scan-converter.c
++    cairo-region.c
++    cairo-rtree.c
++    cairo-scaled-font.c
++    cairo-shape-mask-compositor.c
++    cairo-slope.c
++    cairo-spans-compositor.c
++    cairo-spans.c
++    cairo-spline.c
++    cairo-stroke-dash.c
++    cairo-stroke-style.c
++    cairo-surface-clipper.c
++    cairo-surface-fallback.c
++    cairo-surface-observer.c
++    cairo-surface-offset.c
++    cairo-surface-snapshot.c
++    cairo-surface-subsurface.c
++    cairo-surface-wrapper.c
++    cairo-surface.c
++    cairo-time.c
++    cairo-tor-scan-converter.c
++    cairo-tor22-scan-converter.c
++    cairo-toy-font-face.c
++    cairo-traps-compositor.c
++    cairo-traps.c
++    cairo-tristrip.c
++    cairo-unicode.c
++    cairo-user-font.c
++    cairo-version.c
++    cairo-wideint.c
++    cairo.c
++    cairo-cff-subset.c
++    cairo-scaled-font-subsets.c
++    cairo-truetype-subset.c
++    cairo-type1-fallback.c
++    cairo-type1-glyph-names.c
++    cairo-type1-subset.c
++    cairo-type3-glyph-surface.c
++    cairo-pdf-operators.c
++    cairo-pdf-shading.c
++    cairo-tag-attributes.c
++    cairo-tag-stack.c
++    cairo-deflate-stream.c
++)
++
++set(cairo_headers cairo.h cairo-version.h cairo-deprecated.h)
++
++# cairo_feature_sources structure
++#
++# Find: 'cairo-(.*)': \[
++# Replace: set(cairo_$1_sources
++set(cairo_png_sources cairo-png.c)
++set(cairo_ft_sources cairo-ft-font.c)
++
++set(cairo_xlib_sources
++    cairo-xlib-display.c
++    cairo-xlib-core-compositor.c
++    cairo-xlib-fallback-compositor.c
++    cairo-xlib-render-compositor.c
++    cairo-xlib-screen.c
++    cairo-xlib-source.c
++    cairo-xlib-surface.c
++    cairo-xlib-surface-shm.c
++    cairo-xlib-visual.c
++    cairo-xlib-xcb-surface.c
++)
++set(cairo_xcb_sources
++    cairo-xcb-connection.c
++    cairo-xcb-connection-core.c
++    cairo-xcb-connection-render.c
++    cairo-xcb-connection-shm.c
++    cairo-xcb-screen.c
++    cairo-xcb-shm.c
++    cairo-xcb-surface.c
++    cairo-xcb-surface-core.c
++    cairo-xcb-surface-render.c
++    cairo-xcb-resources.c
++)
++set(cairo_quartz_sources cairo-quartz-surface.c)
++set(cairo_quartz_image_sources cairo-quartz-image-surface.c)
++set(cairo_quartz_font_sources cairo-quartz-font.c)
++set(cairo_win32_sources
++    win32/cairo-win32-debug.c
++    win32/cairo-win32-device.c
++    win32/cairo-win32-gdi-compositor.c
++    win32/cairo-win32-system.c
++    win32/cairo-win32-surface.c
++    win32/cairo-win32-display-surface.c
++    win32/cairo-win32-printing-surface.c
++)
++set(cairo_win32_font_sources win32/cairo-win32-font.c)
++set(cairo_win32_dwrite_font_sources win32/cairo-dwrite-font-public.c win32/cairo-dwrite-font.cpp)
++set(cairo_gl_sources
++    cairo-gl-composite.c
++    cairo-gl-device.c
++    cairo-gl-dispatch.c
++    cairo-gl-glyphs.c
++    cairo-gl-gradient.c
++    cairo-gl-info.c
++    cairo-gl-msaa-compositor.c
++    cairo-gl-operand.c
++    cairo-gl-shaders.c
++    cairo-gl-source.c
++    cairo-gl-spans-compositor.c
++    cairo-gl-surface.c
++    cairo-gl-traps-compositor.c
++)
++set(cairo_script_sources cairo-script-surface.c)
++set(cairo_ps_sources cairo-ps-surface.c)
++set(cairo_pdf_sources cairo-pdf-surface.c cairo-pdf-interchange.c)
++set(cairo_svg_sources cairo-svg-surface.c)
++set(cairo_egl_sources cairo-egl-context.c)
++set(cairo_glx_sources cairo-glx-context.c)
++set(cairo_wgl_sources cairo-wgl-context.c)
++set(cairo_xml_sources cairo-xml-surface.c)
++set(cairo_tee_sources cairo-tee-surface.c)
++
++# cairo_feature_headers structure
++#
++# Find: 'cairo-(.*)': \[(.*)\)
++# Replace: set(cairo_$1_headers $2)
++set(cairo_ps_headers cairo-ps.h)
++set(cairo_pdf_headers cairo-pdf.h)
++set(cairo_svg_headers cairo-svg.h)
++set(cairo_ft_headers cairo-ft.h)
++set(cairo_xlib_headers cairo-xlib.h)
++set(cairo_xlib_xrender_headers cairo-xlib-xrender.h)
++set(cairo_xcb_headers cairo-xcb.h)
++set(cairo_quartz_headers cairo-quartz.h)
++set(cairo_quartz_image_headers cairo-quartz-image.h)
++set(cairo_win32_headers cairo-win32.h)
++set(cairo_gl_headers cairo-gl.h)
++set(cairo_script_headers cairo-script.h)
++set(cairo_tee_headers cairo-tee.h)
++set(cairo_xml_headers cairo-xml.h)
++set(cairo_vg_headers cairo-vg.h)
++
++# foreach feature: built_features
++foreach (_feature IN ITEMS ${built_features})
++    message(STATUS "Enabling ${_feature}")
++    list(APPEND cairo_sources ${${_feature}_sources})
++    if (${_feature}_headers)
++        list(APPEND cairo_headers ${${_feature}_headers})
++    endif ()
++endforeach ()
++
++configure_file(config.cmake.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h)
++configure_file(features.cmake.h.in ${CMAKE_CURRENT_BINARY_DIR}/cairo-features.h)
++
++add_library(cairo "")
++target_sources(cairo PRIVATE ${cairo_sources})
++target_include_directories(cairo PRIVATE ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_CURRENT_BINARY_DIR})
++target_compile_options(cairo PRIVATE ${cairo_c_flags})
++set_target_properties(cairo PROPERTIES PUBLIC_HEADER "${cairo_headers}")
++target_link_libraries(cairo ${cairo_libraries})
++
++# TODO REMOVE
++target_compile_definitions(cairo PRIVATE CAIRO_NO_MUTEX=1)
++
++if (WINDOWS AND NOT BUILD_SHARED_LIBS)
++    target_compile_definitions(cairo PUBLIC CAIRO_WIN32_STATIC_BUILD)
++endif ()
++
++install(
++    TARGETS cairo
++    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
++)
++
++# Ignore test script section
++#
++# shell = find_program('sh', required: false)
++# if shell.found()
++
++#message(FATAL_ERROR "I HAVE COMPLETED ALL THE THINGS")
+diff --git a/src/config.cmake.h.in b/src/config.cmake.h.in
+new file mode 100644
+index 000000000..c32a93bb2
+--- /dev/null
++++ b/src/config.cmake.h.in
+@@ -0,0 +1,94 @@
++/*
++ * Autogenerated by the CMake build system.
++ * Do not edit, your changes will be lost.
++ *
++ * Declaration order follows appearance in CMakeLists.txt
++ */
++
++#pragma once
++
++#cmakedefine WARN_UNUSED_RESULT @WARN_UNUSED_RESULT@
++
++#cmakedefine SIZEOF_INT @SIZEOF_INT@
++#cmakedefine SIZEOF_LONG @SIZEOF_LONG@
++#cmakedefine SIZEOF_LONG_LONG @SIZEOF_LONG_LONG@
++#cmakedefine SIZEOF_SIZE_T @SIZEOF_SIZE_T@
++#cmakedefine SIZEOF_VOID_P @SIZEOF_VOID_P@
++#cmakedefine SIZEOF___UINT128_T @SIZEOF___UINT128_T@
++#cmakedefine SIZEOF_UINT128_T @SIZEOF_UINT128_T@
++#cmakedefine SIZEOF_UINT64_T @SIZEOF_UINT64_T@
++
++#cmakedefine HAVE___UINT128_T 1
++#cmakedefine HAVE_UINT128_T 1
++#cmakedefine HAVE_UINT64_T 1
++
++#cmakedefine HAVE_STDINT_H 1
++#cmakedefine HAVE_INTTYPES_H 1
++#cmakedefine HAVE_SYS_INT_TYPES_H 1
++#cmakedefine HAVE_FCNTL_H 1
++#cmakedefine HAVE_UNISTD_H 1
++#cmakedefine HAVE_SIGNAL_H 1
++#cmakedefine HAVE_SYS_STAT_H 1
++#cmakedefine HAVE_SYS_SOCKET_H 1
++#cmakedefine HAVE_POLL_H 1
++#cmakedefine HAVE_SYS_POLL_H 1
++#cmakedefine HAVE_SYS_UN_H 1
++#cmakedefine HAVE_SCHED_H 1
++#cmakedefine HAVE_SCHED_GETAFFINITY 1
++#cmakedefine HAVE_SYS_MMAN_H 1
++#cmakedefine HAVE_SCHED_GETAFFINITY 1
++#cmakedefine HAVE_TIME_H 1
++#cmakedefine HAVE_CLOCK_GETTIME 1
++#cmakedefine HAVE_LIBGEN_H 1
++#cmakedefine HAVE_BYTESWAP_H 1
++#cmakedefine HAVE_SIGNAL_H 1
++#cmakedefine HAVE_SETJMP_H 1
++#cmakedefine HAVE_FENV_H 1
++#cmakedefine HAVE_SYS_WAIT_H 1
++#cmakedefine HAVE_SYS_STAT_H 1
++#cmakedefine HAVE_IO_H 1
++#cmakedefine HAVE_FENV_H 1
++#cmakedefine HAVE_FEENABLEEXCEPT 1
++#cmakedefine HAVE_FEDISABLEEXCEPT 1
++#cmakedefine HAVE_FECLEAREXCEPT 1
++#cmakedefine HAVE_XLOCALE_H 1
++#cmakedefine HAVE_SYS_IOCTL_H 1
++#cmakedefine HAVE_INTSAFE_H 1
++
++#cmakedefine HAVE_ALARM 1
++#cmakedefine HAVE_CTIME_R 1
++#cmakedefine HAVE_LOCALTIME_R 1
++#cmakedefine HAVE_GMTIME_R 1
++#cmakedefine HAVE_DRAND48 1
++#cmakedefine HAVE_FLOCKFILE 1
++#cmakedefine HAVE_FUNLOCKFILE 1
++#cmakedefine HAVE_GETLINE 1
++#cmakedefine HAVE_LINK 1
++#cmakedefine HAVE_FORK 1
++#cmakedefine HAVE_WAITPID 1
++#cmakedefine HAVE_RAISE 1
++#cmakedefine HAVE_NEWLOCALE 1
++#cmakedefine HAVE_STRTOD_L 1
++
++#cmakedefine WORDS_BIGENDIAN 1
++#cmakedefine FLOAT_WORDS_BIGENDIAN 1
++
++#cmakedefine HAVE_FCINIT 1
++#cmakedefine HAVE_FCFINI 1
++
++#cmakedefine HAVE_FT_GET_X11_FONT_FORMAT 1
++#cmakedefine HAVE_FT_GLYPHSLOT_EMBOLDEN 1
++#cmakedefine HAVE_FT_GLYPHSLOT_OBLIQUE 1
++#cmakedefine HAVE_FT_LOAD_SFNT_TABLE 1
++#cmakedefine HAVE_FT_LIBRARY_SETLCDFILTER 1
++#cmakedefine HAVE_FT_GET_VAR_DESIGN_COORDINATES 1
++#cmakedefine HAVE_FT_DONE_MM_VAR 1
++#cmakedefine HAVE_FT_PALETTE_SET_FOREGROUND_COLOR 1
++#cmakedefine FT_HAS_COLOR 1
++
++#cmakedefine CAIRO_HAS_PTHREAD 1
++
++#cmakedefine HAVE_CXX11_ATOMIC_PRIMITIVES 1
++#cmakedefine HAVE_GCC_LEGACY_ATOMICS 1
++#cmakedefine HAVE_LIB_ATOMIC_OPS 1
++#cmakedefine HAVE_OS_ATOMIC_OPS 1
+diff --git a/src/features.cmake.h.in b/src/features.cmake.h.in
+new file mode 100644
+index 000000000..a77b3d4f8
+--- /dev/null
++++ b/src/features.cmake.h.in
+@@ -0,0 +1,41 @@
++/*
++ * Autogenerated by the CMake build system.
++ * Do not edit, your changes will be lost.
++ */
++
++#pragma once
++
++#define CAIRO_FEATURES_H
++
++#cmakedefine CAIRO_HAS_DWRITE_FONT 1
++#cmakedefine CAIRO_HAS_EGL_FUNCTIONS 1
++#cmakedefine CAIRO_HAS_FC_FONT 1
++#cmakedefine CAIRO_HAS_FT_FONT 1
++#cmakedefine CAIRO_HAS_GLESV2_SURFACE 1
++#cmakedefine CAIRO_HAS_GLESV3_SURFACE 1
++#cmakedefine CAIRO_HAS_GLX_FUNCTIONS 1
++#cmakedefine CAIRO_HAS_GL_SURFACE 1
++#cmakedefine CAIRO_HAS_GOBJECT_FUNCTIONS 1
++#cmakedefine CAIRO_HAS_IMAGE_SURFACE 1
++#cmakedefine CAIRO_HAS_MIME_SURFACE 1
++#cmakedefine CAIRO_HAS_OBSERVER_SURFACE 1
++#cmakedefine CAIRO_HAS_PDF_SURFACE 1
++#cmakedefine CAIRO_HAS_PNG_FUNCTIONS 1
++#cmakedefine CAIRO_HAS_PS_SURFACE 1
++#cmakedefine CAIRO_HAS_QUARTZ_FONT 1
++#cmakedefine CAIRO_HAS_QUARTZ_IMAGE_SURFACE 1
++#cmakedefine CAIRO_HAS_QUARTZ_SURFACE 1
++#cmakedefine CAIRO_HAS_RECORDING_SURFACE 1
++#cmakedefine CAIRO_HAS_SCRIPT_SURFACE 1
++#cmakedefine CAIRO_HAS_SVG_SURFACE 1
++#cmakedefine CAIRO_HAS_TEE_SURFACE 1
++#cmakedefine CAIRO_HAS_USER_FONT 1
++#cmakedefine CAIRO_HAS_WGL_FUNCTIONS 1
++#cmakedefine CAIRO_HAS_WIN32_FONT 1
++#cmakedefine CAIRO_HAS_WIN32_SURFACE 1
++#cmakedefine CAIRO_HAS_XCB_SHM_FUNCTIONS 1
++#cmakedefine CAIRO_HAS_XCB_SURFACE 1
++#cmakedefine CAIRO_HAS_XLIB_SURFACE 1
++#cmakedefine CAIRO_HAS_XLIB_XCB_FUNCTIONS 1
++#cmakedefine CAIRO_HAS_XLIB_XRENDER_SURFACE 1
++#cmakedefine CAIRO_HAS_XML_SURFACE 1
+-- 
+2.37.0.windows.1
+
