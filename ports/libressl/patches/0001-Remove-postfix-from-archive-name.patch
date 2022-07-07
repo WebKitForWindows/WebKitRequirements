@@ -1,4 +1,4 @@
-From 6f98d4c841f5922d833b52353961983fa964e0a0 Mon Sep 17 00:00:00 2001
+From e6d10fa60430e61dadbc23eccb40daa0cc2b460a Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.olmstead@sony.com>
 Date: Wed, 29 Apr 2020 11:23:15 -0700
 Subject: [PATCH 1/2] Remove postfix from archive name
@@ -11,7 +11,7 @@ CMake can't detect a shared build on Windows when there is a postfix version num
  3 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/crypto/CMakeLists.txt b/crypto/CMakeLists.txt
-index b1ded85..bcfa77e 100644
+index 9b66d9f..4467ee7 100644
 --- a/crypto/CMakeLists.txt
 +++ b/crypto/CMakeLists.txt
 @@ -1009,7 +1009,7 @@ if (WIN32)
@@ -24,10 +24,10 @@ index b1ded85..bcfa77e 100644
  	${CRYPTO_VERSION} SOVERSION ${CRYPTO_MAJOR_VERSION})
  
 diff --git a/ssl/CMakeLists.txt b/ssl/CMakeLists.txt
-index a772d12..bad4477 100644
+index cec2417..73763c9 100644
 --- a/ssl/CMakeLists.txt
 +++ b/ssl/CMakeLists.txt
-@@ -77,7 +77,7 @@ if (WIN32)
+@@ -86,7 +86,7 @@ if (WIN32)
  endif()
  set_target_properties(ssl PROPERTIES
  	OUTPUT_NAME ssl${SSL_POSTFIX}
@@ -37,10 +37,10 @@ index a772d12..bad4477 100644
  	SOVERSION ${SSL_MAJOR_VERSION})
  
 diff --git a/tls/CMakeLists.txt b/tls/CMakeLists.txt
-index 9aa10e1..53941af 100644
+index 7827a5e..a482af2 100644
 --- a/tls/CMakeLists.txt
 +++ b/tls/CMakeLists.txt
-@@ -62,7 +62,7 @@ if (WIN32)
+@@ -57,7 +57,7 @@ if (WIN32)
  endif()
  set_target_properties(tls PROPERTIES
  	OUTPUT_NAME tls${TLS_POSTFIX}
@@ -50,5 +50,5 @@ index 9aa10e1..53941af 100644
  	SOVERSION ${TLS_MAJOR_VERSION})
  
 -- 
-2.36.0.windows.1
+2.37.0.windows.1
 
