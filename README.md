@@ -69,7 +69,7 @@ the requirements.
 | [sqlite](http://sqlite.org) | 3.39.0 | 2022-06-25 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
 | [freetype](https://www.freetype.org) | 2.12.1 | 2022-04-30 |
-| [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 4.2.1 | 2022-04-23 |
+| [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 4.4.1 | 2022-06-28 |
 | [pixman](http://www.pixman.org) | 0.40.0 | 2020-04-19 |
 | [cairo](https://www.cairographics.org) | 1.17.6 | 2022-03-18 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.1 | 2020-07-18 |

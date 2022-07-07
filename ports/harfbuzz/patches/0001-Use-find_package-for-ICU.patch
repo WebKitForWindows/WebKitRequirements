@@ -1,4 +1,4 @@
-From 651c1712c410585d9f356cae102e296521aa7aa4 Mon Sep 17 00:00:00 2001
+From 28be05b51de17d732fca1a28f5ae95703137cda4 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 5 Nov 2019 16:56:34 -0800
 Subject: [PATCH 1/2] Use find_package for ICU
@@ -26,5 +26,5 @@ index 9a1d9032f..5ca958130 100644
    include_directories(${ICU_INCLUDE_DIR})
  
 -- 
-2.36.0.windows.1
+2.37.0.windows.1
 
