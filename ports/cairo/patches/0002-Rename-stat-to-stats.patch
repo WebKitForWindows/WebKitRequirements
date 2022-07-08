@@ -1,4 +1,4 @@
-From e97fd2e135525e2e0ad0c989c890454c0aecccbe Mon Sep 17 00:00:00 2001
+From 538ac9ccbf27436fbf7b011749f71f57e055860e Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 2 Apr 2018 14:58:45 -0700
 Subject: [PATCH 2/2] Rename stat to stats
