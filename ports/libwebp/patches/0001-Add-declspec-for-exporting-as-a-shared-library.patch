@@ -1,27 +1,27 @@
-From df65baae6f6acde9179251d589df2d7c7d89d8f3 Mon Sep 17 00:00:00 2001
+From 63db58c21eb953eb52a82f409049af29bc3d7731 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 23 Apr 2018 18:49:42 -0700
 Subject: [PATCH] Add declspec for exporting as a shared library
 
-This adds a default declaration of __declspec to WEBP_EXTERN. Also removes an erroneous WEBP_EXTERN in dsp.h.
+This adds a default declaration of __declspec to WEBP_EXTERN. Also removes an erroneous WEBP_EXTERN in cpu.h.
 ---
- src/dsp/dsp.h    | 2 +-
+ src/dsp/cpu.h    | 2 +-
  src/webp/types.h | 8 +++++++-
  2 files changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/src/dsp/dsp.h b/src/dsp/dsp.h
-index c4f57e4d..ee9868c4 100644
---- a/src/dsp/dsp.h
-+++ b/src/dsp/dsp.h
-@@ -261,7 +261,7 @@ typedef enum {
- } CPUFeature;
+diff --git a/src/dsp/cpu.h b/src/dsp/cpu.h
+index 57a40d87..ca4da00f 100644
+--- a/src/dsp/cpu.h
++++ b/src/dsp/cpu.h
+@@ -245,7 +245,7 @@ extern "C" {
+ 
  // returns true if the CPU supports the feature.
  typedef int (*VP8CPUInfo)(CPUFeature feature);
 -WEBP_EXTERN VP8CPUInfo VP8GetCPUInfo;
 +extern VP8CPUInfo VP8GetCPUInfo;
  
- //------------------------------------------------------------------------------
- // Init stub generator
+ #ifdef __cplusplus
+ }    // extern "C"
 diff --git a/src/webp/types.h b/src/webp/types.h
 index 47f7f2b0..b53e67d6 100644
 --- a/src/webp/types.h
@@ -45,5 +45,5 @@ index 47f7f2b0..b53e67d6 100644
  # else
  #  define WEBP_EXTERN extern
 -- 
-2.35.1.windows.2
+2.37.1.windows.1
 
