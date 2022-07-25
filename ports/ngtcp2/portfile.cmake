@@ -1,19 +1,16 @@
-set(VERSION 0.6.0)
+set(VERSION 0.7.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/ngtcp2-${VERSION}.tar.bz2"
     FILENAME "ngtcp2-${VERSION}.tar.bz2"
-    SHA512 5230bc9abcd7ddd570fa3241d24bc15417a8378c3a3e059f1a7565c74da56e2519538cb33064519ea38b51aef4e460d3377f45d2aa490fcf29867f497c516941
+    SHA512 b87d1d1efc404a250d47604eac333505a0169a6268384b44f5eedb7b3b5ca0f76f959861d4d45e8da275c06910e1b667649c3378ed9c0b50ababcd3241045249
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Use-find_package-for-boringssl.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-a-shared-ngtcp2_crypto_boringssl-target.patch
-    # Remove after next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Define-WIN32_LEAN_AND_MEAN-before-ws2tcpip.h.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-fix-ngtcp2_htons-for-windows.patch
 )
 
 # Extract archive
