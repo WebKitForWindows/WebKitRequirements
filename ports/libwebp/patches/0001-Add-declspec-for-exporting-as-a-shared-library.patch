@@ -1,4 +1,4 @@
-From 63db58c21eb953eb52a82f409049af29bc3d7731 Mon Sep 17 00:00:00 2001
+From c8177ebb799664b867400c3919c6eff011712fa8 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 23 Apr 2018 18:49:42 -0700
 Subject: [PATCH] Add declspec for exporting as a shared library
@@ -45,5 +45,5 @@ index 47f7f2b0..b53e67d6 100644
  # else
  #  define WEBP_EXTERN extern
 -- 
-2.37.1.windows.1
+2.37.2.windows.2
 

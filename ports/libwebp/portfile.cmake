@@ -1,10 +1,10 @@
-set(VERSION 1.2.3)
+set(VERSION 1.2.4)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/webmproject/libwebp/archive/v${VERSION}.zip"
     FILENAME "libwebp-${VERSION}.zip"
-    SHA512 21de2bd4a86a4f2e2cd629da19a94b22d5c0d59a2bd968fc6847d00e31e7b434c4665a59f29b84185d7c2dce2871cf5151f31714f7ad73aa3ba6745318ea46b7
+    SHA512 9b7a0ad06128aba67471bff60b35f544ad3d6cc74b82178b970f49bd741b6c531068fe3a8907805e9f03a039d6f5156f6da60b1e0184e7301ab610c3ad70ed58
 )
 
 # Patches
