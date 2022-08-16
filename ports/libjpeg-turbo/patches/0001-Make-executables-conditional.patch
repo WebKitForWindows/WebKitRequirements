@@ -1,4 +1,4 @@
-From 2d1afe9097ea9c4dcb626d40d2bff4c88fa384c1 Mon Sep 17 00:00:00 2001
+From 13c152aaa66b45aeee301ff572d82762b143ea96 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 5 Nov 2019 14:12:34 -0800
 Subject: [PATCH 1/2] Make executables conditional
@@ -10,7 +10,7 @@ Adds an option ENABLE_EXECUTABLES which specifies whether executables should be 
  2 files changed, 73 insertions(+), 55 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1198eced..656855b9 100644
+index cca29663..c9763ef8 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -185,6 +185,8 @@ option(ENABLE_SHARED "Build shared libraries" TRUE)
@@ -99,7 +99,7 @@ index 1198eced..656855b9 100644
  
  ###############################################################################
  # TESTS
-@@ -1436,19 +1443,21 @@ if(WITH_TURBOJPEG)
+@@ -1434,19 +1441,21 @@ if(WITH_TURBOJPEG)
        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -124,7 +124,7 @@ index 1198eced..656855b9 100644
        if(MSVC_IDE OR XCODE)
          set(DIR "${CMAKE_CURRENT_BINARY_DIR}/\${CMAKE_INSTALL_CONFIG_NAME}")
        else()
-@@ -1466,7 +1475,7 @@ if(ENABLE_STATIC)
+@@ -1464,7 +1473,7 @@ if(ENABLE_STATIC)
    install(TARGETS jpeg-static EXPORT ${CMAKE_PROJECT_NAME}Targets
      INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
      ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
@@ -133,7 +133,7 @@ index 1198eced..656855b9 100644
      if(MSVC_IDE OR XCODE)
        set(DIR "${CMAKE_CURRENT_BINARY_DIR}/\${CMAKE_INSTALL_CONFIG_NAME}")
      else()
-@@ -1481,7 +1490,9 @@ if(ENABLE_STATIC)
+@@ -1479,7 +1488,9 @@ if(ENABLE_STATIC)
    endif()
  endif()
  
@@ -228,5 +228,5 @@ index aea0b9d7..566e9f69 100644
    CMAKE_C_LINKER_SUPPORTS_PDB)
    install(FILES "$<TARGET_PDB_FILE:jpeg>"
 -- 
-2.35.1.windows.2
+2.37.2.windows.2
 
