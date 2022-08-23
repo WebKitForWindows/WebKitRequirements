@@ -58,7 +58,7 @@ the requirements.
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.7.0 | 2022-07-21 |
 | [c-ares](https://c-ares.org) | 1.18.1 | 2021-10-27 |
 | [curl](https://curl.se) | 7.84.0 | 2022-06-27 |
-| [libxml2](http://xmlsoft.org/) | 2.9.14 | 2022-05-02 |
+| [libxml2](http://xmlsoft.org/) | 2.10.0 | 2022-08-17 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.35 | 2022-02-16 |
 | [lcms](https://www.littlecms.com/) | 2.13.1 | 2022-01-28 |
 | [highway](https://github.com/google/highway) | 0.15.0 | 2021-11-11 |
