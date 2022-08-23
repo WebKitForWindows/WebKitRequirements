@@ -1,4 +1,4 @@
-From 612ae2212a6ec2831a8f5996ab2175f56f59a04b Mon Sep 17 00:00:00 2001
+From 8620ea1d57435c2b10300cbb889d778cf9cb39d2 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 3 Mar 2022 15:32:10 -0800
 Subject: [PATCH 2/3] Add ICU build option
@@ -9,7 +9,7 @@ The provided CMake doesn't have a build option for ICU so add it.
  1 file changed, 8 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 81268627..4d0e774b 100644
+index d1062d97..af2aac07 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -17,6 +17,7 @@ find_package(LibXml2 CONFIG REQUIRED)
@@ -20,7 +20,7 @@ index 81268627..4d0e774b 100644
  option(LIBXSLT_WITH_MEM_DEBUG "Add the memory debugging module" OFF)
  option(LIBXSLT_WITH_MODULES "Add the module support" ON)
  option(LIBXSLT_WITH_PROFILER "Add the profiling support" ON)
-@@ -30,6 +31,10 @@ if(LIBXSLT_WITH_CRYPTO)
+@@ -30,6 +31,10 @@ if(LIBXSLT_WITH_CRYPTO AND NOT WIN32)
  	find_package(Gcrypt REQUIRED)
  endif()
  
@@ -31,7 +31,7 @@ index 81268627..4d0e774b 100644
  if(LIBXSLT_WITH_PYTHON)
  	check_include_files(unistd.h HAVE_UNISTD_H)
  	check_symbol_exists(F_GETFL fcntl.h HAVE_F_GETFL)
-@@ -228,6 +233,9 @@ target_include_directories(
+@@ -206,6 +211,9 @@ target_include_directories(
  )
  
  target_link_libraries(LibXslt PUBLIC LibXml2::LibXml2)
@@ -42,5 +42,5 @@ index 81268627..4d0e774b 100644
  if(UNIX)
  	target_link_libraries(LibXslt PRIVATE m)
 -- 
-2.35.1.windows.2
+2.37.2.windows.2
 

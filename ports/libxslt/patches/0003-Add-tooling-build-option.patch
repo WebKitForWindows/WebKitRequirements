@@ -1,4 +1,4 @@
-From 78e50827d0ac435498a8695daf5ff9679479ce56 Mon Sep 17 00:00:00 2001
+From 759f9b248b81675c72b3df4c84f877613642d0d2 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 3 Mar 2022 15:34:42 -0800
 Subject: [PATCH 3/3] Add tooling build option
@@ -9,7 +9,7 @@ Allow disabling of the xsltproc executable build.
  1 file changed, 8 insertions(+), 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 4d0e774b..5183e004 100644
+index af2aac07..43859ad8 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -23,6 +23,7 @@ option(LIBXSLT_WITH_MODULES "Add the module support" ON)
@@ -20,7 +20,7 @@ index 4d0e774b..5183e004 100644
  option(LIBXSLT_WITH_THREADS "Add multithread support" ON)
  set(LIBXSLT_WITH_TRIO OFF)
  option(LIBXSLT_WITH_XSLT_DEBUG "Add the debugging code" ON)
-@@ -368,11 +369,13 @@ if(MSVC AND BUILD_SHARED_LIBS)
+@@ -350,11 +351,13 @@ if(MSVC AND BUILD_SHARED_LIBS)
  	install(FILES $<TARGET_PDB_FILE:LibExslt> DESTINATION ${CMAKE_INSTALL_BINDIR} CONFIGURATIONS Debug RelWithDebInfo COMPONENT debug)
  endif()
  
@@ -40,5 +40,5 @@ index 4d0e774b..5183e004 100644
  if(LIBXSLT_WITH_TESTS)
  	enable_testing()
 -- 
-2.35.1.windows.2
+2.37.2.windows.2
 
