@@ -1,10 +1,10 @@
-set(VERSION 0.7.0)
+set(VERSION 0.8.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/ngtcp2-${VERSION}.tar.bz2"
     FILENAME "ngtcp2-${VERSION}.tar.bz2"
-    SHA512 b87d1d1efc404a250d47604eac333505a0169a6268384b44f5eedb7b3b5ca0f76f959861d4d45e8da275c06910e1b667649c3378ed9c0b50ababcd3241045249
+    SHA512 b1300dbb2ec706a8d4ae89902f49bd8756f0c403a7d2e1c3aeea5ed2cc1829d944f1a7f87e313415e6c6a898f8a28571a961bd869cb8fe47653b6d3a22389cb4
 )
 
 # Patches
@@ -42,10 +42,6 @@ vcpkg_configure_cmake(
         ${BUILD_OPTIONS}
         -DENABLE_SHARED_LIB=${NGTCP2_SHARED_LIB}
         -DENABLE_STATIC_LIB=${NGTCP2_STATIC_LIB}
-    OPTIONS_RELEASE
-        -DBORINGSSL_LIBRARIES_ENV=BORINGSSL_LIBRARIES
-    OPTIONS_DEBUG
-        -DBORINGSSL_LIBRARIES_ENV=BORINGSSL_DEBUG_LIBRARIES
 )
 
 vcpkg_install_cmake()
