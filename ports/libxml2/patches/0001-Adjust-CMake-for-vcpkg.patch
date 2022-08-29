@@ -1,4 +1,4 @@
-From 1009211405186fad14f0e75b0c397512db24c5cf Mon Sep 17 00:00:00 2001
+From 3799516c6fea3ac457cbda3deedd2410f5c490f7 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 23 Aug 2022 14:49:44 -0700
 Subject: [PATCH 1/2] Adjust CMake for vcpkg
@@ -8,7 +8,7 @@ Subject: [PATCH 1/2] Adjust CMake for vcpkg
  1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e3d7c935..f0971815 100644
+index 730aec72..3c396511 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -610,12 +610,12 @@ install(DIRECTORY doc/ DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT documentati
