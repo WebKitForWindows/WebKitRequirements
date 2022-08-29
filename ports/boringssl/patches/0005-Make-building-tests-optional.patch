@@ -1,7 +1,7 @@
-From 21146b0ab51a3e7f787f90173eca398bf6861a5a Mon Sep 17 00:00:00 2001
+From 01bc945417d8547b403d0b95b2de7d24d64580c6 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
-Date: Tue, 28 Jun 2022 18:04:56 -0700
-Subject: [PATCH 3/5] Make building tests optional
+Date: Mon, 29 Aug 2022 15:38:04 -0700
+Subject: [PATCH 5/6] Make building tests optional
 
 ---
  CMakeLists.txt             | 4 ++++
@@ -13,11 +13,11 @@ Subject: [PATCH 3/5] Make building tests optional
  6 files changed, 14 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ccfdf3404..cb3b390fb 100644
+index 031b298d8..c079c5d3e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -558,12 +558,14 @@ if(USE_CUSTOM_LIBCXX)
-   target_link_libraries(libcxx libcxxabi)
+@@ -570,12 +570,14 @@ if(USE_CUSTOM_LIBCXX)
+   install(TARGETS libcxx EXPORT OpenSSLTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
  endif()
  
 +if(ENABLE_TESTING)
@@ -31,7 +31,7 @@ index ccfdf3404..cb3b390fb 100644
  
  # Declare a dummy target to build all unit tests. Test targets should inject
  # themselves as dependencies next to the target definition.
-@@ -646,6 +648,7 @@ else()
+@@ -658,6 +660,7 @@ else()
    add_custom_target(fips_specific_tests_if_any)
  endif()
  
@@ -39,16 +39,19 @@ index ccfdf3404..cb3b390fb 100644
  add_custom_target(
      run_tests
      COMMAND ${GO_EXECUTABLE} run util/all_tests.go -build-dir
-@@ -656,3 +659,4 @@ add_custom_target(
+@@ -668,6 +671,7 @@ add_custom_target(
      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
      DEPENDS all_tests bssl_shim handshaker fips_specific_tests_if_any
      USES_TERMINAL)
 +endif()
+ 
+ install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+ 
 diff --git a/crypto/CMakeLists.txt b/crypto/CMakeLists.txt
-index 461f34b70..49203ad4f 100644
+index d769efdaa..eae23feab 100644
 --- a/crypto/CMakeLists.txt
 +++ b/crypto/CMakeLists.txt
-@@ -471,6 +471,7 @@ if(USE_CUSTOM_LIBCXX)
+@@ -480,6 +480,7 @@ if(USE_CUSTOM_LIBCXX)
    target_link_libraries(crypto libcxx)
  endif()
  
@@ -56,7 +59,7 @@ index 461f34b70..49203ad4f 100644
  # urandom_test is a separate binary because it needs to be able to observe the
  # PRNG initialisation, which means that it can't have other tests running before
  # it does.
-@@ -563,3 +564,4 @@ if(WIN32)
+@@ -573,3 +574,4 @@ if(WIN32)
    target_link_libraries(crypto_test ws2_32)
  endif()
  add_dependencies(all_tests crypto_test)
@@ -93,10 +96,10 @@ index 16985da19..7bcb7dc42 100644
  add_dependencies(all_tests decrepit_test)
 +endif()
 diff --git a/ssl/CMakeLists.txt b/ssl/CMakeLists.txt
-index 4f4abf8a4..8b72238d0 100644
+index b4b103261..1f0fa9370 100644
 --- a/ssl/CMakeLists.txt
 +++ b/ssl/CMakeLists.txt
-@@ -46,6 +46,7 @@ add_dependencies(ssl global_target)
+@@ -56,6 +56,7 @@ add_dependencies(ssl global_target)
  
  target_link_libraries(ssl crypto)
  
@@ -104,7 +107,7 @@ index 4f4abf8a4..8b72238d0 100644
  add_executable(
    ssl_test
  
-@@ -63,3 +64,4 @@ if(WIN32)
+@@ -73,3 +74,4 @@ if(WIN32)
    target_link_libraries(ssl_test ws2_32)
  endif()
  add_dependencies(all_tests ssl_test)
@@ -124,5 +127,5 @@ index f02d6e24f..e312929e3 100644
  endif()
 +endif()
 -- 
-2.37.0.windows.1
+2.37.2.windows.2
 

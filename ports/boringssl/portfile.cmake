@@ -4,25 +4,24 @@ endif()
 
 # BoringSSL doesn't have releases so use the commit used by ngtcp2 to test
 # https://github.com/ngtcp2/ngtcp2/blob/main/ci/build_boringssl.sh
-set(VERSION 27ffcc6e19bbafddf1b59ec0bc6df2904de7eb2c)
+set(VERSION a6d321b11fa80496b7c8ae6405468c212d4f5c87)
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Find-threading-library.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Make-gtest-library-static.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Make-building-tests-optional.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Make-building-tools-optional.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0005-Add-install-targets.patch
-    # Remove after 2022-06-12 version
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0006-Use-the-correct-function-types-in-X509V3_EXT_METHODs.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0007-Fix-build-with-MSVC-2022.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Specify-all-library-install-destinations.patch
+    # Remove above after https://boringssl-review.googlesource.com/c/boringssl/+/54147 lands
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Make-gtest-library-static.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Adjust-CMake-for-vcpkg.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0005-Make-building-tests-optional.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0006-Make-building-tools-optional.patch
 )
 
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO google/boringssl
     REF ${VERSION}
-    SHA512 b20b97c61a31861c4f210e90f7908f5bad5f5238c882ab14aa1d5e46e26aa4aa3cda3171e9e050f114fe453a040b7785eda5404189727db1835e5e2655b66c54
+    SHA512 753367f9cbee873c091b76a47860d02003bd9430ce02abc478c02b5ee8dd687353fb0a91e7bb32a949a28830479d1ce7a4ffdb1a37a339e615ee2b2fcb6fba86
     PATCHES ${PATCHES}
 )
 
@@ -59,7 +58,12 @@ vcpkg_install_cmake()
 vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 
+if (tools IN_LIST FEATURES)
+    vcpkg_copy_tools(TOOL_NAMES bssl AUTO_CLEAN)
+endif()
+
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/boringssl RENAME copyright)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/boringssl/version ${VERSION})
