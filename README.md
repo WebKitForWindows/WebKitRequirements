@@ -59,7 +59,7 @@ the requirements.
 | [c-ares](https://c-ares.org) | 1.18.1 | 2021-10-27 |
 | [curl](https://curl.se) | 7.84.0 | 2022-06-27 |
 | [libxml2](http://xmlsoft.org/) | 2.10.2 | 2022-08-29 |
-| [libxslt](http://xmlsoft.org/libxslt) | 1.1.36 | 2022-08-17 |
+| [libxslt](http://xmlsoft.org/libxslt) | 1.1.37 | 2022-08-29 |
 | [lcms](https://www.littlecms.com/) | 2.13.1 | 2022-01-28 |
 | [highway](https://github.com/google/highway) | 0.15.0 | 2021-11-11 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.37 | 2019-04-15 |
