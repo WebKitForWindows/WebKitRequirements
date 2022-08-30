@@ -1,5 +1,5 @@
 Source: libjxl
-Version: 0.6.1
+Version: 0.7.0
 Build-Depends: brotli, highway, lcms
 Description: |
   libjxl is a reference implementation of JPEG XL (encoder and decoder).

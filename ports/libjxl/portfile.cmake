@@ -1,20 +1,10 @@
-set(VERSION 0.6.1)
+set(VERSION 0.7rc)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/libjxl/libjxl/archive/v${VERSION}.zip"
     FILENAME "libjxl-${VERSION}.zip"
-    SHA512 f19afcf9538d46a7410ce9f3b38ecf73e61fcbb0e2e565fce6f8fc62f1c99f5900f6b88705007262b6c55edebe5d7b62bd09e5a953424185facdaf4d128bf85a
-)
-
-# Patches
-set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-find-module-for-hwy.patch 
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-find-module-for-brotli.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Add-find-module-for-lcms.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-No-lodepng.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0005-Install-runtimes-in-bin.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0006-Remove-setting-of-CMAKE_FIND_LIBRARY_SUFFIXES.patch
+    SHA512 dc0ec81b528bc7660c25ad9f52412a1b392c1ed327c0f774ea3b9ee954fad971cc0fd4905612cdfe61c48be7d79aae66c5fba6d5426dea9d82672eaa2468c088
 )
 
 # Extract archive
