@@ -13,6 +13,7 @@ set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
     # Remove after https://github.com/curl/curl/pull/9065 lands in a release
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-cmake-support-ngtcp2-boringssl-backend.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-ngtcp2-Fix-build-error-due-change-in-nghttp3-prototypes.patch
 )
 
 # Extract archive
