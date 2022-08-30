@@ -1,19 +1,15 @@
-set(VERSION 0.15.0)
+set(VERSION 1.0.1)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/google/highway/archive/refs/tags/${VERSION}.tar.gz"
     FILENAME "highway-${VERSION}.tar.gz"
-    SHA512 ed07e855721f87ea67d762b30e001643a76bd16d70372415023c8e6f1a43c58759a14a638e8eb20566863d8358d994153bf7a660fcf604e808adfea5f938a013
+    SHA512 35b6287579b6248966b0d36fda1522fd6338523934b079e94e857f9de08354f20b99739c99d53249a3a6c583519da0e0ac5e06dfbe6e3a89262f627c75b59dd8
 )
 
 # Patches
 set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Only-run-hwy_list_targets-if-its-possible-to-do-so.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Set-RUNTIME_OUTPUT_DIRECTORY-for-test-executables.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Provide-individual-toggles-for-build-options.patch
-    # Remove above in next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Make-additional-libraries-optional.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Make-hwy_test-library-optional.patch
 )
 
 # Extract archive
@@ -26,8 +22,8 @@ vcpkg_extract_source_archive_ex(
 
 # Run CMake build
 set(BUILD_OPTIONS
-    -DHWY_CONTRIB=OFF
-    -DHWY_TEST=OFF
+    -DHWY_ENABLE_CONTRIB=OFF
+    -DHWY_ENABLE_TEST=OFF
 
     -DHWY_ENABLE_EXAMPLES=OFF
     -DHWY_ENABLE_INSTALL=ON
