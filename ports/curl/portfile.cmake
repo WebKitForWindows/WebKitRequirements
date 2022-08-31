@@ -1,19 +1,16 @@
-set(VERSION 7.84.0)
+set(VERSION 7.85.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 eb157a7b356ce86f488a8021f69107631420662741619576bf8f5bcc8f2c7098ca5d79b80f631c742d1f127d7cd1486e4d8297031b356c0ce737becd73b6d108
+    SHA512 774c57b542279002cbdd90ae6cf53c577fb141696ff52b7878ab6a490616e0324a5ea8e8efcacbe8e3f1f2ce05242336137212571a4d98cc67e57e81b7c102f5
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    # Remove after https://github.com/curl/curl/pull/9065 lands in a release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-cmake-support-ngtcp2-boringssl-backend.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-ngtcp2-Fix-build-error-due-change-in-nghttp3-prototypes.patch
 )
 
 # Extract archive
