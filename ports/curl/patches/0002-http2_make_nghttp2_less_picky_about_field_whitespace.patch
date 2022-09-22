@@ -1,0 +1,60 @@
+From eafc2b14ac9e40377168b46cab3f1d90c3f32f45 Mon Sep 17 00:00:00 2001
+From: Daniel Stenberg <daniel@haxx.se>
+Date: Wed, 7 Sep 2022 15:41:03 +0200
+Subject: [PATCH] http2: make nghttp2 less picky about field whitespace
+
+In nghttp2 1.49.0 it returns error on leading and trailing whitespace in
+header fields according to language in the recently shipped RFC 9113.
+
+nghttp2 1.50.0 introduces an option to switch off this strict check and
+this change enables this option by default which should make curl behave
+more similar to how it did with nghttp2 1.48.0 and earlier.
+
+We might want to consider making this an option in the future.
+
+Closes #9448
+---
+ lib/http2.c | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
+
+diff --git a/lib/http2.c b/lib/http2.c
+index f6364d0e022cd..3a70528e4ab06 100644
+--- a/lib/http2.c
++++ b/lib/http2.c
+@@ -1277,6 +1277,27 @@ void Curl_http2_done(struct Curl_easy *data, bool premature)
+   }
+ }
+ 
++static int client_new(struct connectdata *conn,
++                      nghttp2_session_callbacks *callbacks)
++{
++#if NGHTTP2_VERSION_NUM < 0x013200
++  /* before 1.50.0 */
++  return nghttp2_session_client_new(&conn->proto.httpc.h2, callbacks, conn);
++#else
++  nghttp2_option *o;
++  int rc = nghttp2_option_new(&o);
++  if(rc)
++    return rc;
++  /* turn off RFC 9113 leading and trailing white spaces validation against
++     HTTP field value. */
++  nghttp2_option_set_no_rfc9113_leading_and_trailing_ws_validation(o, 1);
++  rc = nghttp2_session_client_new2(&conn->proto.httpc.h2, callbacks, conn,
++                                   o);
++  nghttp2_option_del(o);
++  return rc;
++#endif
++}
++
+ /*
+  * Initialize nghttp2 for a Curl connection
+  */
+@@ -1317,7 +1338,7 @@ static CURLcode http2_init(struct Curl_easy *data, struct connectdata *conn)
+     nghttp2_session_callbacks_set_error_callback(callbacks, error_callback);
+ 
+     /* The nghttp2 session is not yet setup, do it */
+-    rc = nghttp2_session_client_new(&conn->proto.httpc.h2, callbacks, conn);
++    rc = client_new(conn, callbacks);
+ 
+     nghttp2_session_callbacks_del(callbacks);
+ 

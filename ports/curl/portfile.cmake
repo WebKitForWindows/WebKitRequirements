@@ -11,6 +11,8 @@ vcpkg_download_distfile(ARCHIVE
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    # Remove after 7.86.0 release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-http2_make_nghttp2_less_picky_about_field_whitespace.patch
 )
 
 # Extract archive
