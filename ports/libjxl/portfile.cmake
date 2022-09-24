@@ -1,10 +1,10 @@
-set(VERSION 0.7rc)
+set(VERSION 0.7.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/libjxl/libjxl/archive/v${VERSION}.zip"
     FILENAME "libjxl-${VERSION}.zip"
-    SHA512 dc0ec81b528bc7660c25ad9f52412a1b392c1ed327c0f774ea3b9ee954fad971cc0fd4905612cdfe61c48be7d79aae66c5fba6d5426dea9d82672eaa2468c088
+    SHA512 567346f937c1f82ab4c6ef4e9626d0076f7a7b3094b124c024800751d4a2fe99076424fae27b32aa425522db066fe71236153419578589a9c3a3f5451f3dfd4f
 )
 
 # Extract archive
