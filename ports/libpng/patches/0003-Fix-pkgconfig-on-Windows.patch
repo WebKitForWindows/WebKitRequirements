@@ -1,10 +1,19 @@
+From 9b6b6e68f78860c306f260293b78ac5967d6c225 Mon Sep 17 00:00:00 2001
+From: Don <don.j.olmstead@gmail.com>
+Date: Tue, 30 Nov 2021 10:04:36 -0800
+Subject: [PATCH 3/3] Fix pkgconfig on Windows
+
+---
+ CMakeLists.txt | 45 ++++++++++++++++++++++++++++-----------------
+ 1 file changed, 28 insertions(+), 17 deletions(-)
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index f1b977966..9a605e0f8 100644
+index 207a7756d..4ec859c56 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -812,20 +812,30 @@ endif()
- # Only do this on Windows for Cygwin - the files don't make much sense outside
- # of a UNIX look-alike.
+@@ -924,21 +924,32 @@ endif()
+ # Only do this on Windows for Cygwin - the files don't make much sense
+ # outside of a UNIX look-alike.
  if(NOT WIN32 OR CYGWIN OR MINGW)
 -  set(prefix      ${CMAKE_INSTALL_PREFIX})
 -  set(exec_prefix ${CMAKE_INSTALL_PREFIX})
@@ -12,14 +21,15 @@ index f1b977966..9a605e0f8 100644
 -  set(includedir  ${CMAKE_INSTALL_FULL_INCLUDEDIR})
 -  set(LIBS        "-lz -lm")
 -  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng.pc.in
--    ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc @ONLY)
+-                 ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc
+-                 @ONLY)
 -  create_symlink(libpng.pc FILE ${PNGLIB_NAME}.pc)
--
 -  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng-config.in
--    ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}-config @ONLY)
+-                 ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}-config
+-                 @ONLY)
 -  create_symlink(libpng-config FILE ${PNGLIB_NAME}-config)
 +  set(LIBS "-lz")
-+  if(NOT APPLE)
++  if(M_LIBRARY)
 +    string(APPEND LIBS " -lm")
 +  endif()
 +else()
@@ -35,35 +45,37 @@ index f1b977966..9a605e0f8 100644
 +set(libdir      ${CMAKE_INSTALL_FULL_LIBDIR})
 +set(includedir  ${CMAKE_INSTALL_FULL_INCLUDEDIR})
 +configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng.pc.in
-+  ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc @ONLY)
++               ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc
++               @ONLY)
 +create_symlink(libpng.pc FILE ${PNGLIB_NAME}.pc)
 +
 +configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng-config.in
-+  ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}-config @ONLY)
++               ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}-config
++               @ONLY)
 +create_symlink(libpng-config FILE ${PNGLIB_NAME}-config)
 +
- # SET UP LINKS
+ # Set up links.
  if(PNG_SHARED)
    set_target_properties(png PROPERTIES
-@@ -892,15 +902,15 @@ if(NOT SKIP_INSTALL_FILES AND NOT SKIP_INSTALL_ALL)
-   install(FILES libpng.3 libpngpf.3 DESTINATION ${PNG_MAN_DIR}/man3)
-   install(FILES png.5 DESTINATION ${PNG_MAN_DIR}/man5)
-   # Install pkg-config files
+@@ -1006,14 +1017,14 @@ if(NOT SKIP_INSTALL_FILES AND NOT SKIP_INSTALL_ALL)
+           DESTINATION ${CMAKE_INSTALL_MANDIR}/man3)
+   install(FILES png.5
+           DESTINATION ${CMAKE_INSTALL_MANDIR}/man5)
 +  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libpng.pc
 +          DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 +  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc
 +          DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+   # Install the pkg-config files.
    if(NOT CMAKE_HOST_WIN32 OR CYGWIN OR MINGW)
 -    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libpng.pc
 -            DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
      install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/libpng-config
--            DESTINATION bin)
+             DESTINATION ${CMAKE_INSTALL_BINDIR})
 -    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc
 -            DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-+            DESTINATION tools/libpng)
      install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}-config
--            DESTINATION bin)
-+            DESTINATION tools/libpng)
+             DESTINATION ${CMAKE_INSTALL_BINDIR})
    endif()
- endif()
- 
+-- 
+2.37.3.windows.1
+

@@ -1,7 +1,7 @@
-From 3646f9bfaee3ebc15bc925f412c5270b42dd980a Mon Sep 17 00:00:00 2001
+From d484b6747b5d218a870f1afe5df71950e2e0bf83 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 3 Jan 2019 16:54:07 -0800
-Subject: [PATCH 2/2] Do not append static to library name
+Subject: [PATCH 2/3] Do not append static to library name
 
 On Windows a static lib will have _static appended. In vcpkg only a shared or static library is created so remove this behavior.
 ---
@@ -9,31 +9,31 @@ On Windows a static lib will have _static appended. In vcpkg only a shared or st
  1 file changed, 3 insertions(+), 12 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ea997c08a..5b41b588b 100644
+index eba11f432..207a7756d 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -554,18 +554,9 @@ if(PNG_STATIC)
+@@ -611,18 +611,9 @@ if(PNG_STATIC)
    set(PNG_LIB_NAME_STATIC png_static)
    add_library(png_static STATIC ${libpng_sources})
    add_dependencies(png_static genfiles)
 -  # MSVC doesn't use a different file extension for shared vs. static
--  # libs.  We are able to change OUTPUT_NAME to remove the _static
+-  # libs. We are able to change OUTPUT_NAME to remove the _static
 -  # for all other platforms.
 -  if(NOT MSVC)
 -    set_target_properties(png_static PROPERTIES
--      OUTPUT_NAME "${PNG_LIB_NAME}"
--      CLEAN_DIRECT_OUTPUT 1)
+-                          OUTPUT_NAME "${PNG_LIB_NAME}"
+-                          CLEAN_DIRECT_OUTPUT 1)
 -  else()
 -    set_target_properties(png_static PROPERTIES
--      OUTPUT_NAME "${PNG_LIB_NAME}_static"
--      CLEAN_DIRECT_OUTPUT 1)
+-                          OUTPUT_NAME "${PNG_LIB_NAME}_static"
+-                          CLEAN_DIRECT_OUTPUT 1)
 -  endif()
 +  set_target_properties(png_static PROPERTIES
-+    OUTPUT_NAME "${PNG_LIB_NAME}"
-+    CLEAN_DIRECT_OUTPUT 1)
++                        OUTPUT_NAME "${PNG_LIB_NAME}"
++                        CLEAN_DIRECT_OUTPUT 1)
    list(APPEND PNG_LIB_TARGETS png_static)
    if(MSVC)
-     # msvc does not append 'lib' - do it here to have consistent name
+     # MSVC does not append 'lib'. Do it here, to have consistent name.
 -- 
-2.19.1.windows.1
+2.37.3.windows.1
 
