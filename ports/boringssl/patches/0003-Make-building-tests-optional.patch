@@ -1,7 +1,7 @@
-From 01bc945417d8547b403d0b95b2de7d24d64580c6 Mon Sep 17 00:00:00 2001
+From 5f7f30f0960d9cff6148da022dd4734cc734df46 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 29 Aug 2022 15:38:04 -0700
-Subject: [PATCH 5/6] Make building tests optional
+Subject: [PATCH 3/4] Make building tests optional
 
 ---
  CMakeLists.txt             | 4 ++++
@@ -127,5 +127,5 @@ index f02d6e24f..e312929e3 100644
  endif()
 +endif()
 -- 
-2.37.2.windows.2
+2.37.3.windows.1
 

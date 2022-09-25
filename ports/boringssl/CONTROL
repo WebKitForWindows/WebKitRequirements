@@ -1,5 +1,5 @@
 Source: boringssl
-Version: 2022.08.15
+Version: 2022.09.14
 Description: |
   BoringSSL is a fork of OpenSSL that is designed to meet Google's needs.
 

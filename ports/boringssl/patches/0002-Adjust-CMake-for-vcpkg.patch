@@ -1,7 +1,7 @@
-From 6d9429ccdc5e794f1637e272fed2985b1fffa83d Mon Sep 17 00:00:00 2001
+From 16b21ec4c07110c8eda753e4d9a0a3921110e1fb Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 29 Aug 2022 15:23:25 -0700
-Subject: [PATCH 4/6] Adjust CMake for vcpkg
+Subject: [PATCH 2/4] Adjust CMake for vcpkg
 
 ---
  CMakeLists.txt | 4 ++--
@@ -21,5 +21,5 @@ index 1567cfbd1..031b298d8 100644
 -install(FILES OpenSSLConfig.cmake DESTINATION lib/cmake/OpenSSL)
 +install(FILES OpenSSLConfig.cmake DESTINATION ${CMAKE_INSTALL_DATADIR}/boringssl/cmake)
 -- 
-2.37.2.windows.2
+2.37.3.windows.1
 

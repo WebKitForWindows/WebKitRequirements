@@ -4,24 +4,21 @@ endif()
 
 # BoringSSL doesn't have releases so use the commit used by ngtcp2 to test
 # https://github.com/ngtcp2/ngtcp2/blob/main/ci/build_boringssl.sh
-set(VERSION a6d321b11fa80496b7c8ae6405468c212d4f5c87)
+set(VERSION 04989786e9ab16cef5261bbd05a2b1a8cb312dbf)
 
 # Patches
 set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Find-threading-library.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Specify-all-library-install-destinations.patch
-    # Remove above after https://boringssl-review.googlesource.com/c/boringssl/+/54147 lands
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Make-gtest-library-static.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Adjust-CMake-for-vcpkg.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0005-Make-building-tests-optional.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0006-Make-building-tools-optional.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Make-gtest-library-static.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Adjust-CMake-for-vcpkg.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Make-building-tests-optional.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Make-building-tools-optional.patch
 )
 
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO google/boringssl
     REF ${VERSION}
-    SHA512 753367f9cbee873c091b76a47860d02003bd9430ce02abc478c02b5ee8dd687353fb0a91e7bb32a949a28830479d1ce7a4ffdb1a37a339e615ee2b2fcb6fba86
+    SHA512 5d4052283204741d8a1767e43c9668d7418cca9ee80cd9e13f69caae0acda906fdac5635d304418d18bbee888bb9b84943f6ecfb2303b9303f9b353f46fc783c
     PATCHES ${PATCHES}
 )
 

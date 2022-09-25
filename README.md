@@ -51,7 +51,7 @@ the requirements.
 | [icu](http://site.icu-project.org) | 71.1 | 2022-04-06 |
 | [zlib](https://github.com/zlib-ng/zlib-ng) | 2.0.6 | 2021-12-24 |
 | [brotli](https://github.com/google/brotli) | 1.0.9 | 2020-08-27 |
-| [boringssl](https://boringssl.googlesource.com/boringssl) | a6d321b1 | 2022-08-15 |
+| [boringssl](https://boringssl.googlesource.com/boringssl) | 04989786 | 2022-09-14 |
 | [libressl](https://www.libressl.org) | 3.5.3 | 2022-05-18 |
 | [nghttp2](https://nghttp2.org) | 1.50.0 | 2022-09-21 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.7.0 | 2022-08-21 |
