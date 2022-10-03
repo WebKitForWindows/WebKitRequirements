@@ -7,10 +7,10 @@ Port the meson build over to CMake. Features that aren't relevant at all, like t
 ---
  CMakeLists.txt          | 339 ++++++++++++++++++++++++++++++++++++++++
  cmake/FindPixman.cmake  |  90 +++++++++++
- src/CMakeLists.txt      | 254 ++++++++++++++++++++++++++++++
+ src/CMakeLists.txt      | 251 +++++++++++++++++++++++++++++
  src/config.cmake.h.in   |  94 +++++++++++
  src/features.cmake.h.in |  41 +++++
- 5 files changed, 818 insertions(+)
+ 5 files changed, 815 insertions(+)
  create mode 100644 CMakeLists.txt
  create mode 100644 cmake/FindPixman.cmake
  create mode 100644 src/CMakeLists.txt
@@ -460,10 +460,10 @@ index 000000000..61738006c
 +endif ()
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 new file mode 100644
-index 000000000..1f3ee9b74
+index 000000000..b888a4d6f
 --- /dev/null
 +++ b/src/CMakeLists.txt
-@@ -0,0 +1,254 @@
+@@ -0,0 +1,251 @@
 +# Porting of the meson.build file to CMake
 +
 +set(cairo_sources
@@ -699,9 +699,6 @@ index 000000000..1f3ee9b74
 +set_target_properties(cairo PROPERTIES PUBLIC_HEADER "${cairo_headers}")
 +target_link_libraries(cairo ${cairo_libraries})
 +
-+# TODO REMOVE
-+target_compile_definitions(cairo PRIVATE CAIRO_NO_MUTEX=1)
-+
 +if (WINDOWS AND NOT BUILD_SHARED_LIBS)
 +    target_compile_definitions(cairo PUBLIC CAIRO_WIN32_STATIC_BUILD)
 +endif ()
@@ -866,5 +863,5 @@ index 000000000..a77b3d4f8
 +#cmakedefine CAIRO_HAS_XLIB_XRENDER_SURFACE 1
 +#cmakedefine CAIRO_HAS_XML_SURFACE 1
 -- 
-2.37.0.windows.1
+2.25.1
 
