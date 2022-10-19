@@ -1,4 +1,13 @@
 Source: ngtcp2
 Version: 0.9.0
-Build-Depends: boringssl
 Description: An effort to implement RFC9000 QUIC protocol.
+
+Feature: boringssl
+Build-Depends: boringssl
+Description: |
+  SSL support through boringssl.
+
+Feature: libressl
+Build-Depends: libressl
+Description: |
+  SSL support through libressl.

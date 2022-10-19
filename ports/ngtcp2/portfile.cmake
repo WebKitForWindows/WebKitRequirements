@@ -22,10 +22,13 @@ vcpkg_extract_source_archive_ex(
 )
 
 # Run CMake build
-set(BUILD_OPTIONS
-    # ENABLE options
-    -DENABLE_BORINGSSL=ON
-)
+if (boringssl IN_LIST FEATURES)
+    set(BUILD_OPTIONS -DENABLE_BORINGSSL=ON)
+elseif (libressl IN_LIST FEATURES)
+    set(BUILD_OPTIONS -DENABLE_OPENSSL=ON)
+else ()
+    message(FATAL_ERROR "No SSL backend specified")
+endif ()
 
 if (VCPKG_LIBRARY_LINKAGE MATCHES static)
     set(NGTCP2_SHARED_LIB OFF)
