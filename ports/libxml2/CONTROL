@@ -1,5 +1,5 @@
 Source: libxml2
-Version: 2.10.2
+Version: 2.10.3
 Build-Depends: icu
 Description: |
   Libxml2 is the XML C parser and toolkit developed for the Gnome project
