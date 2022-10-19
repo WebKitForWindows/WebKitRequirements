@@ -2,13 +2,13 @@ if (EXISTS "${CURRENT_INSTALLED_DIR}/include/openssl/ssl.h")
     message(FATAL_ERROR "Can't build LibreSSL if another OpenSSL equivalent is installed. Please remove the OpenSSL variant, and try to install LibreSSL again if you need it. Build will continue since LibreSSL is a drop-in replacement for OpenSSL")
 endif()
 
-set(VERSION 3.5.3)
+set(VERSION 3.6.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${VERSION}.tar.gz"
     FILENAME "libressl-${VERSION}.tar.gz"
-    SHA512 19f97f7c2b5cb4591ee6f191255b441373176b1b6539aa6ac2cd54494a14beaf126b151eb2f0b7fb650796fc0e37e2a9b1508ca50722adc7107c460904a5dbb7
+    SHA512 91758bf99ca93470d799fff706ae4044edc751943e7ce983343cb7b87ccc4204871b28514986e0f3d500bc29e9bd0daecd11433cd168016b4637783f4552a362
 )
 
 # Patches

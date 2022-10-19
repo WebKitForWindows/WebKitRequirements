@@ -1,4 +1,4 @@
-From d815fb7748d53010040376e227f5d7587be7f922 Mon Sep 17 00:00:00 2001
+From a2ebf68b9ea6f93592e814298743c87ad164e490 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Wed, 24 Apr 2019 13:48:58 -0700
 Subject: [PATCH 2/2] Disable additional warnings for Visual Studio
@@ -26,5 +26,5 @@ index 03963a5..a5b9539 100644
  				# Instead, use the ISO C and C++ conformant name
  		)
 -- 
-2.37.0.windows.1
+2.38.1.windows.1
 
