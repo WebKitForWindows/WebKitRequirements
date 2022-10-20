@@ -67,7 +67,7 @@ the requirements.
 | [libwebp](https://github.com/webmproject/libwebp) | 1.2.4 | 2022-08-05 |
 | [openjpeg](https://www.openjpeg.org/) | 2.5.0 | 2022-05-13 |
 | [libjxl](https://github.com/libjxl/libjxl) | 0.7.0 | 2022-09-21 |
-| [sqlite](http://sqlite.org) | 3.39.3 | 2022-09-05 |
+| [sqlite](http://sqlite.org) | 3.39.4 | 2022-09-29 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
 | [freetype](https://www.freetype.org) | 2.12.1 | 2022-04-30 |
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 5.3.1 | 2022-10-19 |
