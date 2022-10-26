@@ -1,5 +1,5 @@
 Source: ngtcp2
-Version: 0.9.0
+Version: 0.10.0
 Description: An effort to implement RFC9000 QUIC protocol.
 
 Feature: boringssl

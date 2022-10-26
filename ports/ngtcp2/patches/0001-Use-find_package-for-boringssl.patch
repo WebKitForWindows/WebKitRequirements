@@ -1,4 +1,4 @@
-From 8af08bda532fc0aff302c8aa8c27591fccb2408a Mon Sep 17 00:00:00 2001
+From e203075e96d22c8adceb07624961521a954c55c9 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Fri, 1 Jul 2022 14:43:37 -0700
 Subject: [PATCH 1/2] Use find_package for boringssl
@@ -9,10 +9,10 @@ The ngtcp2 build seems to allow for multiple backends but in vcpkg we only need 
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 261a118f..4dcf97f6 100644
+index 31ecba8c..85cf42a1 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -147,12 +147,15 @@ endif()
+@@ -167,12 +167,15 @@ endif()
  
  # BoringSSL (required for libngtcp2_crypto_boringssl)
  if(ENABLE_BORINGSSL)
@@ -30,5 +30,5 @@ index 261a118f..4dcf97f6 100644
    cmake_pop_check_state()
  endif()
 -- 
-2.37.3.windows.1
+2.38.1.windows.1
 
