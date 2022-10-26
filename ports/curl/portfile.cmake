@@ -1,18 +1,16 @@
-set(VERSION 7.85.0)
+set(VERSION 7.86.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 774c57b542279002cbdd90ae6cf53c577fb141696ff52b7878ab6a490616e0324a5ea8e8efcacbe8e3f1f2ce05242336137212571a4d98cc67e57e81b7c102f5
+    SHA512 7a129620535252e70bf3734042aff5e753590a47bf3fc0758e46212e49fb969ff73c31d260347fa2238e934b670ac311fd465f736acfa0ebf543bc2184f9d6b1
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    # Remove after 7.86.0 release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-http2_make_nghttp2_less_picky_about_field_whitespace.patch
 )
 
 # Extract archive
