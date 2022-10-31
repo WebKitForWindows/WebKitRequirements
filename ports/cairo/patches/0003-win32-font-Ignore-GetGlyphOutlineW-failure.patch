@@ -1,0 +1,45 @@
+From b9d0fa97313454d787acf98abf688895af1508ba Mon Sep 17 00:00:00 2001
+From: Fujii Hironori <Hironori.Fujii@sony.com>
+Date: Mon, 31 Oct 2022 12:47:57 +0900
+Subject: [PATCH] win32 font: Ignore GetGlyphOutlineW failure
+
+The following change added win32 implementation of atomic int and
+changed the size of cairo_atomic_int_t from 64bit to 32bit on 64bit
+Windows.
+<https://gitlab.freedesktop.org/cairo/cairo/-/commit/cd2b91c62ea74f6448a8a5cff5dd316f8e692e97>
+
+_cairo_status_set_error is using _cairo_atomic_int_cmpxchg to set a
+cairo_status_t variable by casting a cairo_status_t* to a
+cairo_atomic_int_t*. cairo_status_t is 32bit. Before the change,
+_cairo_status_set_error didn't work as expected because it treated a
+32bit cairo_status_t as a 64bit cairo_atomic_int_t. The change fixed
+the problem. However, as a result, another problem appeared.
+
+win32 font has been using GetGlyphOutlineW to a get font glyph
+outline. GetGlyphOutlineW fails with ERROR_CAN_NOT_COMPLETE if the
+font size is zero. Before the change, this error was just ignored.
+However, after the change, this error makes the internal state invalid
+as expected.
+
+_cairo_win32_scaled_font_glyph_path calls GetGlyphOutlineW twice. The
+first is to get the item size. The second is to get the actual glyph
+path. Ignore the failure of the first GetGlyphOutlineW call as before.
+---
+ src/win32/cairo-win32-font.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/win32/cairo-win32-font.c b/src/win32/cairo-win32-font.c
+index a3e1bd731..9e20418b0 100644
+--- a/src/win32/cairo-win32-font.c
++++ b/src/win32/cairo-win32-font.c
+@@ -1494,6 +1494,7 @@ _cairo_win32_scaled_font_init_glyph_path (cairo_win32_scaled_font_t *scaled_font
+ 
+     if (bytesGlyph == GDI_ERROR) {
+ 	status = _cairo_win32_print_gdi_error ("_cairo_win32_scaled_font_glyph_path");
++	status = CAIRO_INT_STATUS_UNSUPPORTED;
+ 	goto CLEANUP_FONT;
+     }
+ 
+-- 
+2.25.1
+

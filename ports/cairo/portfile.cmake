@@ -12,6 +12,7 @@ vcpkg_download_distfile(ARCHIVE
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-build.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Rename-stat-to-stats.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-win32-font-Ignore-GetGlyphOutlineW-failure.patch
 )
 
 # Extract archive
