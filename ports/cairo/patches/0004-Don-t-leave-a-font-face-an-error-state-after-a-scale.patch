@@ -1,0 +1,33 @@
+From 433b1a46c5adefec230df172925f899549de5239 Mon Sep 17 00:00:00 2001
+From: Fujii Hironori <Hironori.Fujii@sony.com>
+Date: Thu, 17 Nov 2022 14:59:44 +0900
+Subject: [PATCH] Don't leave a font face an error state after a scaled font
+ creation failure
+
+cairo_scaled_font_create fails if the requested font size is very
+large on Windows. If the font creatation failed, the font face
+was left in an error state and couldn't be used anymore.
+
+<https://webkit.org/b/248014>
+<https://gitlab.freedesktop.org/cairo/cairo/-/issues/607>
+---
+ src/cairo-scaled-font.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/cairo-scaled-font.c b/src/cairo-scaled-font.c
+index e0b586589..57fafb7f0 100755
+--- a/src/cairo-scaled-font.c
++++ b/src/cairo-scaled-font.c
+@@ -1152,7 +1152,9 @@ cairo_scaled_font_create (cairo_font_face_t          *font_face,
+ 	if (dead != NULL)
+ 	    cairo_scaled_font_destroy (dead);
+ 
++#if 0 /* Don't leave the backend in an error state. */
+ 	status = _cairo_font_face_set_error (font_face, status);
++#endif
+ 	return _cairo_scaled_font_create_in_error (status);
+     }
+     /* Or did we encounter an error whilst constructing the scaled font? */
+-- 
+2.34.1
+
