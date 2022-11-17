@@ -13,6 +13,7 @@ set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-build.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Rename-stat-to-stats.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0003-win32-font-Ignore-GetGlyphOutlineW-failure.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Don-t-leave-a-font-face-an-error-state-after-a-scale.patch
 )
 
 # Extract archive
