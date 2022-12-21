@@ -71,7 +71,7 @@ the requirements.
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
 | [freetype](https://www.freetype.org) | 2.12.1 | 2022-04-30 |
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 5.3.1 | 2022-10-19 |
-| [pixman](http://www.pixman.org) | 0.40.0 | 2020-04-19 |
+| [pixman](http://www.pixman.org) | 0.42.2 | 2022-11-02 |
 | [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.17.6 | 2022-03-18 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.1 | 2020-07-18 |
 | [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 2012-07-12 |
