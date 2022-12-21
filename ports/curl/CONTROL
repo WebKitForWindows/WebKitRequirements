@@ -1,5 +1,5 @@
 Source: curl
-Version: 7.86.0
+Version: 7.87.0
 Build-Depends: zlib, brotli, nghttp2
 Description: A library for transferring data with URLs
 
