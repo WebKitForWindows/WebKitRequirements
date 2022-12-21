@@ -1,3 +1,3 @@
 Source: nghttp3
-Version: 0.7.1
+Version: 0.8.0
 Description: An implementation of HTTP/3 mapping over QUIC and QPACK in C.
