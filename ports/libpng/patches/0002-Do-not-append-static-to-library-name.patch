@@ -1,4 +1,4 @@
-From d484b6747b5d218a870f1afe5df71950e2e0bf83 Mon Sep 17 00:00:00 2001
+From bf71c2b0977909335fac26a0534c5c688148a71b Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 3 Jan 2019 16:54:07 -0800
 Subject: [PATCH 2/3] Do not append static to library name
@@ -9,10 +9,10 @@ On Windows a static lib will have _static appended. In vcpkg only a shared or st
  1 file changed, 3 insertions(+), 12 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index eba11f432..207a7756d 100644
+index 298755d1e..bfc0f64a3 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -611,18 +611,9 @@ if(PNG_STATIC)
+@@ -612,18 +612,9 @@ if(PNG_STATIC)
    set(PNG_LIB_NAME_STATIC png_static)
    add_library(png_static STATIC ${libpng_sources})
    add_dependencies(png_static genfiles)
@@ -35,5 +35,5 @@ index eba11f432..207a7756d 100644
    if(MSVC)
      # MSVC does not append 'lib'. Do it here, to have consistent name.
 -- 
-2.37.3.windows.1
+2.38.1.windows.1
 

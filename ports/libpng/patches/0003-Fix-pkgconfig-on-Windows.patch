@@ -1,4 +1,4 @@
-From 9b6b6e68f78860c306f260293b78ac5967d6c225 Mon Sep 17 00:00:00 2001
+From 6993aeca7bd735f064a9947f681ea5883fcdd395 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 30 Nov 2021 10:04:36 -0800
 Subject: [PATCH 3/3] Fix pkgconfig on Windows
@@ -8,10 +8,10 @@ Subject: [PATCH 3/3] Fix pkgconfig on Windows
  1 file changed, 28 insertions(+), 17 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 207a7756d..4ec859c56 100644
+index bfc0f64a3..78c71d58b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -924,21 +924,32 @@ endif()
+@@ -925,21 +925,32 @@ endif()
  # Only do this on Windows for Cygwin - the files don't make much sense
  # outside of a UNIX look-alike.
  if(NOT WIN32 OR CYGWIN OR MINGW)
@@ -57,7 +57,7 @@ index 207a7756d..4ec859c56 100644
  # Set up links.
  if(PNG_SHARED)
    set_target_properties(png PROPERTIES
-@@ -1006,14 +1017,14 @@ if(NOT SKIP_INSTALL_FILES AND NOT SKIP_INSTALL_ALL)
+@@ -1007,14 +1018,14 @@ if(NOT SKIP_INSTALL_FILES AND NOT SKIP_INSTALL_ALL)
            DESTINATION ${CMAKE_INSTALL_MANDIR}/man3)
    install(FILES png.5
            DESTINATION ${CMAKE_INSTALL_MANDIR}/man5)
@@ -77,5 +77,5 @@ index 207a7756d..4ec859c56 100644
              DESTINATION ${CMAKE_INSTALL_BINDIR})
    endif()
 -- 
-2.37.3.windows.1
+2.38.1.windows.1
 
