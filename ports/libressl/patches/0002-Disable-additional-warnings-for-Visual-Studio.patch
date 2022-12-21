@@ -1,4 +1,4 @@
-From a2ebf68b9ea6f93592e814298743c87ad164e490 Mon Sep 17 00:00:00 2001
+From 6618a4fadb770e998a26749577305f1ca5a597c9 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Wed, 24 Apr 2019 13:48:58 -0700
 Subject: [PATCH 2/2] Disable additional warnings for Visual Studio
@@ -9,7 +9,7 @@ Disabling C4464, C4668 and C4820.
  1 file changed, 5 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 03963a5..a5b9539 100644
+index 68a7c2d..d19554a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -143,7 +143,12 @@ if(MSVC)
