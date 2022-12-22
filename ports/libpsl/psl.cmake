@@ -1,10 +1,10 @@
 # Download PSL file
-# Up to date as of 2022-03-16
+# Up to date as of 2022-12-08
 vcpkg_from_github(
     OUT_SOURCE_PATH PSL_SOURCE_PATH
     REPO publicsuffix/list
-    REF c1f376165d9591ba47b8a01b11cbc5e3ffbd81b2
-    SHA512 5b7698868ac4e3a06e4ad8d04b6cffbadd6234bbb79caca6e55dd0088248e6f6ad39b7115eb6a0c0c8fc06ca8b88fe485c0788fc9d49259e65f0cb8d0a24a6f1
+    REF 4aec132984ce028c5b9d7882a31a85e5e5330346
+    SHA512 d1fe0bb9c8cc653304f231cb8eda9e3976079757dd1adf11f4226d6a7fdaf9aca6a8b9d404b01e1c1086f615ed387742bc449db663da3c1593c102e8adaa5189
     HEAD_REF master
 )
 
