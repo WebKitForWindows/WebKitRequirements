@@ -73,6 +73,6 @@ the requirements.
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 6.0.0 | 2022-12-16 |
 | [pixman](http://www.pixman.org) | 0.42.2 | 2022-11-02 |
 | [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.17.6 | 2022-03-18 |
-| [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.1 | 2020-07-18 |
+| [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.2 | 2022-12-26 |
 | [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 2012-07-12 |
 | [OpenCFLite](https://github.com/fujii/OpenCFLite) | 0.0.2 | 2017-12-11 |

@@ -1,22 +1,17 @@
 include(${CMAKE_CURRENT_LIST_DIR}/psl.cmake)
 
-set(VERSION 0.21.1)
+set(VERSION 0.21.2)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/rockdaboot/libpsl/releases/download/${VERSION}/libpsl-${VERSION}.tar.gz"
     FILENAME "libpsl-${VERSION}.tar.gz"
-    SHA512 a5084b9df4ff2a0b1f5074b20972efe0da846473396d27b57967c7f6aa190ab3c910b4bfc4f8f03802f08decbbad5820d850c36ad59610262ae37fe77de0c7f5
+    SHA512 f1df72220bf4391d4701007100b0df66c833a2cbcb7481c9d13f0b9e0cad3b66d2d15d4b976e5bad60d2ad1540355112fa1acb07aa925c241d2d7cd20681c71d
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-platform.patch
-    # Can be removed on next libpsl release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Increase-label-size.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Fix-write-buffer-overflow.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Fix-stack-buffer-overflow.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0005-Avoid-8-bit-overflow.patch
 )
 
 # Extract archive
