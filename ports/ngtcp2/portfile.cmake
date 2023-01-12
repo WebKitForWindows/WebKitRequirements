@@ -1,16 +1,18 @@
-set(VERSION 0.11.0)
+set(VERSION 0.12.1)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/ngtcp2-${VERSION}.tar.bz2"
     FILENAME "ngtcp2-${VERSION}.tar.bz2"
-    SHA512 2e929ed7ac052f64b8a56aca39ccf7a5ef8c1f9486a4dc76449d87720e91d693df54958183c12335980fc77de019e0066f1020fa148130687f4a422d28b4bc69
+    SHA512 824c37b03be89d3361c7ef5af58162410d3a224a3ea6405b4f94e60249ef7d8a9dc5b738296e6ccb63b76ece1e55a2f5ccfa5f4f34426ea5b026799a37046db8
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Use-find_package-for-boringssl.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-a-shared-ngtcp2_crypto_boringssl-target.patch
+    # Remove after 0.13.0 release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Make-hard-coded-static-library-suffix-optional.patch
 )
 
 # Extract archive
