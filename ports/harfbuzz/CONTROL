@@ -1,4 +1,0 @@
-Source: harfbuzz
-Version: 6.0.0
-Build-Depends: freetype, icu
-Description: HarfBuzz OpenType text shaping engine

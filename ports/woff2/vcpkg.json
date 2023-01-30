@@ -1,0 +1,10 @@
+{
+  "name": "woff2",
+  "version": "1.0.2",
+  "description": "WOFF2 font compression reference code",
+  "homepage": "https://github.com/google/woff2",
+  "license": "MIT",
+  "dependencies": [
+    "brotli"
+  ]
+}

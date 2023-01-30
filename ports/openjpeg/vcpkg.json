@@ -1,0 +1,7 @@
+{
+  "name": "openjpeg",
+  "version": "2.5.0",
+  "description": "JPEG 2000 image library",
+  "homepage": "https://www.openjpeg.org",
+  "license": "BSD-2-Clause"
+}

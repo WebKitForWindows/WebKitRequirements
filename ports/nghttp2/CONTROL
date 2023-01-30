@@ -1,4 +1,0 @@
-Source: nghttp2
-Version: 1.51.0
-Description: |
-  Implementation of the Hypertext Transfer Protocol version 2 in C.

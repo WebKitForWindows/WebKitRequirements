@@ -1,0 +1,7 @@
+{
+  "name": "libwebp",
+  "version": "1.2.4",
+  "description": "Lossy compression of digital photographic images.",
+  "homepage": "https://github.com/webmproject/libwebp",
+  "license": "BSD-3-Clause"
+}

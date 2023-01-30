@@ -58,14 +58,14 @@ the requirements.
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.12.1 | 2023-01-06 |
 | [c-ares](https://c-ares.org) | 1.18.1 | 2021-10-27 |
 | [curl](https://curl.se) | 7.87.0 | 2022-12-21 |
-| [libxml2](http://xmlsoft.org/) | 2.10.3 | 2022-10-14 |
+| [libxml2](http://xmlsoft.org) | 2.10.3 | 2022-10-14 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.37 | 2022-08-29 |
 | [lcms](https://www.littlecms.com/) | 2.14.0 | 2022-11-01 |
 | [highway](https://github.com/google/highway) | 1.0.1 | 2022-08-24 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.39 | 2022-11-20 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.1.4 | 2022-08-12 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.2.4 | 2022-08-05 |
-| [openjpeg](https://www.openjpeg.org/) | 2.5.0 | 2022-05-13 |
+| [openjpeg](https://www.openjpeg.org) | 2.5.0 | 2022-05-13 |
 | [libjxl](https://github.com/libjxl/libjxl) | 0.7.0 | 2022-09-21 |
 | [sqlite](http://sqlite.org) | 3.40.1 | 2022-12-28 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
@@ -74,5 +74,5 @@ the requirements.
 | [pixman](http://www.pixman.org) | 0.42.2 | 2022-11-02 |
 | [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.17.6 | 2022-03-18 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.2 | 2022-12-26 |
-| [pthreads-win32](https://sourceforge.net/projects/pthreads4w/) | 2.9.1 | 2012-07-12 |
+| [pthreads-win32](https://sourceforge.net/projects/pthreads4w) | 2.9.1 | 2012-07-12 |
 | [OpenCFLite](https://github.com/fujii/OpenCFLite) | 0.0.2 | 2017-12-11 |

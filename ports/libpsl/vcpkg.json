@@ -1,0 +1,10 @@
+{
+  "name": "libpsl",
+  "version": "0.21.2",
+  "description": "A library to handle Public Suffix Lists",
+  "homepage": "https://github.com/rockdaboot/libpsl",
+  "license": "MIT",
+  "dependencies": [
+    "icu"
+  ]
+}
