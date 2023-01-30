@@ -1,0 +1,7 @@
+{
+  "name": "zlib",
+  "version": "2.0.6",
+  "description": "A compression library",
+  "homepage": "https://github.com/zlib-ng/zlib-ng",
+  "license": "Zlib"
+}

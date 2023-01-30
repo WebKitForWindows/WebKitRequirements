@@ -1,4 +1,0 @@
-Source: highway
-Version: 1.0.1
-Description: |
-  Performance-portable, length-agnostic SIMD with runtime dispatch.

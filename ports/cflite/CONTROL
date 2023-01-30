@@ -1,6 +1,0 @@
-Source: cflite
-Version: 0.0.2
-Build-Depends: icu, pthreads
-Description: |
-  An open implementation of CoreFoundation.
-

@@ -1,6 +1,0 @@
-Source: libjpeg-turbo
-Version: 2.1.4
-Description: |
-  A JPEG image codec that uses SIMD instructions (MMX, SSE2, AVX2, NEON,
-  AltiVec) to accelerate baseline JPEG compression and decompression on x86,
-  x86-64, ARM, and PowerPC systems.

@@ -1,0 +1,20 @@
+{
+  "name": "cairo",
+  "version": "1.17.6",
+  "description": "Cairo is a 2D graphics library with support for multiple output devices.",
+  "homepage": "https://gitlab.freedesktop.org/cairo/cairo",
+  "license": "MPL-1.1",
+  "dependencies": [
+    "libpng",
+    "pixman",
+    "zlib"
+  ],
+  "features": {
+    "freetype": {
+      "description": "Cairo with freetype support enabled.",
+      "dependencies": [
+        "freetype"
+      ]
+    }
+  }
+}

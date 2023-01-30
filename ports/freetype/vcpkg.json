@@ -1,0 +1,19 @@
+{
+  "name": "freetype",
+  "version": "2.12.1",
+  "description": "A library to render fonts.",
+  "homepage": "https://www.freetype.org",
+  "license": "FTL OR GPL-2.0-or-later",
+  "dependencies": [
+    "libpng",
+    "zlib"
+  ],
+  "features": {
+    "woff2": {
+      "description": "Enable WOFF2 font support.",
+      "dependencies": [
+        "brotli"
+      ]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "libpng",
+  "version": "1.6.39",
+  "description": "libpng is a library implementing an interface for reading and writing PNG (Portable Network Graphics) format files.",
+  "homepage": "ttp://www.libpng.org/pub/png/libpng.html",
+  "license": "libpng-2.0",
+  "dependencies": [
+    "zlib"
+  ]
+}

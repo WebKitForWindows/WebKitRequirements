@@ -1,0 +1,11 @@
+{
+  "name": "boringssl",
+  "version-date": "2022-09-14",
+  "description": "BoringSSL is a fork of OpenSSL that is designed to meet Google's needs.",
+  "homepage": "https://boringssl.googlesource.com/boringssl",
+  "features": {
+    "tools": {
+      "description": "Build openssl executables."
+    }
+  }
+}
