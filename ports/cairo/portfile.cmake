@@ -1,20 +1,17 @@
-set(VERSION 1.17.6)
+set(VERSION 1.17.8)
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/cairo-${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://gitlab.freedesktop.org/cairo/cairo/-/archive/${VERSION}/cairo-${VERSION}.tar.bz2"
     FILENAME "cairo-${VERSION}.tar.bz2"
-    SHA512 1537b34ca49b853f4f60a7ceac0c1b878e7e2874f1ca3a37ab6ccbb704a37872314447016ad07b82312b302bb6df86b71265232a802ccdb9fb8cd18f211ff185
+    SHA512 86d59c60c0436dde1cced60f11774e08bc483b3310faa066f9cb1cd60e64c4b7d61a27d1f5d4781187b1a3839c7b3e490a7503d09f25dbdcd5be21290f066cf8
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-build.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Rename-stat-to-stats.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-win32-font-Ignore-GetGlyphOutlineW-failure.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Don-t-leave-a-font-face-an-error-state-after-a-scale.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0005-Fix-scaled_glyph-hash-lookup-on-Win64.patch
 )
 
 # Extract archive
