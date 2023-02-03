@@ -1,14 +1,14 @@
-From 3ac2c73843fd23efce7ebb6d9dce462504c8afd6 Mon Sep 17 00:00:00 2001
+From 0b4dbc9332e1f85b602813181b5df0f4cc7a5617 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 27 Jun 2022 18:34:05 -0700
-Subject: [PATCH 2/3] Add a shared ngtcp2_crypto_boringssl target
+Subject: [PATCH 2/2] Add a shared ngtcp2_crypto_boringssl target
 
 ---
  crypto/boringssl/CMakeLists.txt | 20 ++++++++++++++++++++
  1 file changed, 20 insertions(+)
 
 diff --git a/crypto/boringssl/CMakeLists.txt b/crypto/boringssl/CMakeLists.txt
-index ebaae3de..004fb6a9 100644
+index bbea4c40..2906a506 100644
 --- a/crypto/boringssl/CMakeLists.txt
 +++ b/crypto/boringssl/CMakeLists.txt
 @@ -43,6 +43,26 @@ foreach(name libngtcp2_crypto_boringssl.pc)
@@ -39,5 +39,5 @@ index ebaae3de..004fb6a9 100644
    # Public static library
    add_library(ngtcp2_crypto_boringssl_static ${ngtcp2_crypto_boringssl_SOURCES})
 -- 
-2.39.0.windows.2
+2.39.1.windows.1
 
