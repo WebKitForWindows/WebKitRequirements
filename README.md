@@ -66,7 +66,7 @@ the requirements.
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.1.4 | 2022-08-12 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.2.4 | 2022-08-05 |
 | [openjpeg](https://www.openjpeg.org) | 2.5.0 | 2022-05-13 |
-| [libjxl](https://github.com/libjxl/libjxl) | 0.7.0 | 2022-09-21 |
+| [libjxl](https://github.com/libjxl/libjxl) | 0.8.1 | 2023-02-03 |
 | [sqlite](http://sqlite.org) | 3.40.1 | 2022-12-28 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
 | [freetype](https://www.freetype.org) | 2.12.1 | 2022-04-30 |
