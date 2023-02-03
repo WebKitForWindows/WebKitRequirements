@@ -1,15 +1,14 @@
-From 7e4b5e1063e05446628d6b27fd6754b9d46bdcbd Mon Sep 17 00:00:00 2001
+From 5ed03784020e3efe829628052e1b53bccea92bc1 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 29 Mar 2022 16:37:06 -0700
 Subject: [PATCH] Add CMake platform
 
 This mirrors the meson build files as closely as possible. It ignores options that aren't supported like non-ICU backends.
 ---
- CMakeLists.txt         |  69 +++++++++++++++++++++++++
- config.h.in            | 114 +++++++++++++++++++++++++++++++++++++++++
- include/CMakeLists.txt |  15 ++++++
- src/CMakeLists.txt     |  23 +++++++++
- 4 files changed, 221 insertions(+)
+ CMakeLists.txt         |  67 +++++++++++++++++
+ include/CMakeLists.txt |  15 ++++
+ src/CMakeLists.txt     |  23 ++++++
+ 3 files changed, 265 insertions(+)
  create mode 100644 CMakeLists.txt
  create mode 100644 config.h.in
  create mode 100644 include/CMakeLists.txt
@@ -17,14 +16,14 @@ This mirrors the meson build files as closely as possible. It ignores options th
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 new file mode 100644
-index 0000000..e7c8959
+index 0000000..5fd5976
 --- /dev/null
 +++ b/CMakeLists.txt
-@@ -0,0 +1,69 @@
+@@ -0,0 +1,67 @@
 +cmake_minimum_required(VERSION 3.13)
 +project(
 +    psl
-+    VERSION 0.21.1
++    VERSION 0.21.2
 +    LANGUAGES C
 +)
 +
@@ -49,17 +48,15 @@ index 0000000..e7c8959
 +
 +# Config file
 +set(PACKAGE_VERSION ${PROJECT_VERSION})
-+set(BUILTIN_GENERATOR_LIBICU ON)
++set(ENABLE_BUILTIN ON)
 +set(WITH_LIBICU ON)
 +check_include_file("alloca.h" HAVE_ALLOCA_H)
 +check_include_file("inttypes.h" HAVE_INTTYPES_H)
-+check_include_file("langinfo.h" HAVE_LANGINFO_H)
-+check_include_file("memory.h" HAVE_MEMORY_H)
 +check_include_file("stdint.h" HAVE_STDINT_H)
++check_include_file("stdio.h" HAVE_STDIO_H)
 +check_include_file("stdlib.h" HAVE_STDLIB_H)
 +check_include_file("string.h" HAVE_STRING_H)
 +check_include_file("strings.h" HAVE_STRINGS_H)
-+check_include_file("sys/mman.h" HAVE_SYS_MMAN_H)
 +check_include_file("sys/stat.h" HAVE_SYS_STAT_H)
 +check_include_file("sys/types.h" HAVE_SYS_TYPES_H)
 +check_include_file("unistd.h" HAVE_UNISTD_H)
@@ -141,5 +138,5 @@ index 0000000..e26d18f
 +    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 +)
 -- 
-2.36.0.windows.1
+2.39.1.windows.1
 
