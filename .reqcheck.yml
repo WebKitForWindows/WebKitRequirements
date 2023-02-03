@@ -1,0 +1,142 @@
+scm:
+  github:
+    driver: github
+    uri: https://github.com
+    token:
+      from_environment: github_public_token
+
+  freedesktop:
+    driver: gitlab
+    uri: https://gitlab.freedesktop.org
+    token:
+      from_environment: gitlab_freedesktop_token
+
+repos:
+  icu:
+    host: github
+    owner: unicode-org
+    repo: icu
+
+  zlib:
+    host: github
+    owner: zlib-ng
+    repo: zlib-ng
+
+  brotli:
+    host: github
+    owner: google
+    repo: brotli
+
+  libressl:
+    host: github
+    owner: libressl-portable
+    repo: portable
+    tags: true
+
+  nghttp2:
+    host: github
+    owner: nghttp2
+    repo: nghttp2
+
+  nghttp3:
+    host: github
+    owner: ngtcp2
+    repo: nghttp3
+
+  ngtcp2:
+    host: github
+    owner: ngtcp2
+    repo: ngtcp2
+
+  c-ares:
+    host: github
+    owner: c-ares
+    repo: c-ares
+
+  curl:
+    host: github
+    owner: curl
+    repo: curl
+
+  libxml2:
+    host: github
+    owner: GNOME
+    repo: libxml2
+    tags: true
+
+  libxslt:
+    host: github
+    owner: GNOME
+    repo: libxslt
+    tags: true
+
+  lcms:
+    host: github
+    owner: mm2
+    repo: Little-CMS
+
+  highway:
+    host: github
+    owner: google
+    repo: highway
+
+  libpng:
+    host: github
+    owner: glennrp
+    repo: libpng
+    tags: true
+    constraint: ~%s
+
+  libjpeg-turbo:
+    host: github
+    owner: libjpeg-turbo
+    repo: libjpeg-turbo
+
+  libwebp:
+    host: github
+    owner: webmproject
+    repo: libwebp
+    tags: true
+
+  openjpeg:
+    host: github
+    owner: uclouvain
+    repo: openjpeg
+
+  libjxl:
+    host: github
+    owner: libjxl
+    repo: libjxl
+
+  sqlite3:
+    host: github
+    owner: sqlite
+    repo: sqlite
+    tags: true
+
+  woff2:
+    host: github
+    owner: google
+    repo: woff2
+
+  freetype:
+    host: freedesktop
+    owner: freetype
+    repo: freetype
+    tags: true
+
+  harfbuzz:
+    host: github
+    owner: harfbuzz
+    repo: harfbuzz
+
+  pixman:
+    host: freedesktop
+    owner: pixman
+    repo: pixman
+    tags: true
+
+  cairo:
+    host: freedesktop
+    owner: cairo
+    repo: cairo
