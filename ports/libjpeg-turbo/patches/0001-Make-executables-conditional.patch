@@ -1,4 +1,4 @@
-From 13c152aaa66b45aeee301ff572d82762b143ea96 Mon Sep 17 00:00:00 2001
+From d5c936c30b1d14283cf9f26b8a10843cdf082c55 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 5 Nov 2019 14:12:34 -0800
 Subject: [PATCH 1/2] Make executables conditional
@@ -10,10 +10,10 @@ Adds an option ENABLE_EXECUTABLES which specifies whether executables should be 
  2 files changed, 73 insertions(+), 55 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index cca29663..c9763ef8 100644
+index 37303268..882b2db0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -185,6 +185,8 @@ option(ENABLE_SHARED "Build shared libraries" TRUE)
+@@ -194,6 +194,8 @@ option(ENABLE_SHARED "Build shared libraries" TRUE)
  boolean_number(ENABLE_SHARED)
  option(ENABLE_STATIC "Build static libraries" TRUE)
  boolean_number(ENABLE_STATIC)
@@ -22,7 +22,7 @@ index cca29663..c9763ef8 100644
  option(REQUIRE_SIMD "Generate a fatal error if SIMD extensions are not available for this platform (default is to fall back to a non-SIMD build)" FALSE)
  boolean_number(REQUIRE_SIMD)
  option(WITH_12BIT "Encode/decode JPEG images with 12-bit samples (implies WITH_ARITH_DEC=0 WITH_ARITH_ENC=0 WITH_JAVA=0 WITH_SIMD=0 WITH_TURBOJPEG=0 )" FALSE)
-@@ -634,17 +636,19 @@ if(WITH_TURBOJPEG)
+@@ -664,17 +666,19 @@ if(WITH_TURBOJPEG)
          LINK_FLAGS "${TJMAPFLAG}${TJMAPFILE}")
      endif()
  
@@ -51,7 +51,7 @@ index cca29663..c9763ef8 100644
    endif()
  
    if(ENABLE_STATIC)
-@@ -657,14 +661,16 @@ if(WITH_TURBOJPEG)
+@@ -687,14 +691,16 @@ if(WITH_TURBOJPEG)
        set_target_properties(turbojpeg-static PROPERTIES OUTPUT_NAME turbojpeg)
      endif()
  
@@ -75,7 +75,7 @@ index cca29663..c9763ef8 100644
      endif()
    endif()
  endif()
-@@ -680,7 +686,7 @@ else()
+@@ -710,7 +716,7 @@ else()
    set(DJPEG_BMP_SOURCES wrbmp.c wrtarga.c)
  endif()
  
@@ -84,7 +84,7 @@ index cca29663..c9763ef8 100644
    add_executable(cjpeg-static cjpeg.c cdjpeg.c rdgif.c rdppm.c rdswitch.c
      ${CJPEG_BMP_SOURCES})
    set_property(TARGET cjpeg-static PROPERTY COMPILE_FLAGS ${COMPILE_FLAGS})
-@@ -696,10 +702,11 @@ if(ENABLE_STATIC)
+@@ -726,10 +732,11 @@ if(ENABLE_STATIC)
    set_property(TARGET jpegtran-static PROPERTY COMPILE_FLAGS "${USE_SETMODE}")
  endif()
  
@@ -99,7 +99,7 @@ index cca29663..c9763ef8 100644
  
  ###############################################################################
  # TESTS
-@@ -1434,19 +1441,21 @@ if(WITH_TURBOJPEG)
+@@ -1466,19 +1473,21 @@ if(WITH_TURBOJPEG)
        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -121,19 +121,19 @@ index cca29663..c9763ef8 100644
        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 -    if(NOT ENABLE_SHARED)
 +    if(NOT ENABLE_SHARED AND ENABLE_EXECUTABLES)
-       if(MSVC_IDE OR XCODE)
+       if(GENERATOR_IS_MULTI_CONFIG)
          set(DIR "${CMAKE_CURRENT_BINARY_DIR}/\${CMAKE_INSTALL_CONFIG_NAME}")
        else()
-@@ -1464,7 +1473,7 @@ if(ENABLE_STATIC)
+@@ -1496,7 +1505,7 @@ if(ENABLE_STATIC)
    install(TARGETS jpeg-static EXPORT ${CMAKE_PROJECT_NAME}Targets
      INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
      ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 -  if(NOT ENABLE_SHARED)
 +  if(NOT ENABLE_SHARED AND ENABLE_EXECUTABLES)
-     if(MSVC_IDE OR XCODE)
+     if(GENERATOR_IS_MULTI_CONFIG)
        set(DIR "${CMAKE_CURRENT_BINARY_DIR}/\${CMAKE_INSTALL_CONFIG_NAME}")
      else()
-@@ -1479,7 +1488,9 @@ if(ENABLE_STATIC)
+@@ -1511,7 +1520,9 @@ if(ENABLE_STATIC)
    endif()
  endif()
  
@@ -228,5 +228,5 @@ index aea0b9d7..566e9f69 100644
    CMAKE_C_LINKER_SUPPORTS_PDB)
    install(FILES "$<TARGET_PDB_FILE:jpeg>"
 -- 
-2.37.2.windows.2
+2.39.1.windows.1
 
