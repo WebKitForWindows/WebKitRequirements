@@ -1,6 +1,6 @@
 {
   "name": "c-ares",
-  "version": "1.18.1",
+  "version": "1.19.0",
   "description": "A C library for asynchronous DNS requests",
   "homepage": "https://c-ares.org",
   "license": "MIT-CMU"
