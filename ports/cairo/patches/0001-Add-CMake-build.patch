@@ -1,4 +1,4 @@
-From 8f41037c48820709cfd97d5517649e4e24609341 Mon Sep 17 00:00:00 2001
+From 2b5c437f4c9eaca720a7ada7a90898796fd138de Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 7 Jul 2022 11:14:19 -0700
 Subject: [PATCH 1/2] Add CMake build
@@ -7,10 +7,10 @@ Port the meson build over to CMake. Features that aren't relevant at all, like t
 ---
  CMakeLists.txt          | 346 ++++++++++++++++++++++++++++++++++++++++
  cmake/FindPixman.cmake  |  90 +++++++++++
- src/CMakeLists.txt      | 251 +++++++++++++++++++++++++++++
+ src/CMakeLists.txt      | 252 +++++++++++++++++++++++++++++
  src/config.cmake.h.in   |  97 +++++++++++
  src/features.cmake.h.in |  41 +++++
- 5 files changed, 825 insertions(+)
+ 5 files changed, 826 insertions(+)
  create mode 100644 CMakeLists.txt
  create mode 100644 cmake/FindPixman.cmake
  create mode 100644 src/CMakeLists.txt
@@ -467,10 +467,10 @@ index 000000000..61738006c
 +endif ()
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 new file mode 100644
-index 000000000..f9452e158
+index 000000000..c597ecaa7
 --- /dev/null
 +++ b/src/CMakeLists.txt
-@@ -0,0 +1,251 @@
+@@ -0,0 +1,252 @@
 +# Porting of the meson.build file to CMake
 +
 +set(cairo_sources
@@ -679,6 +679,7 @@ index 000000000..f9452e158
 +set(cairo_quartz_headers cairo-quartz.h)
 +set(cairo_quartz_image_headers cairo-quartz-image.h)
 +set(cairo_win32_headers cairo-win32.h)
++set(cairo_dwrite_font_headers cairo-dwrite.h)
 +set(cairo_gl_headers cairo-gl.h)
 +set(cairo_script_headers cairo-script.h)
 +set(cairo_tee_headers cairo-tee.h)
