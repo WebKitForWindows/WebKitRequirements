@@ -53,7 +53,7 @@ the requirements.
 | [brotli](https://github.com/google/brotli) | 1.0.9 | 2020-08-27 |
 | [boringssl](https://boringssl.googlesource.com/boringssl) | 04989786 | 2022-09-14 |
 | [libressl](https://www.libressl.org) | 3.7.0 | 2022-12-12 |
-| [nghttp2](https://nghttp2.org) | 1.51.0 | 2022-11-13 |
+| [nghttp2](https://nghttp2.org) | 1.51.0 | 2023-02-13 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.8.0 | 2022-12-10 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.13.1 | 2023-02-09 |
 | [c-ares](https://c-ares.org) | 1.19.0 | 2023-01-28 |

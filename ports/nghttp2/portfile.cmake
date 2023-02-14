@@ -1,10 +1,10 @@
-set(VERSION 1.51.0)
+set(VERSION 1.52.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/nghttp2/nghttp2/archive/v${VERSION}.zip"
     FILENAME "nghttp2-${VERSION}.zip"
-    SHA512 4f875bab0e3297bd29eea0a8d2785e2e03a1444710d15840a4622a3380a0b5dfff181d2510a7b36a2f43dba2944b12e03c718b8ab1676708efb66cc6a7b7a4cf
+    SHA512 93c79233ab4f5039a703de6740f1d44e9260c761c8feba20c8247f7c77532afdb30c02a15dc1a937782c9b98a80664c188a58244fa894ef0a8ee457715f1f1aa
 )
 
 # Extract archive
@@ -18,9 +18,9 @@ vcpkg_extract_source_archive_ex(
 # Run CMake build
 set(BUILD_OPTIONS
     # ENABLE options
-    -DENABLE_LIB_ONLY=ON
-    -DENABLE_ASIO_LIB=OFF
     -DENABLE_FAILMALLOC=OFF
+    -DENABLE_HTTP3=OFF
+    -DENABLE_LIB_ONLY=ON
     -DENABLE_THREADS=OFF
     -DENABLE_WERROR=OFF
     # WITH options
