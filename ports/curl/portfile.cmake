@@ -23,8 +23,6 @@ vcpkg_extract_source_archive_ex(
 
 # Run CMake build
 set(BUILD_OPTIONS
-    # Remove debug postfix (prevent -d postfix on built products)
-    -DCMAKE_DEBUG_POSTFIX=
     # BUILD options
     -DBUILD_CURL_EXE=OFF
     -DBUILD_TESTING=OFF
@@ -160,8 +158,12 @@ vcpkg_configure_cmake(
         -DCURL_STATICLIB=${CURL_STATICLIB}
         -DCURL_USE_OPENSSL=${USE_OPENSSL}
         -DCURL_USE_SCHANNEL=${USE_SCHANNEL}
+        # Remove debug postfix (prevent -d postfix on built products)
+        -DCMAKE_DEBUG_POSTFIX=
     OPTIONS_DEBUG
         -DENABLE_DEBUG=ON
+    MAYBE_UNUSED_VARIABLES
+        CMAKE_DEBUG_POSTFIX
 )
 
 vcpkg_install_cmake()
