@@ -1,11 +1,11 @@
-set(VERSION 7.87.0)
+set(VERSION 7.88.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 9176b4345fd8d93261f9b601dddd20909e24aed84a9ee0a92daf900ab8f71a231db4d9ed53c55fcae6d628a31880482c5cddd64510690fe16befa6647a71d8de
+    SHA512 fad9ea355e6c0d476e982b9b23e56bd76e9b85895ee0ea0a79a16fcf202eae4e173bc7dc66fb5741ddc87f9dc232452b8329f8deb33a2c8f19e24e624a9098e3
 )
 
 # Patches
