@@ -57,5 +57,9 @@ accordingly.
 
 ```
 & Install-Requirements.ps1 -triplet x64-windows-webkit
+
+# TODO Remove cflite from distribution
+.\vcpkg.exe install cflite --triplet x64-windows-webkit
+
 & Release-Requirements.ps1 -triplet x64-windows-webkit
 ```
