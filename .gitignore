@@ -16,6 +16,9 @@
 /scripts/*
 vcpkg.exe
 
+# Ignore vpckg ports
+/ports/vcpkg-*
+
 # Ignore community triplets
 /triplets/*
 !/triplets/x64-windows-webkit.cmake
