@@ -115,5 +115,17 @@ Copy-DirectoryStructure `
    -Path (Join-Path $vcpkgPath -ChildPath 'triplets') `
    -Destination (Join-Path $PSScriptRoot -ChildPath 'triplets');
 
+$portsDir = Join-Path $PSScriptRoot 'ports';
+$vcpkgPortsDir = Join-Path $vcpkgPath 'ports';
+
+$ports = Get-ChildItem -Path $vcpkgPortsDir;
+foreach ($port in $ports) {
+  if ($port.PSIsContainer -and $port.Name.StartsWith('vcpkg-')) {
+    Copy-DirectoryStructure `
+      -Path (Join-Path $vcpkgPortsDir $port.Name) `
+      -Destination (Join-Path $portsDir -ChildPath $port.Name);
+  }
+}
+
 # Restore location
 Set-Location $currentPath;
