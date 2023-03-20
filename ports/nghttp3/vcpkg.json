@@ -1,6 +1,6 @@
 {
   "name": "nghttp3",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "An implementation of HTTP/3 mapping over QUIC and QPACK in C.",
   "homepage": "https://github.com/ngtcp2/nghttp3",
   "license": "MIT"
