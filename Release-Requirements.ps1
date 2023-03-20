@@ -18,10 +18,6 @@ $tripletSplit = $triplet -split '-',3;
 $platform = $tripletSplit[1];
 
 if ($platform -eq 'windows') {
-  $command = ('Delete-PthreadHeaders.ps1 -triplet {0}' -f $triplet)
-  Write-Host $command;
-  Invoke-Expression -Command ('{0}/{1}' -f $PSScriptRoot,$command);
-
   $command = ('Rename-WithBitSuffix.ps1 -triplet {0}' -f $triplet);
   Write-Host $command;
   Invoke-Expression -Command ('{0}/{1}' -f $PSScriptRoot,$command);
