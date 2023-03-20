@@ -49,7 +49,7 @@ the requirements.
 | Library | Version | Release Date |
 |---|:---:|:---:|
 | [icu](http://site.icu-project.org) | 72.1 | 2022-10-18 |
-| [zlib](https://github.com/zlib-ng/zlib-ng) | 2.0.6 | 2021-12-24 |
+| [zlib](https://github.com/zlib-ng/zlib-ng) | 2.0.7 | 2021-03-17 |
 | [brotli](https://github.com/google/brotli) | 1.0.9 | 2020-08-27 |
 | [boringssl](https://boringssl.googlesource.com/boringssl) | 04989786 | 2022-09-14 |
 | [libressl](https://www.libressl.org) | 3.7.1 | 2023-03-16 |
