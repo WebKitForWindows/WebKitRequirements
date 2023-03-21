@@ -1,0 +1,83 @@
+From 75d2bcd521011245335cd101867b90984a59e094 Mon Sep 17 00:00:00 2001
+From: Khaled Hosny <khaled@aliftype.com>
+Date: Tue, 31 Jan 2023 00:43:42 +0200
+Subject: [PATCH 04/15] doc: Fix dwrite gtk-doc warnings
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Don’t use gtk-doc comment syntax for regular comments.
+---
+ src/win32/cairo-dwrite-font.cpp | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/src/win32/cairo-dwrite-font.cpp b/src/win32/cairo-dwrite-font.cpp
+index 1d84fc047..925ce22ef 100644
+--- a/src/win32/cairo-dwrite-font.cpp
++++ b/src/win32/cairo-dwrite-font.cpp
+@@ -915,7 +915,7 @@ _cairo_dwrite_scaled_font_init_glyph_color_surface(cairo_dwrite_scaled_font_t *s
+     RefPtr<IDWriteColorGlyphRunEnumerator1> run_enumerator;
+     HRESULT hr;
+ 
+-    /**
++    /*
+      * We transform by the inverse transformation here. This will put our glyph
+      * locations in the space in which we draw. Which is later transformed by
+      * the transformation matrix that we use. This will transform the
+@@ -924,7 +924,7 @@ _cairo_dwrite_scaled_font_init_glyph_color_surface(cairo_dwrite_scaled_font_t *s
+      */
+     cairo_matrix_transform_point(&scaled_font->mat_inverse, &x, &y);
+     offset.advanceOffset = (FLOAT)x;
+-    /** Y-axis is inverted */
++    /* Y-axis is inverted */
+     offset.ascenderOffset = -(FLOAT)y;
+ 
+     run.fontFace = dwrite_font_face->dwriteface;
+@@ -1197,7 +1197,7 @@ _cairo_dwrite_scaled_font_init_glyph_surface(cairo_dwrite_scaled_font_t *scaled_
+     if (status)
+ 	goto FAIL;
+ 
+-    /**
++    /*
+      * We transform by the inverse transformation here. This will put our glyph
+      * locations in the space in which we draw. Which is later transformed by
+      * the transformation matrix that we use. This will transform the
+@@ -1206,7 +1206,7 @@ _cairo_dwrite_scaled_font_init_glyph_surface(cairo_dwrite_scaled_font_t *scaled_
+      */
+     cairo_matrix_transform_point(&scaled_font->mat_inverse, &x, &y);
+     offset.advanceOffset = (FLOAT)x;
+-    /** Y-axis is inverted */
++    /* Y-axis is inverted */
+     offset.ascenderOffset = -(FLOAT)y;
+ 
+     area.top = 0;
+@@ -1565,7 +1565,7 @@ _dwrite_draw_glyphs_to_gdi_surface_gdi(cairo_win32_surface_t *surface,
+     else
+ 	params = DWriteFactory::DefaultRenderingParams();
+ 
+-    /**
++    /*
+      * We set the number of pixels per DIP to 1.0. This is because we always want
+      * to draw in device pixels, and not device independent pixels. On high DPI
+      * systems this value will be higher than 1.0 and automatically upscale
+@@ -1708,7 +1708,7 @@ _cairo_dwrite_show_glyphs_on_surface(void			*surface,
+ 	    largestY = (INT32)glyphs[i].y;
+ 	}
+     }
+-    /**
++    /*
+      * Here we try to get a rough estimate of the area that this glyph run will
+      * cover on the surface. Since we use GDI interop to draw we will be copying
+      * data around the size of the area of the surface that we map. We will want
+@@ -1768,7 +1768,7 @@ _cairo_dwrite_show_glyphs_on_surface(void			*surface,
+ 	    double x = glyphs[i].x - fontArea.left + EPSILON;
+ 	    double y = glyphs[i].y - fontArea.top;
+ 	    cairo_matrix_transform_point(&dwritesf->mat_inverse, &x, &y);
+-	    /**
++	    /*
+ 	     * Since we will multiply by our ctm matrix later for rotation effects
+ 	     * and such, adjust positions by the inverse matrix now. The Y-axis
+ 	     * is inverted so the offset becomes negative.
+-- 
+2.34.1
+

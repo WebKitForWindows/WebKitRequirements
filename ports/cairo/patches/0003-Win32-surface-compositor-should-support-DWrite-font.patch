@@ -1,0 +1,31 @@
+From 85e271d20faade59bad308d6dc3501f233e4e4fb Mon Sep 17 00:00:00 2001
+From: Fujii Hironori <Hironori.Fujii@sony.com>
+Date: Mon, 30 Jan 2023 11:30:56 +0900
+Subject: [PATCH 03/15] Win32 surface compositor should support DWrite font
+
+_cairo_win32_gdi_compositor_glyphs was falling back to the default
+implementation for DWrite font because check_glyphs() returned FALSE
+for CAIRO_FONT_TYPE_DWRITE.
+
+Fixes cairo/cairo#597
+---
+ src/win32/cairo-win32-gdi-compositor.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/win32/cairo-win32-gdi-compositor.c b/src/win32/cairo-win32-gdi-compositor.c
+index 1d1d7f873..bc1f69e70 100644
+--- a/src/win32/cairo-win32-gdi-compositor.c
++++ b/src/win32/cairo-win32-gdi-compositor.c
+@@ -602,7 +602,8 @@ static cairo_bool_t check_glyphs (cairo_composite_rectangles_t *composite,
+     if (! _cairo_clip_is_region (composite->clip))
+ 	return FALSE;
+ 
+-    if (cairo_scaled_font_get_type (scaled_font) != CAIRO_FONT_TYPE_WIN32)
++    cairo_font_type_t type = cairo_scaled_font_get_type (scaled_font);
++    if (type != CAIRO_FONT_TYPE_WIN32 && type != CAIRO_FONT_TYPE_DWRITE)
+ 	return FALSE;
+ 
+     if (! _cairo_pattern_is_opaque_solid (&composite->source_pattern.base))
+-- 
+2.34.1
+

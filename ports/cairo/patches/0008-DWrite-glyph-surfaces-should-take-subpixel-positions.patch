@@ -1,0 +1,77 @@
+From b913a7d96cbaf4011894df9b987a38b9a8d51ccd Mon Sep 17 00:00:00 2001
+From: Fujii Hironori <Hironori.Fujii@sony.com>
+Date: Fri, 10 Feb 2023 10:05:57 +0900
+Subject: [PATCH 08/15] DWrite: glyph surfaces should take subpixel positions
+ into account
+
+Shift the glyph position by phases taken
+by _cairo_scaled_glyph_xphase and _cairo_scaled_glyph_yphase.
+
+Fixes #597
+---
+ src/win32/cairo-dwrite-font.cpp | 22 ++++++----------------
+ 1 file changed, 6 insertions(+), 16 deletions(-)
+
+diff --git a/src/win32/cairo-dwrite-font.cpp b/src/win32/cairo-dwrite-font.cpp
+index edd606abe..feec9652e 100644
+--- a/src/win32/cairo-dwrite-font.cpp
++++ b/src/win32/cairo-dwrite-font.cpp
+@@ -891,7 +891,6 @@ _cairo_dwrite_scaled_font_init_glyph_color_surface(cairo_dwrite_scaled_font_t *s
+ {
+     int width, height;
+     double x1, y1, x2, y2;
+-    cairo_glyph_t glyph;
+     cairo_bool_t uses_foreground_color = FALSE;
+ 
+     cairo_dwrite_font_face_t *dwrite_font_face = (cairo_dwrite_font_face_t *)scaled_font->base.font_face;
+@@ -908,16 +907,12 @@ _cairo_dwrite_scaled_font_init_glyph_color_surface(cairo_dwrite_scaled_font_t *s
+     width = (int)(x2 - x1);
+     height = (int)(y2 - y1);
+ 
+-    glyph.index = _cairo_scaled_glyph_index (scaled_glyph);
+-    glyph.x = x1;
+-    glyph.y = y1;
+-
+     DWRITE_GLYPH_RUN run;
+     FLOAT advance = 0;
+-    UINT16 index = (UINT16)glyph.index;
++    UINT16 index = (UINT16)_cairo_scaled_glyph_index (scaled_glyph);
+     DWRITE_GLYPH_OFFSET offset;
+-    double x = -glyph.x;
+-    double y = -glyph.y;
++    double x = -x1 + .25 * _cairo_scaled_glyph_xphase (scaled_glyph);
++    double y = -y1 + .25 * _cairo_scaled_glyph_yphase (scaled_glyph);
+     DWRITE_MATRIX matrix;
+     D2D1_POINT_2F origin = {0, 0};
+     RefPtr<IDWriteColorGlyphRunEnumerator1> run_enumerator;
+@@ -1131,7 +1126,6 @@ _cairo_dwrite_scaled_font_init_glyph_surface(cairo_dwrite_scaled_font_t *scaled_
+ 					     cairo_scaled_glyph_t	*scaled_glyph)
+ {
+     cairo_int_status_t status;
+-    cairo_glyph_t glyph;
+     cairo_win32_surface_t *surface;
+     cairo_t *cr;
+     cairo_surface_t *image;
+@@ -1145,16 +1139,12 @@ _cairo_dwrite_scaled_font_init_glyph_surface(cairo_dwrite_scaled_font_t *scaled_
+     width = (int)(x2 - x1);
+     height = (int)(y2 - y1);
+ 
+-    glyph.index = _cairo_scaled_glyph_index (scaled_glyph);
+-    glyph.x = -x1;
+-    glyph.y = -y1;
+-
+     DWRITE_GLYPH_RUN run;
+     FLOAT advance = 0;
+-    UINT16 index = (UINT16)glyph.index;
++    UINT16 index = (UINT16)_cairo_scaled_glyph_index (scaled_glyph);
+     DWRITE_GLYPH_OFFSET offset;
+-    double x = glyph.x;
+-    double y = glyph.y;
++    double x = -x1 + .25 * _cairo_scaled_glyph_xphase (scaled_glyph);
++    double y = -y1 + .25 * _cairo_scaled_glyph_yphase (scaled_glyph);
+     RECT area;
+     DWRITE_MATRIX matrix;
+ 
+-- 
+2.34.1
+
