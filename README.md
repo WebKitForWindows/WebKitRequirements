@@ -60,7 +60,7 @@ the requirements.
 | [curl](https://curl.se) | 7.88.1 | 2023-02-20 |
 | [libxml2](http://xmlsoft.org) | 2.10.3 | 2022-10-14 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.37 | 2022-08-29 |
-| [lcms](https://www.littlecms.com/) | 2.14.0 | 2022-11-01 |
+| [lcms](https://www.littlecms.com/) | 2.15.0 | 2023-03-01 |
 | [highway](https://github.com/google/highway) | 1.0.4 | 2023-03-17 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.39 | 2022-11-20 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.1.5 | 2023-01-31 |
