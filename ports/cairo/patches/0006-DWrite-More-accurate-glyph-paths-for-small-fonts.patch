@@ -1,0 +1,152 @@
+From 2e35793d014c8dc1f7a3d0698372bfd37341c2c5 Mon Sep 17 00:00:00 2001
+From: Fujii Hironori <Hironori.Fujii@sony.com>
+Date: Tue, 7 Feb 2023 15:42:51 +0900
+Subject: [PATCH 06/15] DWrite: More accurate glyph paths for small fonts
+
+Applying a transformation matrix to a glyph path after converting
+floats to fixed point numbers caused caluculation errors. Apply the
+transform before the conversion.
+
+Fixes cairo/cairo#611
+---
+ src/win32/cairo-dwrite-font.cpp | 66 ++++++++++++++++++---------------
+ 1 file changed, 37 insertions(+), 29 deletions(-)
+
+diff --git a/src/win32/cairo-dwrite-font.cpp b/src/win32/cairo-dwrite-font.cpp
+index 925ce22ef..994889e21 100644
+--- a/src/win32/cairo-dwrite-font.cpp
++++ b/src/win32/cairo-dwrite-font.cpp
+@@ -736,8 +736,9 @@ _cairo_dwrite_scaled_font_init_glyph_metrics(cairo_dwrite_scaled_font_t *scaled_
+ class GeometryRecorder : public IDWriteGeometrySink
+ {
+ public:
+-    GeometryRecorder(cairo_path_fixed_t *aCairoPath)
+-	: mCairoPath(aCairoPath) {}
++    GeometryRecorder(cairo_path_fixed_t *aCairoPath, const cairo_matrix_t &matrix)
++	: mCairoPath(aCairoPath)
++	, mMatrix(matrix) {}
+ 
+     // IUnknown interface
+     IFACEMETHOD(QueryInterface)(IID const& iid, OUT void** ppObject)
+@@ -779,10 +780,14 @@ public:
+ 	D2D1_POINT_2F startPoint,
+ 	D2D1_FIGURE_BEGIN figureBegin)
+     {
+-	mStartPoint = startPoint;
++	double x = startPoint.x;
++	double y = startPoint.y;
++	cairo_matrix_transform_point(&mMatrix, &x, &y);
++	mStartPointX = _cairo_fixed_from_double(x);
++	mStartPointY = _cairo_fixed_from_double(y);
+ 	cairo_status_t status = _cairo_path_fixed_move_to(mCairoPath,
+-							  _cairo_fixed_from_double(startPoint.x),
+-							  _cairo_fixed_from_double(startPoint.y));
++							  mStartPointX,
++							  mStartPointY);
+ 	(void)status; /* squelch warning */
+     }
+ 
+@@ -791,8 +796,8 @@ public:
+     {
+ 	if (figureEnd == D2D1_FIGURE_END_CLOSED) {
+ 	    cairo_status_t status = _cairo_path_fixed_line_to(mCairoPath,
+-							      _cairo_fixed_from_double(mStartPoint.x),
+-							      _cairo_fixed_from_double(mStartPoint.y));
++							      mStartPointX,
++							      mStartPointY);
+ 	    (void)status; /* squelch warning */
+ 	}
+     }
+@@ -802,13 +807,22 @@ public:
+ 	UINT beziersCount)
+     {
+ 	for (unsigned int i = 0; i < beziersCount; i++) {
++	    double x1 = beziers[i].point1.x;
++	    double y1 = beziers[i].point1.y;
++	    double x2 = beziers[i].point2.x;
++	    double y2 = beziers[i].point2.y;
++	    double x3 = beziers[i].point3.x;
++	    double y3 = beziers[i].point3.y;
++	    cairo_matrix_transform_point(&mMatrix, &x1, &y1);
++	    cairo_matrix_transform_point(&mMatrix, &x2, &y2);
++	    cairo_matrix_transform_point(&mMatrix, &x3, &y3);
+ 	    cairo_status_t status = _cairo_path_fixed_curve_to(mCairoPath,
+-							       _cairo_fixed_from_double(beziers[i].point1.x),
+-							       _cairo_fixed_from_double(beziers[i].point1.y),
+-							       _cairo_fixed_from_double(beziers[i].point2.x),
+-							       _cairo_fixed_from_double(beziers[i].point2.y),
+-							       _cairo_fixed_from_double(beziers[i].point3.x),
+-							       _cairo_fixed_from_double(beziers[i].point3.y));
++							       _cairo_fixed_from_double(x1),
++							       _cairo_fixed_from_double(y1),
++							       _cairo_fixed_from_double(x2),
++							       _cairo_fixed_from_double(y2),
++							       _cairo_fixed_from_double(x3),
++							       _cairo_fixed_from_double(y3));
+ 	    (void)status; /* squelch warning */
+ 	}
+     }
+@@ -818,16 +832,21 @@ public:
+ 	UINT pointsCount)
+     {
+ 	for (unsigned int i = 0; i < pointsCount; i++) {
++	    double x = points[i].x;
++	    double y = points[i].y;
++	    cairo_matrix_transform_point(&mMatrix, &x, &y);
+ 	    cairo_status_t status = _cairo_path_fixed_line_to(mCairoPath,
+-							      _cairo_fixed_from_double(points[i].x),
+-							      _cairo_fixed_from_double(points[i].y));
++							      _cairo_fixed_from_double(x),
++							      _cairo_fixed_from_double(y));
+ 	    (void)status; /* squelch warning */
+ 	}
+     }
+ 
+ private:
+     cairo_path_fixed_t *mCairoPath;
+-    D2D1_POINT_2F mStartPoint;
++    const cairo_matrix_t &mMatrix;
++    cairo_fixed_t mStartPointX;
++    cairo_fixed_t mStartPointY;
+ };
+ 
+ static cairo_int_status_t
+@@ -837,7 +856,7 @@ _cairo_dwrite_scaled_font_init_glyph_path(cairo_dwrite_scaled_font_t *scaled_fon
+     cairo_int_status_t status;
+     cairo_path_fixed_t *path;
+     path = _cairo_path_fixed_create();
+-    GeometryRecorder recorder(path);
++    GeometryRecorder recorder(path, scaled_font->base.scale);
+ 
+     DWRITE_GLYPH_OFFSET offset;
+     offset.advanceOffset = 0;
+@@ -846,12 +865,7 @@ _cairo_dwrite_scaled_font_init_glyph_path(cairo_dwrite_scaled_font_t *scaled_fon
+     FLOAT advance = 0.0;
+     cairo_dwrite_font_face_t *dwriteff = (cairo_dwrite_font_face_t*)scaled_font->base.font_face;
+ 
+-    /* GetGlyphRunOutline seems to ignore hinting so just use the em size to get the outline
+-     * to avoid rounding errors when converting to cairo_path_fixed_t.
+-     */
+-    DWRITE_FONT_METRICS metrics;
+-    dwriteff->dwriteface->GetMetrics(&metrics);
+-    HRESULT hr = dwriteff->dwriteface->GetGlyphRunOutline(metrics.designUnitsPerEm,
++    HRESULT hr = dwriteff->dwriteface->GetGlyphRunOutline(1,
+ 							  &glyphId,
+ 							  &advance,
+ 							  &offset,
+@@ -864,12 +878,6 @@ _cairo_dwrite_scaled_font_init_glyph_path(cairo_dwrite_scaled_font_t *scaled_fon
+ 
+     status = (cairo_int_status_t)_cairo_path_fixed_close_path(path);
+ 
+-    /* Now scale the em size down to 1.0 and apply the font matrix and font ctm. */
+-    cairo_matrix_t mat = scaled_font->base.ctm;
+-    cairo_matrix_multiply(&mat, &scaled_font->base.font_matrix, &mat);
+-    cairo_matrix_scale (&mat, 1.0/metrics.designUnitsPerEm, 1.0/metrics.designUnitsPerEm);
+-    _cairo_path_fixed_transform(path, &mat);
+-
+     _cairo_scaled_glyph_set_path (scaled_glyph,
+ 				  &scaled_font->base,
+ 				  path);
+-- 
+2.34.1
+
