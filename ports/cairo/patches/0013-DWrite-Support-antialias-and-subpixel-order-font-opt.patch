@@ -1,0 +1,254 @@
+From 37b4dd0fcaf28b5533cdd15a842da6e5a88cdb55 Mon Sep 17 00:00:00 2001
+From: Fujii Hironori <Hironori.Fujii@sony.com>
+Date: Tue, 14 Feb 2023 16:13:00 +0900
+Subject: [PATCH 13/15] DWrite: Support antialias and subpixel order font
+ options
+
+Create a new IDWriteRenderingParams object from the given font
+options.
+---
+ src/win32/cairo-dwrite-font.cpp    | 127 +++++++++++++++++++++++++----
+ src/win32/cairo-dwrite-private.hpp |  33 ++++++++
+ 2 files changed, 145 insertions(+), 15 deletions(-)
+
+diff --git a/src/win32/cairo-dwrite-font.cpp b/src/win32/cairo-dwrite-font.cpp
+index d1c4e63f1..d12f7b70b 100644
+--- a/src/win32/cairo-dwrite-font.cpp
++++ b/src/win32/cairo-dwrite-font.cpp
+@@ -212,6 +212,9 @@ private:
+ 
+ 
+ RefPtr<IDWriteFactory> DWriteFactory::mFactoryInstance;
++RefPtr<IDWriteFactory1> DWriteFactory::mFactoryInstance1;
++RefPtr<IDWriteFactory2> DWriteFactory::mFactoryInstance2;
++RefPtr<IDWriteFactory3> DWriteFactory::mFactoryInstance3;
+ RefPtr<IDWriteFactory4> DWriteFactory::mFactoryInstance4;
+ 
+ RefPtr<IWICImagingFactory> WICImagingFactory::mFactoryInstance;
+@@ -221,6 +224,107 @@ RefPtr<IDWriteRenderingParams> DWriteFactory::mDefaultRenderingParams;
+ RefPtr<ID2D1Factory> D2DFactory::mFactoryInstance;
+ RefPtr<ID2D1DCRenderTarget> D2DFactory::mRenderTarget;
+ 
++static int
++_quality_from_antialias_mode(cairo_antialias_t antialias)
++{
++    switch (antialias) {
++    case CAIRO_ANTIALIAS_NONE:
++	return NONANTIALIASED_QUALITY;
++    case CAIRO_ANTIALIAS_FAST:
++    case CAIRO_ANTIALIAS_GRAY:
++	return ANTIALIASED_QUALITY;
++    default:
++	break;
++    }
++    return CLEARTYPE_QUALITY;    
++}
++
++static RefPtr<IDWriteRenderingParams>
++_create_rendering_params(IDWriteRenderingParams     *params,
++			 const cairo_font_options_t *options,
++			 cairo_antialias_t           antialias)
++{
++    if (!params)
++	params = DWriteFactory::DefaultRenderingParams();
++    FLOAT gamma = params->GetGamma();
++    FLOAT enhanced_contrast = params->GetEnhancedContrast();
++    FLOAT clear_type_level = params->GetClearTypeLevel();
++    DWRITE_PIXEL_GEOMETRY pixel_geometry = params->GetPixelGeometry();
++    DWRITE_RENDERING_MODE rendering_mode = params->GetRenderingMode();
++
++    cairo_bool_t modified = FALSE;
++    switch (antialias) {
++    case CAIRO_ANTIALIAS_NONE:
++	if (rendering_mode != DWRITE_RENDERING_MODE_ALIASED) {
++	    rendering_mode = DWRITE_RENDERING_MODE_ALIASED;
++	    modified = TRUE;
++	}
++	break;
++    case CAIRO_ANTIALIAS_FAST:
++    case CAIRO_ANTIALIAS_GRAY:
++	if (clear_type_level) {
++	    clear_type_level = 0;
++	    modified = TRUE;
++	}
++	break;
++    default:
++	break;
++    }
++    auto subpixel_order = cairo_font_options_get_subpixel_order (options);
++    switch (subpixel_order) {
++    case CAIRO_SUBPIXEL_ORDER_RGB:
++	if (pixel_geometry != DWRITE_PIXEL_GEOMETRY_RGB) {
++	    pixel_geometry = DWRITE_PIXEL_GEOMETRY_RGB;
++	    modified = TRUE;
++	}
++	break;
++    case CAIRO_SUBPIXEL_ORDER_BGR:
++	if (pixel_geometry != DWRITE_PIXEL_GEOMETRY_BGR) {
++	    pixel_geometry = DWRITE_PIXEL_GEOMETRY_BGR;
++	    modified = TRUE;
++	}
++	break;
++    default:
++	break;
++    }	
++    if (!modified)
++	return params;
++
++    HRESULT hr;
++    RefPtr<IDWriteRenderingParams1> params1;
++    hr = params->QueryInterface(&params1);
++    if (FAILED(hr)) {
++	RefPtr<IDWriteRenderingParams> ret;
++	DWriteFactory::Instance()->CreateCustomRenderingParams(gamma, enhanced_contrast, clear_type_level, pixel_geometry, rendering_mode, &ret);
++	return ret;
++    }
++
++    FLOAT grayscaleEnhancedContrast = params1->GetGrayscaleEnhancedContrast();
++    RefPtr<IDWriteRenderingParams2> params2;
++    hr = params->QueryInterface(&params2);
++    if (FAILED(hr)) {
++	RefPtr<IDWriteRenderingParams1> ret;
++	DWriteFactory::Instance1()->CreateCustomRenderingParams(gamma, enhanced_contrast, grayscaleEnhancedContrast, clear_type_level, pixel_geometry, rendering_mode, &ret);
++	return ret;
++    }    
++
++    DWRITE_GRID_FIT_MODE gridFitMode = params2->GetGridFitMode();
++    RefPtr<IDWriteRenderingParams3> params3;
++    hr = params->QueryInterface(&params3);
++    if (FAILED(hr)) {
++	RefPtr<IDWriteRenderingParams2> ret;
++	DWriteFactory::Instance2()->CreateCustomRenderingParams(gamma, enhanced_contrast, grayscaleEnhancedContrast, clear_type_level, pixel_geometry, rendering_mode, gridFitMode, &ret);
++	return ret;
++    }    
++    
++    DWRITE_RENDERING_MODE1 rendering_mode1 = params3->GetRenderingMode1();
++    if (antialias == CAIRO_ANTIALIAS_NONE)
++	rendering_mode1 = DWRITE_RENDERING_MODE1_ALIASED;
++    RefPtr<IDWriteRenderingParams3> ret;
++    DWriteFactory::Instance3()->CreateCustomRenderingParams(gamma, enhanced_contrast, grayscaleEnhancedContrast, clear_type_level, pixel_geometry, rendering_mode1, gridFitMode, &ret);
++    return ret;
++}
++
+ /* Functions #cairo_font_face_backend_t */
+ static cairo_status_t
+ _cairo_dwrite_font_face_create_for_toy (cairo_toy_font_face_t   *toy_face,
+@@ -557,13 +661,6 @@ _cairo_dwrite_font_face_scaled_font_create (void			*abstract_face,
+     dwrite_font->mat_inverse = dwrite_font->mat;
+     cairo_matrix_invert (&dwrite_font->mat_inverse);
+ 
+-    dwrite_font->rendering_params = NULL;
+-    if (font_face->rendering_params) {
+-	dwrite_font->rendering_params = font_face->rendering_params;
+-	dwrite_font->rendering_params->AddRef();
+-    }
+-    dwrite_font->measuring_mode = font_face->measuring_mode;
+-
+     cairo_font_extents_t extents;
+ 
+     DWRITE_FONT_METRICS metrics;
+@@ -612,6 +709,9 @@ _cairo_dwrite_font_face_scaled_font_create (void			*abstract_face,
+ 	dwrite_font->antialias_mode = options->antialias;
+     }
+ 
++    dwrite_font->rendering_params = _create_rendering_params(font_face->rendering_params, options, dwrite_font->antialias_mode).forget().drop();
++    dwrite_font->measuring_mode = font_face->measuring_mode;
++
+     return _cairo_scaled_font_set_metrics (*font, &extents);
+ }
+ 
+@@ -1199,7 +1299,7 @@ _cairo_dwrite_scaled_font_init_glyph_surface(cairo_dwrite_scaled_font_t *scaled_
+ 
+     GdiFlush();
+ 
+-    image = _cairo_compute_glyph_mask (&surface->base, CLEARTYPE_QUALITY);
++    image = _cairo_compute_glyph_mask (&surface->base, _quality_from_antialias_mode(scaled_font->antialias_mode));
+     status = (cairo_int_status_t)image->status;
+     if (status)
+ 	goto FAIL;
+@@ -1453,6 +1553,9 @@ cairo_dwrite_font_face_get_rendering_params (cairo_font_face_t *font_face)
+  * @params: The #IDWriteRenderingParams object
+  *
+  * Sets the #IDWriteRenderingParams object to @font_face.
++ * This #IDWriteRenderingParams is used to render glyphs if default values of font options are used.
++ * If non-defalut values of font options are specified when creating a #cairo_scaled_font_t,
++ * cairo creates a new #IDWriteRenderingParams object for the #cairo_scaled_font_t object by overwriting the corresponding parameters.
+  *
+  * Since: 1.18
+  **/
+@@ -1526,12 +1629,6 @@ _dwrite_draw_glyphs_to_gdi_surface_gdi(cairo_win32_surface_t *surface,
+ 	}
+     }
+ 
+-    IDWriteRenderingParams *params;
+-    if (scaled_font->rendering_params)
+-	params = scaled_font->rendering_params;
+-    else
+-	params = DWriteFactory::DefaultRenderingParams();
+-
+     /*
+      * We set the number of pixels per DIP to 1.0. This is because we always want
+      * to draw in device pixels, and not device independent pixels. On high DPI
+@@ -1556,7 +1653,7 @@ _dwrite_draw_glyphs_to_gdi_surface_gdi(cairo_win32_surface_t *surface,
+ 	   surface->dc,
+ 	   area.left, area.top,
+ 	   SRCCOPY | NOMIRRORBITMAP);
+-    rt->DrawGlyphRun(x, y, scaled_font->measuring_mode, run, params, color);
++    rt->DrawGlyphRun(x, y, scaled_font->measuring_mode, run, scaled_font->rendering_params, color);
+     BitBlt(surface->dc,
+ 	   area.left, area.top,
+ 	   area.right - area.left, area.bottom - area.top,
+diff --git a/src/win32/cairo-dwrite-private.hpp b/src/win32/cairo-dwrite-private.hpp
+index 5e91acf42..c7a24822a 100644
+--- a/src/win32/cairo-dwrite-private.hpp
++++ b/src/win32/cairo-dwrite-private.hpp
+@@ -99,6 +99,36 @@ public:
+ 	return mFactoryInstance;
+     }
+ 
++    static RefPtr<IDWriteFactory1> Instance1()
++    {
++	if (!mFactoryInstance1) {
++	    if (Instance()) {
++		Instance()->QueryInterface(&mFactoryInstance1);
++	    }
++	}
++	return mFactoryInstance1;
++    }
++
++    static RefPtr<IDWriteFactory2> Instance2()
++    {
++	if (!mFactoryInstance2) {
++	    if (Instance()) {
++		Instance()->QueryInterface(&mFactoryInstance2);
++	    }
++	}
++	return mFactoryInstance2;
++    }
++
++    static RefPtr<IDWriteFactory3> Instance3()
++    {
++	if (!mFactoryInstance3) {
++	    if (Instance()) {
++		Instance()->QueryInterface(&mFactoryInstance3);
++	    }
++	}
++	return mFactoryInstance3;
++    }
++
+     static RefPtr<IDWriteFactory4> Instance4()
+     {
+ 	if (!mFactoryInstance4) {
+@@ -149,6 +179,9 @@ public:
+ 
+ private:
+     static RefPtr<IDWriteFactory> mFactoryInstance;
++    static RefPtr<IDWriteFactory1> mFactoryInstance1;
++    static RefPtr<IDWriteFactory2> mFactoryInstance2;
++    static RefPtr<IDWriteFactory3> mFactoryInstance3;
+     static RefPtr<IDWriteFactory4> mFactoryInstance4;
+     static RefPtr<IDWriteFontCollection> mSystemCollection;
+     static RefPtr<IDWriteRenderingParams> mDefaultRenderingParams;
+-- 
+2.34.1
+
