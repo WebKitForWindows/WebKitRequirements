@@ -1,12 +1,17 @@
-set(VERSION 3.40.01)
+set(VERSION 3.41.02)
 string(REPLACE "." "" TAG ${VERSION})
 string(CONCAT TAG ${TAG} "00")
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://sqlite.org/2022/sqlite-amalgamation-${TAG}.zip"
+    URLS "https://sqlite.org/2023/sqlite-amalgamation-${TAG}.zip"
     FILENAME "sqlite-amalgamation-${TAG}.zip"
-    SHA512 863afdabbdbe27baaccc13477e08437ce3b4d7e6f0c51a294d1d71252476af474b6c275729ebe1bc801f004da7ca6775591a30fed1930c3a1920d8118864f1d2
+    SHA512 6f7e46361769f29468f063f74d59095c5ad791bc28ced263b9dc2db018eaa86bea2721da61c24089f1f5c3be1cd5800edc1cec5bdb8c43d8ba07c3d08a7c77d0
+)
+
+# Patches
+set(PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-build.patch
 )
 
 # Extract archive
@@ -17,33 +22,14 @@ vcpkg_extract_source_archive_ex(
     PATCHES ${PATCHES}
 )
 
-# Add CMake sources
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
-
 # Run CMake build
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
     OPTIONS
         -DENABLE_FTS3=ON
-        -DENABLE_OMIT_LOAD_EXTENSION=ON
+        -DENABLE_LOAD_EXTENSION=OFF
         -DENABLE_RTREE=ON
-
-        -DHAVE_STDLIB_H=ON
-        -DSTDC_HEADERS=ON
-        -DHAVE_SYS_TYPES_H=ON
-        -DHAVE_SYS_STAT_H=ON
-        -DHAVE_STDLIB_H=ON
-        -DHAVE_STRING_H=ON
-        -DHAVE_MEMORY_H=ON
-        -DHAVE_STRINGS_H=ON
-        -DHAVE_INTTYPES_H=ON
-        -DHAVE_STDINT_H=ON
-        -DHAVE_UNISTD_H=ON
-        -DHAVE_DLFCN_H=ON
-        -DHAVE_USLEEP=ON
-        -DHAVE_DECL_STRERROR_R=ON
-        -DHAVE_STRERROR_R=ON        
 )
 
 vcpkg_install_cmake()
