@@ -99,9 +99,9 @@ if(X86)
     endif(X86_SSSE3)
 endif(X86)
 
-IF(UNIX)
-    set(CMAKE_C_FLAGS -fPIC)
-ENDIF(UNIX) 
+if(UNIX)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+endif()
 
 add_library(pixman-1_core OBJECT ${SOURCES} ${HEADERS})
 add_library(pixman-1 $<TARGET_OBJECTS:pixman-1_core>)
