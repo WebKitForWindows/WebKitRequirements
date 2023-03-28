@@ -24,6 +24,7 @@ vcpkg_extract_source_archive_ex(
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/cmake DESTINATION ${SOURCE_PATH})
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/CMakeLists.txt DESTINATION ${SOURCE_PATH})
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/pixman/CMakeLists.txt DESTINATION ${SOURCE_PATH}/pixman)
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/build/test/CMakeLists.txt DESTINATION ${SOURCE_PATH}/test)
 
 # Run CMake build
 if (VCPKG_TARGET_ARCHITECTURE STREQUAL x86 OR VCPKG_TARGET_ARCHITECTURE STREQUAL x64)
@@ -38,6 +39,22 @@ elseif (VCPKG_TARGET_ARCHITECTURE MATCHES "^arm")
         -DARM_NEON=ON
         -DARM_SIMD=OFF
     )
+endif ()
+
+# Check for testing feature
+if (testing IN_LIST FEATURES)
+    message(STATUS "Enabling Tests")
+    set(BUILD_OPTIONS ${BUILD_OPTIONS} -DBUILD_TESTS=ON)
+else ()
+    set(BUILD_OPTIONS ${BUILD_OPTIONS} -DBUILD_TESTS=OFF)
+endif ()
+
+if (NOT VCPKG_CMAKE_SYSTEM_NAME)
+    set(VCPKG_CMAKE_SYSTEM_NAME Windows)
+endif ()
+
+if (VCPKG_CRT_LINKAGE STREQUAL dynamic AND VCPKG_CMAKE_SYSTEM_NAME MATCHES "^Windows")
+    list(APPEND BUILD_OPTIONS -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON)
 endif ()
 
 vcpkg_configure_cmake(
