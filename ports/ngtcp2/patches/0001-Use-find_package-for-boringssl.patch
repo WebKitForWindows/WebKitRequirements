@@ -1,4 +1,4 @@
-From a7cd500d58555ee0745cd4c1f3a33f9380c0de83 Mon Sep 17 00:00:00 2001
+From 0cd091ee4e63aa34d07e4b60b759d500718eca5f Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Fri, 1 Jul 2022 14:43:37 -0700
 Subject: [PATCH 1/2] Use find_package for boringssl
@@ -9,7 +9,7 @@ The ngtcp2 build seems to allow for multiple backends but in vcpkg we only need 
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 5dfa66c8..28945d0b 100644
+index 53369efd..780b0b6c 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -167,12 +167,15 @@ endif()
@@ -30,5 +30,5 @@ index 5dfa66c8..28945d0b 100644
    cmake_pop_check_state()
  endif()
 -- 
-2.39.1.windows.1
+2.39.2.windows.1
 
