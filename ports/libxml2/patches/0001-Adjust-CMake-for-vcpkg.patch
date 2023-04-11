@@ -1,4 +1,4 @@
-From 3ae4dcc4450f1cae1fdaf17c9035ccd5ee39fc43 Mon Sep 17 00:00:00 2001
+From c8f3d805f52b2503ec69e9d78509555d608a1b06 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 23 Aug 2022 14:49:44 -0700
 Subject: [PATCH 1/2] Adjust CMake for vcpkg
@@ -56,5 +56,5 @@ index 9fdc2e6e..535655ff 100644
  
  set(XML_INCLUDEDIR "-I${CMAKE_INSTALL_FULL_INCLUDEDIR}/libxml2")
 -- 
-2.38.1.windows.1
+2.39.2.windows.1
 
