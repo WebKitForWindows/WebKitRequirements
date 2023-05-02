@@ -1,10 +1,10 @@
-set(VERSION 7.1.0)
+set(VERSION 7.2.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${VERSION}/harfbuzz-${VERSION}.tar.xz"
     FILENAME "harfbuzz-${VERSION}.tar.xz"
-    SHA512 2f15bf14f927263c34201dba067ffac84133610121c58843c566d6f271f30f1dce44832a65bceb83828e25e9dd1a1d2a1610c5dbe2bef3ddbcecd7b5bcab8714
+    SHA512 c32ae887fa13da332a88885baa387fc472e501f5f682dcbdf5f038a25a18a75948a1313a94612ee44beae169fb1ddd66b883e7a2d236d0ad5b81476b5c4d3cb2
 )
 
 # Patches
