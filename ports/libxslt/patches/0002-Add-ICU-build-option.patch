@@ -1,4 +1,4 @@
-From ae8a27f342638f58b6a1338d470faa540161df3d Mon Sep 17 00:00:00 2001
+From f5ac5a270c72a9965dad4b5b5422f3d99be9466d Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 3 Mar 2022 15:32:10 -0800
 Subject: [PATCH 2/3] Add ICU build option
@@ -9,10 +9,10 @@ The provided CMake doesn't have a build option for ICU so add it.
  1 file changed, 8 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d1062d97..af2aac07 100644
+index d0b0d15d..c821c780 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -17,6 +17,7 @@ find_package(LibXml2 CONFIG REQUIRED)
+@@ -40,6 +40,7 @@ endif()
  option(BUILD_SHARED_LIBS "Build shared libraries" ON)
  option(LIBXSLT_WITH_DEBUGGER "Add the debugging support" ON)
  option(LIBXSLT_WITH_CRYPTO "Add crypto support to exslt" OFF)
@@ -20,7 +20,7 @@ index d1062d97..af2aac07 100644
  option(LIBXSLT_WITH_MEM_DEBUG "Add the memory debugging module" OFF)
  option(LIBXSLT_WITH_MODULES "Add the module support" ON)
  option(LIBXSLT_WITH_PROFILER "Add the profiling support" ON)
-@@ -30,6 +31,10 @@ if(LIBXSLT_WITH_CRYPTO AND NOT WIN32)
+@@ -57,6 +58,10 @@ if(LIBXSLT_WITH_CRYPTO AND NOT WIN32)
  	find_package(Gcrypt REQUIRED)
  endif()
  
@@ -31,7 +31,7 @@ index d1062d97..af2aac07 100644
  if(LIBXSLT_WITH_PYTHON)
  	check_include_files(unistd.h HAVE_UNISTD_H)
  	check_symbol_exists(F_GETFL fcntl.h HAVE_F_GETFL)
-@@ -206,6 +211,9 @@ target_include_directories(
+@@ -230,6 +235,9 @@ target_include_directories(
  )
  
  target_link_libraries(LibXslt PUBLIC LibXml2::LibXml2)
@@ -42,5 +42,5 @@ index d1062d97..af2aac07 100644
  if(UNIX)
  	target_link_libraries(LibXslt PRIVATE m)
 -- 
-2.37.2.windows.2
+2.40.1.windows.1
 

@@ -1,13 +1,13 @@
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 1)
-set(VERSION_PATCH 37)
+set(VERSION_PATCH 38)
 set(VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://download.gnome.org/sources/libxslt/${VERSION_MAJOR}.${VERSION_MINOR}/libxslt-${VERSION}.tar.xz"
     FILENAME "libxslt-${VERSION}.tar.xz"
-    SHA512 a4e477d2bb918b7d01945e2c7491c3a4aae799dc1602bbd13de55c8a5052e210a20bc45115347eae44473c8b1d03dbc5e4a2aa18c2218f1fdfd376d87cd501ca
+    SHA512 2836bd2990b95680db0960ac4c465d0c6c28a293ad095a224c05021a1c8d2576a45e41da8947a31f4ef3e6ef368cbda65243661e311c9886c19694be5a7c9a8e
 )
 
 # Patches
