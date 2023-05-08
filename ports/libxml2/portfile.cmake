@@ -1,19 +1,21 @@
 set(VERSION_MAJOR 2)
 set(VERSION_MINOR 11)
-set(VERSION_PATCH 1)
+set(VERSION_PATCH 2)
 set(VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://download.gnome.org/sources/libxml2/${VERSION_MAJOR}.${VERSION_MINOR}/libxml2-${VERSION}.tar.xz"
     FILENAME "libxml2-${VERSION}.tar.xz"
-    SHA512 cdcc06b7f8f8c2bd05ce3272dfd317b49cb52842bbf4bd6b50cd93c6f0b1bb6f57698b20369f6afeb110338b950633babfb8e9858b29f8c7d8b710fcbbec679d
+    SHA512 9b49522d816d7e5682bb863e7706c8e9ddc629d9148fbe6753e82aef4859c11ba6a4b6e801de967b5c3da517d44d0be2dc6b47553b0efee6f04f4cbf1d7285d5
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Remove-library-suffix-on-Windows.patch
+    # Remove in next release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Guard-xmlXPathNodeSetClear-in-LIBXML_XPATH_ENABLED.patch
 )
 
 # Extract archive
@@ -51,7 +53,6 @@ set(BUILD_OPTIONS
     -DLIBXML2_WITH_PYTHON=OFF
     -DLIBXML2_WITH_READER=OFF
     -DLIBXML2_WITH_REGEXPS=ON
-    -DLIBXML2_WITH_RUN_DEBUG=OFF
     -DLIBXML2_WITH_SAX1=ON
     -DLIBXML2_WITH_SCHEMAS=OFF
     -DLIBXML2_WITH_SCHEMATRON=OFF

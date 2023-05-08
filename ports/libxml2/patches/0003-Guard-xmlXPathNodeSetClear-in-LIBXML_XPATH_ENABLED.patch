@@ -1,0 +1,37 @@
+From b51ba668844eb92b90091d1c4865138559076494 Mon Sep 17 00:00:00 2001
+From: Don Olmstead <don.j.olmstead@gmail.com>
+Date: Mon, 8 May 2023 13:43:56 -0700
+Subject: [PATCH] Guard xmlXPathNodeSetClear in LIBXML_XPATH_ENABLED
+
+In 8d22e065 the `xmlXPathNodeSetClear` function was added but it is unable to compile when `LIBXML_XPATH_ENABLED` is `false` since `xmlNodeSetPtr` is undefined. Move the forward declaration into a position where its guarded by the enable.
+---
+ xpath.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/xpath.c b/xpath.c
+index 0f969950..d24ab4e2 100644
+--- a/xpath.c
++++ b/xpath.c
+@@ -145,9 +145,6 @@
+  * any use of the macros IS_ASCII_CHARACTER and IS_ASCII_DIGIT)
+  */
+ 
+-static void
+-xmlXPathNodeSetClear(xmlNodeSetPtr set, int hasNsNodes);
+-
+ #ifdef XP_OPTIMIZED_NON_ELEM_COMPARISON
+ /**
+  * xmlXPathCmpNodesExt:
+@@ -566,6 +563,9 @@ xmlXPathIsInf(double val) {
+ #define DEBUG_EVAL_COUNTS
+ #endif
+ 
++static void
++xmlXPathNodeSetClear(xmlNodeSetPtr set, int hasNsNodes);
++
+ static xmlNs xmlXPathXMLNamespaceStruct = {
+     NULL,
+     XML_NAMESPACE_DECL,
+-- 
+2.40.1.windows.1
+
