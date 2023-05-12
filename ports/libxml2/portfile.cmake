@@ -1,21 +1,19 @@
 set(VERSION_MAJOR 2)
 set(VERSION_MINOR 11)
-set(VERSION_PATCH 2)
+set(VERSION_PATCH 3)
 set(VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://download.gnome.org/sources/libxml2/${VERSION_MAJOR}.${VERSION_MINOR}/libxml2-${VERSION}.tar.xz"
     FILENAME "libxml2-${VERSION}.tar.xz"
-    SHA512 9b49522d816d7e5682bb863e7706c8e9ddc629d9148fbe6753e82aef4859c11ba6a4b6e801de967b5c3da517d44d0be2dc6b47553b0efee6f04f4cbf1d7285d5
+    SHA512 d05b7972a5f1dcec31a2f9a53901242f95f440a9a7be8f0feaa1eeb664f34e66d37883373f4d37dc344ce4d0e9d48534060916921e25b3e2d6b8c1b80828a589
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Remove-library-suffix-on-Windows.patch
-    # Remove in next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Guard-xmlXPathNodeSetClear-in-LIBXML_XPATH_ENABLED.patch
 )
 
 # Extract archive
