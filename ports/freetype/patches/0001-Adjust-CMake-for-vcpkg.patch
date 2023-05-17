@@ -1,7 +1,7 @@
-From c50de10d85d35f0b098194d89617fdfeef8bae09 Mon Sep 17 00:00:00 2001
+From 50559b4aa83559159e2a83c2d02d23be0fe86042 Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Tue, 13 Oct 2020 13:50:17 -0700
-Subject: [PATCH] Adjust CMake for vcpkg
+Subject: [PATCH 1/2] Adjust CMake for vcpkg
 
 Changes the locations of installed files to match what vcpkg expects.
 ---
@@ -28,5 +28,5 @@ index 554b580e9..2a95f933a 100644
  endif ()
  
 -- 
-2.39.1.windows.1
+2.40.1.windows.1
 

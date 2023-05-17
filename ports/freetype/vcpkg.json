@@ -4,15 +4,23 @@
   "description": "A library to render fonts.",
   "homepage": "https://www.freetype.org",
   "license": "FTL OR GPL-2.0-or-later",
-  "dependencies": [
-    "libpng",
-    "zlib"
-  ],
   "features": {
+    "png": {
+      "description": "Support PNG compressed OpenType embedded bitmaps.",
+      "dependencies": [
+        "libpng"
+      ]
+    },
     "woff2": {
       "description": "Enable WOFF2 font support.",
       "dependencies": [
         "brotli"
+      ]
+    },
+    "zlib": {
+      "description": "Use zlib instead of internal library for DEFLATE",
+      "dependencies": [
+        "zlib"
       ]
     }
   }

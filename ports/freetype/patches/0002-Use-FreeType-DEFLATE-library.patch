@@ -1,0 +1,35 @@
+From c23747e2e55d343b3c34de3fa103c6f35cd7c013 Mon Sep 17 00:00:00 2001
+From: Don Olmstead <don.j.olmstead@gmail.com>
+Date: Mon, 15 May 2023 14:05:23 -0700
+Subject: [PATCH 2/2] Use FreeType DEFLATE library
+
+The FindPNG.cmake will also end up finding zlib so `ZLIB_FOUND` will be present even if zlib support is disabled. Add a check for zlib support being disabled.
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2a95f933a..e53df6d35 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -332,7 +332,7 @@ endif ()
+ # Create the options file
+ file(READ "${PROJECT_SOURCE_DIR}/include/freetype/config/ftoption.h"
+   FTOPTION_H)
+-if (ZLIB_FOUND)
++if (NOT FT_DISABLE_ZLIB AND ZLIB_FOUND)
+   string(REGEX REPLACE
+     "/\\* +(#define +FT_CONFIG_OPTION_SYSTEM_ZLIB) +\\*/" "\\1"
+     FTOPTION_H "${FTOPTION_H}")
+@@ -521,7 +521,7 @@ set(PKGCONFIG_REQUIRES_PRIVATE "")
+ set(PKGCONFIG_LIBS "-L\${libdir} -lfreetype")
+ set(PKGCONFIG_LIBS_PRIVATE "")
+ 
+-if (ZLIB_FOUND)
++if (NOT FT_DISABLE_ZLIB AND ZLIB_FOUND)
+   target_link_libraries(freetype PRIVATE ${ZLIB_LIBRARIES})
+   target_include_directories(freetype PRIVATE ${ZLIB_INCLUDE_DIRS})
+   list(APPEND PKGCONFIG_REQUIRES_PRIVATE "zlib")
+-- 
+2.40.1.windows.1
+
