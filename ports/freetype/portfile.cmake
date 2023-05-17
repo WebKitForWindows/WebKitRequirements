@@ -12,6 +12,7 @@ vcpkg_download_distfile(ARCHIVE
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Use-FreeType-DEFLATE-library.patch
 )
 
 # Extract archive
@@ -24,17 +25,33 @@ vcpkg_extract_source_archive_ex(
 
 # Run CMake build
 set(BUILD_OPTIONS
+    # No BZIP support
     -DFT_DISABLE_BZIP2=ON
+    -DFT_REQUIRE_BZIP2=OFF
+    # No Harfbuzz support
     -DFT_DISABLE_HARFBUZZ=ON
-    -DFT_REQUIRE_PNG=ON
-    -DFT_REQUIRE_ZLIB=ON
+    -DFT_REQUIRE_HARFBUZZ=OFF
 )
+
+if (png IN_LIST FEATURES)
+    message(STATUS "Enabling libpng")
+    list(APPEND BUILD_OPTIONS -DFT_DISABLE_PNG=OFF -DFT_REQUIRE_PNG=ON)
+else ()
+    list(APPEND BUILD_OPTIONS -DFT_DISABLE_PNG=ON -DFT_REQUIRE_PNG=OFF)
+endif ()
 
 if (woff2 IN_LIST FEATURES)
     message(STATUS "Enabling woff2")
-    set(BUILD_OPTIONS ${BUILD_OPTIONS} -DFT_REQUIRE_BROTLI=ON)
+    list(APPEND BUILD_OPTIONS -DFT_DISABLE_BROTLI=OFF -DFT_REQUIRE_BROTLI=ON)
 else ()
-    set(BUILD_OPTIONS ${BUILD_OPTIONS} -DFT_DISABLE_BROTLI=ON)
+    list(APPEND BUILD_OPTIONS -DFT_DISABLE_BROTLI=ON -DFT_REQUIRE_BROTLI=OFF)
+endif ()
+
+if (zlib IN_LIST FEATURES)
+    message(STATUS "Enabling system zlib")
+    list(APPEND BUILD_OPTIONS -DFT_DISABLE_ZLIB=OFF -DFT_REQUIRE_ZLIB=ON)
+else ()
+    list(APPEND BUILD_OPTIONS -DFT_DISABLE_ZLIB=ON -DFT_REQUIRE_ZLIB=OFF)
 endif ()
 
 vcpkg_configure_cmake(
@@ -42,6 +59,7 @@ vcpkg_configure_cmake(
     PREFER_NINJA
     OPTIONS
         ${BUILD_OPTIONS}
+        -DDISABLE_FORCE_DEBUG_POSTFIX=ON
     OPTIONS_DEBUG
         -DSKIP_INSTALL_HEADERS=ON
 )
