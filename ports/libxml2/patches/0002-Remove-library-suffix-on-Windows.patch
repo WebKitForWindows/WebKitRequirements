@@ -1,4 +1,4 @@
-From af9777b6e12594f141dcbba3c176a1707830c2fa Mon Sep 17 00:00:00 2001
+From 0dae24176a3b1fcef6f6f365354351e46f93a745 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 23 Aug 2022 14:50:24 -0700
 Subject: [PATCH 2/4] Remove library suffix on Windows
