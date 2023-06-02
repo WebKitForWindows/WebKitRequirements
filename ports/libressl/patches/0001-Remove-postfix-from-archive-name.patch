@@ -1,4 +1,4 @@
-From eab5a3ec58093a5bbbce805c505f9b64f7da5f1f Mon Sep 17 00:00:00 2001
+From 3db4ded247dedfc4671ce27b4fc964d67dccc8ba Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Wed, 29 Apr 2020 11:23:15 -0700
 Subject: [PATCH 1/2] Remove postfix from archive name
@@ -50,5 +50,5 @@ index 62dde63..6729942 100644
  	SOVERSION ${TLS_MAJOR_VERSION})
  
 -- 
-2.40.1.windows.1
+2.39.2.windows.1
 
