@@ -1,15 +1,10 @@
-set(VERSION 2.0.7)
+set(VERSION 2.1.2)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/zlib-ng/zlib-ng/archive/refs/tags/${VERSION}.zip"
     FILENAME "zlib-ng-${VERSION}.zip"
-    SHA512 6e9c2296b8cbcac7eb6482d489981b0eadadd311570330baa27bb4156613a525cbd06da27219a353c8eb88be61ae0d1d79a23712c54e4154177133f6932f369c
-)
-
-# Patches
-set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-static-target.patch
+    SHA512 eddc9bc04bf8711b976edb922eb7a3116a0d0bff4cef87306482fa5c5bcd802257d507f37354c70d6c8f4f1308ba191e852d8f183f478ad33cf569b5778f25b9
 )
 
 # Extract archive
