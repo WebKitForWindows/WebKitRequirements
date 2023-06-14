@@ -30,6 +30,7 @@ vcpkg_configure_cmake(
         -DENABLE_FTS3=ON
         -DENABLE_LOAD_EXTENSION=OFF
         -DENABLE_RTREE=ON
+        -DENABLE_THREADSAFE=ON
 )
 
 vcpkg_install_cmake()
