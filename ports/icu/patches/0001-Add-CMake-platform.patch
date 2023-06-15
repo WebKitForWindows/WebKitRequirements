@@ -1,4 +1,4 @@
-From 80ca3c941d73a61bd5f2179c4051d7808cdd1132 Mon Sep 17 00:00:00 2001
+From 13c2a3f769ac2e63641e939b993f64e77d5a99b8 Mon Sep 17 00:00:00 2001
 From: foopoiuyt <github@zombiestormtrooper.com>
 Date: Tue, 3 Nov 2020 08:58:19 -0800
 Subject: [PATCH 1/2] Add CMake platform
@@ -20560,5 +20560,5 @@ index 0000000000..36b15d4783
 +    DESTINATION "${includedir}"
 +)
 -- 
-2.40.1.windows.1
+2.41.0.windows.1
 

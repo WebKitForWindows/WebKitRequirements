@@ -1,4 +1,4 @@
-From 3155ccc3ac61d758c73adf54d150b4ee0a6ad9dd Mon Sep 17 00:00:00 2001
+From e2b288ba798307107baf400e51085ae12dfdbdb1 Mon Sep 17 00:00:00 2001
 From: foopoiuyt <github@zombiestormtrooper.com>
 Date: Tue, 3 Nov 2020 09:02:25 -0800
 Subject: [PATCH 2/2] Remove install suffix on Windows
@@ -27,5 +27,5 @@ index 34688e4317..f1e1ba7b13 100644
  # Package information
  set(PACKAGE_ICU_DESCRIPTION "International Components for Unicode")
 -- 
-2.40.1.windows.1
+2.41.0.windows.1
 
