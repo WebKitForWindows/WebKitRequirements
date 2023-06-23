@@ -1,39 +1,26 @@
-From bf71c2b0977909335fac26a0534c5c688148a71b Mon Sep 17 00:00:00 2001
+From 9168a9ba147af738a3a8cf05708a541b2d5f4bc4 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 3 Jan 2019 16:54:07 -0800
 Subject: [PATCH 2/3] Do not append static to library name
 
 On Windows a static lib will have _static appended. In vcpkg only a shared or static library is created so remove this behavior.
 ---
- CMakeLists.txt | 15 +++------------
- 1 file changed, 3 insertions(+), 12 deletions(-)
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 298755d1e..bfc0f64a3 100644
+index a11ddf0f4..cbb9f541b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -612,18 +612,9 @@ if(PNG_STATIC)
-   set(PNG_LIB_NAME_STATIC png_static)
-   add_library(png_static STATIC ${libpng_sources})
-   add_dependencies(png_static genfiles)
--  # MSVC doesn't use a different file extension for shared vs. static
--  # libs. We are able to change OUTPUT_NAME to remove the _static
--  # for all other platforms.
--  if(NOT MSVC)
--    set_target_properties(png_static PROPERTIES
--                          OUTPUT_NAME "${PNG_LIB_NAME}"
--                          CLEAN_DIRECT_OUTPUT 1)
--  else()
--    set_target_properties(png_static PROPERTIES
--                          OUTPUT_NAME "${PNG_LIB_NAME}_static"
--                          CLEAN_DIRECT_OUTPUT 1)
--  endif()
-+  set_target_properties(png_static PROPERTIES
-+                        OUTPUT_NAME "${PNG_LIB_NAME}"
-+                        CLEAN_DIRECT_OUTPUT 1)
-   list(APPEND PNG_LIB_TARGETS png_static)
-   if(MSVC)
-     # MSVC does not append 'lib'. Do it here, to have consistent name.
+@@ -632,7 +632,7 @@ else()
+   # We also need to use a custom suffix, in order to distinguish between the
+   # shared import library name and the static library name.
+   set(PNG_SHARED_OUTPUT_NAME "libpng${PNGLIB_ABI_VERSION}")
+-  set(PNG_STATIC_OUTPUT_NAME "libpng${PNGLIB_ABI_VERSION}_static")
++  set(PNG_STATIC_OUTPUT_NAME "libpng${PNGLIB_ABI_VERSION}")
+ endif()
+ 
+ if(PNG_SHARED)
 -- 
-2.38.1.windows.1
+2.41.0.windows.1
 
