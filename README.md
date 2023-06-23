@@ -62,7 +62,7 @@ the requirements.
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.38 | 2023-05-08 |
 | [lcms](https://www.littlecms.com/) | 2.15.0 | 2023-03-01 |
 | [highway](https://github.com/google/highway) | 1.0.4 | 2023-03-17 |
-| [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.39 | 2022-11-20 |
+| [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.40 | 2023-06-21 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 2.1.5 | 2023-01-31 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.3.0 | 2023-01-12 |
 | [openjpeg](https://www.openjpeg.org) | 2.5.0 | 2022-05-13 |

@@ -1,17 +1,17 @@
-From 6993aeca7bd735f064a9947f681ea5883fcdd395 Mon Sep 17 00:00:00 2001
+From 4d3f7727a03bdbf66ef000b4f9dab591b541c684 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 30 Nov 2021 10:04:36 -0800
 Subject: [PATCH 3/3] Fix pkgconfig on Windows
 
 ---
- CMakeLists.txt | 45 ++++++++++++++++++++++++++++-----------------
- 1 file changed, 28 insertions(+), 17 deletions(-)
+ CMakeLists.txt | 44 +++++++++++++++++++++++++++-----------------
+ 1 file changed, 27 insertions(+), 17 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index bfc0f64a3..78c71d58b 100644
+index cbb9f541b..ecc755bac 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -925,21 +925,32 @@ endif()
+@@ -961,21 +961,31 @@ endif()
  # Only do this on Windows for Cygwin - the files don't make much sense
  # outside of a UNIX look-alike.
  if(NOT WIN32 OR CYGWIN OR MINGW)
@@ -21,13 +21,13 @@ index bfc0f64a3..78c71d58b 100644
 -  set(includedir  ${CMAKE_INSTALL_FULL_INCLUDEDIR})
 -  set(LIBS        "-lz -lm")
 -  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng.pc.in
--                 ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc
+-                 ${CMAKE_CURRENT_BINARY_DIR}/libpng${PNGLIB_ABI_VERSION}.pc
 -                 @ONLY)
--  create_symlink(libpng.pc FILE ${PNGLIB_NAME}.pc)
+-  create_symlink(libpng.pc FILE libpng${PNGLIB_ABI_VERSION}.pc)
 -  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng-config.in
--                 ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}-config
+-                 ${CMAKE_CURRENT_BINARY_DIR}/libpng${PNGLIB_ABI_VERSION}-config
 -                 @ONLY)
--  create_symlink(libpng-config FILE ${PNGLIB_NAME}-config)
+-  create_symlink(libpng-config FILE libpng${PNGLIB_ABI_VERSION}-config)
 +  set(LIBS "-lz")
 +  if(M_LIBRARY)
 +    string(APPEND LIBS " -lm")
@@ -45,25 +45,24 @@ index bfc0f64a3..78c71d58b 100644
 +set(libdir      ${CMAKE_INSTALL_FULL_LIBDIR})
 +set(includedir  ${CMAKE_INSTALL_FULL_INCLUDEDIR})
 +configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng.pc.in
-+               ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc
++               ${CMAKE_CURRENT_BINARY_DIR}/libpng${PNGLIB_ABI_VERSION}.pc
 +               @ONLY)
-+create_symlink(libpng.pc FILE ${PNGLIB_NAME}.pc)
-+
++create_symlink(libpng.pc FILE libpng${PNGLIB_ABI_VERSION}.pc)
 +configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libpng-config.in
-+               ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}-config
++               ${CMAKE_CURRENT_BINARY_DIR}/libpng${PNGLIB_ABI_VERSION}-config
 +               @ONLY)
-+create_symlink(libpng-config FILE ${PNGLIB_NAME}-config)
++create_symlink(libpng-config FILE libpng${PNGLIB_ABI_VERSION}-config)
 +
- # Set up links.
- if(PNG_SHARED)
-   set_target_properties(png PROPERTIES
-@@ -1007,14 +1018,14 @@ if(NOT SKIP_INSTALL_FILES AND NOT SKIP_INSTALL_ALL)
+ # Install.
+ if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
+   install(TARGETS ${PNG_LIBRARY_TARGETS}
+@@ -1035,14 +1045,14 @@ if(NOT SKIP_INSTALL_FILES AND NOT SKIP_INSTALL_ALL)
            DESTINATION ${CMAKE_INSTALL_MANDIR}/man3)
    install(FILES png.5
            DESTINATION ${CMAKE_INSTALL_MANDIR}/man5)
 +  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libpng.pc
 +          DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc
++  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libpng${PNGLIB_ABI_VERSION}.pc
 +          DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
    # Install the pkg-config files.
    if(NOT CMAKE_HOST_WIN32 OR CYGWIN OR MINGW)
@@ -71,11 +70,11 @@ index bfc0f64a3..78c71d58b 100644
 -            DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
      install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/libpng-config
              DESTINATION ${CMAKE_INSTALL_BINDIR})
--    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}.pc
+-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libpng${PNGLIB_ABI_VERSION}.pc
 -            DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-     install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/${PNGLIB_NAME}-config
+     install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/libpng${PNGLIB_ABI_VERSION}-config
              DESTINATION ${CMAKE_INSTALL_BINDIR})
    endif()
 -- 
-2.38.1.windows.1
+2.41.0.windows.1
 
