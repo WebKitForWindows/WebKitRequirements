@@ -1,5 +1,5 @@
-From 50559b4aa83559159e2a83c2d02d23be0fe86042 Mon Sep 17 00:00:00 2001
-From: Don Olmstead <don.j.olmstead@gmail.com>
+From 63484d3a8389588a9eace7992c57dcfa6ebc0435 Mon Sep 17 00:00:00 2001
+From: Don Olmstead <don.olmstead@sony.com>
 Date: Tue, 13 Oct 2020 13:50:17 -0700
 Subject: [PATCH 1/2] Adjust CMake for vcpkg
 
@@ -9,7 +9,7 @@ Changes the locations of installed files to match what vcpkg expects.
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 554b580e9..2a95f933a 100644
+index d31ab175d..e72f5f539 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -641,12 +641,12 @@ if (NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
@@ -28,5 +28,5 @@ index 554b580e9..2a95f933a 100644
  endif ()
  
 -- 
-2.40.1.windows.1
+2.41.0.windows.1
 
