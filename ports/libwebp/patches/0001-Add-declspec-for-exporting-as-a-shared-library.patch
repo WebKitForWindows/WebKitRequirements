@@ -1,27 +1,13 @@
-From 43178fa0bf8868c89f157abca8ff258b8e401b15 Mon Sep 17 00:00:00 2001
+From f1c6771e19f181c59008398fcd4e70b0b99988e1 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 23 Apr 2018 18:49:42 -0700
 Subject: [PATCH] Add declspec for exporting as a shared library
 
-This adds a default declaration of __declspec to WEBP_EXTERN. Also removes an erroneous WEBP_EXTERN in cpu.h.
+This adds a default declaration of __declspec to WEBP_EXTERN.
 ---
- src/dsp/cpu.h    | 2 +-
  src/webp/types.h | 8 +++++++-
- 2 files changed, 8 insertions(+), 2 deletions(-)
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/src/dsp/cpu.h b/src/dsp/cpu.h
-index be80727c..6777e789 100644
---- a/src/dsp/cpu.h
-+++ b/src/dsp/cpu.h
-@@ -247,7 +247,7 @@ extern "C" {
- 
- // returns true if the CPU supports the feature.
- typedef int (*VP8CPUInfo)(CPUFeature feature);
--WEBP_EXTERN VP8CPUInfo VP8GetCPUInfo;
-+extern VP8CPUInfo VP8GetCPUInfo;
- 
- #ifdef __cplusplus
- }    // extern "C"
 diff --git a/src/webp/types.h b/src/webp/types.h
 index f255432e..67202ca1 100644
 --- a/src/webp/types.h
@@ -45,5 +31,5 @@ index f255432e..67202ca1 100644
  # else
  #  if defined(_MSC_VER) && defined(WEBP_DLL)
 -- 
-2.39.1.windows.1
+2.41.0.windows.1
 
