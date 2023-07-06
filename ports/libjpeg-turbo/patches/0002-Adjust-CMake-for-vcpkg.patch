@@ -1,4 +1,4 @@
-From 1092c874a9e63ec750529dccbd8d6191831b0d6f Mon Sep 17 00:00:00 2001
+From 517d8488c3dc7a51259b8fc34e0b151dfb54fb85 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 26 Apr 2021 13:41:32 -0700
 Subject: [PATCH 2/2] Adjust CMake for vcpkg
@@ -8,10 +8,10 @@ Subject: [PATCH 2/2] Adjust CMake for vcpkg
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 882b2db0..39bf3e94 100644
+index 0e07f638..9642bb5e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -1552,10 +1552,10 @@ endif()
+@@ -1774,10 +1774,10 @@ endif()
  install(FILES
    ${CMAKE_CURRENT_BINARY_DIR}/pkgscripts/${CMAKE_PROJECT_NAME}Config.cmake
    ${CMAKE_CURRENT_BINARY_DIR}/pkgscripts/${CMAKE_PROJECT_NAME}ConfigVersion.cmake
@@ -25,5 +25,5 @@ index 882b2db0..39bf3e94 100644
  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/jconfig.h
    ${CMAKE_CURRENT_SOURCE_DIR}/jerror.h ${CMAKE_CURRENT_SOURCE_DIR}/jmorecfg.h
 -- 
-2.39.1.windows.1
+2.41.0.windows.1
 
