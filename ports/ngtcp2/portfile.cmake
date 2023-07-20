@@ -1,16 +1,17 @@
-set(VERSION 0.15.0)
+set(VERSION 0.17.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/ngtcp2-${VERSION}.tar.bz2"
     FILENAME "ngtcp2-${VERSION}.tar.bz2"
-    SHA512 9a4ad749d92e5a8e6bd606a1bdc70f35dfe2fa45da01e266526c321819cfe10d6b6b2948e198a484b841403ff2abbc30f517d51c72a48656e49fd6b228bf9c38
+    SHA512 49ac525f8e2ccbde06f5d033e1d295a50db14b8d11ec3fe5d15a8572e4e4a229ae150492640008e6160f293a21adc5d877d385ad59283b85079367bc00a4ef85
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Use-find_package-for-boringssl.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-a-shared-ngtcp2_crypto_boringssl-target.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Fix-ngtcp2-crypto-openssl-remnants.patch
 )
 
 # Extract archive
