@@ -1,10 +1,10 @@
-set(VERSION 1.0.4)
+set(VERSION 1.0.5)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/google/highway/archive/refs/tags/${VERSION}.tar.gz"
     FILENAME "highway-${VERSION}.tar.gz"
-    SHA512 75aaa0a3f97c6b044acb146ac4db20c1d813c4215b9c1620e72352d00c136939db7059f599122d6600e385bffa8b24d7fd9c1fe09772f4941e5300767a8c68dd
+    SHA512 0886b60147b78807e40c4987438fe664b4fbc012c3c681a45f3043ee4077afa493cb75550bc18ae160d00e527bf15bcf1f14220ea8561a4baacb3317fc25e347
 )
 
 # Patches
