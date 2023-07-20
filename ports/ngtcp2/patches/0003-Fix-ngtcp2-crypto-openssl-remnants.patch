@@ -1,0 +1,84 @@
+From 930cc72e0a262014217e6cfe60d6031bc2902db1 Mon Sep 17 00:00:00 2001
+From: Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+Date: Mon, 10 Jul 2023 18:16:32 +0900
+Subject: [PATCH 3/3] Fix ngtcp2_crypto_openssl remnants
+
+---
+ CMakeLists.txt                 | 2 +-
+ configure.ac                   | 2 +-
+ crypto/includes/CMakeLists.txt | 2 +-
+ crypto/quictls/.gitignore      | 2 +-
+ crypto/shared.h                | 6 +++---
+ 5 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c5a3d9c10..06ab1ed78 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -134,7 +134,7 @@ if(HAVE_CUNIT)
+   add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
+ endif()
+ 
+-# OpenSSL (required for libngtcp2_crypto_openssl,
++# OpenSSL (required for libngtcp2_crypto_quictls,
+ # libngtcp2_crypto_picotls and examples)
+ include(CheckSymbolExists)
+ if(ENABLE_OPENSSL AND OPENSSL_FOUND)
+diff --git a/configure.ac b/configure.ac
+index cf29215c3..227e551cc 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -227,7 +227,7 @@ AM_CONDITIONAL([HAVE_CUNIT], [ test "x${have_cunit}" = "xyes" ])
+ 
+ AM_CONDITIONAL([ENABLE_SHARED], [ test "x${enable_shared}" = "xyes" ])
+ 
+-# OpenSSL (required for libngtcp2_crypto_openssl,
++# OpenSSL (required for libngtcp2_crypto_quictls,
+ # libngtcp2_crypto_picotls and examples)
+ have_openssl=no
+ have_vanilla_openssl=no
+diff --git a/crypto/includes/CMakeLists.txt b/crypto/includes/CMakeLists.txt
+index 10f912222..477c10d17 100644
+--- a/crypto/includes/CMakeLists.txt
++++ b/crypto/includes/CMakeLists.txt
+@@ -27,7 +27,7 @@ install(FILES
+ 
+ if(HAVE_OPENSSL)
+   install(FILES
+-      ngtcp2/ngtcp2_crypto_openssl.h
++      ngtcp2/ngtcp2_crypto_quictls.h
+       DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/ngtcp2")
+ endif()
+ 
+diff --git a/crypto/shared.h b/crypto/shared.h
+index 8c7c88d0c..d69fd2121 100644
+--- a/crypto/shared.h
++++ b/crypto/shared.h
+@@ -100,7 +100,7 @@ ngtcp2_crypto_ctx *ngtcp2_crypto_ctx_initial(ngtcp2_crypto_ctx *ctx);
+  * `ngtcp2_crypto_aead_init` initializes |aead| with the provided
+  * |aead_native_handle| which is an underlying AEAD object.
+  *
+- * If libngtcp2_crypto_openssl is linked, |aead_native_handle| must be
++ * If libngtcp2_crypto_quictls is linked, |aead_native_handle| must be
+  * a pointer to EVP_CIPHER.
+  *
+  * If libngtcp2_crypto_gnutls is linked, |aead_native_handle| must be
+@@ -214,7 +214,7 @@ int ngtcp2_crypto_update_traffic_secret(uint8_t *dest, uint32_t version,
+  * pointed by |buf| of length |len|, to the native handle |tls|.
+  *
+  * |tls| points to a implementation dependent TLS session object.  If
+- * libngtcp2_crypto_openssl is linked, |tls| must be a pointer to SSL
++ * libngtcp2_crypto_quictls is linked, |tls| must be a pointer to SSL
+  * object.
+  *
+  * This function returns 0 if it succeeds, or -1.
+@@ -230,7 +230,7 @@ int ngtcp2_crypto_set_local_transport_params(void *tls, const uint8_t *buf,
+  * `ngtcp2_conn_set_remote_transport_params`.
+  *
+  * |tls| points to a implementation dependent TLS session object.  If
+- * libngtcp2_crypto_openssl is linked, |tls| must be a pointer to SSL
++ * libngtcp2_crypto_quictls is linked, |tls| must be a pointer to SSL
+  * object.
+  *
+  * This function returns 0 if it succeeds, or -1.
+  
