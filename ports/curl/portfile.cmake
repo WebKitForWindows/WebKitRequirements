@@ -1,17 +1,16 @@
-set(VERSION 8.2.0)
+set(VERSION 8.2.1)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 1464d45da34631686511bf249580b8e8086353466f5b350702f8de10b7588ed4e89c0c3a1077ca408589cd728c2e56eb68760bff37e7320d65caf03bfe7319f2
+    SHA512 f114320b29620aa7e993fd98ffafe70b17c04444f3739a61b283c0011bb87e9c8fe077193076df4c06f0c927dc1a9d7c83cf461a001fed52417c7c9fb7b7959e
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Update-CMake-ngtcp2-detection
 )
 
 # Extract archive

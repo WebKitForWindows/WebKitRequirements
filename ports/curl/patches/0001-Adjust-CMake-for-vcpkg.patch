@@ -1,14 +1,14 @@
-From afb9b60d1e09e4706b4d1064d8245c5c1e264fcf Mon Sep 17 00:00:00 2001
+From ead2dd2250c9de338cb1e59158014c802907001c Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 26 Nov 2018 16:32:05 -0800
-Subject: [PATCH 1/2] Adjust CMake for vcpkg
+Subject: [PATCH] Adjust CMake for vcpkg
 
 ---
  CMakeLists.txt | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index babc50086..d587b4076 100644
+index 7a4c36fac..097dbf11a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -1393,7 +1393,7 @@ endfunction()
