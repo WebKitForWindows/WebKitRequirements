@@ -1,4 +1,4 @@
-From 61ecf4fb9680202cb51f2e996e65c10490abc977 Mon Sep 17 00:00:00 2001
+From af8d9c5fff56fc50f0bdc5eb574e8d2c5af4a181 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 5 Nov 2019 16:57:32 -0800
 Subject: [PATCH 2/3] Adjust CMake for vcpkg
