@@ -1,10 +1,10 @@
-set(VERSION 0.13.0)
+set(VERSION 0.14.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/ngtcp2/nghttp3/releases/download/v${VERSION}/nghttp3-${VERSION}.tar.bz2"
     FILENAME "nghttp3-${VERSION}.tar.bz2"
-    SHA512 c0597d1ea277624c0aba70f5a5fc3f7fd88749788c343e5b5bd480c69b26d853313fdc1a6085fcfe28a20b21d97506199123360403b70ee5f983602f1973028c
+    SHA512 29af8a5b5fff4b4f5f104073a76fa86747a0fcaff20be9f926911bb4a1ae343319cc3c7de8c2795897a827ae4084026dc503f12dde315f7b183336447d3a0a76
 )
 
 # Extract archive
