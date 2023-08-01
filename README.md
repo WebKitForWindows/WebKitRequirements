@@ -54,7 +54,7 @@ the requirements.
 | [boringssl](https://boringssl.googlesource.com/boringssl) | 04989786 | 2022-09-14 |
 | [libressl](https://www.libressl.org) | 3.8.0 | 2023-05-26 |
 | [nghttp2](https://nghttp2.org) | 1.55.1 | 2023-07-14 |
-| [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.13.0 | 2023-07-09 |
+| [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.14.0 | 2023-07-31 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.18.0 | 2023-07-31 |
 | [c-ares](https://c-ares.org) | 1.19.1 | 2023-05-22 |
 | [curl](https://curl.se) | 8.2.1 | 2023-07-26 |
