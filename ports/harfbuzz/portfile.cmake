@@ -1,10 +1,10 @@
-set(VERSION 8.1.0)
+set(VERSION 8.1.1)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${VERSION}/harfbuzz-${VERSION}.tar.xz"
     FILENAME "harfbuzz-${VERSION}.tar.xz"
-    SHA512 7e7612e0b04979e156c40bbadf3e9412e5793f897924135e424a046072872964214116606d9edcdff9070d2ce2d4417278dc1d097ae6b9cacb7aefe97dbe812f
+    SHA512 74416c6cf78751721112fe551a47600b9b85d6865f38b155c0e432e757a175ac127baeeaa16bfe6d62510e00f9def8950f0c836545d1847a924b478c51e43b0c
 )
 
 # Patches
