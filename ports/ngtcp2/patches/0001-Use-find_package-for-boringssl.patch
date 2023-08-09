@@ -1,7 +1,7 @@
-From af5fc5edfd298487ad6149b6c6ce51cc09c1bc2c Mon Sep 17 00:00:00 2001
+From 012fff9cd7a0f28e99963be5517cb9d6e3a30ec5 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Fri, 1 Jul 2022 14:43:37 -0700
-Subject: [PATCH 1/3] Use find_package for boringssl
+Subject: [PATCH 1/2] Use find_package for boringssl
 
 The ngtcp2 build seems to allow for multiple backends but in vcpkg we only need one. FindOpenSSL can detect BoringSSL so just use that rather than trying to pass in a list of libraries.
 ---
@@ -9,7 +9,7 @@ The ngtcp2 build seems to allow for multiple backends but in vcpkg we only need 
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 2575af7b..f1366b9e 100644
+index 2e709877..406153c1 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -167,12 +167,15 @@ endif()
