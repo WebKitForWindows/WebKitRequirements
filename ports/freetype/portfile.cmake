@@ -1,4 +1,4 @@
-set(VERSION 2.13.1)
+set(VERSION 2.13.2)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
@@ -6,7 +6,7 @@ vcpkg_download_distfile(ARCHIVE
         "https://download.savannah.gnu.org/releases/freetype/freetype-${VERSION}.tar.xz"
         "https://downloads.sourceforge.net/project/freetype/freetype2/${VERSION}/freetype-${VERSION}.tar.xz"
     FILENAME "freetype-${VERSION}.tar.xz"
-    SHA512 045c43f9a3ca33e7d6a98c286895b94ea6ccfbb83851270d1b1861b31ef3ee5a574d8e49c6414c4e14bdfb9276dc49a0677b3be3e4f40ef279dcda99b769b962
+    SHA512 a5917edaa45cb9f75786f8a4f9d12fdf07529247e09dfdb6c0cf7feb08f7588bb24f7b5b11425fb47f8fd62fcb426e731c944658f6d5a59ce4458ad5b0a50194
 )
 
 # Patches
