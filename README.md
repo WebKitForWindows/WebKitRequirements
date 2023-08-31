@@ -69,7 +69,7 @@ the requirements.
 | [libjxl](https://github.com/libjxl/libjxl) | 0.8.2 | 2023-06-14 |
 | [sqlite](http://sqlite.org) | 3.43.0 | 2023-08-24 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
-| [freetype](https://www.freetype.org) | 2.13.1 | 2023-06-23 |
+| [freetype](https://www.freetype.org) | 2.13.2 | 2023-08-25 |
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 8.1.1 | 2023-08-02 |
 | [pixman](http://www.pixman.org) | 0.42.2 | 2022-11-02 |
 | [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.17.8 | 2023-02-02 |

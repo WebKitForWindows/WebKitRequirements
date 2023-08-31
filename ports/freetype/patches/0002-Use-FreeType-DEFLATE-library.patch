@@ -1,4 +1,4 @@
-From 3513a27bbd032683a5cf4d8c9754c62f7186aec2 Mon Sep 17 00:00:00 2001
+From 47e76bdf641812e8291fbd6c3ac11d07b97403b3 Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Mon, 15 May 2023 14:05:23 -0700
 Subject: [PATCH 2/2] Use FreeType DEFLATE library
@@ -9,7 +9,7 @@ The FindPNG.cmake will also end up finding zlib so `ZLIB_FOUND` will be present 
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e72f5f539..df4c0eed0 100644
+index d3dd69adb..cd2a96490 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -332,7 +332,7 @@ endif ()
