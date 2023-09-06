@@ -1,4 +1,4 @@
-From d441bba706c90238a4be2ea02e251002d656b692 Mon Sep 17 00:00:00 2001
+From c63153119b4d3c2d6a9d6f01d0b2539f73a4746e Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 27 Jun 2022 18:34:05 -0700
 Subject: [PATCH 2/2] Add a shared ngtcp2_crypto_boringssl target
@@ -39,5 +39,5 @@ index 60d2d414..f955be51 100644
    # Public static library
    add_library(ngtcp2_crypto_boringssl_static STATIC ${ngtcp2_crypto_boringssl_SOURCES})
 -- 
-2.42.0.windows.2
+2.41.0.windows.1
 
