@@ -1,4 +1,4 @@
-From aea616e1a344c9b79024b4c8aa733c643663418f Mon Sep 17 00:00:00 2001
+From 254fa6dd1abb78ec775ae37e6e073a31f4a98131 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 24 Sep 2018 18:22:19 -0700
 Subject: [PATCH 2/2] Add __has_declspec_attribute
@@ -10,10 +10,10 @@ used to determine whether __declspec is available.
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/c/include/brotli/port.h b/c/include/brotli/port.h
-index 825237a..e4e3e39 100644
+index 0d50019..beb54a1 100644
 --- a/c/include/brotli/port.h
 +++ b/c/include/brotli/port.h
-@@ -257,8 +257,12 @@
+@@ -268,8 +268,12 @@
  
  /* <<< <<< <<< end of hedley macros. */
  
@@ -28,5 +28,5 @@ index 825237a..e4e3e39 100644
  #define BROTLI_COMMON_API __declspec(dllexport)
  #else
 -- 
-2.26.2.windows.1
+2.42.0.windows.2
 

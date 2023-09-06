@@ -1,15 +1,15 @@
-set(VERSION 1.0.9)
+set(VERSION 1.1.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/google/brotli/archive/v${VERSION}.zip"
     FILENAME "brotli-${VERSION}.zip"
-    SHA512 42b909a1aa5f99f370fb9e5f9e97b4a5d349aaf6fc5bf0939bbe3ced5ab3c9b6bc76d70ce0819b01f4298d10de22ae311e5d429ac7826b1d8ea107e24178b8fd
+    SHA512 e62f5624b58a6d0de27105d0df67324027d50a81c8cbb7c83d3322e952dc26ef0e30fc66f32f8b09151713bfae095032733ce4c06949f21b0461f2f16531938d
 )
 
 # Patches
 set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-static-target.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Make-cli-optional.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-__has_declspec_attribute.patch
 )
 
