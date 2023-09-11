@@ -16,6 +16,7 @@
     "libwebp",
     "openjpeg",
     "libjxl",
+    "libavif[aom]",
     "sqlite3",
     "woff2",
     "pixman",
