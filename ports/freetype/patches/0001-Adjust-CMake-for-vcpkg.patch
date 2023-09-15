@@ -17,13 +17,13 @@ index 8dbca01e6..d3dd69adb 100644
    install(
      EXPORT freetype-targets
 -      DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/freetype
-+      DESTINATION ${CMAKE_INSTALL_LIBDIR}/freetype/cmake
++      DESTINATION ${CMAKE_INSTALL_DATADIR}/freetype
        FILE freetype-config.cmake
        COMPONENT headers)
    install(
      FILES ${PROJECT_BINARY_DIR}/freetype-config-version.cmake
 -    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/freetype
-+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/freetype/cmake
++    DESTINATION ${CMAKE_INSTALL_DATADIR}/freetype
      COMPONENT headers)
  endif ()
  

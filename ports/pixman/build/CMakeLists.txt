@@ -2,6 +2,8 @@ project(pixman)
 set(PACKAGE pixman)
 cmake_minimum_required(VERSION 2.8.8)
 
+include(GNUInstallDirs)
+
 # detect version
 file (READ configure.ac configure_ac)
 string (REGEX REPLACE ".*pixman_major], ([0-9]+).*" "\\1" PIXMAN_VERSION_MAJOR ${configure_ac})

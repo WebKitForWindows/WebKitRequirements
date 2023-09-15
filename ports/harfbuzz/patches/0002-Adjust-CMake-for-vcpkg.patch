@@ -16,7 +16,7 @@ index dfb67bd9d..c413c6033 100644
    install(EXPORT harfbuzzConfig
        NAMESPACE harfbuzz::
 -      DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/harfbuzz
-+      DESTINATION ${CMAKE_INSTALL_LIBDIR}/harfbuzz/cmake
++      DESTINATION ${CMAKE_INSTALL_DATADIR}/harfbuzz
    )
    if (HB_HAVE_ICU)
      install(TARGETS harfbuzz-icu

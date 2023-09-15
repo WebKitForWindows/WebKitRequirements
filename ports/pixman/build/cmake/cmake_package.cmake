@@ -1,5 +1,4 @@
 include(CMakePackageConfigHelpers)
-set(ConfigPackageLocation share/pixman/cmake)
 
 write_basic_package_version_file(
     "${CMAKE_CURRENT_BINARY_DIR}/pixman/PixmanConfigVersion.cmake"
@@ -31,7 +30,7 @@ install(
   NAMESPACE
     Upstream::
   DESTINATION
-    ${ConfigPackageLocation}
+    ${CMAKE_INSTALL_DATADIR}/pixman
 )
 
 install(
@@ -39,7 +38,7 @@ install(
     "${CMAKE_CURRENT_BINARY_DIR}/pixman/PixmanConfig.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/pixman/PixmanConfigVersion.cmake"
   DESTINATION
-    ${ConfigPackageLocation}
+    ${CMAKE_INSTALL_DATADIR}/pixman
   COMPONENT
     Devel
 )
