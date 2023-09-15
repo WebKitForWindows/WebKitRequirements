@@ -64,7 +64,7 @@ the requirements.
 | [highway](https://github.com/google/highway) | 1.0.7 | 2023-08-30 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.40 | 2023-06-21 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 3.0.0 | 2023-07-03 |
-| [libwebp](https://github.com/webmproject/libwebp) | 1.3.1 | 2023-06-28 |
+| [libwebp](https://github.com/webmproject/libwebp) | 1.3.2 | 2023-09-13 |
 | [openjpeg](https://www.openjpeg.org) | 2.5.0 | 2022-05-13 |
 | [libjxl](https://github.com/libjxl/libjxl) | 0.8.2 | 2023-06-14 |
 | [sqlite](http://sqlite.org) | 3.43.0 | 2023-08-24 |

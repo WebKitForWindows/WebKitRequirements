@@ -1,4 +1,4 @@
-From f1c6771e19f181c59008398fcd4e70b0b99988e1 Mon Sep 17 00:00:00 2001
+From 7dc70860b381a23eb21ee1d14f94dca9f2aa94e9 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 23 Apr 2018 18:49:42 -0700
 Subject: [PATCH] Add declspec for exporting as a shared library
@@ -31,5 +31,5 @@ index f255432e..67202ca1 100644
  # else
  #  if defined(_MSC_VER) && defined(WEBP_DLL)
 -- 
-2.41.0.windows.1
+2.42.0.windows.2
 
