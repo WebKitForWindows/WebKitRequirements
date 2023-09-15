@@ -1,0 +1,11 @@
+include_guard(GLOBAL)
+
+function(vcpkg_fixup_pkgconfig)
+    if (NOT VCPKG_DISABLE_PKGCONFIG_FIXUP)
+        _vcpkg_fixup_pkgconfig()
+    else ()
+        message(STATUS "Fixing pkgconfig files disabled. Files will be removed!")
+        file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/lib/pkgconfig")
+        file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/lib/pkgconfig")
+    endif ()
+endfunction()

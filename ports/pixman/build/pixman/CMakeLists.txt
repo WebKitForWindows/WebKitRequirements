@@ -106,6 +106,15 @@ endif()
 add_library(pixman-1_core OBJECT ${SOURCES} ${HEADERS})
 add_library(pixman-1 $<TARGET_OBJECTS:pixman-1_core>)
 
-install(TARGETS pixman-1 EXPORT PixmanTargets RUNTIME DESTINATION bin ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
+install(
+    TARGETS pixman-1
+    EXPORT PixmanTargets
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
 
-install(FILES pixman.h ${CMAKE_CURRENT_BINARY_DIR}/pixman-version.h DESTINATION include/pixman-1)
+install(
+    FILES pixman.h ${CMAKE_CURRENT_BINARY_DIR}/pixman-version.h
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/pixman-1
+)

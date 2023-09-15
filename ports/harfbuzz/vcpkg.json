@@ -6,6 +6,18 @@
   "license": "MIT-Modern-Variant",
   "dependencies": [
     "freetype",
-    "icu"
+    "icu",
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-webkit",
+      "host": true
+    }
   ]
 }

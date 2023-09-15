@@ -173,20 +173,21 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup()
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
 if (VCPKG_LIBRARY_LINKAGE STREQUAL "static")
-    vcpkg_replace_string("${CURRENT_PACKAGES_DIR}/include/curl/curl.h"
-        "#ifdef CURL_STATICLIB"
-        "#if 1"
+    vcpkg_replace_string(
+        "${CURRENT_PACKAGES_DIR}/include/curl/curl.h"
+        "#ifdef CURL_STATICLIB" "#if 1"
     )
 
-    file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin")
-    file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/bin")
+    file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin)
+    file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/bin)
 else ()
-    file(REMOVE "${CURRENT_PACKAGES_DIR}/bin/curl-config")
-    file(REMOVE "${CURRENT_PACKAGES_DIR}/debug/bin/curl-config")
+    file(REMOVE ${CURRENT_PACKAGES_DIR}/bin/curl-config)
+    file(REMOVE ${CURRENT_PACKAGES_DIR}/debug/bin/curl-config)
 endif()
 
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)

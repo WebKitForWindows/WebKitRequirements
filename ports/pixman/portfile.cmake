@@ -61,10 +61,13 @@ vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
     OPTIONS ${BUILD_OPTIONS}
+    MAYBE_UNUSED_VARIABLES
+        CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS
 )
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup()
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution

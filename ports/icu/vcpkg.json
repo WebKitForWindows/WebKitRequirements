@@ -3,5 +3,19 @@
   "version": "73.2",
   "description": "ICU is a mature, widely used set of C/C++ and Java libraries providing Unicode and Globalization support for software applications. ICU is widely portable and gives applications the same results on all platforms and between C/C++ and Java software.",
   "homepage": "http://site.icu-project.org",
-  "license": "ICU"
+  "license": "ICU",
+  "dependencies": [
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-webkit",
+      "host": true
+    }
+  ]
 }

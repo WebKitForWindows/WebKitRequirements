@@ -87,10 +87,15 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup()
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/share/doc)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/share/man)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/share/libxml2/aclocal)
+file(REMOVE ${CURRENT_PACKAGES_DIR}/share/libxml2/xml2-config)
 file(INSTALL ${SOURCE_PATH}/Copyright DESTINATION ${CURRENT_PACKAGES_DIR}/share/libxml2 RENAME copyright)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/libxml2/version ${VERSION})

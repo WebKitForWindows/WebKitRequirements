@@ -18,6 +18,7 @@ vcpkg.exe
 
 # Ignore vpckg ports
 /ports/vcpkg-*
+!/ports/vcpkg-cmake-webkit
 
 # Ignore community triplets
 /triplets/*

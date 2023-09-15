@@ -26,10 +26,6 @@ if ($platform -eq 'windows') {
   return;
 }
 
-$command = ('Delete-ShareDirectory.ps1 -triplet {0}' -f $triplet)
-Write-Host $command;
-Invoke-Expression -Command ('{0}/{1}' -f $PSScriptRoot,$command);
-
 $command = ('Package-Requirements.ps1 -triplet {0}' -f $triplet);
 Write-Host $command;
 Invoke-Expression -Command ('{0}/{1}' -f $PSScriptRoot,$command);

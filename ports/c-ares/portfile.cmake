@@ -48,16 +48,22 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup()
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
-file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
-file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
-file(INSTALL ${SOURCE_PATH}/LICENSE.md DESTINATION ${CURRENT_PACKAGES_DIR}/share/c-ares RENAME copyright)
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/c-ares/version ${VERSION})
+if(CARES_STATIC)
+    vcpkg_replace_string(
+        "${CURRENT_PACKAGES_DIR}/include/ares.h"
+        "#ifdef CARES_STATICLIB" "#if 1"
+    )
 
-# The static build creates empty bin directories
-if (CARES_STATIC)
     file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin)
     file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/bin)
-endif ()
+endif()
+
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/share/man)
+file(INSTALL ${SOURCE_PATH}/LICENSE.md DESTINATION ${CURRENT_PACKAGES_DIR}/share/c-ares RENAME copyright)
+file(WRITE ${CURRENT_PACKAGES_DIR}/share/c-ares/version ${VERSION})
