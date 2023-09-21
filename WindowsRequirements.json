@@ -14,7 +14,6 @@
     "libpng",
     "libjpeg-turbo",
     "libwebp",
-    "openjpeg",
     "libjxl",
     "sqlite3",
     "woff2",
