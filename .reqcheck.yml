@@ -98,11 +98,6 @@ repos:
     repo: libwebp
     tags: true
 
-  openjpeg:
-    host: github
-    owner: uclouvain
-    repo: openjpeg
-
   libjxl:
     host: github
     owner: libjxl
