@@ -3,7 +3,7 @@
     "brotli",
     "libressl[tools]",
     "nghttp2",
-    "ngtcp2[libressl]",
+    "ngtcp2",
     "nghttp3",
     "curl[libressl,http3,ipv6]",
     "icu",
