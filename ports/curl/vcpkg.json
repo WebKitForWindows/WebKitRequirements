@@ -15,12 +15,6 @@
         "c-ares"
       ]
     },
-    "boringssl": {
-      "description": "SSL support through boringssl. If no SSL libraries are specified then the system SSL library will be used.",
-      "dependencies": [
-        "boringssl"
-      ]
-    },
     "ca-bundle": {
       "description": "Use the provided certificate bundle."
     },
