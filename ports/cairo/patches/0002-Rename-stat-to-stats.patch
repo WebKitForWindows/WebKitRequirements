@@ -1,4 +1,4 @@
-From 33fca6cb37ed0afc3eeafa18ee38ef455745f4e2 Mon Sep 17 00:00:00 2001
+From 7ae81fc5861554a9d522a9f23502e1e6acbc013f Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 2 Apr 2018 14:58:45 -0700
 Subject: [PATCH 2/2] Rename stat to stats
@@ -41,10 +41,10 @@ index 6ed0c18d1..7d7dd8d4c 100644
  	unsigned int noop;
  
 diff --git a/src/cairo-surface-observer.c b/src/cairo-surface-observer.c
-index 9c4432e24..6bd2d4ec7 100644
+index 83aa41801..77033a6e6 100644
 --- a/src/cairo-surface-observer.c
 +++ b/src/cairo-surface-observer.c
-@@ -58,7 +58,7 @@ static const cairo_surface_backend_t _cairo_surface_observer_backend;
+@@ -76,7 +76,7 @@ static const cairo_surface_backend_t _cairo_surface_observer_backend;
  
  /* observation/stats */
  
@@ -53,7 +53,7 @@ index 9c4432e24..6bd2d4ec7 100644
  {
      s->min = HUGE_VAL;
      s->max = -HUGE_VAL;
-@@ -261,7 +261,7 @@ add_clip (struct clip *stats,
+@@ -279,7 +279,7 @@ add_clip (struct clip *stats,
  }
  
  static void
@@ -63,5 +63,5 @@ index 9c4432e24..6bd2d4ec7 100644
      if (v < s->min)
  	s->min = v;
 -- 
-2.34.1
+2.42.0.windows.2
 
