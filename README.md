@@ -71,5 +71,5 @@ the requirements.
 | [freetype](https://www.freetype.org) | 2.13.2 | 2023-08-25 |
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 8.2.1 | 2023-09-18 |
 | [pixman](http://www.pixman.org) | 0.42.2 | 2022-11-02 |
-| [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.17.8 | 2023-02-02 |
+| [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.18.0 | 2023-09-23 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.2 | 2022-12-26 |
