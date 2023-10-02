@@ -11,6 +11,8 @@ vcpkg_download_distfile(ARCHIVE
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    # Remove in next release 8.4.0
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-h2-testcase-and-fix-for-pausing-h2-streams.patch
 )
 
 # Extract archive
