@@ -1,10 +1,10 @@
-set(VERSION 1.56.0)
+set(VERSION 1.57.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/nghttp2/nghttp2/archive/v${VERSION}.zip"
     FILENAME "nghttp2-${VERSION}.zip"
-    SHA512 6567a1b41e3acdc0469798d99b5736143f83864263f282ecc2653b08ed44d3f9bd9d6956f1a84cfdb955c3107c6b9ebec13868f086bd9b27088380e09e43f3e7
+    SHA512 80160deea9e5e06f6c7fbf69e5615ae2ab041ff8d11202414878b74b9a6053dafee067c9c24555774f40e262697fd9063bdad8d88993d7d2455c249ee7aa8144
 )
 
 # Extract archive
