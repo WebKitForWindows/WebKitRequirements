@@ -1,4 +1,4 @@
-From 887ad5a538bddbf32e1391c8a76f6b8a723d8a07 Mon Sep 17 00:00:00 2001
+From e2c5f94d757b5dc74f9caac6ba58232496cd151e Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Tue, 21 Mar 2023 17:20:21 -0700
 Subject: [PATCH] Add CMake build
