@@ -5,7 +5,6 @@
   "homepage": "https://github.com/ngtcp2/ngtcp2",
   "license": "MIT",
   "dependencies": [
-    "libressl",
     {
       "name": "vcpkg-cmake",
       "host": true
@@ -18,5 +17,13 @@
       "name": "vcpkg-cmake-webkit",
       "host": true
     }
-  ]
+  ],
+  "features": {
+    "libressl": {
+      "description": "SSL support through libressl. If no SSL libraries are specified then the system SSL library will be used.",
+      "dependencies": [
+        "libressl"
+      ]
+    }
+  }
 }

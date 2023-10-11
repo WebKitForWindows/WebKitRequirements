@@ -24,6 +24,13 @@ else ()
     set(NGTCP2_STATIC_LIB OFF)
 endif ()
 
+# Each port of an OpenSSL equivalent checks to see that no other variant is installed so
+# just check to see if any OpenSSL variants are requested and if not use the system one
+set(USE_OPENSSL ON)
+if (NOT libressl IN_LIST FEATURES)
+    message(STATUS "Using system SSL library")
+endif ()
+
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
