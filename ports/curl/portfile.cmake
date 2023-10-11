@@ -1,18 +1,16 @@
-set(VERSION 8.3.0)
+set(VERSION 8.4.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 8e34636bdd6ea07535053169b85d885d1a0a924189dd03980461d4691c5c50dc067f866ece8b2347def9e4f38c1ab4954c6117e9ab1e2dab1d0d515a4e40a19c
+    SHA512 ab9d19a99e91b0eb3fcdd5c7156cd4330c884961aa211a3ffafa91781b38f74bb96a9779c67f9470b9f6d64de76045880f51318d5d0fad2bd0639a47ba37a29e
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    # Remove in next release 8.4.0
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-h2-testcase-and-fix-for-pausing-h2-streams.patch
 )
 
 # Extract archive
