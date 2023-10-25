@@ -1,10 +1,10 @@
-set(VERSION 0.19.1)
+set(VERSION 1.0.1)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/ngtcp2-${VERSION}.tar.bz2"
     FILENAME "ngtcp2-${VERSION}.tar.bz2"
-    SHA512 e4bfe87765784dab9f8863278c8e68b1bd5525cd164ca210a6638a504041835c06f7ce7613cff9290a82caac34887c88ee7b6c90615a68246a9107b516f92ce5
+    SHA512 53700f1f51f20f9f75390bc657b654c251591febcc91eb137334fbd44dea860eaea53a7c697be48402d0b9fb5bc2c0ab0f1ac5e3384bf22294943f9896db52d0
 )
 
 # Extract archive
