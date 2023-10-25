@@ -1,4 +1,4 @@
-From e81b6836252d340979991e315c3cc81882e8d477 Mon Sep 17 00:00:00 2001
+From 90b86da090a80715ef29216791b997437a30d9cc Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 5 Nov 2019 16:57:32 -0800
 Subject: [PATCH 2/3] Adjust CMake for vcpkg
@@ -8,7 +8,7 @@ Subject: [PATCH 2/3] Adjust CMake for vcpkg
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index dfb67bd9d..c413c6033 100644
+index dfb67bd9d..c3ec7417e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -764,7 +764,7 @@ if (NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
