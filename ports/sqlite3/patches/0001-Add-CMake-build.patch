@@ -21,7 +21,7 @@ index 000000000..4adbe8795
 @@ -0,0 +1,209 @@
 +cmake_minimum_required(VERSION 3.10)
 +
-+project(sqlite VERSION 3.41.2 LANGUAGES C)
++project(sqlite VERSION 3.43.2 LANGUAGES C)
 +
 +option(ENABLE_THREADSAFE "Whether to support threadsafe operation" OFF)
 +option(ENABLE_LOAD_EXTENSION "Whether to support loadable extensions" ON)
