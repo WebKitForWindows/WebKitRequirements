@@ -1,4 +1,4 @@
-From e2b288ba798307107baf400e51085ae12dfdbdb1 Mon Sep 17 00:00:00 2001
+From b492e64f697b6e81cd7ba776beeac6b932e160df Mon Sep 17 00:00:00 2001
 From: foopoiuyt <github@zombiestormtrooper.com>
 Date: Tue, 3 Nov 2020 09:02:25 -0800
 Subject: [PATCH 2/2] Remove install suffix on Windows
@@ -8,7 +8,7 @@ Subject: [PATCH 2/2] Remove install suffix on Windows
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/source/icudefs.cmake b/source/icudefs.cmake
-index 34688e4317..f1e1ba7b13 100644
+index 34688e43176..f1e1ba7b13e 100644
 --- a/source/icudefs.cmake
 +++ b/source/icudefs.cmake
 @@ -13,10 +13,10 @@ set(includedir ${CMAKE_INSTALL_INCLUDEDIR})
@@ -27,5 +27,5 @@ index 34688e4317..f1e1ba7b13 100644
  # Package information
  set(PACKAGE_ICU_DESCRIPTION "International Components for Unicode")
 -- 
-2.41.0.windows.1
+2.42.0.windows.2
 

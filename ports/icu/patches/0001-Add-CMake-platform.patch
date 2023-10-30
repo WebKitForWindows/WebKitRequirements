@@ -1,4 +1,4 @@
-From 13c2a3f769ac2e63641e939b993f64e77d5a99b8 Mon Sep 17 00:00:00 2001
+From ddabe88bff57de069de81dd3b982c3179aff7ac2 Mon Sep 17 00:00:00 2001
 From: foopoiuyt <github@zombiestormtrooper.com>
 Date: Tue, 3 Nov 2020 08:58:19 -0800
 Subject: [PATCH 1/2] Add CMake platform
@@ -111,7 +111,7 @@ Modified version of the LibCMaker ICU files.
 
 diff --git a/LICENSE_CMakeLists b/LICENSE_CMakeLists
 new file mode 100644
-index 0000000000..f23753eab1
+index 00000000000..f23753eab10
 --- /dev/null
 +++ b/LICENSE_CMakeLists
 @@ -0,0 +1,60 @@
@@ -177,7 +177,7 @@ index 0000000000..f23753eab1
 +OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 diff --git a/README_CMakeLists.txt b/README_CMakeLists.txt
 new file mode 100644
-index 0000000000..356e81fa50
+index 00000000000..356e81fa505
 --- /dev/null
 +++ b/README_CMakeLists.txt
 @@ -0,0 +1,146 @@
@@ -329,7 +329,7 @@ index 0000000000..356e81fa50
 +See file 'LICENSE_CMakeLists' for license information.
 diff --git a/source/CMakeLists.txt b/source/CMakeLists.txt
 new file mode 100644
-index 0000000000..8139279923
+index 00000000000..81392799232
 --- /dev/null
 +++ b/source/CMakeLists.txt
 @@ -0,0 +1,175 @@
@@ -510,7 +510,7 @@ index 0000000000..8139279923
 +)
 diff --git a/source/cmake/Config.in.cmake b/source/cmake/Config.in.cmake
 new file mode 100644
-index 0000000000..d865445a8c
+index 00000000000..d865445a8c8
 --- /dev/null
 +++ b/source/cmake/Config.in.cmake
 @@ -0,0 +1,127 @@
@@ -643,7 +643,7 @@ index 0000000000..d865445a8c
 +endif()
 diff --git a/source/common/CMakeLists.txt b/source/common/CMakeLists.txt
 new file mode 100644
-index 0000000000..7fe27d04b3
+index 00000000000..7fe27d04b38
 --- /dev/null
 +++ b/source/common/CMakeLists.txt
 @@ -0,0 +1,98 @@
@@ -747,7 +747,7 @@ index 0000000000..7fe27d04b3
 +)
 diff --git a/source/common_icu_lib_flags.cmake b/source/common_icu_lib_flags.cmake
 new file mode 100644
-index 0000000000..7ee5968fa3
+index 00000000000..7ee5968fa3d
 --- /dev/null
 +++ b/source/common_icu_lib_flags.cmake
 @@ -0,0 +1,127 @@
@@ -880,7 +880,7 @@ index 0000000000..7ee5968fa3
 +endif()
 diff --git a/source/common_icu_lib_includes.cmake b/source/common_icu_lib_includes.cmake
 new file mode 100644
-index 0000000000..cd21b75233
+index 00000000000..cd21b752331
 --- /dev/null
 +++ b/source/common_icu_lib_includes.cmake
 @@ -0,0 +1,8 @@
@@ -894,7 +894,7 @@ index 0000000000..cd21b75233
 +target_include_directories(${lib_NAME} PUBLIC $<INSTALL_INTERFACE:${includedir}>)
 diff --git a/source/common_tools_exe_flags.cmake b/source/common_tools_exe_flags.cmake
 new file mode 100644
-index 0000000000..017a5a4383
+index 00000000000..017a5a43832
 --- /dev/null
 +++ b/source/common_tools_exe_flags.cmake
 @@ -0,0 +1,86 @@
@@ -986,7 +986,7 @@ index 0000000000..017a5a4383
 +endif()
 diff --git a/source/common_tools_exe_libs.cmake b/source/common_tools_exe_libs.cmake
 new file mode 100644
-index 0000000000..1ea471803a
+index 00000000000..1ea471803a4
 --- /dev/null
 +++ b/source/common_tools_exe_libs.cmake
 @@ -0,0 +1,8 @@
@@ -1000,7 +1000,7 @@ index 0000000000..1ea471803a
 +target_link_libraries(${exe_NAME} PRIVATE ${ICULIBS_TOOLUTIL} ${LIB_M})
 diff --git a/source/configure_1st.cmake b/source/configure_1st.cmake
 new file mode 100644
-index 0000000000..dd22f884c3
+index 00000000000..dd22f884c3a
 --- /dev/null
 +++ b/source/configure_1st.cmake
 @@ -0,0 +1,137 @@
@@ -1143,7 +1143,7 @@ index 0000000000..dd22f884c3
 +status_message("release ${VERSION}, library ${LIB_VERSION}, unicode version ${UNICODE_VERSION}")
 diff --git a/source/configure_2nd.cmake b/source/configure_2nd.cmake
 new file mode 100644
-index 0000000000..be373fbc3c
+index 00000000000..be373fbc3c3
 --- /dev/null
 +++ b/source/configure_2nd.cmake
 @@ -0,0 +1,1208 @@
@@ -2357,7 +2357,7 @@ index 0000000000..be373fbc3c
 +endif()
 diff --git a/source/data/CMakeLists.txt b/source/data/CMakeLists.txt
 new file mode 100644
-index 0000000000..5a1c4665b2
+index 00000000000..5a1c4665b2e
 --- /dev/null
 +++ b/source/data/CMakeLists.txt
 @@ -0,0 +1,340 @@
@@ -2703,7 +2703,7 @@ index 0000000000..5a1c4665b2
 +endif()
 diff --git a/source/data/cmake-brkitr-index-txt-content.in b/source/data/cmake-brkitr-index-txt-content.in
 new file mode 100644
-index 0000000000..9afca11c39
+index 00000000000..9afca11c398
 --- /dev/null
 +++ b/source/data/cmake-brkitr-index-txt-content.in
 @@ -0,0 +1,21 @@
@@ -2730,7 +2730,7 @@ index 0000000000..9afca11c39
 +}
 diff --git a/source/data/cmake-coll-index-txt-content.in b/source/data/cmake-coll-index-txt-content.in
 new file mode 100644
-index 0000000000..5d71517afe
+index 00000000000..5d71517afeb
 --- /dev/null
 +++ b/source/data/cmake-coll-index-txt-content.in
 @@ -0,0 +1,168 @@
@@ -2904,7 +2904,7 @@ index 0000000000..5d71517afe
 +}
 diff --git a/source/data/cmake-curr-index-txt-content.in b/source/data/cmake-curr-index-txt-content.in
 new file mode 100644
-index 0000000000..859ca4c5f6
+index 00000000000..859ca4c5f61
 --- /dev/null
 +++ b/source/data/cmake-curr-index-txt-content.in
 @@ -0,0 +1,550 @@
@@ -3460,7 +3460,7 @@ index 0000000000..859ca4c5f6
 +}
 diff --git a/source/data/cmake-icudata-list-content.in b/source/data/cmake-icudata-list-content.in
 new file mode 100644
-index 0000000000..9ce5b2e8f6
+index 00000000000..9ce5b2e8f63
 --- /dev/null
 +++ b/source/data/cmake-icudata-list-content.in
 @@ -0,0 +1,3815 @@
@@ -7281,7 +7281,7 @@ index 0000000000..9ce5b2e8f6
 +zu_ZA.res
 diff --git a/source/data/cmake-lang-index-txt-content.in b/source/data/cmake-lang-index-txt-content.in
 new file mode 100644
-index 0000000000..002f7196e3
+index 00000000000..002f7196e3d
 --- /dev/null
 +++ b/source/data/cmake-lang-index-txt-content.in
 @@ -0,0 +1,480 @@
@@ -7767,7 +7767,7 @@ index 0000000000..002f7196e3
 +}
 diff --git a/source/data/cmake-locales-index-txt-content.in b/source/data/cmake-locales-index-txt-content.in
 new file mode 100644
-index 0000000000..5a33a8709f
+index 00000000000..5a33a8709f9
 --- /dev/null
 +++ b/source/data/cmake-locales-index-txt-content.in
 @@ -0,0 +1,841 @@
@@ -8614,7 +8614,7 @@ index 0000000000..5a33a8709f
 +}
 diff --git a/source/data/cmake-rbnf-index-txt-content.in b/source/data/cmake-rbnf-index-txt-content.in
 new file mode 100644
-index 0000000000..26f6993119
+index 00000000000..26f6993119c
 --- /dev/null
 +++ b/source/data/cmake-rbnf-index-txt-content.in
 @@ -0,0 +1,113 @@
@@ -8733,7 +8733,7 @@ index 0000000000..26f6993119
 +}
 diff --git a/source/data/cmake-region-index-txt-content.in b/source/data/cmake-region-index-txt-content.in
 new file mode 100644
-index 0000000000..cedcdf3177
+index 00000000000..cedcdf31771
 --- /dev/null
 +++ b/source/data/cmake-region-index-txt-content.in
 @@ -0,0 +1,479 @@
@@ -9218,7 +9218,7 @@ index 0000000000..cedcdf3177
 +}
 diff --git a/source/data/cmake-unit-index-txt-content.in b/source/data/cmake-unit-index-txt-content.in
 new file mode 100644
-index 0000000000..aeafe1cdc0
+index 00000000000..aeafe1cdc02
 --- /dev/null
 +++ b/source/data/cmake-unit-index-txt-content.in
 @@ -0,0 +1,470 @@
@@ -9694,7 +9694,7 @@ index 0000000000..aeafe1cdc0
 +}
 diff --git a/source/data/cmake-zone-index-txt-content.in b/source/data/cmake-zone-index-txt-content.in
 new file mode 100644
-index 0000000000..94ab8bb3f4
+index 00000000000..94ab8bb3f4d
 --- /dev/null
 +++ b/source/data/cmake-zone-index-txt-content.in
 @@ -0,0 +1,480 @@
@@ -10180,7 +10180,7 @@ index 0000000000..94ab8bb3f4
 +}
 diff --git a/source/data/icupkg.inc.cmake b/source/data/icupkg.inc.cmake
 new file mode 100644
-index 0000000000..a9ecd830c7
+index 00000000000..a9ecd830c78
 --- /dev/null
 +++ b/source/data/icupkg.inc.cmake
 @@ -0,0 +1,17 @@
@@ -10203,7 +10203,7 @@ index 0000000000..a9ecd830c7
 +INSTALL_CMD="@CMAKE_COMMAND@" -E echo INSTALL
 diff --git a/source/data/rules.cmake b/source/data/rules.cmake
 new file mode 100644
-index 0000000000..fa273f2146
+index 00000000000..fa273f21462
 --- /dev/null
 +++ b/source/data/rules.cmake
 @@ -0,0 +1,8561 @@
@@ -18770,7 +18770,7 @@ index 0000000000..fa273f2146
 +list(APPEND tmpdep ${ICUDATA_ALL_OUTPUT_FILES})
 diff --git a/source/i18n/CMakeLists.txt b/source/i18n/CMakeLists.txt
 new file mode 100644
-index 0000000000..c237333eb3
+index 00000000000..c237333eb32
 --- /dev/null
 +++ b/source/i18n/CMakeLists.txt
 @@ -0,0 +1,80 @@
@@ -18856,7 +18856,7 @@ index 0000000000..c237333eb3
 +)
 diff --git a/source/icudefs.cmake b/source/icudefs.cmake
 new file mode 100644
-index 0000000000..34688e4317
+index 00000000000..34688e43176
 --- /dev/null
 +++ b/source/icudefs.cmake
 @@ -0,0 +1,245 @@
@@ -19107,7 +19107,7 @@ index 0000000000..34688e4317
 +endif()
 diff --git a/source/icufunctions.cmake b/source/icufunctions.cmake
 new file mode 100644
-index 0000000000..4a3bc155b2
+index 00000000000..4a3bc155b22
 --- /dev/null
 +++ b/source/icufunctions.cmake
 @@ -0,0 +1,99 @@
@@ -19212,7 +19212,7 @@ index 0000000000..4a3bc155b2
 +endfunction()
 diff --git a/source/io/CMakeLists.txt b/source/io/CMakeLists.txt
 new file mode 100644
-index 0000000000..94043af012
+index 00000000000..94043af012e
 --- /dev/null
 +++ b/source/io/CMakeLists.txt
 @@ -0,0 +1,67 @@
@@ -19285,7 +19285,7 @@ index 0000000000..94043af012
 +)
 diff --git a/source/layoutex/CMakeLists.txt b/source/layoutex/CMakeLists.txt
 new file mode 100644
-index 0000000000..98cb81f9e1
+index 00000000000..98cb81f9e1c
 --- /dev/null
 +++ b/source/layoutex/CMakeLists.txt
 @@ -0,0 +1,71 @@
@@ -19362,7 +19362,7 @@ index 0000000000..98cb81f9e1
 +)
 diff --git a/source/stubdata/CMakeLists.txt b/source/stubdata/CMakeLists.txt
 new file mode 100644
-index 0000000000..a109ffa5fd
+index 00000000000..a109ffa5fd6
 --- /dev/null
 +++ b/source/stubdata/CMakeLists.txt
 @@ -0,0 +1,77 @@
@@ -19445,7 +19445,7 @@ index 0000000000..a109ffa5fd
 +endif()
 diff --git a/source/test/CMakeLists.txt b/source/test/CMakeLists.txt
 new file mode 100644
-index 0000000000..880adeca53
+index 00000000000..880adeca53d
 --- /dev/null
 +++ b/source/test/CMakeLists.txt
 @@ -0,0 +1,34 @@
@@ -19485,7 +19485,7 @@ index 0000000000..880adeca53
 +endforeach()
 diff --git a/source/test/testdata/CMakeLists.txt b/source/test/testdata/CMakeLists.txt
 new file mode 100644
-index 0000000000..ef679c682d
+index 00000000000..ef679c682db
 --- /dev/null
 +++ b/source/test/testdata/CMakeLists.txt
 @@ -0,0 +1,52 @@
@@ -19543,7 +19543,7 @@ index 0000000000..ef679c682d
 +add_custom_target(foo2 DEPENDS ${TESTDATA_ALL_OUTPUT_FILES})
 diff --git a/source/test/testdata/rules.cmake b/source/test/testdata/rules.cmake
 new file mode 100644
-index 0000000000..8706ee044a
+index 00000000000..8706ee044a4
 --- /dev/null
 +++ b/source/test/testdata/rules.cmake
 @@ -0,0 +1,216 @@
@@ -19765,7 +19765,7 @@ index 0000000000..8706ee044a
 +)
 diff --git a/source/tools/CMakeLists.txt b/source/tools/CMakeLists.txt
 new file mode 100644
-index 0000000000..9db8d28f37
+index 00000000000..9db8d28f375
 --- /dev/null
 +++ b/source/tools/CMakeLists.txt
 @@ -0,0 +1,38 @@
@@ -19809,7 +19809,7 @@ index 0000000000..9db8d28f37
 +# include(${CMAKE_CURRENT_LIST_DIR}/tzcode/CMakeLists.txt)
 diff --git a/source/tools/ctestfw/CMakeLists.txt b/source/tools/ctestfw/CMakeLists.txt
 new file mode 100644
-index 0000000000..0035668dfe
+index 00000000000..0035668dfe9
 --- /dev/null
 +++ b/source/tools/ctestfw/CMakeLists.txt
 @@ -0,0 +1,61 @@
@@ -19876,7 +19876,7 @@ index 0000000000..0035668dfe
 +)
 diff --git a/source/tools/escapesrc/CMakeLists.txt b/source/tools/escapesrc/CMakeLists.txt
 new file mode 100644
-index 0000000000..134833be0e
+index 00000000000..134833be0e3
 --- /dev/null
 +++ b/source/tools/escapesrc/CMakeLists.txt
 @@ -0,0 +1,35 @@
@@ -19917,7 +19917,7 @@ index 0000000000..134833be0e
 +)
 diff --git a/source/tools/genbrk/CMakeLists.txt b/source/tools/genbrk/CMakeLists.txt
 new file mode 100644
-index 0000000000..d799103aa4
+index 00000000000..d799103aa42
 --- /dev/null
 +++ b/source/tools/genbrk/CMakeLists.txt
 @@ -0,0 +1,30 @@
@@ -19953,7 +19953,7 @@ index 0000000000..d799103aa4
 +)
 diff --git a/source/tools/genccode/CMakeLists.txt b/source/tools/genccode/CMakeLists.txt
 new file mode 100644
-index 0000000000..9960cb2259
+index 00000000000..9960cb2259a
 --- /dev/null
 +++ b/source/tools/genccode/CMakeLists.txt
 @@ -0,0 +1,30 @@
@@ -19989,7 +19989,7 @@ index 0000000000..9960cb2259
 +)
 diff --git a/source/tools/gencfu/CMakeLists.txt b/source/tools/gencfu/CMakeLists.txt
 new file mode 100644
-index 0000000000..fd7b95484e
+index 00000000000..fd7b95484e1
 --- /dev/null
 +++ b/source/tools/gencfu/CMakeLists.txt
 @@ -0,0 +1,31 @@
@@ -20026,7 +20026,7 @@ index 0000000000..fd7b95484e
 +)
 diff --git a/source/tools/gencmn/CMakeLists.txt b/source/tools/gencmn/CMakeLists.txt
 new file mode 100644
-index 0000000000..197f402bb1
+index 00000000000..197f402bb1b
 --- /dev/null
 +++ b/source/tools/gencmn/CMakeLists.txt
 @@ -0,0 +1,30 @@
@@ -20062,7 +20062,7 @@ index 0000000000..197f402bb1
 +)
 diff --git a/source/tools/gencnval/CMakeLists.txt b/source/tools/gencnval/CMakeLists.txt
 new file mode 100644
-index 0000000000..abcb2b9beb
+index 00000000000..abcb2b9beb7
 --- /dev/null
 +++ b/source/tools/gencnval/CMakeLists.txt
 @@ -0,0 +1,30 @@
@@ -20098,7 +20098,7 @@ index 0000000000..abcb2b9beb
 +)
 diff --git a/source/tools/gendict/CMakeLists.txt b/source/tools/gendict/CMakeLists.txt
 new file mode 100644
-index 0000000000..062a91ba5d
+index 00000000000..062a91ba5d6
 --- /dev/null
 +++ b/source/tools/gendict/CMakeLists.txt
 @@ -0,0 +1,30 @@
@@ -20134,7 +20134,7 @@ index 0000000000..062a91ba5d
 +)
 diff --git a/source/tools/gennorm2/CMakeLists.txt b/source/tools/gennorm2/CMakeLists.txt
 new file mode 100644
-index 0000000000..ce286fe502
+index 00000000000..ce286fe5021
 --- /dev/null
 +++ b/source/tools/gennorm2/CMakeLists.txt
 @@ -0,0 +1,31 @@
@@ -20171,7 +20171,7 @@ index 0000000000..ce286fe502
 +)
 diff --git a/source/tools/genrb/CMakeLists.txt b/source/tools/genrb/CMakeLists.txt
 new file mode 100644
-index 0000000000..f43720d1d2
+index 00000000000..f43720d1d25
 --- /dev/null
 +++ b/source/tools/genrb/CMakeLists.txt
 @@ -0,0 +1,65 @@
@@ -20242,7 +20242,7 @@ index 0000000000..f43720d1d2
 +endforeach()
 diff --git a/source/tools/gensprep/CMakeLists.txt b/source/tools/gensprep/CMakeLists.txt
 new file mode 100644
-index 0000000000..8477d1da78
+index 00000000000..8477d1da78a
 --- /dev/null
 +++ b/source/tools/gensprep/CMakeLists.txt
 @@ -0,0 +1,31 @@
@@ -20279,7 +20279,7 @@ index 0000000000..8477d1da78
 +)
 diff --git a/source/tools/gentest/CMakeLists.txt b/source/tools/gentest/CMakeLists.txt
 new file mode 100644
-index 0000000000..421b3daddb
+index 00000000000..421b3daddb5
 --- /dev/null
 +++ b/source/tools/gentest/CMakeLists.txt
 @@ -0,0 +1,38 @@
@@ -20323,7 +20323,7 @@ index 0000000000..421b3daddb
 +)
 diff --git a/source/tools/icuinfo/CMakeLists.txt b/source/tools/icuinfo/CMakeLists.txt
 new file mode 100644
-index 0000000000..35d78b66f8
+index 00000000000..35d78b66f81
 --- /dev/null
 +++ b/source/tools/icuinfo/CMakeLists.txt
 @@ -0,0 +1,53 @@
@@ -20382,7 +20382,7 @@ index 0000000000..35d78b66f8
 +endif()
 diff --git a/source/tools/icupkg/CMakeLists.txt b/source/tools/icupkg/CMakeLists.txt
 new file mode 100644
-index 0000000000..48d7ada6b2
+index 00000000000..48d7ada6b2d
 --- /dev/null
 +++ b/source/tools/icupkg/CMakeLists.txt
 @@ -0,0 +1,30 @@
@@ -20418,7 +20418,7 @@ index 0000000000..48d7ada6b2
 +)
 diff --git a/source/tools/makeconv/CMakeLists.txt b/source/tools/makeconv/CMakeLists.txt
 new file mode 100644
-index 0000000000..a9edbb4d3f
+index 00000000000..a9edbb4d3f0
 --- /dev/null
 +++ b/source/tools/makeconv/CMakeLists.txt
 @@ -0,0 +1,31 @@
@@ -20455,7 +20455,7 @@ index 0000000000..a9edbb4d3f
 +)
 diff --git a/source/tools/pkgdata/CMakeLists.txt b/source/tools/pkgdata/CMakeLists.txt
 new file mode 100644
-index 0000000000..27e4c98420
+index 00000000000..27e4c984204
 --- /dev/null
 +++ b/source/tools/pkgdata/CMakeLists.txt
 @@ -0,0 +1,35 @@
@@ -20496,7 +20496,7 @@ index 0000000000..27e4c98420
 +)
 diff --git a/source/tools/toolutil/CMakeLists.txt b/source/tools/toolutil/CMakeLists.txt
 new file mode 100644
-index 0000000000..36b15d4783
+index 00000000000..36b15d4783d
 --- /dev/null
 +++ b/source/tools/toolutil/CMakeLists.txt
 @@ -0,0 +1,59 @@
@@ -20560,5 +20560,5 @@ index 0000000000..36b15d4783
 +    DESTINATION "${includedir}"
 +)
 -- 
-2.41.0.windows.1
+2.42.0.windows.2
 
