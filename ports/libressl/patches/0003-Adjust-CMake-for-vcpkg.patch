@@ -1,0 +1,25 @@
+From e6d4198c159e6c5181e9d73a5200daf793b976b5 Mon Sep 17 00:00:00 2001
+From: Don Olmstead <don.j.olmstead@gmail.com>
+Date: Fri, 3 Nov 2023 11:31:24 -0700
+Subject: [PATCH 3/3] Adjust CMake for vcpkg
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 42ea267..824151a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -39,7 +39,7 @@ option(ENABLE_ASM "Enable assembly" ON)
+ option(ENABLE_EXTRATESTS "Enable extra tests that may be unreliable on some platforms" OFF)
+ option(ENABLE_NC "Enable installing TLS-enabled nc(1)" OFF)
+ set(OPENSSLDIR ${OPENSSLDIR} CACHE PATH "Set the default openssl directory" FORCE)
+-set(LIBRESSL_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake/LibreSSL" CACHE STRING "Installation directory for the CMake targets")
++set(LIBRESSL_INSTALL_CMAKEDIR "${CMAKE_INSTALL_DATADIR}/libressl" CACHE STRING "Installation directory for the CMake targets")
+ 
+ option(USE_STATIC_MSVC_RUNTIMES "Use /MT instead of /MD in MSVC" OFF)
+ if(USE_STATIC_MSVC_RUNTIMES)
+-- 
+2.42.0.windows.2
+

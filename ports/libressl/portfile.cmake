@@ -1,20 +1,17 @@
-if (EXISTS "${CURRENT_INSTALLED_DIR}/include/openssl/ssl.h")
-    message(FATAL_ERROR "Can't build LibreSSL if another OpenSSL equivalent is installed. Please remove the OpenSSL variant, and try to install LibreSSL again if you need it. Build will continue since LibreSSL is a drop-in replacement for OpenSSL")
-endif()
-
-set(VERSION 3.8.0)
+set(VERSION 3.8.2)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${VERSION}.tar.gz"
     FILENAME "libressl-${VERSION}.tar.gz"
-    SHA512 59d3040c81846758e4b2fdad9fc77a933f4ebaee12ecb2278d873a0da4c3156fa20c731b2448e5df83682451295a46679330182a4511e4e30877bec763c8517a
+    SHA512 81765174fdd60223529182fab96249a28978c1d02b5894313d9b0b3aa365a1da2f7e5906403ab368114bdcba2fa861d1ad69b752f8344e6ea61d44666b483122
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-postfix-from-archive-name.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Disable-additional-warnings-for-Visual-Studio.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Adjust-CMake-for-vcpkg.patch
 )
 
 # Extract archive
@@ -50,7 +47,7 @@ vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
 if (tools IN_LIST FEATURES)
-    vcpkg_copy_tools(TOOL_NAMES openssl AUTO_CLEAN)
+    vcpkg_copy_tools(TOOL_NAMES openssl ocspcheck AUTO_CLEAN)
 else ()
     # Config and pem files are not installed without the apps
     file(
