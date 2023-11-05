@@ -8,7 +8,7 @@ set(VERSION3 "${VERSION_MAJOR}-${VERSION_MINOR}")
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/unicode-org/icu/releases/download/release-${VERSION3}/icu4c-${VERSION2}-src.tgz"
     FILENAME "icu4c-${VERSION2}-src.tgz"
-    SHA512 ded771d2c23f4d0acb43b1124fd21cdf9aae8456140722b02f2b6481777ce40ddb9974470eccf05f36f0437def6612cae0a6d9f2865c46b0bfe19fc35fa51856
+    SHA512 32c28270aa5d94c58d2b1ef46d4ab73149b5eaa2e0621d4a4c11597b71d146812f5e66db95f044e8aaa11b94e99edd4a48ab1aa8efbe3d72a73870cd56b564c2
 )
 
 # Patches
@@ -123,5 +123,5 @@ file(COPY
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/lib/cmake)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/cmake)
 
-file(INSTALL ${CMAKE_CURRENT_LIST_DIR}/build/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/icu RENAME copyright)
+file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/icu RENAME copyright)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/icu/version "${VERSION_MAJOR}.${VERSION_MINOR}.0")
