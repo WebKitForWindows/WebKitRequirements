@@ -1,4 +1,4 @@
-From 3613a7e563a1a9b75fd0864d0bdca9014b8eb714 Mon Sep 17 00:00:00 2001
+From 969734dbdbbecca3477afa0e1ca20145f283ce5c Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Sat, 24 Sep 2022 18:57:06 -0700
 Subject: [PATCH 3/3] Remove icu-uc from pkgconfig
