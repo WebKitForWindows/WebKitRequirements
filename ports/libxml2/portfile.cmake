@@ -1,13 +1,13 @@
 set(VERSION_MAJOR 2)
-set(VERSION_MINOR 11)
-set(VERSION_PATCH 5)
+set(VERSION_MINOR 12)
+set(VERSION_PATCH 0)
 set(VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://download.gnome.org/sources/libxml2/${VERSION_MAJOR}.${VERSION_MINOR}/libxml2-${VERSION}.tar.xz"
     FILENAME "libxml2-${VERSION}.tar.xz"
-    SHA512 8f087cdaf61957567f04280facc70211c09ca131a532fd13ed4bfc38ddec50e44b1f842b108e635bd4205232036a3e1097904ac016f1fd135bacd17aebb04272
+    SHA512 ea0b66f20bf9c81afd757d5764e8ad1a7a3e4b7addba1b0e9492ee7a8024ce0523ab5031808780801120e18a29134b664b2b4ecc425ea28fb4d96029bedb903a
 )
 
 # Patches

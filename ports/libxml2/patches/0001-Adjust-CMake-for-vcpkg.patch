@@ -1,4 +1,4 @@
-From ab028fc6196b178172674dd0e7567ce554174dc9 Mon Sep 17 00:00:00 2001
+From 0deca97f664d24f368b79c94d7091518b8eacaf3 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 23 Aug 2022 14:49:44 -0700
 Subject: [PATCH 1/2] Adjust CMake for vcpkg
@@ -8,10 +8,10 @@ Subject: [PATCH 1/2] Adjust CMake for vcpkg
  1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 834b35d3..9d2a8f4f 100644
+index 6553255c..4c6b2c42 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -584,12 +584,12 @@ install(DIRECTORY doc/ DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT documentati
+@@ -615,12 +615,12 @@ install(DIRECTORY doc/ DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT documentati
  
  configure_package_config_file(
  	libxml2-config.cmake.cmake.in libxml2-config.cmake
@@ -26,7 +26,7 @@ index 834b35d3..9d2a8f4f 100644
  	COMPONENT development
  )
  
-@@ -601,13 +601,13 @@ write_basic_package_version_file(
+@@ -632,13 +632,13 @@ write_basic_package_version_file(
  
  install(
  	FILES ${CMAKE_CURRENT_BINARY_DIR}/libxml2-config-version.cmake
@@ -42,7 +42,7 @@ index 834b35d3..9d2a8f4f 100644
  	NAMESPACE LibXml2::
  	FILE libxml2-export.cmake
  	COMPONENT development
-@@ -649,10 +649,10 @@ if(WIN32)
+@@ -699,10 +699,10 @@ if(WIN32)
  	set(prefix "\$(cd \"\$(dirname \"\$0\")\"; pwd -P)/..")
  endif()
  configure_file(xml2-config.in xml2-config @ONLY)
@@ -56,5 +56,5 @@ index 834b35d3..9d2a8f4f 100644
  
  set(XML_INCLUDEDIR "-I${CMAKE_INSTALL_FULL_INCLUDEDIR}/libxml2")
 -- 
-2.41.0.windows.1
+2.42.0.windows.2
 
