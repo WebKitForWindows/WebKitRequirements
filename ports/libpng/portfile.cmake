@@ -35,6 +35,7 @@ vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
     OPTIONS
+        -DPNG_DEBUG_POSTFIX=
         -DPNG_STATIC=${PNG_STATIC_LIBS}
         -DPNG_SHARED=${PNG_SHARED_LIBS}
         -DPNG_TESTS=OFF
