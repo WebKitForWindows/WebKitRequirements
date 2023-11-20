@@ -1,4 +1,4 @@
-From 3a1778a72e5266bab5f6bad66f1d430bb5a385eb Mon Sep 17 00:00:00 2001
+From 7a63edbc68228c95a9fd5b3dad8846c392c7d91e Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 20 Oct 2020 16:42:08 -0700
 Subject: [PATCH] Adjust CMake for vcpkg
@@ -8,7 +8,7 @@ Subject: [PATCH] Adjust CMake for vcpkg
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 5c44ac7..735f5c1 100644
+index 2e9142d..f10f961 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -665,7 +665,7 @@ ENDIF ()
@@ -21,5 +21,5 @@ index 5c44ac7..735f5c1 100644
  	CONFIGURE_PACKAGE_CONFIG_FILE (${PROJECT_NAME}-config.cmake.in ${PROJECT_NAME}-config.cmake
  		INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 -- 
-2.42.0.windows.2
+2.43.0.windows.1
 
