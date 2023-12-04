@@ -1,4 +1,4 @@
-From 7a63edbc68228c95a9fd5b3dad8846c392c7d91e Mon Sep 17 00:00:00 2001
+From 746020bf9e0ba5332114b2683f09d4a074eecc18 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 20 Oct 2020 16:42:08 -0700
 Subject: [PATCH] Adjust CMake for vcpkg
@@ -8,10 +8,10 @@ Subject: [PATCH] Adjust CMake for vcpkg
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 2e9142d..f10f961 100644
+index a885c81..d9b2ec5 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -665,7 +665,7 @@ ENDIF ()
+@@ -711,7 +711,7 @@ ENDIF ()
  
  # Export targets
  IF (CARES_INSTALL)
