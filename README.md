@@ -59,7 +59,7 @@ the requirements.
 | [curl](https://curl.se) | 8.4.0 | 2023-10-11 |
 | [libxml2](http://xmlsoft.org) | 2.12.1 | 2023-11-23 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.39 | 2023-11-16 |
-| [lcms](https://www.littlecms.com/) | 2.15.0 | 2023-03-01 |
+| [lcms](https://www.littlecms.com/) | 2.16.0 | 2023-12-03 |
 | [highway](https://github.com/google/highway) | 1.0.7 | 2023-08-30 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.40 | 2023-06-21 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 3.0.1 | 2023-10-16 |

@@ -1,10 +1,10 @@
-set(VERSION 2.15)
+set(VERSION 2.16)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/mm2/Little-CMS/releases/download/lcms${VERSION}/lcms2-${VERSION}.tar.gz"
     FILENAME "lcms2-${VERSION}.tar.gz"
-    SHA512 ab038c369e66736e0dd3810fbac6cf5381bc3102c4dd693819367b1224f59d9e853ede081388464c0e7c213d92e6cddc48c23020953af10ad6c6802cfa17e213
+    SHA512 638dd6ad6787456c8145510d18b2d0727bd0a446a13ac2934aabc9531d1156eca2a2c0fd780a453823fbd35a1895f9d8de5dc4b3cab505459dd3f0535b4e837d
 )
 
 # Patches
@@ -32,5 +32,5 @@ vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
-file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/lcms RENAME copyright)
+file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/lcms RENAME copyright)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/lcms/version ${VERSION})

@@ -1,4 +1,4 @@
-From a14f93980aaf4417608413181c8f965084fd0afd Mon Sep 17 00:00:00 2001
+From ebc36b1283b5c9b5bd4b055665a020041cc7244e Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 11 Nov 2021 14:31:22 -0800
 Subject: [PATCH] Add CMake build
@@ -17,7 +17,7 @@ index 0000000..24c7457
 +cmake_minimum_required(VERSION 3.15)
 +
 +project(little-cms
-+    VERSION 2.13.0
++    VERSION 2.16.0
 +    LANGUAGES C
 +)
 +
@@ -111,5 +111,5 @@ index 0000000..24c7457
 +    DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
 +)
 -- 
-2.39.2.windows.1
+2.43.0.windows.1
 

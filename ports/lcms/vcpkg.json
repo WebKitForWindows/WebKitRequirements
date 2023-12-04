@@ -1,6 +1,6 @@
 {
   "name": "lcms",
-  "version": "2.15.0",
+  "version": "2.16.0",
   "description": "A free, open source, CMM engine. It provides fast transforms between ICC profiles.",
   "homepage": "https://github.com/mm2/Little-CMS",
   "license": "MIT",
