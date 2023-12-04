@@ -1,10 +1,10 @@
-set(VERSION 2.1.4)
+set(VERSION 2.1.5)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/zlib-ng/zlib-ng/archive/refs/tags/${VERSION}.zip"
     FILENAME "zlib-ng-${VERSION}.zip"
-    SHA512 f1001edff3fd8d763825175860d3298df9d235afe4442d6e53116398033a2412a59efe2434002bb99989710fb6dc1db181bb18e585c7786415518ada65805b93
+    SHA512 692e1f7ab3e56a23fef0012392c8d79806545ba5d2cdd74d8f4161a9526d0173f507daef648f769aa07a00da5d72bcfa64446cb5ad64254c47e6b69a055c0b10
 )
 
 # Extract archive
