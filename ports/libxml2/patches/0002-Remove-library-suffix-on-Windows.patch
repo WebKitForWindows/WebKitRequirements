@@ -1,4 +1,4 @@
-From 1cc67f3517de892fe87753da4fbff0e8ec86b8f8 Mon Sep 17 00:00:00 2001
+From b06a790e64cef1658531ebc82d2d14ca61d9bc3c Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 23 Aug 2022 14:50:24 -0700
 Subject: [PATCH 2/2] Remove library suffix on Windows
@@ -8,10 +8,10 @@ Subject: [PATCH 2/2] Remove library suffix on Windows
  1 file changed, 19 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 4c6b2c42..61f13290 100644
+index de547363..e87452c8 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -454,25 +454,6 @@ set_target_properties(
+@@ -455,25 +455,6 @@ set_target_properties(
          SOVERSION ${LIBXML_MAJOR_VERSION}
  )
  
