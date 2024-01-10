@@ -11,6 +11,8 @@ vcpkg_download_distfile(ARCHIVE
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    # Remove after 8.6.0 release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-http2-improved-on_stream_close-data_done-handling.patch
 )
 
 # Extract archive
