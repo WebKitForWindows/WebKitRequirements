@@ -37,13 +37,15 @@ if (!$libraries) {
 $json = Get-Content -Raw -Path $libraries | ConvertFrom-Json
 
 $arguments = @('remove')
-$arguments += $json
+foreach ($value in $json) {
+  $arguments += ($value -split '\[')[0];
+}
 $arguments += '--triplet'
 $arguments += $triplet
 
 Write-Host ('vcpkg {0}' -f ($arguments -join ' '))
 
 Start-Process -Wait -NoNewWindow `
-   -FilePath (Join-Path $PSScriptRoot 'vcpkg.exe') `
-   -WorkingDirectory $PSScriptRoot `
-   -ArgumentList $arguments
+  -FilePath (Join-Path $PSScriptRoot 'vcpkg.exe') `
+  -WorkingDirectory $PSScriptRoot `
+  -ArgumentList $arguments
