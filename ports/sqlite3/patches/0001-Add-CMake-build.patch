@@ -1,4 +1,4 @@
-From f1e36e958bf901c1af7c84394959bba0c6731e12 Mon Sep 17 00:00:00 2001
+From 73dc5af0e3622932ece5b7a6e4b679dde5ce8f1b Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Tue, 21 Mar 2023 17:20:21 -0700
 Subject: [PATCH] Add CMake build
@@ -21,7 +21,7 @@ index 000000000..a0e6487a4
 @@ -0,0 +1,209 @@
 +cmake_minimum_required(VERSION 3.10)
 +
-+project(sqlite VERSION 3.44.0 LANGUAGES C)
++project(sqlite VERSION 3.45.0 LANGUAGES C)
 +
 +option(ENABLE_THREADSAFE "Whether to support threadsafe operation" OFF)
 +option(ENABLE_LOAD_EXTENSION "Whether to support loadable extensions" ON)
