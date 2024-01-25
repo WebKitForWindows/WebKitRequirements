@@ -1,4 +1,4 @@
-From 06c8c1e0ff4d080332b3acb4f3487f0d3c7a1082 Mon Sep 17 00:00:00 2001
+From de23e96ac096abbe9354ab4f8402e7051a44bc76 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 5 Nov 2019 14:12:34 -0800
 Subject: [PATCH 1/2] Make executables conditional
@@ -10,7 +10,7 @@ Adds an option ENABLE_EXECUTABLES which specifies whether executables should be 
  2 files changed, 23 insertions(+), 8 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 5ad07183..b95b8c90 100644
+index adb0ca45..a86665f9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -222,6 +222,8 @@ option(ENABLE_SHARED "Build shared libraries" TRUE)
@@ -22,7 +22,7 @@ index 5ad07183..b95b8c90 100644
  option(REQUIRE_SIMD "Generate a fatal error if SIMD extensions are not available for this platform (default is to fall back to a non-SIMD build)" FALSE)
  boolean_number(REQUIRE_SIMD)
  option(WITH_ARITH_DEC "Include arithmetic decoding support when emulating the libjpeg v6b API/ABI" TRUE)
-@@ -690,6 +692,7 @@ if(WITH_TURBOJPEG)
+@@ -699,6 +701,7 @@ if(WITH_TURBOJPEG)
          LINK_FLAGS "${TJMAPFLAG}${TJMAPFILE}")
      endif()
  
@@ -30,15 +30,15 @@ index 5ad07183..b95b8c90 100644
      add_executable(tjunittest tjunittest.c tjutil.c md5/md5.c md5/md5hl.c)
      target_link_libraries(tjunittest turbojpeg)
  
-@@ -701,6 +704,7 @@ if(WITH_TURBOJPEG)
+@@ -710,6 +713,7 @@ if(WITH_TURBOJPEG)
  
      add_executable(tjexample tjexample.c)
      target_link_libraries(tjexample turbojpeg)
 +    endif()
-   endif()
  
-   if(ENABLE_STATIC)
-@@ -721,6 +725,7 @@ if(WITH_TURBOJPEG)
+     add_custom_target(tjdoc COMMAND doxygen -s doxygen.config
+       WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+@@ -733,6 +737,7 @@ if(WITH_TURBOJPEG)
        set_target_properties(turbojpeg-static PROPERTIES OUTPUT_NAME turbojpeg)
      endif()
  
@@ -46,7 +46,7 @@ index 5ad07183..b95b8c90 100644
      add_executable(tjunittest-static tjunittest.c tjutil.c md5/md5.c
        md5/md5hl.c)
      target_link_libraries(tjunittest-static turbojpeg-static)
-@@ -730,6 +735,7 @@ if(WITH_TURBOJPEG)
+@@ -742,6 +747,7 @@ if(WITH_TURBOJPEG)
      if(UNIX)
        target_link_libraries(tjbench-static m)
      endif()
@@ -54,7 +54,7 @@ index 5ad07183..b95b8c90 100644
    endif()
  endif()
  
-@@ -739,7 +745,7 @@ endif()
+@@ -751,7 +757,7 @@ endif()
  set(CDJPEG_COMPILE_FLAGS
    "-DBMP_SUPPORTED -DGIF_SUPPORTED -DPPM_SUPPORTED -DTARGA_SUPPORTED ${USE_SETMODE}")
  
@@ -63,7 +63,7 @@ index 5ad07183..b95b8c90 100644
    # Compile a separate version of these source files with 12-bit and 16-bit
    # data precision.
    add_library(cjpeg12-static OBJECT rdgif.c rdppm.c)
-@@ -778,9 +784,11 @@ if(ENABLE_STATIC)
+@@ -790,9 +796,11 @@ if(ENABLE_STATIC)
    target_link_libraries(example-static jpeg-static)
  endif()
  
@@ -75,7 +75,7 @@ index 5ad07183..b95b8c90 100644
  
  
  ###############################################################################
-@@ -1709,8 +1717,10 @@ if(WITH_TURBOJPEG)
+@@ -1721,8 +1729,10 @@ if(WITH_TURBOJPEG)
        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -86,7 +86,7 @@ index 5ad07183..b95b8c90 100644
      if(NOT CMAKE_VERSION VERSION_LESS "3.1" AND MSVC AND
        CMAKE_C_LINKER_SUPPORTS_PDB)
        install(FILES "$<TARGET_PDB_FILE:turbojpeg>"
-@@ -1721,7 +1731,7 @@ if(WITH_TURBOJPEG)
+@@ -1733,7 +1743,7 @@ if(WITH_TURBOJPEG)
      install(TARGETS turbojpeg-static EXPORT ${CMAKE_PROJECT_NAME}Targets
        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
@@ -95,7 +95,7 @@ index 5ad07183..b95b8c90 100644
        if(GENERATOR_IS_MULTI_CONFIG)
          set(DIR "${CMAKE_CURRENT_BINARY_DIR}/\${CMAKE_INSTALL_CONFIG_NAME}")
        else()
-@@ -1739,7 +1749,7 @@ if(ENABLE_STATIC)
+@@ -1751,7 +1761,7 @@ if(ENABLE_STATIC)
    install(TARGETS jpeg-static EXPORT ${CMAKE_PROJECT_NAME}Targets
      INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
      ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
@@ -104,7 +104,7 @@ index 5ad07183..b95b8c90 100644
      if(GENERATOR_IS_MULTI_CONFIG)
        set(DIR "${CMAKE_CURRENT_BINARY_DIR}/\${CMAKE_INSTALL_CONFIG_NAME}")
      else()
-@@ -1754,7 +1764,9 @@ if(ENABLE_STATIC)
+@@ -1766,7 +1776,9 @@ if(ENABLE_STATIC)
    endif()
  endif()
  
@@ -148,5 +148,5 @@ index 8e942569..e5f27e7b 100644
    CMAKE_C_LINKER_SUPPORTS_PDB)
    install(FILES "$<TARGET_PDB_FILE:jpeg>"
 -- 
-2.42.0.windows.2
+2.43.0.windows.1
 
