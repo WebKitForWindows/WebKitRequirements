@@ -62,7 +62,7 @@ the requirements.
 | [lcms](https://www.littlecms.com/) | 2.16.0 | 2023-12-03 |
 | [highway](https://github.com/google/highway) | 1.0.7 | 2023-08-30 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.41 | 2024-01-24 |
-| [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 3.0.1 | 2023-10-16 |
+| [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 3.0.2 | 2024-01-24 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.3.2 | 2023-09-13 |
 | [libjxl](https://github.com/libjxl/libjxl) | 0.9.0 | 2023-12-22 |
 | [sqlite](http://sqlite.org) | 3.45.0 | 2024-01-15 |
