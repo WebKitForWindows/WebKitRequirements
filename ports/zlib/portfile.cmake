@@ -1,10 +1,16 @@
-set(VERSION 2.1.5)
+set(VERSION 2.1.6)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/zlib-ng/zlib-ng/archive/refs/tags/${VERSION}.zip"
     FILENAME "zlib-ng-${VERSION}.zip"
-    SHA512 692e1f7ab3e56a23fef0012392c8d79806545ba5d2cdd74d8f4161a9526d0173f507daef648f769aa07a00da5d72bcfa64446cb5ad64254c47e6b69a055c0b10
+    SHA512 0314183a4212775dd41e83c6189aebef3fd94639976d543ae2690e79d48bc4084a94cb1c2619973888c9f80e8eb9392133bf0e5be933422c540493b153995e0e
+)
+
+# Patches
+set(PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Relocate-CMake-target-export-definitions.patch
 )
 
 # Extract archive
@@ -28,8 +34,10 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup()
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(INSTALL ${SOURCE_PATH}/LICENSE.md DESTINATION ${CURRENT_PACKAGES_DIR}/share/zlib RENAME copyright)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/zlib/version "${VERSION}")

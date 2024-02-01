@@ -1,0 +1,25 @@
+From f9bed9d9c7aea2fea9ad19892f2cd201d91cd47f Mon Sep 17 00:00:00 2001
+From: Don Olmstead <don.j.olmstead@gmail.com>
+Date: Thu, 1 Feb 2024 13:15:21 -0800
+Subject: [PATCH 1/2] Adjust CMake for vcpkg
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8bcfaf7e..4f20aadf 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1211,7 +1211,7 @@ if(NOT SKIP_INSTALL_FILES AND NOT SKIP_INSTALL_ALL)
+         EXPORT ${EXPORT_NAME}
+         DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+     install(EXPORT ${EXPORT_NAME}
+-        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}"
++        DESTINATION "${CMAKE_INSTALL_DATADIR}/zlib"
+         NAMESPACE ${EXPORT_NAME}::)
+ endif()
+ 
+-- 
+2.43.0.windows.1
+
