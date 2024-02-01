@@ -64,7 +64,7 @@ the requirements.
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.41 | 2024-01-24 |
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 3.0.2 | 2024-01-24 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.3.2 | 2023-09-13 |
-| [libjxl](https://github.com/libjxl/libjxl) | 0.9.0 | 2023-12-22 |
+| [libjxl](https://github.com/libjxl/libjxl) | 0.9.1 | 2024-01-11 |
 | [sqlite](http://sqlite.org) | 3.45.0 | 2024-01-15 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
 | [freetype](https://www.freetype.org) | 2.13.2 | 2023-08-25 |
