@@ -1,10 +1,10 @@
-set(VERSION 1.6.40)
+set(VERSION 1.6.41)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://downloads.sourceforge.net/project/libpng/libpng16/${VERSION}/libpng-${VERSION}.tar.gz"
-    FILENAME "libpng-${VERSION}.tar.gz"
-    SHA512 e27c61cb8fecd2550ca742aad68560f83bcc5123875f6727c2992258212bd342020e35a0ed95de6c2a2ca3f388f3afe1da7965e98650df3a0b9c5726c8334f95
+    URLS "https://downloads.sourceforge.net/project/libpng/libpng16/${VERSION}/libpng-${VERSION}.tar.xz"
+    FILENAME "libpng-${VERSION}.tar.xz"
+    SHA512 046d0328255572ee2ccab7e751ed457b07e0aedc72474c2f4675a8303e628de3ef8afa1a00c60d768eb788546d1cda1e8b800b2497d9c352694faba6dde2c5b4
 )
 
 # Patches

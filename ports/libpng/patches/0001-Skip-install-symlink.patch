@@ -1,4 +1,4 @@
-From 38a91e5792ba87ffe969ec832ad48373610f06b7 Mon Sep 17 00:00:00 2001
+From dcd98afa914f513d517ff1ff05f4b95f43ed3b73 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 3 Jan 2019 16:53:04 -0800
 Subject: [PATCH 1/3] Skip install symlink
@@ -9,19 +9,19 @@ Avoid using symlinks on Windows.
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e355e4dfd..a11ddf0f4 100644
+index 0d40ce0b7..11a33d168 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -985,7 +985,7 @@ if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
+@@ -1010,7 +1010,7 @@ if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
            FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR})
  
 -  if(PNG_SHARED)
 +  if(PNG_SHARED AND NOT SKIP_INSTALL_SYMLINK)
      # Create a symlink for libpng.dll.a => libpng16.dll.a on Cygwin
-     if(CYGWIN OR MINGW)
-       create_symlink(libpng${CMAKE_IMPORT_LIBRARY_SUFFIX} TARGET png_shared)
-@@ -1000,7 +1000,7 @@ if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
+     if(NOT WIN32 OR CYGWIN OR MINGW)
+       create_symlink(libpng${CMAKE_SHARED_LIBRARY_SUFFIX} TARGET png_shared)
+@@ -1019,7 +1019,7 @@ if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
      endif()
    endif()
  
@@ -31,5 +31,5 @@ index e355e4dfd..a11ddf0f4 100644
        create_symlink(libpng${CMAKE_STATIC_LIBRARY_SUFFIX} TARGET png_static)
        install(FILES $<TARGET_LINKER_FILE_DIR:png_static>/libpng${CMAKE_STATIC_LIBRARY_SUFFIX}
 -- 
-2.41.0.windows.1
+2.43.0.windows.1
 
