@@ -1,4 +1,4 @@
-From 73dc5af0e3622932ece5b7a6e4b679dde5ce8f1b Mon Sep 17 00:00:00 2001
+From a6c80dbf1dd5cf40161bbee58b65444b857f5e16 Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Tue, 21 Mar 2023 17:20:21 -0700
 Subject: [PATCH] Add CMake build
@@ -15,7 +15,7 @@ Follows along with the configure options and checks. The `sqlite_cfg.h.cmake` he
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 new file mode 100644
-index 000000000..a0e6487a4
+index 000000000..0131e0be6
 --- /dev/null
 +++ b/CMakeLists.txt
 @@ -0,0 +1,209 @@
