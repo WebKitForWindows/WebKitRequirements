@@ -1,4 +1,4 @@
-From 38b80781cc5a77bbdf879d59b481f54ffb18f4c8 Mon Sep 17 00:00:00 2001
+From c08bfe63f60ee50185ce2081789e723e71944756 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 30 Nov 2021 10:04:36 -0800
 Subject: [PATCH 3/3] Fix pkgconfig on Windows

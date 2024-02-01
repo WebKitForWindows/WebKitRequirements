@@ -1,4 +1,4 @@
-From c62b89da985f1464be464b2b9070a0060c94fb69 Mon Sep 17 00:00:00 2001
+From ffb6a58cc25d93645f4e91caf61c9e4cebcb87f2 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 3 Jan 2019 16:54:07 -0800
 Subject: [PATCH 2/3] Do not append static to library name
