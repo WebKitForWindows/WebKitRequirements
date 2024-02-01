@@ -1,18 +1,16 @@
-set(VERSION 8.5.0)
+set(VERSION 8.6.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 966937f2a17b20f320d5cf7a94aafb85158e945191bfe040d75c8d99b55e5af12f43b1b4f40ebe0f6f583fea0ceb92e3ae184efe844cf8fd7b6b52b45124a199
+    SHA512 f5f4b966b3bd379617d2f6d62513fa674f302c817c58903284f8aaeac6f1f1d62970def0b78d7f13341b6862b95e3ad6055d2dc62563eba22911981e17daa9cc
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    # Remove after 8.6.0 release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-http2-improved-on_stream_close-data_done-handling.patch
 )
 
 # Extract archive
@@ -27,6 +25,7 @@ vcpkg_extract_source_archive_ex(
 set(BUILD_OPTIONS
     # BUILD options
     -DBUILD_CURL_EXE=OFF
+    -DBUILD_LIBCURL_DOCS=OFF
     -DBUILD_TESTING=OFF
     # CURL options
     -DCURL_BROTLI=ON
@@ -71,7 +70,7 @@ set(BUILD_OPTIONS
     -DCURL_USE_LIBPSL=OFF
     -DCURL_USE_LIBSSH2=OFF
     # ENABLE options
-    -DENABLE_MANUAL=OFF
+    -DENABLE_CURL_MANUAL=OFF
     -DENABLE_UNIX_SOCKETS=OFF
     # USE options
     -DUSE_NGHTTP2=ON
