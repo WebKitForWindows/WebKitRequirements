@@ -82,7 +82,7 @@ repos:
 
   libpng:
     host: github
-    owner: glennrp
+    owner: pnggroup
     repo: libpng
     tags: true
     constraint: ~%s
