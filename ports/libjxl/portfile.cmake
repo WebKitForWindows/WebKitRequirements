@@ -1,16 +1,10 @@
-set(VERSION 0.9.1)
+set(VERSION 0.10.1)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/libjxl/libjxl/archive/v${VERSION}.zip"
     FILENAME "libjxl-${VERSION}.zip"
-    SHA512 72e9a519f93be999a5dc218e844eb4d703f36ad2097a84d3c9d2c01e046517ed0ab0de510d9d844b26e3fa63023bb3de209da905d7915b8518711d35d8ade476
-)
-
-# Patches
-set(PATCHES
-    # Remove after 0.9.2 release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Change-definition-of-JXL_DEBUG_V-when-JXL_DEBUG_V_LE.patch
+    SHA512 c106f1e02e2c6b1e9341ad116e90baa646bae5c1992779ee187d5dcb206f436cabe9686d81b5c17d0b7dfd0fce4b93c57bd3049fdee583a7d63b6e0d90a2325e
 )
 
 # Extract archive
