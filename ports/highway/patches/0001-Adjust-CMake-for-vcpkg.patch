@@ -1,4 +1,4 @@
-From 7675f08ab319606f259511ea82a56770571f46e5 Mon Sep 17 00:00:00 2001
+From b5c223ea62c24f31034051576a7eb426e2948aee Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Mon, 20 Mar 2023 18:33:07 -0700
 Subject: [PATCH] Adjust CMake for vcpkg
@@ -9,10 +9,10 @@ Subject: [PATCH] Adjust CMake for vcpkg
  2 files changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 8212477..6b866d2 100644
+index 265ff68..77520f9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -621,6 +621,6 @@ if (HWY_ENABLE_INSTALL)
+@@ -674,6 +674,6 @@ if (HWY_ENABLE_INSTALL)
    # write hwy-config file to handle `Config` mode
    include(CMakePackageConfigHelpers)
    write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/hwy-config-version.cmake" COMPATIBILITY SameMajorVersion)
@@ -34,5 +34,5 @@ index 0416b10..6f55d52 100644
  Libs: -L${libdir} -lhwy_test
  Cflags: -I${includedir}
 -- 
-2.41.0.windows.1
+2.44.0.windows.1
 
