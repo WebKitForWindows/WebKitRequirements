@@ -1,4 +1,4 @@
-From 5ed03784020e3efe829628052e1b53bccea92bc1 Mon Sep 17 00:00:00 2001
+From b1f91519a81a81bf673e507fbaec61ba98f924c8 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Tue, 29 Mar 2022 16:37:06 -0700
 Subject: [PATCH] Add CMake platform
@@ -138,5 +138,5 @@ index 0000000..e26d18f
 +    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 +)
 -- 
-2.39.1.windows.1
+2.44.0.windows.1
 

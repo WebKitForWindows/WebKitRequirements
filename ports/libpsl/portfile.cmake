@@ -1,12 +1,12 @@
 include(${CMAKE_CURRENT_LIST_DIR}/psl.cmake)
 
-set(VERSION 0.21.2)
+set(VERSION 0.21.5)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/rockdaboot/libpsl/releases/download/${VERSION}/libpsl-${VERSION}.tar.gz"
     FILENAME "libpsl-${VERSION}.tar.gz"
-    SHA512 f1df72220bf4391d4701007100b0df66c833a2cbcb7481c9d13f0b9e0cad3b66d2d15d4b976e5bad60d2ad1540355112fa1acb07aa925c241d2d7cd20681c71d
+    SHA512 c14d575cecc0f1693894dd79565b6b9220084ddfa43b908a1cefe16d147cdd5ec47796eb0c2135e2f829a951abaf39d8a371ab5c1352f57b36e610e25adf91f5
 )
 
 # Patches

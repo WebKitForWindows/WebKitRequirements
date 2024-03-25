@@ -71,4 +71,4 @@ the requirements.
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 8.3.1 | 2024-03-16 |
 | [pixman](http://www.pixman.org) | 0.42.2 | 2022-11-02 |
 | [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.18.0 | 2023-09-23 |
-| [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.2 | 2022-12-26 |
+| [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.5 | 2024-01-13 |
