@@ -1,17 +1,16 @@
-set(VERSION 8.3.0)
+set(VERSION 8.3.1)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${VERSION}/harfbuzz-${VERSION}.tar.xz"
     FILENAME "harfbuzz-${VERSION}.tar.xz"
-    SHA512 6b8753c0b55d34a1a46a64466b9b0de8bc4748c42b29fa9463616a5f48db08ceb4a80cce416e10861778b98dc96d0638d9dd8d7204e404662154f419f3f61f21
+    SHA512 47bb8150faf215d317a434f78c3029261924aae5ff479fbd3a5d62dbbbfce159460fcbc6f53c3c8ec85b09fad5ae0c9d591d67a0ca70424f43ed5b7849eef4ea
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Use-find_package-for-ICU.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Adjust-CMake-for-vcpkg.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Remove-icu-uc-from-pkgconfig.patch
 )
 
 # Extract archive
