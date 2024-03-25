@@ -135,3 +135,8 @@ repos:
     host: freedesktop
     owner: cairo
     repo: cairo
+
+  libpsl:
+    host: github
+    owner: rockdaboot
+    repo: libpsl
