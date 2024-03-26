@@ -52,7 +52,7 @@ the requirements.
 | [zlib](https://github.com/zlib-ng/zlib-ng) | 2.1.6 | 2024-01-10 |
 | [brotli](https://github.com/google/brotli) | 1.1.0 | 2023-08-31 |
 | [libressl](https://www.libressl.org) | 3.9.0 | 2024-03-09 |
-| [nghttp2](https://nghttp2.org) | 1.59.0 | 2024-01-21 |
+| [nghttp2](https://nghttp2.org) | 1.60.0 | 2024-03-01 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 1.1.0 | 2023-11-25 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.2.0 | 2024-01-20 |
 | [c-ares](https://c-ares.org) | 1.27.0 | 2024-02-22 |

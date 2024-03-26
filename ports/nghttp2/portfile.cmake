@@ -1,10 +1,17 @@
-set(VERSION 1.59.0)
+set(VERSION 1.60.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/nghttp2/nghttp2/releases/download/v${VERSION}/nghttp2-${VERSION}.tar.xz"
     FILENAME "nghttp2-${VERSION}.tar.xz"
-    SHA512 0725f302957520893ac454997adc6d6e71dc9b520c62390477fe8c5dd5c64d02415023266814cfec859bf562159e4a42eeb7d7312c5871739a3d57ed7430820b
+    SHA512 5e6365d9118596d41848930de70f4a918d72463920184df60a7e1678c3a6c9cf1416236888e7e34395c87f41bba00a114994ba5a6e73f6a389769abf1b5cc842
+)
+
+# Patches
+set(PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
+    # Remove after next release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-CMake-Respect-BUILD_STATIC_LIBS.patch
 )
 
 # Extract archive
@@ -18,6 +25,7 @@ vcpkg_extract_source_archive_ex(
 # Run CMake build
 set(BUILD_OPTIONS
     # ENABLE options
+    -DENABLE_DOC=OFF
     -DENABLE_FAILMALLOC=OFF
     -DENABLE_HTTP3=OFF
     -DENABLE_LIB_ONLY=ON
@@ -44,8 +52,9 @@ vcpkg_configure_cmake(
     PREFER_NINJA
     OPTIONS
         ${BUILD_OPTIONS}
-        -DENABLE_SHARED_LIB=${NGHTTP2_SHARED_LIB}
-        -DENABLE_STATIC_LIB=${NGHTTP2_STATIC_LIB}
+        -DBUILD_TESTING=OFF
+        -DBUILD_SHARED_LIBS=${NGHTTP2_SHARED_LIB}
+        -DBUILD_STATIC_LIBS=${NGHTTP2_STATIC_LIB}
 )
 
 vcpkg_install_cmake()
