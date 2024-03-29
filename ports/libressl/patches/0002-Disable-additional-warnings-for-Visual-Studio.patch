@@ -1,4 +1,4 @@
-From 3f8ee98050113bfaebedac075a275809fe294177 Mon Sep 17 00:00:00 2001
+From 2a12b15a1e303c31bc2550f8a70ee80e302edaa7 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Wed, 24 Apr 2019 13:48:58 -0700
 Subject: [PATCH 2/3] Disable additional warnings for Visual Studio
@@ -9,10 +9,10 @@ Disabling C4464, C4668 and C4820.
  1 file changed, 5 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index dc14583..a9e65a2 100644
+index 01a42fb..10d5c32 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -165,7 +165,12 @@ if(MSVC)
+@@ -170,7 +170,12 @@ if(MSVC)
  			"C4267" # 'var' : conversion from 'size_t' to 'type',
  			        # possible loss of data
  			"C4389" # 'operator' : signed/unsigned mismatch

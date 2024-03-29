@@ -1,4 +1,4 @@
-From 6d992696c94df00f6cff66d8ecc51e55f46cdb12 Mon Sep 17 00:00:00 2001
+From 88b3eda37942ca7ab69d01d69159b45298614429 Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Fri, 3 Nov 2023 11:31:24 -0700
 Subject: [PATCH 3/3] Adjust CMake for vcpkg
@@ -8,7 +8,7 @@ Subject: [PATCH 3/3] Adjust CMake for vcpkg
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a9e65a2..9ce70dc 100644
+index 10d5c32..5eb4f28 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -39,7 +39,7 @@ option(ENABLE_ASM "Enable assembly" ON)
