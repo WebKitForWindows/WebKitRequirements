@@ -1,10 +1,15 @@
-set(VERSION 1.2.0)
+set(VERSION 1.4.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/ngtcp2-${VERSION}.tar.xz"
     FILENAME "ngtcp2-${VERSION}.tar.xz"
-    SHA512 98a5724df82340d9448e0d11393bf9638aeb766edcae67255fb421538fba05e01f56fd16b85b157b21ff086696508f2d9ca410e81b8495411afcce77325c241a
+    SHA512 6491f158cd3bd659d593810935ceedefea8ee4a77e0a1952c0300f83188d0af1ef8313b24f9dbd3e7a795b6ad9099d2681b70ff1bafd92eed429ee028b2f2dea
+)
+
+set(PATCHES
+    # Remove after next release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-cmake-add-BUILD_TESTING-fix-MSVC-with-static-shared.patch
 )
 
 # Extract archive
@@ -35,6 +40,7 @@ vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
     OPTIONS
+        -DBUILD_TESTING=OFF
         -DENABLE_OPENSSL=ON
         -DENABLE_SHARED_LIB=${NGTCP2_SHARED_LIB}
         -DENABLE_STATIC_LIB=${NGTCP2_STATIC_LIB}
