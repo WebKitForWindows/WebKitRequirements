@@ -1,4 +1,4 @@
-From 3ac6fd25aa8e9d98a31ba7af5d0e8e2d38fdbd64 Mon Sep 17 00:00:00 2001
+From da2db3b41075bd976fd08bffabe375d92270a590 Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Tue, 26 Mar 2024 10:45:06 -0700
 Subject: [PATCH] Adjust CMake for vcpkg
@@ -8,10 +8,10 @@ Subject: [PATCH] Adjust CMake for vcpkg
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
-index 211c8e43..52b040d5 100644
+index fda8dcb7..de103d6e 100644
 --- a/lib/CMakeLists.txt
 +++ b/lib/CMakeLists.txt
-@@ -99,5 +99,5 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libnghttp2.pc"
+@@ -103,5 +103,5 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/libnghttp2.pc"
    DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
  
  install(EXPORT ${EXPORT_SET}

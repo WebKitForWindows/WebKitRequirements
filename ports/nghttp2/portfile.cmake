@@ -1,17 +1,15 @@
-set(VERSION 1.60.0)
+set(VERSION 1.61.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/nghttp2/nghttp2/releases/download/v${VERSION}/nghttp2-${VERSION}.tar.xz"
     FILENAME "nghttp2-${VERSION}.tar.xz"
-    SHA512 5e6365d9118596d41848930de70f4a918d72463920184df60a7e1678c3a6c9cf1416236888e7e34395c87f41bba00a114994ba5a6e73f6a389769abf1b5cc842
+    SHA512 01e930d7caf464699505f92b76e2bc8192d168612dc564d2546812c42afea2fb81d552d70e8a5fed35e2bf5deadbec8eda095af94a2484bca41542988afce52a
 )
 
 # Patches
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    # Remove after next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-CMake-Respect-BUILD_STATIC_LIBS.patch
 )
 
 # Extract archive
