@@ -1,4 +1,4 @@
-From 888802470d8c8e3ddbb2ff3a1b698e8a021e9bf2 Mon Sep 17 00:00:00 2001
+From b4f00a2066c9290d216d5c795c48f06f949155b2 Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Tue, 21 Mar 2023 17:20:21 -0700
 Subject: [PATCH] Add CMake build
@@ -15,13 +15,13 @@ Follows along with the configure options and checks. The `sqlite_cfg.h.cmake` he
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 new file mode 100644
-index 000000000..0131e0be6
+index 000000000..0a7a878d7
 --- /dev/null
 +++ b/CMakeLists.txt
 @@ -0,0 +1,209 @@
 +cmake_minimum_required(VERSION 3.10)
 +
-+project(sqlite VERSION 3.45.0 LANGUAGES C)
++project(sqlite VERSION 3.45.3 LANGUAGES C)
 +
 +option(ENABLE_THREADSAFE "Whether to support threadsafe operation" OFF)
 +option(ENABLE_LOAD_EXTENSION "Whether to support loadable extensions" ON)
