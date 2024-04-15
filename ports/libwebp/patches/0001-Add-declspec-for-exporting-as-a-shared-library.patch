@@ -1,20 +1,20 @@
-From 7dc70860b381a23eb21ee1d14f94dca9f2aa94e9 Mon Sep 17 00:00:00 2001
+From 94db0c93a2d3c9ea0f46de1d67b9cb6281084085 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Mon, 23 Apr 2018 18:49:42 -0700
 Subject: [PATCH] Add declspec for exporting as a shared library
 
 This adds a default declaration of __declspec to WEBP_EXTERN.
 ---
- src/webp/types.h | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ src/webp/types.h | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/src/webp/types.h b/src/webp/types.h
-index f255432e..67202ca1 100644
+index 9c17edec..24cb24f3 100644
 --- a/src/webp/types.h
 +++ b/src/webp/types.h
-@@ -36,10 +36,16 @@ typedef long long int int64_t;
- #define WEBP_INLINE __forceinline
- #endif  /* _MSC_VER */
+@@ -59,10 +59,14 @@ typedef long long int int64_t;
+ #endif  /* defined(WEBP_ENABLE_NODISCARD) && WEBP_ENABLE_NODISCARD */
+ #endif  /* WEBP_NODISCARD */
  
 +#ifndef __has_declspec_attribute
 +#define __has_declspec_attribute(x) 0
@@ -23,13 +23,11 @@ index f255432e..67202ca1 100644
  #ifndef WEBP_EXTERN
  // This explicitly marks library functions and allows for changing the
  // signature for e.g., Windows DLL builds.
--# if defined(__GNUC__) && __GNUC__ >= 4
-+# if defined(WIN32) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport))
-+#  define WEBP_EXTERN __declspec(dllexport)
-+# elif defined(__GNUC__) && __GNUC__ >= 4
+-# if defined(_WIN32) && defined(WEBP_DLL)
++# if defined(WEBP_DLL) && (defined(WIN32) || (__has_declspec_attribute(dllexport) && __has_declspec_attribute(dllimport)))
+ #  define WEBP_EXTERN __declspec(dllexport)
+ # elif defined(__GNUC__) && __GNUC__ >= 4
  #  define WEBP_EXTERN extern __attribute__ ((visibility ("default")))
- # else
- #  if defined(_MSC_VER) && defined(WEBP_DLL)
 -- 
-2.42.0.windows.2
+2.44.0.windows.1
 
