@@ -1,6 +1,6 @@
 {
   "name": "icu",
-  "version": "74.2.0",
+  "version": "75.1.0",
   "description": "ICU is a mature, widely used set of C/C++ and Java libraries providing Unicode and Globalization support for software applications. ICU is widely portable and gives applications the same results on all platforms and between C/C++ and Java software.",
   "homepage": "http://site.icu-project.org",
   "license": "ICU",

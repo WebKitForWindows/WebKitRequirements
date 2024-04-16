@@ -1,4 +1,4 @@
-From 5ffc30f0afb6718ee347f4aa4ac46097547c041f Mon Sep 17 00:00:00 2001
+From 5c04c91d4941c422abeea20863f01146afa2f4e1 Mon Sep 17 00:00:00 2001
 From: foopoiuyt <github@zombiestormtrooper.com>
 Date: Tue, 3 Nov 2020 08:58:19 -0800
 Subject: [PATCH 1/2] Add CMake platform
@@ -15,7 +15,7 @@ Modified version of the LibCMaker ICU files.
  source/common_tools_exe_flags.cmake     |   86 +
  source/common_tools_exe_libs.cmake      |    8 +
  source/configure_1st.cmake              |  137 +
- source/configure_2nd.cmake              | 1208 +++
+ source/configure_2nd.cmake              | 1189 +++
  source/data/CMakeLists.txt              |  340 +
  .../data/cmake-brkitr-index-txt-content.in    |   21 +
  .../data/cmake-coll-index-txt-content.in      |  168 +
@@ -56,7 +56,7 @@ Modified version of the LibCMaker ICU files.
  source/tools/makeconv/CMakeLists.txt    |   31 +
  source/tools/pkgdata/CMakeLists.txt     |   35 +
  source/tools/toolutil/CMakeLists.txt    |   59 +
- 51 files changed, 20144 insertions(+)
+ 51 files changed, 20125 insertions(+)
  create mode 100644 LICENSE_CMakeLists
  create mode 100644 README_CMakeLists.txt
  create mode 100644 source/CMakeLists.txt
@@ -1143,10 +1143,10 @@ index 00000000000..dd22f884c3a
 +status_message("release ${VERSION}, library ${LIB_VERSION}, unicode version ${UNICODE_VERSION}")
 diff --git a/source/configure_2nd.cmake b/source/configure_2nd.cmake
 new file mode 100644
-index 00000000000..be373fbc3c3
+index 00000000000..637c17e4bd3
 --- /dev/null
 +++ b/source/configure_2nd.cmake
-@@ -0,0 +1,1208 @@
+@@ -0,0 +1,1189 @@
 +# Copyright (c) 2018, NikitaFeodonit. All rights reserved.
 +#
 +# ICU build file for CMake build tools
@@ -1268,7 +1268,7 @@ index 00000000000..be373fbc3c3
 +
 +set(CMAKE_C_STANDARD 99)
 +set(CMAKE_C_STANDARD_REQUIRED ON)
-+set(CMAKE_CXX_STANDARD 11)
++set(CMAKE_CXX_STANDARD 17)
 +set(CMAKE_CXX_STANDARD_REQUIRED ON)
 +
 +# Check whether to build debug libraries check_message("whether to build debug libraries"
@@ -1548,25 +1548,6 @@ index 00000000000..be373fbc3c3
 +
 +# Check whether to use the evil rpath or not
 +option(ICU_ENABLE_RPATH "Use rpath when linking" OFF)
-+
-+if(CMAKE_CXX_STANDARD LESS 11)
-+    try_compile_src(
-+        "if_include_string_works"
-+        "cpp"
-+        "#include <string>"
-+        ""
-+        ""
-+        ""
-+        _HEADER_STDSTRING
-+    )
-+    if(_HEADER_STDSTRING)
-+        set(U_HAVE_STD_STRING 1)
-+    else()
-+        set(U_HAVE_STD_STRING 0)
-+        list(APPEND CONFIG_CPPFLAGS U_HAVE_STD_STRING=0)
-+    endif()
-+    check_message("if #include <string> works" ${_HEADER_STDSTRING})
-+endif()
 +
 +# NOTE: this check is removed in ICU 63.1, C++11 has <atomic>.
 +try_compile_src(
@@ -20560,5 +20541,5 @@ index 00000000000..36b15d4783d
 +    DESTINATION "${includedir}"
 +)
 -- 
-2.43.0.windows.1
+2.44.0.windows.1
 

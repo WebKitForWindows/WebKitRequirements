@@ -48,7 +48,7 @@ the requirements.
 
 | Library | Version | Release Date |
 |---|:---:|:---:|
-| [icu](http://site.icu-project.org) | 74.2 | 2023-12-11 |
+| [icu](http://site.icu-project.org) | 75.1 | 2024-04-17 |
 | [zlib](https://github.com/zlib-ng/zlib-ng) | 2.1.6 | 2024-01-10 |
 | [brotli](https://github.com/google/brotli) | 1.1.0 | 2023-08-31 |
 | [libressl](https://www.libressl.org) | 3.9.1 | 2024-03-27 |
