@@ -6,7 +6,6 @@
   "dependencies": [
     "brotli",
     "nghttp2",
-    "zlib",
     {
       "name": "vcpkg-cmake",
       "host": true
@@ -18,7 +17,8 @@
     {
       "name": "vcpkg-cmake-webkit",
       "host": true
-    }
+    },
+    "zlib"
   ],
   "features": {
     "ares": {

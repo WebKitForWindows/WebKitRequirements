@@ -5,7 +5,6 @@
   "homepage": "ttp://www.libpng.org/pub/png/libpng.html",
   "license": "libpng-2.0",
   "dependencies": [
-    "zlib",
     {
       "name": "vcpkg-cmake",
       "host": true
@@ -17,6 +16,7 @@
     {
       "name": "vcpkg-cmake-webkit",
       "host": true
-    }
+    },
+    "zlib"
   ]
 }

@@ -7,7 +7,6 @@
   "dependencies": [
     "libpng",
     "pixman",
-    "zlib",
     {
       "name": "vcpkg-cmake",
       "host": true
@@ -19,9 +18,9 @@
     {
       "name": "vcpkg-cmake-webkit",
       "host": true
-    }
-  ]
-  ,
+    },
+    "zlib"
+  ],
   "features": {
     "freetype": {
       "description": "Cairo with freetype support enabled.",
