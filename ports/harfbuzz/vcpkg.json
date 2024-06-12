@@ -6,7 +6,10 @@
   "license": "MIT-Modern-Variant",
   "dependencies": [
     "freetype",
-    "icu",
+    {
+      "name": "icu",
+      "platform": "!linux"
+    },
     {
       "name": "vcpkg-cmake",
       "host": true

@@ -5,7 +5,10 @@
   "homepage": "http://xmlsoft.org",
   "license": "MIT",
   "dependencies": [
-    "icu",
+    {
+      "name": "icu",
+      "platform": "!linux"
+    },
     {
       "name": "vcpkg-cmake",
       "host": true

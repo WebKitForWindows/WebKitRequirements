@@ -71,10 +71,10 @@ vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
-file(INSTALL ${SOURCE_PATH}/LICENSE.txt DESTINATION ${CURRENT_PACKAGES_DIR}/share/freetype RENAME copyright)
+file(INSTALL ${SOURCE_PATH}/LICENSE.TXT DESTINATION ${CURRENT_PACKAGES_DIR}/share/freetype RENAME copyright)
 file(INSTALL 
-    ${SOURCE_PATH}/docs/FTL.txt
-    ${SOURCE_PATH}/docs/GPLv2.txt
+    ${SOURCE_PATH}/docs/FTL.TXT
+    ${SOURCE_PATH}/docs/GPLv2.TXT
     DESTINATION ${CURRENT_PACKAGES_DIR}/share/freetype
 )
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/freetype/version ${VERSION})

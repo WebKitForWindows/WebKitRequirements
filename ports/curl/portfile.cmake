@@ -148,16 +148,11 @@ if (NOT libressl IN_LIST FEATURES)
     endif ()
 endif ()
 
-if (NOT VCPKG_WINDOWS OR VCPKG_TARGET_ARCHITECTURE MATCHES "^arm")
+# When cross compiling curl it does not have the ability to use CMake's try_run
+# functionality so these values need to be set properly for the platform
+if (DEFINED CURL_CROSS_BUILD_OPTIONS)
     message(STATUS "Cross compiling curl")
-
-    # When cross compiling curl it does not have the ability to use CMake's try_run
-    # functionality so these values need to be set properly for the platform
-    if (DEFINED CURL_CROSS_BUILD_OPTIONS)
-        list(APPEND BUILD_OPTIONS ${CURL_CROSS_BUILD_OPTIONS})
-    else ()
-        message(FATAL_ERROR "CURL_CROSS_BUILD_OPTIONS needs to be set in the triplet file when cross compiling to communicate values determined by try_run")
-    endif ()
+    list(APPEND BUILD_OPTIONS ${CURL_CROSS_BUILD_OPTIONS})
 endif ()
 
 vcpkg_configure_cmake(
