@@ -1,17 +1,11 @@
-set(VERSION 8.7.1)
+set(VERSION 8.8.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/curl-${VERSION}.zip"
     FILENAME "curl-${VERSION}.zip"
-    SHA512 640bf8cf7ab68470d1a15c2a85c32849f7f2de85e4d4b1e403c7ee3c849a9ac797640ff0e4e3f9a24cf2aed449e0dc46934a7b32326f5381b3216acc3589a063
-)
-
-# Patches
-set(PATCHES
-    # Remove in next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-content_encoding-brotli-and-others-pass-through-0-le.patch
+    SHA512 a9a800d3730aa318722ea96f6f0118ef5d0453674dcf852e0376c8513f752487c20e04236e0b096311d0749cb56181f555f9830a787688c0e5c9a511e112ce8f
 )
 
 # Extract archive
