@@ -1,10 +1,10 @@
-set(VERSION 1.1.0)
+set(VERSION 1.2.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/google/highway/archive/refs/tags/${VERSION}.tar.gz"
     FILENAME "highway-${VERSION}.tar.gz"
-    SHA512 513718873ca5d1be5c781f92ef943432da4677582e15d25a247c1d3def087fdbd3fe787608d76f32a9b4f9253df88b40bd8ea570159f8106c338ba37e8a50a8d
+    SHA512 e94b9cc51c81157ccd6bf4d6163445b1acc1a2667dc2650d1c4aea0a5021989c08dafcb92564fcbecb9445ab2f1779051260be2f5b29c3932803b8a42ed2f824
 )
 
 # Extract archive
