@@ -7,6 +7,12 @@ vcpkg_download_distfile(ARCHIVE
     SHA512 cf2044744e109d9b86d2e08684bf322afe5eb0c55853d287b345d117c0f7535593995af0d74f9fa088312bff8c0f5fc73f6c16aa1dc061cb0068ff4adeed342f
 )
 
+# Patches
+set(PATCHES
+    # Remove after next release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Update-search-path-for-highway-version.patch
+)
+
 # Extract archive
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
