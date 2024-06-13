@@ -1,6 +1,6 @@
 {
   "name": "curl",
-  "version": "8.7.1",
+  "version": "8.8.0",
   "description": "A library for transferring data with URLs",
   "homepage": "https://curl.se/",
   "dependencies": [
