@@ -1,7 +1,7 @@
-From a855d6148c05a4616bed66c81504a721a60bf03a Mon Sep 17 00:00:00 2001
+From 5e365402fc720c9729fdefc27bf097c71852b26b Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Sat, 24 Sep 2022 18:57:06 -0700
-Subject: [PATCH 3/3] Remove icu-uc from pkgconfig
+Subject: [PATCH 1/2] Remove icu-uc from pkgconfig
 
 The icu build doesn't output a pkgconfig so vcpkg will fail to fix up harfbuzz's pkgconfig.
 ---
@@ -20,5 +20,4 @@ index 949869a35..5be5b2686 100644
  Libs: -L${libdir} -lharfbuzz-icu
  Cflags: -I${includedir}/harfbuzz
 -- 
-2.44.0.windows.1
-
+2.45.2.windows.1
