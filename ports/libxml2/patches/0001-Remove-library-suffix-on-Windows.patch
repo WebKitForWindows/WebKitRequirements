@@ -1,42 +1,41 @@
-From 7e682df0b94ee24052fd9e46365066e0eb02af6d Mon Sep 17 00:00:00 2001
+From 92e9627e6cde8d0f1f4706ab9be28dc8adfe64b4 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
-Date: Tue, 23 Aug 2022 14:50:24 -0700
-Subject: [PATCH 2/2] Remove library suffix on Windows
+Date: Thu, 13 Jun 2024 15:32:36 -0700
+Subject: [PATCH] Remove library suffix on Windows
 
 ---
  CMakeLists.txt | 19 -------------------
  1 file changed, 19 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index de547363..e87452c8 100644
+index 723e2344..a02c2853 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -455,25 +455,6 @@ set_target_properties(
-         SOVERSION ${LIBXML_MAJOR_VERSION}
+@@ -438,25 +438,6 @@ set_target_properties(
+     SOVERSION ${LIBXML_MAJOR_VERSION}
  )
  
 -if(MSVC)
--	if(BUILD_SHARED_LIBS)
--		set_target_properties(
--			LibXml2
--			PROPERTIES
--			DEBUG_POSTFIX d
--		)
--	else()
--		set_target_properties(
--			LibXml2
--			PROPERTIES
--			DEBUG_POSTFIX sd
--			MINSIZEREL_POSTFIX s
--			RELEASE_POSTFIX s
--			RELWITHDEBINFO_POSTFIX s
--		)
--	endif()
+-    if(BUILD_SHARED_LIBS)
+-        set_target_properties(
+-            LibXml2
+-            PROPERTIES
+-            DEBUG_POSTFIX d
+-        )
+-    else()
+-        set_target_properties(
+-            LibXml2
+-            PROPERTIES
+-            DEBUG_POSTFIX sd
+-            MINSIZEREL_POSTFIX s
+-            RELEASE_POSTFIX s
+-            RELWITHDEBINFO_POSTFIX s
+-        )
+-    endif()
 -endif()
 -
  install(FILES ${LIBXML2_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/libxml2/libxml COMPONENT development)
  
  install(
 -- 
-2.44.0.windows.1
-
+2.45.2.windows.1
