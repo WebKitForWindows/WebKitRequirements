@@ -11,7 +11,6 @@ vcpkg_download_distfile(ARCHIVE
 set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-postfix-from-archive-name.patch
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Disable-additional-warnings-for-Visual-Studio.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Adjust-CMake-for-vcpkg.patch
 )
 
 # Extract archive
@@ -43,7 +42,7 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
-vcpkg_cmake_config_fixup()
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/LibreSSL)
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
