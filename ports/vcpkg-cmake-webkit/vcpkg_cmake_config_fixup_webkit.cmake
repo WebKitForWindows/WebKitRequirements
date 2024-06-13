@@ -1,5 +1,15 @@
 include_guard(GLOBAL)
 
+function(_remove_empty_directory)
+    file(GLOB directory_files "${ARGV0}/*")
+    list(LENGTH directory_files file_count)
+    if (file_count EQUAL 0)
+        file(REMOVE_RECURSE "${ARGV0}")
+        cmake_path(GET ARGV0 PARENT_PATH parent_path)
+        _remove_empty_directory(${parent_path})
+    endif ()
+endfunction()
+
 function(vcpkg_cmake_config_fixup)
     if (NOT VCPKG_DISABLE_CMAKE_FIXUP)
         _vcpkg_cmake_config_fixup(${ARGV})
@@ -19,4 +29,7 @@ function(vcpkg_cmake_config_fixup)
     file(GLOB cmake_files "${CURRENT_PACKAGES_DIR}/${arg_CONFIG_PATH}/*.cmake")
     file(GLOB cmake_debug_files "${CURRENT_PACKAGES_DIR}/debug/${arg_CONFIG_PATH}/*.cmake")
     file(REMOVE ${cmake_files} ${cmake_debug_files})
+
+    _remove_empty_directory("${CURRENT_PACKAGES_DIR}/${arg_CONFIG_PATH}")
+    _remove_empty_directory("${CURRENT_PACKAGES_DIR}/debug/${arg_CONFIG_PATH}")
 endfunction()

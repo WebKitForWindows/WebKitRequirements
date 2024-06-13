@@ -12,10 +12,9 @@ vcpkg_download_distfile(ARCHIVE
 
 # Patches
 set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-ICU-build-option.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Add-tooling-build-option.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Remove-config-requirement-for-libxml2.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-ICU-build-option.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-tooling-build-option.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Remove-config-requirement-for-libxml2.patch
 )
 
 # Extract archive
@@ -51,14 +50,38 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
-vcpkg_cmake_config_fixup()
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/libxslt-${VERSION})
 vcpkg_fixup_pkgconfig()
 
+# Fix the xslt-config
+file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/tools/libxslt)
+file(RENAME ${CURRENT_PACKAGES_DIR}/bin/xslt-config ${CURRENT_PACKAGES_DIR}/tools/libxslt/xslt-config)
+vcpkg_replace_string(${CURRENT_PACKAGES_DIR}/tools/libxslt/xslt-config [[$(cd "$(dirname "$0")"; pwd -P)/..]] [[$(cd "$(dirname "$0")/../.."; pwd -P)]])
+
+if (NOT VCPKG_BUILD_TYPE)
+    file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/tools/libxslt/debug)
+    file(RENAME ${CURRENT_PACKAGES_DIR}/debug/bin/xslt-config ${CURRENT_PACKAGES_DIR}/tools/libxslt/debug/xslt-config)
+    vcpkg_replace_string(${CURRENT_PACKAGES_DIR}/tools/libxslt/debug/xslt-config [[$(cd "$(dirname "$0")"; pwd -P)/..]] [[$(cd "$(dirname "$0")/../../../debug"; pwd -P)]])
+    vcpkg_replace_string(${CURRENT_PACKAGES_DIR}/tools/libxslt/debug/xslt-config [[${prefix}/include]] [[${prefix}/../include]])
+endif()
+
+# Modify headers for static builds
+if (VCPKG_LIBRARY_LINKAGE STREQUAL "static")
+    vcpkg_replace_string(${CURRENT_PACKAGES_DIR}/include/libxslt/xsltexports.h "ifdef LIBXSLT_STATIC" "if 1")
+    vcpkg_replace_string(${CURRENT_PACKAGES_DIR}/include/libexslt/exsltexports.h "ifdef LIBEXSLT_STATIC" "if 1")
+endif()
+
 # Prepare distribution
-file(REMOVE ${CURRENT_PACKAGES_DIR}/share/libxslt/xsltConf.sh)
+file(REMOVE ${CURRENT_PACKAGES_DIR}/lib/xsltConf.sh)
+file(REMOVE ${CURRENT_PACKAGES_DIR}/debug/lib/xsltConf.sh)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/share/doc)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/share/man)
 file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/libxslt RENAME copyright)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/libxslt/version ${VERSION})
+
+if (VCPKG_LIBRARY_LINKAGE STREQUAL "static")
+    file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin)
+    file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/bin)
+endif()

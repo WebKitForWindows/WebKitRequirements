@@ -12,8 +12,7 @@ vcpkg_download_distfile(ARCHIVE
 
 # Patches
 set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Remove-library-suffix-on-Windows.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-library-suffix-on-Windows.patch
 )
 
 # Extract archive
@@ -87,8 +86,25 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
-vcpkg_cmake_config_fixup()
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/libxml2-${VERSION})
 vcpkg_fixup_pkgconfig()
+
+# Fix the xml2-config
+file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/tools/libxml2)
+file(RENAME ${CURRENT_PACKAGES_DIR}/bin/xml2-config ${CURRENT_PACKAGES_DIR}/tools/libxml2/xml2-config)
+vcpkg_replace_string(${CURRENT_PACKAGES_DIR}/tools/libxml2/xml2-config [[$(cd "$(dirname "$0")"; pwd -P)/..]] [[$(cd "$(dirname "$0")/../.."; pwd -P)]])
+
+if (NOT VCPKG_BUILD_TYPE)
+    file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/tools/libxml2/debug)
+    file(RENAME ${CURRENT_PACKAGES_DIR}/debug/bin/xml2-config ${CURRENT_PACKAGES_DIR}/tools/libxml2/debug/xml2-config)
+    vcpkg_replace_string(${CURRENT_PACKAGES_DIR}/tools/libxml2/debug/xml2-config [[$(cd "$(dirname "$0")"; pwd -P)/..]] [[$(cd "$(dirname "$0")/../../../debug"; pwd -P)]])
+    vcpkg_replace_string(${CURRENT_PACKAGES_DIR}/tools/libxml2/debug/xml2-config [[${prefix}/include]] [[${prefix}/../include]])
+endif()
+
+# Modify headers for static builds
+if (VCPKG_LIBRARY_LINKAGE STREQUAL "static")
+    vcpkg_replace_string(${CURRENT_PACKAGES_DIR}/include/libxml2/libxml/xmlexports.h "ifdef LIBXML_STATIC" "if 1")
+endif()
 
 # Prepare distribution
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
@@ -99,3 +115,8 @@ file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/share/libxml2/aclocal)
 file(REMOVE ${CURRENT_PACKAGES_DIR}/share/libxml2/xml2-config)
 file(INSTALL ${SOURCE_PATH}/Copyright DESTINATION ${CURRENT_PACKAGES_DIR}/share/libxml2 RENAME copyright)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/libxml2/version ${VERSION})
+
+if (VCPKG_LIBRARY_LINKAGE STREQUAL "static")
+    file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin)
+    file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/bin)
+endif()

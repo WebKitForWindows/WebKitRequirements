@@ -11,8 +11,7 @@ vcpkg_download_distfile(ARCHIVE
 
 # Patches
 set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Use-FreeType-DEFLATE-library.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Use-FreeType-DEFLATE-library.patch
 )
 
 # Extract archive
@@ -66,7 +65,7 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
-vcpkg_cmake_config_fixup()
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/freetype)
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution

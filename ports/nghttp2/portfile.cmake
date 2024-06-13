@@ -7,11 +7,6 @@ vcpkg_download_distfile(ARCHIVE
     SHA512 01e930d7caf464699505f92b76e2bc8192d168612dc564d2546812c42afea2fb81d552d70e8a5fed35e2bf5deadbec8eda095af94a2484bca41542988afce52a
 )
 
-# Patches
-set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-)
-
 # Extract archive
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
@@ -57,6 +52,7 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/nghttp2)
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution

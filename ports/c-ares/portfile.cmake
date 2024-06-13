@@ -8,11 +8,6 @@ vcpkg_download_distfile(ARCHIVE
     SHA512 9a24f40002b661d97c9b49a617d2e6b12bad1c9f22e872611252d051ec650f886c010207939fac6992610b3cd5a87588f802d7dfa1310ced7c6621ea2f99dd90
 )
 
-# Patches
-set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Adjust-CMake-for-vcpkg.patch
-)
-
 # Extract archive
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
@@ -48,7 +43,7 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
-vcpkg_cmake_config_fixup()
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/c-ares)
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
