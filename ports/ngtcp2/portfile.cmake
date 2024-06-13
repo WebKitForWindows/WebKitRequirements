@@ -1,15 +1,10 @@
-set(VERSION 1.4.0)
+set(VERSION 1.6.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/ngtcp2-${VERSION}.tar.xz"
     FILENAME "ngtcp2-${VERSION}.tar.xz"
-    SHA512 6491f158cd3bd659d593810935ceedefea8ee4a77e0a1952c0300f83188d0af1ef8313b24f9dbd3e7a795b6ad9099d2681b70ff1bafd92eed429ee028b2f2dea
-)
-
-set(PATCHES
-    # Remove after next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-cmake-add-BUILD_TESTING-fix-MSVC-with-static-shared.patch
+    SHA512 3afa23e05b7810cc4dd8b8b497ed47eff73fe97869d0a560a324d59491975209705a9dd0de4ab5833ed8e1c2507a621318be7dd18673ac9b07204598fecdffe8
 )
 
 # Extract archive
