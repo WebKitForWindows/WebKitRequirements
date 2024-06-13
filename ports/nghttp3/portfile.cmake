@@ -1,15 +1,10 @@
-set(VERSION 1.2.0)
+set(VERSION 1.4.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/ngtcp2/nghttp3/releases/download/v${VERSION}/nghttp3-${VERSION}.tar.xz"
     FILENAME "nghttp3-${VERSION}.tar.xz"
-    SHA512 51ade6b17215eb15c92b18ad7a94b70e0a442d5968aee31ec734e5826d09ca34197e64407a1ac3f7bfb4ed1a0b3c3b58afc4a152542bacdcc4c71140931a7652
-)
-
-set(PATCHES
-    # Remove after next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-cmake-add-BUILD_TESTING-fix-MSVC-with-static-shared.patch
+    SHA512 39ff9418009dcf84ae58d8297f53427da91509a69ecc4fc78c4c00f0fe6bbe348f7afffeafe535ae4c02ff9f0413016b4f51de6a87d8e8c8f6b415bb7f2b0895
 )
 
 # Extract archive
@@ -46,6 +41,7 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/nghttp3)
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
