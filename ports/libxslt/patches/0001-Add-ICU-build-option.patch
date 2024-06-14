@@ -1,7 +1,7 @@
-From 8e1cb823b5bc59a6a1f1e02de95d0cd1b9458098 Mon Sep 17 00:00:00 2001
+From 6633ceefa002e021aa7a5e1ee7c96f9a51f8a9ae Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 3 Mar 2022 15:32:10 -0800
-Subject: [PATCH 2/4] Add ICU build option
+Subject: [PATCH 1/3] Add ICU build option
 
 The provided CMake doesn't have a build option for ICU so add it.
 ---
@@ -9,7 +9,7 @@ The provided CMake doesn't have a build option for ICU so add it.
  1 file changed, 8 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d0b0d15d..c821c780 100644
+index a18f7402..c446c186 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -40,6 +40,7 @@ endif()
@@ -17,10 +17,10 @@ index d0b0d15d..c821c780 100644
  option(LIBXSLT_WITH_DEBUGGER "Add the debugging support" ON)
  option(LIBXSLT_WITH_CRYPTO "Add crypto support to exslt" OFF)
 +option(LIBXSLT_WITH_ICU "Add ICU support to xslt" OFF)
- option(LIBXSLT_WITH_MEM_DEBUG "Add the memory debugging module" OFF)
  option(LIBXSLT_WITH_MODULES "Add the module support" ON)
  option(LIBXSLT_WITH_PROFILER "Add the profiling support" ON)
-@@ -57,6 +58,10 @@ if(LIBXSLT_WITH_CRYPTO AND NOT WIN32)
+ option(LIBXSLT_WITH_PYTHON "Build Python bindings" ON)
+@@ -56,6 +57,10 @@ if(LIBXSLT_WITH_CRYPTO AND NOT WIN32)
  	find_package(Gcrypt REQUIRED)
  endif()
  
@@ -31,7 +31,7 @@ index d0b0d15d..c821c780 100644
  if(LIBXSLT_WITH_PYTHON)
  	check_include_files(unistd.h HAVE_UNISTD_H)
  	check_symbol_exists(F_GETFL fcntl.h HAVE_F_GETFL)
-@@ -230,6 +235,9 @@ target_include_directories(
+@@ -229,6 +234,9 @@ target_include_directories(
  )
  
  target_link_libraries(LibXslt PUBLIC LibXml2::LibXml2)
@@ -42,5 +42,5 @@ index d0b0d15d..c821c780 100644
  if(UNIX)
  	target_link_libraries(LibXslt PRIVATE m)
 -- 
-2.42.0.windows.2
+2.45.2.windows.1
 

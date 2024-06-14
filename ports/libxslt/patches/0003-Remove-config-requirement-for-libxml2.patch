@@ -1,14 +1,14 @@
-From 42e884f0984ba08dd07ea19041c3fd6471a1536c Mon Sep 17 00:00:00 2001
+From 1302939554bcf09cdc0de94ac826bf4fd7428ad4 Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Fri, 22 Sep 2023 13:14:02 -0700
-Subject: [PATCH 4/4] Remove config requirement for libxml2
+Subject: [PATCH 3/3] Remove config requirement for libxml2
 
 ---
  CMakeLists.txt | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 04ad51c8..5b406784 100644
+index 1d51c42b..16a2b994 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -34,7 +34,7 @@ include(CMakePackageConfigHelpers)
@@ -21,5 +21,5 @@ index 04ad51c8..5b406784 100644
  
  option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 -- 
-2.42.0.windows.2
+2.45.2.windows.1
 
