@@ -2,10 +2,14 @@ set(VERSION 3.46.00)
 string(REPLACE "." "" TAG ${VERSION})
 string(CONCAT TAG ${TAG} "00")
 
+set(FILENAME "sqlite-amalgamation-${TAG}.zip")
+# URL needs to be iterated every year
+set(URLS "https://sqlite.org/2024/${FILENAME}")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://sqlite.org/2024/sqlite-amalgamation-${TAG}.zip"
-    FILENAME "sqlite-amalgamation-${TAG}.zip"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 b38befaec5b3c32a35536f22f8e1dbb7a1859a6b354ad0fbdfb28634f2fab5acaa4d418420d52c4ab5291784203d46af16c183f113c4d2b4ce7efaa3a2a31d30
 )
 

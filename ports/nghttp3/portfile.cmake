@@ -1,9 +1,12 @@
 set(VERSION 1.4.0)
 
+set(FILENAME "nghttp3-${VERSION}.tar.xz")
+set(URLS "https://github.com/ngtcp2/nghttp3/releases/download/v${VERSION}/${FILENAME}")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/ngtcp2/nghttp3/releases/download/v${VERSION}/nghttp3-${VERSION}.tar.xz"
-    FILENAME "nghttp3-${VERSION}.tar.xz"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 39ff9418009dcf84ae58d8297f53427da91509a69ecc4fc78c4c00f0fe6bbe348f7afffeafe535ae4c02ff9f0413016b4f51de6a87d8e8c8f6b415bb7f2b0895
 )
 

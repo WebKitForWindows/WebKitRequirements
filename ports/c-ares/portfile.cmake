@@ -1,9 +1,12 @@
 set(VERSION 1.31.0)
 
+set(FILENAME "c-ares-${VERSION}.tar.gz")
+set(URLS "https://github.com/c-ares/c-ares/releases/download/v${VERSION}/${FILENAME}")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/c-ares/c-ares/releases/download/v${VERSION}/c-ares-${VERSION}.tar.gz"
-    FILENAME "c-ares-${VERSION}.tar.gz"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 571d2555b4aaf3bf9cd7b5c89be8448ca26fe0ea1f3d664b07a01b42d28af4f5412b30485ef01d4bacc4e08de487dc6eeda98acf212a6a08edec6805f17210cc
 )
 

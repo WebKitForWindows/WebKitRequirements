@@ -3,10 +3,13 @@ set(VERSION 1.0.2)
 # The woff2 library does not support shared libraries
 vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 
+set(FILENAME "woff2-${VERSION}.zip")
+set(URLS "https://github.com/google/woff2/archive/v${VERSION}.zip")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/google/woff2/archive/v${VERSION}.zip"
-    FILENAME "woff2-${VERSION}.zip"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 4cb38d1daabe40cbede843c9338338590f1eed6843ba97f646a5abf8d64e814c5854561a8197157eeb267e252e316f67bef230afe4a2846cc734e0fdbd77de7e
 )
 

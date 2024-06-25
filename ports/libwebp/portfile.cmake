@@ -1,9 +1,12 @@
 set(VERSION 1.4.0)
 
+set(FILENAME "libwebp-${VERSION}.zip")
+set(URLS "https://github.com/webmproject/libwebp/archive/v${VERSION}.zip")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/webmproject/libwebp/archive/v${VERSION}.zip"
-    FILENAME "libwebp-${VERSION}.zip"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 e5fa54f456ac9dddc3be2e740298b2c18233444716835306976c3c2a1e08063b3849fdf5376f34253a49e1b7bb072a9678d646b3377ef52541260af7ea5a1a0b
 )
 

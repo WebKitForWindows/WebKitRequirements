@@ -1,9 +1,12 @@
 set(VERSION 8.5.0)
 
+set(FILENAME "harfbuzz-${VERSION}.tar.xz")
+set(URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${VERSION}/${FILENAME}")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${VERSION}/harfbuzz-${VERSION}.tar.xz"
-    FILENAME "harfbuzz-${VERSION}.tar.xz"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 d5762f77b0913792d34596e6f3adb98ab693e2ef928396f997ca2e647ca7cad13fdd204fa15b49e2f7c33320ff210d7f078215d5765c9365571458b919a4f10c
 )
 

@@ -1,9 +1,12 @@
 set(VERSION 0.42.2)
 
+set(FILENAME "pixman-${VERSION}.tar.gz")
+set(URLS "https://www.cairographics.org/releases/${FILENAME}")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://www.cairographics.org/releases/pixman-${VERSION}.tar.gz"
-    FILENAME "pixman-${VERSION}.tar.gz"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 0a4e327aef89c25f8cb474fbd01de834fd2a1b13fdf7db11ab72072082e45881cd16060673b59d02054b1711ae69c6e2395f6ae9214225ee7153939efcd2fa5d
 )
 

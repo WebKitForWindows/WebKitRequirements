@@ -1,9 +1,12 @@
 set(VERSION 2.16)
 
+set(FILENAME "lcms2-${VERSION}.tar.gz")
+set(URLS "https://github.com/mm2/Little-CMS/releases/download/lcms${VERSION}/${FILENAME}")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/mm2/Little-CMS/releases/download/lcms${VERSION}/lcms2-${VERSION}.tar.gz"
-    FILENAME "lcms2-${VERSION}.tar.gz"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 638dd6ad6787456c8145510d18b2d0727bd0a446a13ac2934aabc9531d1156eca2a2c0fd780a453823fbd35a1895f9d8de5dc4b3cab505459dd3f0535b4e837d
 )
 

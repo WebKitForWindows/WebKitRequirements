@@ -1,11 +1,15 @@
 set(VERSION 2.13.2)
 
+set(FILENAME "freetype-${VERSION}.tar.xz")
+set(URLS
+    "https://download.savannah.gnu.org/releases/freetype/${FILENAME}"
+    "https://downloads.sourceforge.net/project/freetype/freetype2/${VERSION}/${FILENAME}"
+)
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS 
-        "https://download.savannah.gnu.org/releases/freetype/freetype-${VERSION}.tar.xz"
-        "https://downloads.sourceforge.net/project/freetype/freetype2/${VERSION}/freetype-${VERSION}.tar.xz"
-    FILENAME "freetype-${VERSION}.tar.xz"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 a5917edaa45cb9f75786f8a4f9d12fdf07529247e09dfdb6c0cf7feb08f7588bb24f7b5b11425fb47f8fd62fcb426e731c944658f6d5a59ce4458ad5b0a50194
 )
 

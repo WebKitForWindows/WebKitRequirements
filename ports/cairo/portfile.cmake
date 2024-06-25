@@ -1,10 +1,12 @@
 set(VERSION 1.18.0)
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/cairo-${VERSION})
+
+set(FILENAME "cairo-${VERSION}.tar.bz2")
+set(URLS "https://gitlab.freedesktop.org/cairo/cairo/-/archive/${VERSION}/${FILENAME}")
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://gitlab.freedesktop.org/cairo/cairo/-/archive/${VERSION}/cairo-${VERSION}.tar.bz2"
-    FILENAME "cairo-${VERSION}.tar.bz2"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 bd702f3b64061f8add954c243c9b59f5d44271adfa76d997941ddab629ff8018c2a1d3368edf2362573e0018c342c61483de58240c63e15e1e6035d2511d3e40
 )
 

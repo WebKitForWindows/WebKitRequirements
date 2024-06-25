@@ -4,10 +4,13 @@ set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
 set(VERSION2 "${VERSION_MAJOR}_${VERSION_MINOR}")
 set(VERSION3 "${VERSION_MAJOR}-${VERSION_MINOR}")
 
+set(FILENAME "icu4c-${VERSION2}-src.tgz")
+set(URLS "https://github.com/unicode-org/icu/releases/download/release-${VERSION3}/${FILENAME}")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/unicode-org/icu/releases/download/release-${VERSION3}/icu4c-${VERSION2}-src.tgz"
-    FILENAME "icu4c-${VERSION2}-src.tgz"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 70ea842f0d5f1f6c6b65696ac71d96848c4873f4d794bebc40fd87af2ad4ef064c61a786bf7bc430ce4713ec6deabb8cc1a8cc0212eab148cee2d498a3683e45
 )
 

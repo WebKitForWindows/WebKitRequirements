@@ -1,9 +1,12 @@
 set(VERSION 1.1.0)
 
+set(FILENAME "brotli-${VERSION}.zip")
+set(URLS "https://github.com/google/brotli/archive/v${VERSION}.zip")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/google/brotli/archive/v${VERSION}.zip"
-    FILENAME "brotli-${VERSION}.zip"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 e62f5624b58a6d0de27105d0df67324027d50a81c8cbb7c83d3322e952dc26ef0e30fc66f32f8b09151713bfae095032733ce4c06949f21b0461f2f16531938d
 )
 

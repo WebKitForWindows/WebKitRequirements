@@ -1,9 +1,12 @@
 set(VERSION 1.62.1)
 
+set(FILENAME "nghttp2-${VERSION}.tar.xz")
+set(URLS "https://github.com/nghttp2/nghttp2/releases/download/v${VERSION}/${FILENAME}")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://github.com/nghttp2/nghttp2/releases/download/v${VERSION}/nghttp2-${VERSION}.tar.xz"
-    FILENAME "nghttp2-${VERSION}.tar.xz"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 d5d6b068712e9b467547b0e5380465b8540317134f3f26c2b0c60eb9c604be2f37b4517a98b371d5f5fb668ce2ee35603ddd944224f11e96382aa541a6a17b4c
 )
 

@@ -1,9 +1,12 @@
 set(VERSION 3.9.2)
 
+set(FILENAME "libressl-${VERSION}.tar.gz")
+set(URLS "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/${FILENAME}")
+
 # Get archive
 vcpkg_download_distfile(ARCHIVE
-    URLS "https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${VERSION}.tar.gz"
-    FILENAME "libressl-${VERSION}.tar.gz"
+    URLS ${URLS}
+    FILENAME ${FILENAME}
     SHA512 b7b9f47c77fd27787b7c7ae7e78cd831fe9f7f32e280f54952994569bfe69ff03022e349aea9ea734c50b079693c6e15a3c1115ef0093e523437904074da5784
 )
 
