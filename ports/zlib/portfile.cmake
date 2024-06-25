@@ -1,16 +1,10 @@
-set(VERSION 2.1.6)
+set(VERSION 2.2.0)
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS "https://github.com/zlib-ng/zlib-ng/archive/refs/tags/${VERSION}.zip"
     FILENAME "zlib-ng-${VERSION}.zip"
-    SHA512 0314183a4212775dd41e83c6189aebef3fd94639976d543ae2690e79d48bc4084a94cb1c2619973888c9f80e8eb9392133bf0e5be933422c540493b153995e0e
-)
-
-# Patches
-set(PATCHES
-    # Remove in next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Relocate-CMake-target-export-definitions.patch
+    SHA512 9a5b5c66093703b6eb21da04984d7b5a90278063ac4703b02172fc55e1c7f2dd62b37b3ce18577eb995ef0fb02d9b2dedb6b6854252fadb7a75d2c101ef6819b
 )
 
 # Extract archive

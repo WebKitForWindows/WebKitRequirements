@@ -49,7 +49,7 @@ the requirements.
 | Library | Version | Release Date |
 |---|:---:|:---:|
 | [icu](http://site.icu-project.org) | 75.1 | 2024-04-17 |
-| [zlib](https://github.com/zlib-ng/zlib-ng) | 2.1.6 | 2024-01-10 |
+| [zlib](https://github.com/zlib-ng/zlib-ng) | 2.2.0 | 2024-06-19 |
 | [brotli](https://github.com/google/brotli) | 1.1.0 | 2023-08-31 |
 | [libressl](https://www.libressl.org) | 3.9.2 | 2024-05-12 |
 | [nghttp2](https://nghttp2.org) | 1.62.1 | 2024-05-19 |
