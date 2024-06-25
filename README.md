@@ -58,7 +58,7 @@ the requirements.
 | [c-ares](https://c-ares.org) | 1.30.0 | 2024-06-07 |
 | [curl](https://curl.se) | 8.8.0 | 2024-05-21 |
 | [libxml2](http://xmlsoft.org) | 2.13.1 | 2024-06-19 |
-| [libxslt](http://xmlsoft.org/libxslt) | 1.1.40 | 2024-06-12 |
+| [libxslt](http://xmlsoft.org/libxslt) | 1.1.40 | 2024-06-19 |
 | [lcms](https://www.littlecms.com/) | 2.16.0 | 2023-12-03 |
 | [highway](https://github.com/google/highway) | 1.2.0 | 2024-05-31 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.43 | 2024-02-23 |

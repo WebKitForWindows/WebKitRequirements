@@ -1,4 +1,4 @@
-From af6fdbeb28f021ac8c780b351996ad7457dc8199 Mon Sep 17 00:00:00 2001
+From 501e61c75229f2c0b0632d01ba2c2611da6d2044 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 3 Mar 2022 15:34:42 -0800
 Subject: [PATCH 2/3] Add tooling build option
@@ -9,7 +9,7 @@ Allow disabling of the xsltproc executable build.
  1 file changed, 3 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index c446c186..1d51c42b 100644
+index b302c802..9e46ae24 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -45,6 +45,7 @@ option(LIBXSLT_WITH_MODULES "Add the module support" ON)
