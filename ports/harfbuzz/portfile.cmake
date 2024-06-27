@@ -7,7 +7,7 @@ set(URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${VERSION}/${FI
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 d5762f77b0913792d34596e6f3adb98ab693e2ef928396f997ca2e647ca7cad13fdd204fa15b49e2f7c33320ff210d7f078215d5765c9365571458b919a4f10c
+    SHA512 2700b560727d9c4440ad9c74a170b857f20f9e553e5d98b0c4bcf086a25ba644149d7c89009a41d964af7a924efcc486da4dcbfa5cc4d47f9f10e9b6b8c689af
 )
 
 # Patches
