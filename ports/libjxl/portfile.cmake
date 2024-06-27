@@ -1,4 +1,4 @@
-set(VERSION 0.10.2)
+set(VERSION 0.10.3)
 
 set(FILENAME "libjxl-${VERSION}.zip")
 set(URLS "https://github.com/libjxl/libjxl/archive/v${VERSION}.zip")
@@ -7,7 +7,7 @@ set(URLS "https://github.com/libjxl/libjxl/archive/v${VERSION}.zip")
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 cf2044744e109d9b86d2e08684bf322afe5eb0c55853d287b345d117c0f7535593995af0d74f9fa088312bff8c0f5fc73f6c16aa1dc061cb0068ff4adeed342f
+    SHA512 fff18c24ac7856d1c55b0820afe22b6c3ed6a5609c5f5aa6ae94fd98d72a6442ae612ef05cc63d3ac66930a4981ff34497845c12ea74c844b65d767d643d6d9d
 )
 
 # Patches

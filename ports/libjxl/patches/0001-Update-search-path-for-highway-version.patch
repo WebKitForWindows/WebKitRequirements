@@ -1,4 +1,4 @@
-From e44de3751bdb193f20cd0b5636a09d5ffd02f9bd Mon Sep 17 00:00:00 2001
+From ecb079b6d69d65df036c41b1b5675df0edb77180 Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Thu, 13 Jun 2024 16:13:08 -0700
 Subject: [PATCH] Update search path for highway version
@@ -9,7 +9,7 @@ In version 1.2.0 of highway the defines used to determine the version moved from
  1 file changed, 12 insertions(+), 2 deletions(-)
 
 diff --git a/cmake/FindHWY.cmake b/cmake/FindHWY.cmake
-index c5a90fbc..917f2e73 100644
+index c5a90fbc..1cae0f26 100644
 --- a/cmake/FindHWY.cmake
 +++ b/cmake/FindHWY.cmake
 @@ -20,9 +20,19 @@ find_library(HWY_LIBRARY
@@ -36,3 +36,4 @@ index c5a90fbc..917f2e73 100644
  
 -- 
 2.45.2.windows.1
+
