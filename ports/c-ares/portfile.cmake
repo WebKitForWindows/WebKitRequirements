@@ -1,4 +1,4 @@
-set(VERSION 1.31.0)
+set(VERSION 1.33.0)
 
 set(FILENAME "c-ares-${VERSION}.tar.gz")
 set(URLS "https://github.com/c-ares/c-ares/releases/download/v${VERSION}/${FILENAME}")
@@ -7,7 +7,7 @@ set(URLS "https://github.com/c-ares/c-ares/releases/download/v${VERSION}/${FILEN
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 571d2555b4aaf3bf9cd7b5c89be8448ca26fe0ea1f3d664b07a01b42d28af4f5412b30485ef01d4bacc4e08de487dc6eeda98acf212a6a08edec6805f17210cc
+    SHA512 3cf1b94d6e8e53742703a679d7e35d3f985320720f41fa58189a0bcad4aca80405c73c4689abe7879df292dbe8f3ddca34b2d48429af5afcc9d2933edb075788
 )
 
 # Extract archive
