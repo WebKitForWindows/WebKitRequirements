@@ -1,4 +1,4 @@
-set(VERSION 2.13.2)
+set(VERSION 2.13.3)
 
 set(FILENAME "freetype-${VERSION}.tar.xz")
 set(URLS
@@ -10,12 +10,7 @@ set(URLS
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 a5917edaa45cb9f75786f8a4f9d12fdf07529247e09dfdb6c0cf7feb08f7588bb24f7b5b11425fb47f8fd62fcb426e731c944658f6d5a59ce4458ad5b0a50194
-)
-
-# Patches
-set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Use-FreeType-DEFLATE-library.patch
+    SHA512 600828d7756c8cfa974448ef34ee0db573fb8cfdb2dc1e0358b63c44a03bfd7e3d4384424b9cc5e4749034f60231a550c4b7fcb46694fcacea218787ce305504
 )
 
 # Extract archive
