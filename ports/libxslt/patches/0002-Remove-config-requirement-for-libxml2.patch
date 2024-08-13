@@ -1,14 +1,14 @@
-From 2c7b105cfa33cb555b686f8b9c620c38874ce98f Mon Sep 17 00:00:00 2001
+From c14c71b3b84b07e80eb5e1c46067375711fe22d7 Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Fri, 22 Sep 2023 13:14:02 -0700
-Subject: [PATCH 3/3] Remove config requirement for libxml2
+Subject: [PATCH 2/2] Remove config requirement for libxml2
 
 ---
  CMakeLists.txt | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 9e46ae24..1821e3f3 100644
+index 0df2698e..674b6e29 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -34,7 +34,7 @@ include(CMakePackageConfigHelpers)

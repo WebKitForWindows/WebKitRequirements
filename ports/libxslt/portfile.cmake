@@ -1,6 +1,6 @@
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 1)
-set(VERSION_PATCH 41)
+set(VERSION_PATCH 42)
 set(VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
 set(FILENAME "libxslt-${VERSION}.tar.xz")
@@ -10,14 +10,13 @@ set(URLS "https://download.gnome.org/sources/libxslt/${VERSION_MAJOR}.${VERSION_
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 b9f94d1c00dfb9f731c6c424a0d3f07fb0a37935048b26618e5405c3890d1d40c832420117de4d5363a90ab4809f77f6e566013ce7858cc88e0905709ca0f6fe
+    SHA512 02a2189b6cd65fa1fb929fc0e6868bc046bdd8827849f0048cdf9267ed9450745158cef0f2713a833e28fb520b312ff86dc5754dd423ce768c457bfd8812bdc7
 )
 
 # Patches
 set(PATCHES
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-ICU-build-option.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Add-tooling-build-option.patch
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Remove-config-requirement-for-libxml2.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Remove-library-suffix-on-Windows.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Remove-config-requirement-for-libxml2.patch
 )
 
 # Extract archive
@@ -33,12 +32,11 @@ set(BUILD_OPTIONS
     # Options
     -DLIBXSLT_WITH_CRYPTO=OFF
     -DLIBXSLT_WITH_DEBUGGER=OFF
-    -DLIBXSLT_WITH_ICU=ON
     -DLIBXSLT_WITH_MODULES=OFF
     -DLIBXSLT_WITH_PROFILER=OFF
+    -DLIBXSLT_WITH_PROGRAMS=OFF
     -DLIBXSLT_WITH_PYTHON=OFF
     -DLIBXSLT_WITH_TESTS=OFF
-    -DLIBXSLT_WITH_TOOLS=OFF
     -DLIBXSLT_WITH_THREADS=OFF
     -DLIBXSLT_WITH_TRIO=OFF
     -DLIBXSLT_WITH_XSLT_DEBUG=OFF
