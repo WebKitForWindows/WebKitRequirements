@@ -1,31 +1,39 @@
 <#
   .Synopsis
-  Creates a WebKitRequirements release.
-  .Details
-  Calls the individual scripts for preparing a release.
+  Packages the requirements into a zip file for release.
   .Parameter Triplet
   The vcpkg triplet to use.
+  .Parameter Output
+  The filename to output to. Defaults to the form
+  `WebKitRequirements${Platform}.zip`.
 #>
 
 param(
   [Parameter(Mandatory)]
-  [string]$triplet
+  [string]$triplet,
+  [Parameter()]
+  [string]$output
 )
 
 $ErrorActionPreference = 'Stop';
 
-$tripletSplit = $triplet -split '-',3;
-$platform = $tripletSplit[1];
+if (!$ouput) {
+  $tripletSplit = $triplet -split '-',3;
+  $arch = $tripletSplit[0];
+  $platform = $tripletSplit[1];
 
-if ($platform -eq 'windows') {
-  $command = ('Rename-WithBitSuffix.ps1 -triplet {0}' -f $triplet);
-  Write-Host $command;
-  Invoke-Expression -Command ('{0}/{1}' -f $PSScriptRoot,$command);
-} else {
-  Write-Error ('Unknown triplet {0}' -f $triplet);
-  return;
+  if ($platform -eq 'windows') {
+    if ($arch -eq 'x64') {
+      $suffix = 'Win64';
+    } else {
+      $suffix = 'Win32';
+    }
+  } else {
+    Write-Error ('Unknown triplet {0}' -f $libraries);
+  }
+
+  $output = ('WebKitRequirements{0}.zip' -f $suffix);
 }
 
-$command = ('Package-Requirements.ps1 -triplet {0}' -f $triplet);
-Write-Host $command;
-Invoke-Expression -Command ('{0}/{1}' -f $PSScriptRoot,$command);
+Write-Host ('Creating archive {0}' -f $output)
+Compress-7Zip -ArchiveFileName $output -Path ('{0}/installed/{1}' -f $PSScriptRoot,$triplet)
