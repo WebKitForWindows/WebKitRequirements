@@ -1,4 +1,4 @@
-set(VERSION 8.9.1)
+set(VERSION 8.10.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 set(FILENAME "curl-${VERSION}.zip")
@@ -8,7 +8,7 @@ set(URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/${FILENAME}
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 fba5523b415fdddae6722065bbe7a288dd39a3a58fca0e75f503a776b33ef75a454e4a4cd217bb2b8a1125fac681bbd4a3462c812402159e9e86de3b90b7c38d
+    SHA512 9279c0fdb470b3547518457c8fd1ad3673f76584f85258b6e33038f345086301ef120d59314bb99e8a7b0898d4a25c8a5c288311c185c10c92fc3dcfa0d6a1fb
 )
 
 # Extract archive
