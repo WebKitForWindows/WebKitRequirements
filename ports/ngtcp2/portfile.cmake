@@ -1,4 +1,4 @@
-set(VERSION 1.6.0)
+set(VERSION 1.7.0)
 
 set(FILENAME "ngtcp2-${VERSION}.tar.xz")
 set(URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/${FILENAME}")
@@ -7,7 +7,7 @@ set(URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/${FILEN
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 3afa23e05b7810cc4dd8b8b497ed47eff73fe97869d0a560a324d59491975209705a9dd0de4ab5833ed8e1c2507a621318be7dd18673ac9b07204598fecdffe8
+    SHA512 6efa42d17772fde00d9d0a67f2cbcf0704a8462c7305a5e3f213d1e98c9302a1ceee847081ecef358c7a421db56236e571a1ad9ff7fa5f5037987c5cb14e517d
 )
 
 # Extract archive
@@ -46,6 +46,7 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/ngtcp2)
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution
