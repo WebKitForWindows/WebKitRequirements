@@ -1,6 +1,6 @@
 {
   "name": "libjxl",
-  "version": "0.10.3",
+  "version": "0.11.0",
   "description": "libjxl is a reference implementation of JPEG XL (encoder and decoder).",
   "homepage": "https://github.com/libjxl/libjxl",
   "license": "BSD-3-Clause",

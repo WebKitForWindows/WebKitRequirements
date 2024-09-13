@@ -1,4 +1,4 @@
-set(VERSION 0.10.3)
+set(VERSION 0.11.0)
 
 set(FILENAME "libjxl-${VERSION}.zip")
 set(URLS "https://github.com/libjxl/libjxl/archive/v${VERSION}.zip")
@@ -7,13 +7,7 @@ set(URLS "https://github.com/libjxl/libjxl/archive/v${VERSION}.zip")
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 fff18c24ac7856d1c55b0820afe22b6c3ed6a5609c5f5aa6ae94fd98d72a6442ae612ef05cc63d3ac66930a4981ff34497845c12ea74c844b65d767d643d6d9d
-)
-
-# Patches
-set(PATCHES
-    # Remove after next release
-    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Update-search-path-for-highway-version.patch
+    SHA512 1dace0c304213736a2f94036f8a2ce408dd19d3e7f1e825d21de0a465e5014abeaecb2192d2b2e5367a29930275b4a0a48ef0a3e29722f85d1a3390fde201699
 )
 
 # Extract archive
