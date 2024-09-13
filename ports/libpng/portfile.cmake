@@ -1,4 +1,4 @@
-set(VERSION 1.6.43)
+set(VERSION 1.6.44)
 
 set(FILENAME "libpng-${VERSION}.tar.xz")
 set(URLS "https://downloads.sourceforge.net/project/libpng/libpng16/${VERSION}/${FILENAME}")
@@ -7,7 +7,7 @@ set(URLS "https://downloads.sourceforge.net/project/libpng/libpng16/${VERSION}/$
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 c95d661fed548708ce7de5d80621a432272bdfe991f0d4db3695036e5fafb8a717b4e4314991bdd3227d7aa07f8c6afb6037c57fa0fe3349334a0b6c58268487
+    SHA512 bbd3e5e68d8b6fe3d85e59ca0babe8b522c19cac4b6ce0fcf21516cda7120b642be611eb1eaa565b7eabbacd22606593619aabd227b43a36f1efc707e7e11851
 )
 
 # Patches
@@ -51,6 +51,7 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/PNG)
 vcpkg_fixup_pkgconfig()
 
 # Prepare distribution

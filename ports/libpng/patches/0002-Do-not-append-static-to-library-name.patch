@@ -1,4 +1,4 @@
-From 0d90df3862b11ca03fdcb600ee7a8ed7ff48ec62 Mon Sep 17 00:00:00 2001
+From ec8dc64f101aadd6eda58fe654bf19ff39cf612c Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 3 Jan 2019 16:54:07 -0800
 Subject: [PATCH 2/3] Do not append static to library name
@@ -9,10 +9,10 @@ On Windows a static lib will have _static appended. In vcpkg only a shared or st
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d47fa5577..ecad8e697 100644
+index e1b3bee1f..4857ec8d4 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -684,7 +684,7 @@ else()
+@@ -683,7 +683,7 @@ else()
    # We also need to use a custom suffix, in order to distinguish between the
    # shared import library name and the static library name.
    set(PNG_SHARED_OUTPUT_NAME "libpng${PNGLIB_ABI_VERSION}")
@@ -22,5 +22,4 @@ index d47fa5577..ecad8e697 100644
  
  if(PNG_SHARED)
 -- 
-2.44.0.windows.1
-
+2.46.0.windows.1
