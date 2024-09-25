@@ -1,4 +1,4 @@
-From 2a768cab03be7ef6cf1a6ffd061d2c2bd4cb32b0 Mon Sep 17 00:00:00 2001
+From 65464b145fe54fe5009f19a3cfec20a082045b14 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Sat, 24 Sep 2022 18:57:06 -0700
 Subject: [PATCH] Remove icu-uc from pkgconfig
@@ -20,5 +20,5 @@ index 949869a35..5be5b2686 100644
  Libs: -L${libdir} -lharfbuzz-icu
  Cflags: -I${includedir}/harfbuzz
 -- 
-2.45.2.windows.1
+2.46.1.windows.1
 

@@ -1,4 +1,4 @@
-set(VERSION 9.0.0)
+set(VERSION 10.0.1)
 
 set(FILENAME "harfbuzz-${VERSION}.tar.xz")
 set(URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${VERSION}/${FILENAME}")
@@ -7,7 +7,7 @@ set(URLS "https://github.com/harfbuzz/harfbuzz/releases/download/${VERSION}/${FI
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 2700b560727d9c4440ad9c74a170b857f20f9e553e5d98b0c4bcf086a25ba644149d7c89009a41d964af7a924efcc486da4dcbfa5cc4d47f9f10e9b6b8c689af
+    SHA512 3fb7dda6e51496337698d46cebe623f678a4e5b0f006be6e1309143a82408a362c149812477e083e14811a5cba565d76eb2c0804f5e1bbea7e1bf83678176048
 )
 
 # Patches
