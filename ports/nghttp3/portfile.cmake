@@ -1,4 +1,4 @@
-set(VERSION 1.5.0)
+set(VERSION 1.6.0)
 
 set(FILENAME "nghttp3-${VERSION}.tar.xz")
 set(URLS "https://github.com/ngtcp2/nghttp3/releases/download/v${VERSION}/${FILENAME}")
@@ -7,7 +7,7 @@ set(URLS "https://github.com/ngtcp2/nghttp3/releases/download/v${VERSION}/${FILE
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 76a089fb0dd88b9aced41fccf36758c6504f8faf68c143ca81c260c017ac6dfd83fe678c401304de8bf65e859b0559dc5e8fcb37e88e547076d0ba9fd2c4a59c
+    SHA512 d0f585cf388a48d391f803897b0998c12c39e118ca380ecc48c4d3dfd3ff4588a5e456dc89a96f2f5ffd5afc261a2d60a71fd4d8ebb82af35bfe6668737538d8
 )
 
 # Extract archive
