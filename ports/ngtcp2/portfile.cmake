@@ -1,4 +1,4 @@
-set(VERSION 1.7.0)
+set(VERSION 1.8.0)
 
 set(FILENAME "ngtcp2-${VERSION}.tar.xz")
 set(URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/${FILENAME}")
@@ -7,7 +7,7 @@ set(URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/${FILEN
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 6efa42d17772fde00d9d0a67f2cbcf0704a8462c7305a5e3f213d1e98c9302a1ceee847081ecef358c7a421db56236e571a1ad9ff7fa5f5037987c5cb14e517d
+    SHA512 4bb838ed94977515ad7fcd86bbafddfb9733264999b268c109b8f487caf01967b0e6d9d0791f19aa549177a375a7d4182662f14b09e7dc5240fa03b68de16235
 )
 
 # Extract archive
