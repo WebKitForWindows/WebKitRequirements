@@ -10,6 +10,12 @@ vcpkg_download_distfile(ARCHIVE
     SHA512 4bb838ed94977515ad7fcd86bbafddfb9733264999b268c109b8f487caf01967b0e6d9d0791f19aa549177a375a7d4182662f14b09e7dc5240fa03b68de16235
 )
 
+# Patches
+set(PATCHES
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Use-REQUIRED-when-finding-a-package.patch
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Ignore-local-install-of-OpenSSL-on-Windows.patch
+)
+
 # Extract archive
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH

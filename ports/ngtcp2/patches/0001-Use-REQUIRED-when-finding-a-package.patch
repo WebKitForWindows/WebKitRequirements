@@ -1,0 +1,94 @@
+From f6dba3631308382077546f5cd77a5015106316e1 Mon Sep 17 00:00:00 2001
+From: Don Olmstead <don.j.olmstead@gmail.com>
+Date: Wed, 16 Oct 2024 14:46:31 -0700
+Subject: [PATCH 1/2] Use REQUIRED when finding a package
+
+If an `ENABLE` option is `ON` and requires a package to be present it should fail the build if its not found.
+---
+ CMakeLists.txt | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ba9955dc..4b5a5d1e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -117,13 +117,13 @@ if(NOT CMAKE_C_COMPILER_ID MATCHES "MSVC")
+ endif()
+ 
+ if(ENABLE_GNUTLS)
+-  find_package(GnuTLS 3.7.2)
++  find_package(GnuTLS 3.7.2 REQUIRED)
+ endif()
+ if(ENABLE_OPENSSL)
+-  find_package(OpenSSL 1.1.1)
++  find_package(OpenSSL 1.1.1 REQUIRED)
+ endif()
+ if(ENABLE_WOLFSSL)
+-  find_package(wolfssl 5.5.0)
++  find_package(wolfssl 5.5.0 REQUIRED)
+ endif()
+ if(ENABLE_JEMALLOC)
+   find_package(Jemalloc)
+@@ -152,11 +152,11 @@ if(ENABLE_OPENSSL AND OPENSSL_FOUND)
+   endif()
+   check_symbol_exists(SSL_provide_quic_data "openssl/ssl.h" HAVE_SSL_PROVIDE_QUIC_DATA)
+   if(NOT HAVE_SSL_PROVIDE_QUIC_DATA)
+-    message(WARNING "Disabling OpenSSL due to lack of QUIC support in ${OPENSSL_LIBRARIES}")
++    message(FATAL_ERROR "Disabling OpenSSL due to lack of QUIC support in ${OPENSSL_LIBRARIES}")
+   endif()
+   cmake_pop_check_state()
+ endif()
+-if(ENABLE_OPENSSL AND HAVE_SSL_PROVIDE_QUIC_DATA)
++if(ENABLE_OPENSSL)
+   set(OPENSSL_INCLUDE_DIRS  ${OPENSSL_INCLUDE_DIR})
+   set(HAVE_OPENSSL TRUE)
+   set(HAVE_CRYPTO TRUE)
+@@ -174,11 +174,11 @@ if(ENABLE_BORINGSSL)
+   set(CMAKE_REQUIRED_LIBRARIES  "${BORINGSSL_LIBRARIES}")
+   check_cxx_symbol_exists(SSL_set_quic_early_data_context "openssl/ssl.h" HAVE_SSL_SET_QUIC_EARLY_DATA_CONTEXT)
+   if(NOT HAVE_SSL_SET_QUIC_EARLY_DATA_CONTEXT)
+-    message(WARNING "Disabling BoringSSL due to lack of QUIC support in ${BORINGSSL_LIBRARIES}")
++    message(FATAL_ERROR "Disabling BoringSSL due to lack of QUIC support in ${BORINGSSL_LIBRARIES}")
+   endif()
+   cmake_pop_check_state()
+ endif()
+-if(ENABLE_BORINGSSL AND HAVE_SSL_SET_QUIC_EARLY_DATA_CONTEXT)
++if(ENABLE_BORINGSSL)
+   set(BORINGSSL_INCLUDE_DIRS  ${BORINGSSL_INCLUDE_DIR})
+   set(HAVE_BORINGSSL TRUE)
+   set(HAVE_CRYPTO TRUE)
+@@ -196,7 +196,7 @@ set(HAVE_LIBEV      ${LIBEV_FOUND})
+ set(HAVE_LIBNGHTTP3 ${LIBNGHTTP3_FOUND})
+ 
+ # GnuTLS (required for libngtcp2_crypto_gnutls)
+-if(ENABLE_GNUTLS AND GNUTLS_FOUND)
++if(ENABLE_GNUTLS)
+   set(GNUTLS_INCLUDE_DIRS  ${GNUTLS_INCLUDE_DIR})
+   set(HAVE_GNUTLS TRUE)
+   set(HAVE_CRYPTO TRUE)
+@@ -214,11 +214,11 @@ if(ENABLE_PICOTLS)
+   check_symbol_exists(ptls_openssl_random_bytes "picotls.h;picotls/openssl.h"
+     HAVE_PTLS_OPENSSL_RANDOM_BYTES)
+   if(NOT HAVE_PTLS_OPENSSL_RANDOM_BYTES)
+-    message(WARNING "Disabling Picotls because ptls_openssl_random_bytes not found in ${CMAKE_REQUIRED_LIBRARIES}")
++    message(FATAL_ERROR "Disabling Picotls because ptls_openssl_random_bytes not found in ${CMAKE_REQUIRED_LIBRARIES}")
+   endif()
+   cmake_pop_check_state()
+ endif()
+-if(ENABLE_PICOTLS AND HAVE_PTLS_OPENSSL_RANDOM_BYTES)
++if(ENABLE_PICOTLS)
+   set(PICOTLS_INCLUDE_DIRS  ${PICOTLS_INCLUDE_DIR})
+   set(HAVE_PICOTLS TRUE)
+   set(HAVE_CRYPTO TRUE)
+@@ -229,7 +229,7 @@ else()
+ endif()
+ 
+ # wolfSSL (required for libngtcp2_crypto_wolfssl)
+-if(ENABLE_WOLFSSL AND WOLFSSL_FOUND)
++if(ENABLE_WOLFSSL)
+   set(WOLFSSL_INCLUDE_DIRS  ${WOLFSSL_INCLUDE_DIR})
+   set(HAVE_WOLFSSL TRUE)
+   set(HAVE_CRYPTO TRUE)
+-- 
+2.47.0.windows.1
+
