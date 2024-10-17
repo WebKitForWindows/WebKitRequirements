@@ -34,15 +34,14 @@ get_filename_component(PYTHON3_EXE_PATH ${PYTHON3} DIRECTORY)
 vcpkg_add_to_path(${PYTHON3_EXE_PATH})
 
 # Run CMake build
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS
         -DPSL_SOURCE_PATH=${PSL_SOURCE_PATH}
         -DLIBPSL_VERSION=${VERSION}
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 

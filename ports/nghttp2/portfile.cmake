@@ -43,9 +43,8 @@ else ()
     set(NGHTTP2_STATIC_LIB OFF)
 endif ()
 
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS
         ${BUILD_OPTIONS}
         -DBUILD_TESTING=OFF
@@ -53,7 +52,7 @@ vcpkg_configure_cmake(
         -DBUILD_STATIC_LIBS=${NGHTTP2_STATIC_LIB}
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/nghttp2)
 vcpkg_fixup_pkgconfig()

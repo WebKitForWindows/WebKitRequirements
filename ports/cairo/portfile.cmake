@@ -32,9 +32,8 @@ else ()
     set(CAIRO_ENABLE_FREETYPE OFF)
 endif ()
 
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS
         -DCAIRO_ENABLE_FONTCONFIG=OFF
         -DCAIRO_ENABLE_FREETYPE=${CAIRO_ENABLE_FREETYPE}
@@ -42,7 +41,7 @@ vcpkg_configure_cmake(
         -DCAIRO_ENABLE_ZLIB=OFF
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 

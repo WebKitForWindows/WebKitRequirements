@@ -24,9 +24,8 @@ vcpkg_extract_source_archive_ex(
 )
 
 # Run CMake build
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS
         -DWEBP_BUILD_ANIM_UTILS=OFF
         -DWEBP_BUILD_CWEBP=OFF
@@ -39,7 +38,7 @@ vcpkg_configure_cmake(
         -DWEBP_BUILD_EXTRAS=OFF
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 

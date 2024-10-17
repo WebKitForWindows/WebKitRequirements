@@ -60,15 +60,14 @@ if (VCPKG_CRT_LINKAGE STREQUAL dynamic AND VCPKG_CMAKE_SYSTEM_NAME MATCHES "^Win
     list(APPEND BUILD_OPTIONS -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON)
 endif ()
 
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS ${BUILD_OPTIONS}
     MAYBE_UNUSED_VARIABLES
         CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_cmake_config_fixup()
 vcpkg_fixup_pkgconfig()

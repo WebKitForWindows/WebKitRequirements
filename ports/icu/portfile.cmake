@@ -51,16 +51,15 @@ else ()
     set(ENABLE_TOOLS ON)
 endif ()
 
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}/source
-    PREFER_NINJA
     OPTIONS
         ${BUILD_OPTIONS}
         -DICU_ENABLE_TOOLS=${ENABLE_TOOLS}
         -DICU_CROSS_COMPILING=${CROSS_COMPILING}
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 

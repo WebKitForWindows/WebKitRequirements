@@ -34,16 +34,15 @@ else ()
     set(CARES_SHARED ON)
 endif ()
 
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS 
         ${BUILD_OPTIONS}
         -DCARES_STATIC=${CARES_STATIC}
         -DCARES_SHARED=${CARES_SHARED}
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/c-ares)
 vcpkg_fixup_pkgconfig()

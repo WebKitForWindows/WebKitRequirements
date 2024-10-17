@@ -34,9 +34,8 @@ if (NOT libressl IN_LIST FEATURES)
     message(STATUS "Using system SSL library")
 endif ()
 
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS
         -DBUILD_TESTING=OFF
         -DENABLE_OPENSSL=ON
@@ -44,7 +43,7 @@ vcpkg_configure_cmake(
         -DENABLE_STATIC_LIB=${NGTCP2_STATIC_LIB}
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/ngtcp2)
 vcpkg_fixup_pkgconfig()

@@ -27,9 +27,8 @@ vcpkg_extract_source_archive_ex(
 )
 
 # Run CMake build
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS
         -DENABLE_FTS3=ON
         -DENABLE_LOAD_EXTENSION=OFF
@@ -37,7 +36,7 @@ vcpkg_configure_cmake(
         -DENABLE_THREADSAFE=ON
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 

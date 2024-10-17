@@ -31,9 +31,8 @@ else ()
 endif ()
 
 # Run CMake build
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS
         -DLIBRESSL_TESTS=OFF
     OPTIONS_RELEASE
@@ -42,7 +41,7 @@ vcpkg_configure_cmake(
         -DLIBRESSL_APPS=OFF
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/LibreSSL)
 vcpkg_fixup_pkgconfig()

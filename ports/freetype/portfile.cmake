@@ -52,9 +52,8 @@ else ()
     list(APPEND BUILD_OPTIONS -DFT_DISABLE_ZLIB=ON -DFT_REQUIRE_ZLIB=OFF)
 endif ()
 
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS
         ${BUILD_OPTIONS}
         -DDISABLE_FORCE_DEBUG_POSTFIX=ON
@@ -62,7 +61,7 @@ vcpkg_configure_cmake(
         -DSKIP_INSTALL_HEADERS=ON
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/freetype)
 vcpkg_fixup_pkgconfig()

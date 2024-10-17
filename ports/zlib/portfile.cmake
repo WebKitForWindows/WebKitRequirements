@@ -19,9 +19,8 @@ vcpkg_extract_source_archive_ex(
 )
 
 # Run CMake build
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS
         -DZLIB_COMPAT=ON
         -DZLIB_ENABLE_TESTS=OFF
@@ -29,7 +28,7 @@ vcpkg_configure_cmake(
         -DSKIP_INSTALL_HEADERS=ON
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/ZLIB)
 vcpkg_fixup_pkgconfig()

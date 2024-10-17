@@ -25,15 +25,14 @@ vcpkg_extract_source_archive_ex(
 )
 
 # Run CMake build
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS 
         -DBROTLI_DISABLE_CLI=ON
         -DBROTLI_DISABLE_TESTS=ON
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 

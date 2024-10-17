@@ -151,9 +151,8 @@ if (DEFINED CURL_CROSS_BUILD_OPTIONS)
     list(APPEND BUILD_OPTIONS ${CURL_CROSS_BUILD_OPTIONS})
 endif ()
 
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
     SOURCE_PATH ${SOURCE_PATH}
-    PREFER_NINJA
     OPTIONS 
         ${BUILD_OPTIONS}
         -DBUILD_STATIC_LIBS=${BUILD_STATIC_LIBS}
@@ -167,7 +166,7 @@ vcpkg_configure_cmake(
         CMAKE_DEBUG_POSTFIX
 )
 
-vcpkg_install_cmake()
+vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/CURL)
 vcpkg_fixup_pkgconfig()
