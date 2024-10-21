@@ -65,7 +65,7 @@ the requirements.
 | [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 3.0.3 | 2024-05-08 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.4.0 | 2024-04-12 |
 | [libjxl](https://github.com/libjxl/libjxl) | 0.11.0 | 2024-09-13 |
-| [sqlite](http://sqlite.org) | 3.46.1 | 2024-08-13 |
+| [sqlite](http://sqlite.org) | 3.47.0 | 2024-10-21 |
 | [woff2](https://github.com/google/woff2) | 1.0.2 | 2017-11-13 |
 | [freetype](https://www.freetype.org) | 2.13.3 | 2024-08-12 |
 | [harfbuzz](https://github.com/harfbuzz/harfbuzz) | 10.0.1 | 2024-09-24 |

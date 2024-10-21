@@ -1,4 +1,4 @@
-set(VERSION 3.46.01)
+set(VERSION 3.47.00)
 string(REPLACE "." "" TAG ${VERSION})
 string(CONCAT TAG ${TAG} "00")
 
@@ -10,7 +10,7 @@ set(URLS "https://sqlite.org/2024/${FILENAME}")
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 731e91d39f6339bf4d4623b5b898ff2851e6b7bd70ec82a81e3d3f4ce1f5a4940f0fee4449cda96e3d4159f3b0c60ad6d485e4e1b06a2e8539f505668b923e8d
+    SHA512 3ee88204cd12a20b649fe53ca5dbe97b2c36436f9de00b4c010d0f221a0d00df7653acbd9c4cbd2d85b568be804499b9879463748dc5d097aa35fa08606efa84
 )
 
 # Patches

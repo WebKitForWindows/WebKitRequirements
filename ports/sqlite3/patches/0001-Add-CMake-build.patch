@@ -1,4 +1,4 @@
-From 4f8326cea68010bc14863ad99d7c0789640b592a Mon Sep 17 00:00:00 2001
+From e4d8f9aa230c7319b14ef5fcb62744cb2fc2c19b Mon Sep 17 00:00:00 2001
 From: Don Olmstead <don.j.olmstead@gmail.com>
 Date: Tue, 21 Mar 2023 17:20:21 -0700
 Subject: [PATCH] Add CMake build
@@ -394,4 +394,4 @@ index 0000000000..2dde3123c4
 +/* Define for large files, on AIX-style hosts. */
 +#cmakedefine _LARGE_FILES
 -- 
-2.46.0.windows.1
+2.47.0.windows.1
