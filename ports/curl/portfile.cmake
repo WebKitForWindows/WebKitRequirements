@@ -136,6 +136,10 @@ endif ()
 # just check to see if any OpenSSL variants are requested and if not use the system one
 set(USE_OPENSSL ON)
 if (NOT libressl IN_LIST FEATURES)
+    if (EXISTS "${CURRENT_INSTALLED_DIR}/include/openssl/ssl.h")
+        message(FATAL_ERROR "Can't build with system SSL library if OpenSSL is installed. Please remove OpenSSL and try to install again")
+    endif()
+
     message(STATUS "Using system SSL library")
 
     if (VCPKG_WINDOWS)
