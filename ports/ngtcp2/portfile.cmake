@@ -1,4 +1,4 @@
-set(VERSION 1.8.0)
+set(VERSION 1.8.1)
 
 set(FILENAME "ngtcp2-${VERSION}.tar.xz")
 set(URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/${FILENAME}")
@@ -7,7 +7,13 @@ set(URLS "https://github.com/ngtcp2/ngtcp2/releases/download/v${VERSION}/${FILEN
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 4bb838ed94977515ad7fcd86bbafddfb9733264999b268c109b8f487caf01967b0e6d9d0791f19aa549177a375a7d4182662f14b09e7dc5240fa03b68de16235
+    SHA512 18728ee0376de319a99c3c5a294a7250a8fefa82fd530f0f2882540da2bada2451644898561be6bb6d95e6c8b7e129337edefe3e71d5ca820beb67db0db7d331
+)
+
+# Patches
+set(PATCHES
+    # Remove after next release
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Use-REQUIRED-when-finding-a-package.patch
 )
 
 # Extract archive
