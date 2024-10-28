@@ -1,6 +1,17 @@
 # WebKitRequirements
 > Third party packages required for building the open source WebKit port for Windows.
 
+> [!IMPORTANT]
+> At this time this repository is not accepting any new ports. The functionality
+> of `vcpkg` has greatly expanded since this repository was conceived. If an
+> additional library is required for your build of WebKit on Windows please
+> build it from the canonical [registry](https://github.com/microsoft/vcpkg) and
+> add the build artifacts to the `WebKitLibraries/win` before starting a new
+> WebKit build.
+>
+> This repository may move in the future to use the canonical registry and only
+> overlay a limited number of ports when absolutely necessary.
+
 ## Setup
 
 WebKitRequirements uses [vcpkg](https://github.com/microsoft/vcpkg) to drive
