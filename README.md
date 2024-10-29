@@ -72,3 +72,7 @@ the requirements.
 | [pixman](http://www.pixman.org) | 0.42.2 | 2022-11-02 |
 | [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.18.0 | 2023-09-23 |
 | [libpsl](https://github.com/rockdaboot/libpsl) | 0.21.5 | 2024-01-13 |
+
+## Libraries that are as important as the above ones but intentionally not included
+
+- [libavif](https://github.com/AOMediaCodec/libavif) (See #183)
