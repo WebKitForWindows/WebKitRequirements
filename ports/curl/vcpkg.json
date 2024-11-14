@@ -17,7 +17,7 @@
     "zlib"
   ],
   "features": {
-    "ares": {
+    "c-ares": {
       "description": "Enable c-ares for asynchronous DNS requests.",
       "dependencies": [
         "c-ares"
