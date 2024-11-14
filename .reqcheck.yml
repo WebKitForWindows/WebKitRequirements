@@ -47,11 +47,6 @@ repos:
     owner: ngtcp2
     repo: ngtcp2
 
-  c-ares:
-    host: github
-    owner: c-ares
-    repo: c-ares
-
   curl:
     host: github
     owner: curl
