@@ -58,7 +58,7 @@ jobs:
         id: brotli
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install brotli --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install brotli --triplet ${{ matrix.triplet }}
       - name: Read brotli config
         if: steps.brotli.outcome == 'success' || steps.brotli.outcome == 'failure'
         continue-on-error: true
