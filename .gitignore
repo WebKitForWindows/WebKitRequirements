@@ -1,29 +1,9 @@
-# drone exec files
-.env
-.secrets
-.drone.yml
-
 # Ignore vcpkg paths
 /buildtrees/
 /build*/
 /downloads/
 /installed*/
 /packages/
-
-# Ignore vcpkg files
-# TODO Remove once third party repositories are supported
-.vcpkg-root
-/scripts/*
-vcpkg.exe
-
-# Ignore vpckg ports
-/ports/vcpkg-*
-!/ports/vcpkg-cmake-webkit
-
-# Ignore community triplets
-/triplets/*
-!/triplets/x64-windows-webkit.cmake
-!/triplets/x86-windows-webkit.cmake
 
 # Packaging files
 *.zip

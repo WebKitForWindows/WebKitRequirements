@@ -1,48 +1,21 @@
 # WebKitRequirements
 > Third party packages required for building the open source WebKit port for Windows.
 
-## Setup
-
-WebKitRequirements uses [vcpkg](https://github.com/microsoft/vcpkg) to drive
-building the libraries. A helper script, `Install-Vcpkg.ps1`, configures
-`vcpkg` to be able to build the repository.
-
-```powershell
-> Install-Vcpkg.ps1 -vcpkgPath <path-to-vcpkg> [-update]
-```
-
-The script clones `vcpkg` at the given location if it is not already there. If
-the `vcpkg` repository was already checked out at that location the script does
-not automatically update the sources. An optional flag, `-update`, is required
-to trigger a `git pull`.
-
-After the repository is ready the script will copy over any resources from the
-`vcpkg` checkout that are required to do the build. View the
-[Install-Vcpkg.ps1](Install-Vcpkg.ps1) script for additional options.
-
-## Building
-
-After installing `vcpkg` the requirements can be fully built using the
-`Install-Requirements` script, which is just a wrapper around `vcpkg` which
-builds the listed ports. A default is chosen based on the triplet, for windows
-[WindowsRequirements.json](WindowsRequirements.json) is used.
-
-```powershell
-> Install-Requirements.ps1 -triplet <triplet-file>
-```
-
-After the script runs the requirements will be built in the expected manner for
-use within WebKit. View the
-[Install-Requirements.ps1](Install-Requirements.ps1) script for additional
-options.
-
-Ports can be manually built using `vcpkg` directly. The
-`Install-Requirements.ps1` is just provided as a convenience for fully building
-the requirements.
-
-```powershell
-> vcpkg.exe install <port> --triplet <triplet>
-```
+> [!WARNING]  
+> ## 🚧 REPOSITORY UNDER HEAVY CONSTRUCTION! 🚧
+>
+> The Windows WebKit port has an influx of new contributors and interests.
+> Feedback from that group identified some friction around managing third party
+> libraries. To support that community's efforts the direction of this
+> repository is changing.
+>
+> Going forward `vcpkg` will be directly integrated in the Windows WebKit port.
+> The third party libraries will be built there through the canonical
+> [registry](https://github.com/microsoft/vcpkg) with this registry providing
+> overlays of ports from it when absolutely necessary.
+>
+> At this time this repository is not accepting any changes from the community.
+> It will reopen after the transition is completed.
 
 ## Current Versions
 
