@@ -23,7 +23,6 @@
 |---|:---:|:---:|
 | [icu](http://site.icu-project.org) | 76.1 | 2024-10-24 |
 | [zlib](https://github.com/zlib-ng/zlib-ng) | 2.2.2 | 2024-09-17 |
-| [brotli](https://github.com/google/brotli) | 1.1.0 | 2023-08-31 |
 | [nghttp2](https://nghttp2.org) | 1.64.0 | 2024-10-21 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 1.6.0 | 2024-10-05 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.8.1 | 2024-10-17 |
