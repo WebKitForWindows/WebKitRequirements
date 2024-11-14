@@ -34,7 +34,6 @@
 | [lcms](https://www.littlecms.com/) | 2.16.0 | 2023-12-03 |
 | [highway](https://github.com/google/highway) | 1.2.0 | 2024-05-31 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.44 | 2024-09-12 |
-| [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) | 3.0.3 | 2024-05-08 |
 | [libwebp](https://github.com/webmproject/libwebp) | 1.4.0 | 2024-04-12 |
 | [libjxl](https://github.com/libjxl/libjxl) | 0.11.0 | 2024-09-13 |
 | [sqlite](http://sqlite.org) | 3.47.0 | 2024-10-21 |

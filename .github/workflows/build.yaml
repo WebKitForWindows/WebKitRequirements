@@ -280,7 +280,7 @@ jobs:
         id: libjpeg
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libjpeg-turbo --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libjpeg-turbo --triplet ${{ matrix.triplet }}
       - name: Read libjpeg-turbo config
         if: steps.libjpeg.outcome == 'success' || steps.libjpeg.outcome == 'failure'
         continue-on-error: true
