@@ -1,4 +1,4 @@
-From 9aca3f85fcb92e269d700eec6338dc817a710ca5 Mon Sep 17 00:00:00 2001
+From 18120f1fbf2af73007c997a73af6ff735aa188b0 Mon Sep 17 00:00:00 2001
 From: Don <don.j.olmstead@gmail.com>
 Date: Thu, 13 Jun 2024 15:32:36 -0700
 Subject: [PATCH] Remove library suffix on Windows
@@ -38,4 +38,4 @@ index f99fd368..a3cda8dd 100644
  
  install(
 -- 
-2.46.0.windows.1
+2.47.0.windows.2
