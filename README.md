@@ -27,7 +27,6 @@
 | [nghttp2](https://nghttp2.org) | 1.64.0 | 2024-10-21 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 1.6.0 | 2024-10-05 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.8.1 | 2024-10-17 |
-| [c-ares](https://c-ares.org) | 1.33.0 | 2024-08-02 |
 | [curl](https://curl.se) | 8.11.0 | 2024-11-05 |
 | [libxml2](http://xmlsoft.org) | 2.13.5 | 2024-11-12 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.42 | 2024-07-04 |
