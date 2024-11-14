@@ -373,7 +373,7 @@ jobs:
         id: pixman
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install pixman --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install pixman --triplet ${{ matrix.triplet }}
       - name: Read pixman config
         if: steps.pixman.outcome == 'success' || steps.pixman.outcome == 'failure'
         continue-on-error: true
