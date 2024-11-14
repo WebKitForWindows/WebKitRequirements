@@ -76,7 +76,7 @@ jobs:
         id: libressl
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libressl[tools] --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libressl[tools] --triplet ${{ matrix.triplet }}
       - name: Read libressl config
         if: steps.libressl.outcome == 'success' || steps.libressl.outcome == 'failure'
         continue-on-error: true

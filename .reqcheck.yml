@@ -29,9 +29,8 @@ repos:
 
   libressl:
     host: github
-    owner: libressl-portable
+    owner: libressl
     repo: portable
-    tags: true
 
   nghttp2:
     host: github
