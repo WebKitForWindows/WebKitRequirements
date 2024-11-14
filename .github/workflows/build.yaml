@@ -371,21 +371,25 @@ jobs:
 
       - name: Build pixman
         id: pixman
-        if: steps.vcpkg.outcome == 'success'
+        if: steps.icu.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install pixman --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
-      - name: Read pixman config
+        run: ./vcpkg.exe install pixman --triplet ${{ matrix.triplet }}
+      - name: Read pixman debug config
         if: steps.pixman.outcome == 'success' || steps.pixman.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/pixman/config-${{ matrix.triplet }}-out.log
+        run: Get-Content ./buildtrees/pixman/config-${{ matrix.triplet }}-dbg-out.log
       - name: Read pixman debug build log
         if: steps.pixman.outcome == 'success' || steps.pixman.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/pixman/install-${{ matrix.triplet }}-dbg-out.log
+        run: Get-Content ./buildtrees/pixman/package-${{ matrix.triplet }}-dbg-out.log
+      - name: Read pixman release config
+        if: steps.pixman.outcome == 'success' || steps.pixman.outcome == 'failure'
+        continue-on-error: true
+        run: Get-Content ./buildtrees/pixman/config-${{ matrix.triplet }}-rel-out.log
       - name: Read pixman release build log
         if: steps.pixman.outcome == 'success' || steps.pixman.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/pixman/install-${{ matrix.triplet }}-rel-out.log
+        run: Get-Content ./buildtrees/pixman/package-${{ matrix.triplet }}-rel-out.log
 
       - name: Build cairo
         id: cairo
