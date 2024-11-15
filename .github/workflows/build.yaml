@@ -112,7 +112,7 @@ jobs:
         id: ngtcp2
         if: steps.libressl.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install ngtcp2[libressl] --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install ngtcp2[libressl] --triplet ${{ matrix.triplet }}
       - name: Read ngtcp2 config
         if: steps.ngtcp2.outcome == 'success' || steps.ngtcp2.outcome == 'failure'
         continue-on-error: true
