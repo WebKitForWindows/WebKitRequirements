@@ -244,7 +244,7 @@ jobs:
         id: highway
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install highway --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install highway --triplet ${{ matrix.triplet }}
       - name: Read highway config
         if: steps.highway.outcome == 'success' || steps.highway.outcome == 'failure'
         continue-on-error: true
