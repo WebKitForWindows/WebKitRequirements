@@ -369,6 +369,28 @@ jobs:
         continue-on-error: true
         run: Get-Content ./buildtrees/woff2/install-${{ matrix.triplet }}-rel-out.log
 
+      - name: Build harfbuzz
+        id: harfbuzz
+        if: steps.icu.outcome == 'success'
+        continue-on-error: true
+        run: ./vcpkg.exe install harfbuzz[core,icu,directwrite] --triplet ${{ matrix.triplet }}
+      - name: Read harfbuzz debug config
+        if: steps.harfbuzz.outcome == 'success' || steps.harfbuzz.outcome == 'failure'
+        continue-on-error: true
+        run: Get-Content ./buildtrees/harfbuzz/config-${{ matrix.triplet }}-dbg-out.log
+      - name: Read harfbuzz debug build log
+        if: steps.harfbuzz.outcome == 'success' || steps.harfbuzz.outcome == 'failure'
+        continue-on-error: true
+        run: Get-Content ./buildtrees/harfbuzz/package-${{ matrix.triplet }}-dbg-out.log
+      - name: Read harfbuzz release config
+        if: steps.harfbuzz.outcome == 'success' || steps.harfbuzz.outcome == 'failure'
+        continue-on-error: true
+        run: Get-Content ./buildtrees/harfbuzz/config-${{ matrix.triplet }}-rel-out.log
+      - name: Read harfbuzz release build log
+        if: steps.harfbuzz.outcome == 'success' || steps.harfbuzz.outcome == 'failure'
+        continue-on-error: true
+        run: Get-Content ./buildtrees/harfbuzz/package-${{ matrix.triplet }}-rel-out.log
+
       - name: Build pixman
         id: pixman
         if: steps.vcpkg.outcome == 'success'
