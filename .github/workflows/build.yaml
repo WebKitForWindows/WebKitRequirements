@@ -413,19 +413,23 @@ jobs:
         id: libpsl
         if: steps.icu.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libpsl --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
-      - name: Read libpsl config
+        run: ./vcpkg.exe install libpsl --triplet ${{ matrix.triplet }}
+      - name: Read libpsl debug config
         if: steps.libpsl.outcome == 'success' || steps.libpsl.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/libpsl/config-${{ matrix.triplet }}-out.log
+        run: Get-Content ./buildtrees/libpsl/config-${{ matrix.triplet }}-dbg-out.log
       - name: Read libpsl debug build log
         if: steps.libpsl.outcome == 'success' || steps.libpsl.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/libpsl/install-${{ matrix.triplet }}-dbg-out.log
+        run: Get-Content ./buildtrees/libpsl/package-${{ matrix.triplet }}-dbg-out.log
+      - name: Read libpsl release config
+        if: steps.libpsl.outcome == 'success' || steps.libpsl.outcome == 'failure'
+        continue-on-error: true
+        run: Get-Content ./buildtrees/libpsl/config-${{ matrix.triplet }}-rel-out.log
       - name: Read libpsl release build log
         if: steps.libpsl.outcome == 'success' || steps.libpsl.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/libpsl/install-${{ matrix.triplet }}-rel-out.log
+        run: Get-Content ./buildtrees/libpsl/package-${{ matrix.triplet }}-rel-out.log
 
       # See if any of the previous build steps had an outcome of `failure`
       #
