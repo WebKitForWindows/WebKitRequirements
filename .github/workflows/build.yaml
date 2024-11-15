@@ -409,7 +409,7 @@ jobs:
         id: libpsl
         if: steps.icu.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libpsl --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libpsl[libicu] --triplet ${{ matrix.triplet }}
       - name: Read libpsl config
         if: steps.libpsl.outcome == 'success' || steps.libpsl.outcome == 'failure'
         continue-on-error: true
