@@ -355,7 +355,7 @@ jobs:
         id: woff2
         if: steps.brotli.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install woff2 --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install woff2 --triplet ${{ matrix.triplet }}
       - name: Read woff2 config
         if: steps.woff2.outcome == 'success' || steps.woff2.outcome == 'failure'
         continue-on-error: true
