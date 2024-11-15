@@ -130,7 +130,7 @@ jobs:
         id: nghttp3
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install nghttp3 --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install nghttp3 --triplet ${{ matrix.triplet }}
       - name: Read nghttp3 config
         if: steps.nghttp3.outcome == 'success' || steps.nghttp3.outcome == 'failure'
         continue-on-error: true
