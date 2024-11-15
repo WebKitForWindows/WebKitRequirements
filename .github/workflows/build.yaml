@@ -94,7 +94,7 @@ jobs:
         id: nghttp2
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install nghttp2 --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install nghttp2 --triplet ${{ matrix.triplet }}
       - name: Read nghttp2 config
         if: steps.nghttp2.outcome == 'success' || steps.nghttp2.outcome == 'failure'
         continue-on-error: true
