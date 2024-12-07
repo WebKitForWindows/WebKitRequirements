@@ -298,7 +298,7 @@ jobs:
         id: libwebp
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libwebp --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libwebp --triplet ${{ matrix.triplet }}
       - name: Read libwebp config
         if: steps.libwebp.outcome == 'success' || steps.libwebp.outcome == 'failure'
         continue-on-error: true

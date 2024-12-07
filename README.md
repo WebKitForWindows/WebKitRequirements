@@ -27,7 +27,6 @@
 | [libxml2](http://xmlsoft.org) | 2.13.5 | 2024-11-12 |
 | [libxslt](http://xmlsoft.org/libxslt) | 1.1.42 | 2024-07-04 |
 | [libpng](http://www.libpng.org/pub/png/libpng.html) | 1.6.44 | 2024-09-12 |
-| [libwebp](https://github.com/webmproject/libwebp) | 1.4.0 | 2024-04-12 |
 | [libjxl](https://github.com/libjxl/libjxl) | 0.11.0 | 2024-09-13 |
 | [sqlite](http://sqlite.org) | 3.47.0 | 2024-10-21 |
 | [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.18.0 | 2023-09-23 |
