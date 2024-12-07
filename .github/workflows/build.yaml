@@ -319,7 +319,7 @@ jobs:
           steps.highway.outcome == 'success' &&
           steps.lcms.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libjxl --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libjxl --triplet ${{ matrix.triplet }}
       - name: Read libjxl config
         if: steps.libjxl.outcome == 'success' || steps.libjxl.outcome == 'failure'
         continue-on-error: true
