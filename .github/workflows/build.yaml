@@ -341,7 +341,7 @@ jobs:
         id: sqlite3
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install sqlite3 --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install sqlite3[json1,fts3,rtree] --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read sqlite3 config
         if: steps.sqlite3.outcome == 'success' || steps.sqlite3.outcome == 'failure'
         continue-on-error: true
