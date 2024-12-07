@@ -226,7 +226,7 @@ jobs:
         id: lcms
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install lcms --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install lcms --triplet ${{ matrix.triplet }}
       - name: Read lcms config
         if: steps.lcms.outcome == 'success' || steps.lcms.outcome == 'failure'
         continue-on-error: true
