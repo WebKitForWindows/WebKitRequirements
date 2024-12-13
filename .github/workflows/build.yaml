@@ -208,7 +208,7 @@ jobs:
         id: libxslt
         if: steps.libxml2.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libxslt --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libxslt --triplet ${{ matrix.triplet }}
       - name: Read libxslt config
         if: steps.libxslt.outcome == 'success' || steps.libxslt.outcome == 'failure'
         continue-on-error: true
