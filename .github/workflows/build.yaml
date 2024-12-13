@@ -262,7 +262,7 @@ jobs:
         id: libpng
         if: steps.zlib.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libpng --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libpng --triplet ${{ matrix.triplet }}
       - name: Read libpng config
         if: steps.libpng.outcome == 'success' || steps.libpng.outcome == 'failure'
         continue-on-error: true
