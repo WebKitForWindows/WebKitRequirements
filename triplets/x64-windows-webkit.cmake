@@ -8,3 +8,8 @@ if (PORT STREQUAL "highway")
 elseif (PORT STREQUAL "pixman")
     set(VCPKG_LIBRARY_LINKAGE static)
 endif ()
+
+# Turn on zlib compatibility
+if (PORT STREQUAL "zlib-ng")
+    set(ZLIB_COMPAT ON)
+endif ()

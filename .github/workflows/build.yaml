@@ -44,15 +44,15 @@ jobs:
       - name: Read zlib config
         if: steps.zlib.outcome == 'success' || steps.zlib.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/zlib/config-${{ matrix.triplet }}-out.log
+        run: Get-Content ./buildtrees/zlib-ng/config-${{ matrix.triplet }}-out.log
       - name: Read zlib debug build log
         if: steps.zlib.outcome == 'success' || steps.zlib.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/zlib/install-${{ matrix.triplet }}-dbg-out.log
+        run: Get-Content ./buildtrees/zlib-ng/install-${{ matrix.triplet }}-dbg-out.log
       - name: Read zlib release build log
         if: steps.zlib.outcome == 'success' || steps.zlib.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/zlib/install-${{ matrix.triplet }}-rel-out.log
+        run: Get-Content ./buildtrees/zlib-ng/install-${{ matrix.triplet }}-rel-out.log
 
       - name: Build brotli
         id: brotli
