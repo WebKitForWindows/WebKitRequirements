@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        triplet: [x64-windows]
+        triplet: [x64-windows-webkit]
 
     steps:
       - uses: actions/checkout@v4
@@ -40,7 +40,7 @@ jobs:
         id: zlib
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install zlib --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install zlib --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read zlib config
         if: steps.zlib.outcome == 'success' || steps.zlib.outcome == 'failure'
         continue-on-error: true
@@ -58,7 +58,7 @@ jobs:
         id: brotli
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install brotli --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install brotli --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read brotli config
         if: steps.brotli.outcome == 'success' || steps.brotli.outcome == 'failure'
         continue-on-error: true
@@ -76,7 +76,7 @@ jobs:
         id: libressl
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libressl[tools] --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libressl[tools] --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read libressl config
         if: steps.libressl.outcome == 'success' || steps.libressl.outcome == 'failure'
         continue-on-error: true
@@ -94,7 +94,7 @@ jobs:
         id: nghttp2
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install nghttp2 --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install nghttp2 --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read nghttp2 config
         if: steps.nghttp2.outcome == 'success' || steps.nghttp2.outcome == 'failure'
         continue-on-error: true
@@ -112,7 +112,7 @@ jobs:
         id: ngtcp2
         if: steps.libressl.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install ngtcp2[libressl] --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install ngtcp2[libressl] --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read ngtcp2 config
         if: steps.ngtcp2.outcome == 'success' || steps.ngtcp2.outcome == 'failure'
         continue-on-error: true
@@ -130,7 +130,7 @@ jobs:
         id: nghttp3
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install nghttp3 --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install nghttp3 --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read nghttp3 config
         if: steps.nghttp3.outcome == 'success' || steps.nghttp3.outcome == 'failure'
         continue-on-error: true
@@ -154,7 +154,7 @@ jobs:
           steps.ngtcp2.outcome == 'success' &&
           steps.nghttp3.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install curl[libressl,http3,ipv6] --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install curl[libressl,http3,ipv6] --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read curl config
         if: steps.curl.outcome == 'success' || steps.curl.outcome == 'failure'
         continue-on-error: true
@@ -172,7 +172,7 @@ jobs:
         id: icu
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install icu --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install icu --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read icu config
         if: steps.icu.outcome == 'success' || steps.icu.outcome == 'failure'
         continue-on-error: true
@@ -190,7 +190,7 @@ jobs:
         id: libxml2
         if: steps.icu.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libxml2[xslt] --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libxml2[xslt] --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read libxml2 config
         if: steps.libxml2.outcome == 'success' || steps.libxml2.outcome == 'failure'
         continue-on-error: true
@@ -208,7 +208,7 @@ jobs:
         id: libxslt
         if: steps.libxml2.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libxslt --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libxslt --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read libxslt config
         if: steps.libxslt.outcome == 'success' || steps.libxslt.outcome == 'failure'
         continue-on-error: true
@@ -226,25 +226,29 @@ jobs:
         id: lcms
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install lcms --triplet ${{ matrix.triplet }}
-      - name: Read lcms config
+        run: ./vcpkg.exe install lcms --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
+      - name: Read lcms debug config
         if: steps.lcms.outcome == 'success' || steps.lcms.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/lcms/config-${{ matrix.triplet }}-out.log
+        run: Get-Content ./buildtrees/lcms/config-${{ matrix.triplet }}-dbg-out.log
       - name: Read lcms debug build log
         if: steps.lcms.outcome == 'success' || steps.lcms.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/lcms/install-${{ matrix.triplet }}-dbg-out.log
+        run: Get-Content ./buildtrees/lcms/package-${{ matrix.triplet }}-dbg-out.log
+      - name: Read lcms release config
+        if: steps.lcms.outcome == 'success' || steps.lcms.outcome == 'failure'
+        continue-on-error: true
+        run: Get-Content ./buildtrees/lcms/config-${{ matrix.triplet }}-rel-out.log
       - name: Read lcms release build log
         if: steps.lcms.outcome == 'success' || steps.lcms.outcome == 'failure'
         continue-on-error: true
-        run: Get-Content ./buildtrees/lcms/install-${{ matrix.triplet }}-rel-out.log
+        run: Get-Content ./buildtrees/lcms/package-${{ matrix.triplet }}-rel-out.log
 
       - name: Build highway
         id: highway
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install highway --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install highway --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read highway config
         if: steps.highway.outcome == 'success' || steps.highway.outcome == 'failure'
         continue-on-error: true
@@ -262,7 +266,7 @@ jobs:
         id: libpng
         if: steps.zlib.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libpng --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libpng --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read libpng config
         if: steps.libpng.outcome == 'success' || steps.libpng.outcome == 'failure'
         continue-on-error: true
@@ -280,7 +284,7 @@ jobs:
         id: libjpeg
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libjpeg-turbo --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libjpeg-turbo --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read libjpeg-turbo config
         if: steps.libjpeg.outcome == 'success' || steps.libjpeg.outcome == 'failure'
         continue-on-error: true
@@ -298,7 +302,7 @@ jobs:
         id: libwebp
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libwebp --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libwebp --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read libwebp config
         if: steps.libwebp.outcome == 'success' || steps.libwebp.outcome == 'failure'
         continue-on-error: true
@@ -319,7 +323,7 @@ jobs:
           steps.highway.outcome == 'success' &&
           steps.lcms.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libjxl --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libjxl --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read libjxl config
         if: steps.libjxl.outcome == 'success' || steps.libjxl.outcome == 'failure'
         continue-on-error: true
@@ -337,7 +341,7 @@ jobs:
         id: sqlite3
         if: steps.vcpkg.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install sqlite3 --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install sqlite3 --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read sqlite3 config
         if: steps.sqlite3.outcome == 'success' || steps.sqlite3.outcome == 'failure'
         continue-on-error: true
@@ -355,7 +359,7 @@ jobs:
         id: woff2
         if: steps.brotli.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install woff2 --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install woff2 --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read woff2 config
         if: steps.woff2.outcome == 'success' || steps.woff2.outcome == 'failure'
         continue-on-error: true
@@ -373,7 +377,7 @@ jobs:
         id: harfbuzz
         if: steps.icu.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install harfbuzz[core,icu,directwrite] --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install harfbuzz[core,icu,directwrite] --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read harfbuzz debug config
         if: steps.harfbuzz.outcome == 'success' || steps.harfbuzz.outcome == 'failure'
         continue-on-error: true
@@ -395,7 +399,7 @@ jobs:
         id: pixman
         if: steps.icu.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install pixman --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install pixman --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read pixman debug config
         if: steps.pixman.outcome == 'success' || steps.pixman.outcome == 'failure'
         continue-on-error: true
@@ -417,7 +421,7 @@ jobs:
         id: cairo
         if: steps.libpng.outcome == 'success' && steps.pixman.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install cairo --overlay-ports ./WebKitRequirements/ports --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install cairo --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read cairo config
         if: steps.cairo.outcome == 'success' || steps.cairo.outcome == 'failure'
         continue-on-error: true
@@ -435,7 +439,7 @@ jobs:
         id: libpsl
         if: steps.icu.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libpsl --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libpsl --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read libpsl debug config
         if: steps.libpsl.outcome == 'success' || steps.libpsl.outcome == 'failure'
         continue-on-error: true
