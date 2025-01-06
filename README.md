@@ -22,7 +22,6 @@
 | Library | Version | Release Date |
 |---|:---:|:---:|
 | [icu](http://site.icu-project.org) | 76.1 | 2024-10-24 |
-| [zlib](https://github.com/zlib-ng/zlib-ng) | 2.2.2 | 2024-09-17 |
 | [curl](https://curl.se) | 8.11.0 | 2024-11-05 |
 | [libxml2](http://xmlsoft.org) | 2.13.5 | 2024-11-12 |
 | [sqlite](http://sqlite.org) | 3.47.0 | 2024-10-21 |

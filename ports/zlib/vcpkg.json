@@ -1,17 +1,10 @@
 {
   "name": "zlib",
-  "version": "2.2.2",
+  "version-string": "zlib-ng",
   "description": "A compression library",
   "homepage": "https://github.com/zlib-ng/zlib-ng",
   "license": "Zlib",
   "dependencies": [
-    {
-      "name": "vcpkg-cmake",
-      "host": true
-    },
-    {
-      "name": "vcpkg-cmake-config",
-      "host": true
-    }
+    "zlib-ng"
   ]
 }

@@ -17,7 +17,7 @@ repos:
     owner: unicode-org
     repo: icu
 
-  zlib:
+  zlib-ng:
     host: github
     owner: zlib-ng
     repo: zlib-ng
