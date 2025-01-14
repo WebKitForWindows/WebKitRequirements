@@ -23,5 +23,4 @@
 |---|:---:|:---:|
 | [icu](http://site.icu-project.org) | 76.1 | 2024-10-24 |
 | [curl](https://curl.se) | 8.11.0 | 2024-11-05 |
-| [libxml2](http://xmlsoft.org) | 2.13.5 | 2024-11-12 |
 | [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.18.0 | 2023-09-23 |

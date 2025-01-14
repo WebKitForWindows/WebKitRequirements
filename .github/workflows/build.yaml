@@ -190,7 +190,7 @@ jobs:
         id: libxml2
         if: steps.icu.outcome == 'success'
         continue-on-error: true
-        run: ./vcpkg.exe install libxml2[xslt] --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
+        run: ./vcpkg.exe install libxml2[core] --overlay-ports ./WebKitRequirements/ports --overlay-triplets ./WebKitRequirements/triplets --triplet ${{ matrix.triplet }}
       - name: Read libxml2 config
         if: steps.libxml2.outcome == 'success' || steps.libxml2.outcome == 'failure'
         continue-on-error: true
