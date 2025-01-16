@@ -61,6 +61,7 @@ vcpkg_cmake_configure(
 
 vcpkg_cmake_install()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/ICU)
 vcpkg_fixup_pkgconfig()
 
 if (ENABLE_TOOLS)
@@ -109,17 +110,12 @@ file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/sbin)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/sbin)
 
-# Merge cmake configs
-file(COPY
-    DESTINATION ${CURRENT_PACKAGES_DIR}/share/icu
-    PATTERN ${CURRENT_PACKAGES_DIR}/debug/lib/cmake/*.cmake
-)
-file(COPY
-    DESTINATION ${CURRENT_PACKAGES_DIR}/share/icu
-    PATTERN ${CURRENT_PACKAGES_DIR}/lib/cmake/*.cmake
-)
-file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/lib/cmake)
-file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/cmake)
+# Meson requires a pkgconfig file to properly build libraries with ICU
+# The CMake here doesn't create one so just use a generated one
+if (VCPKG_TARGET_IS_WINDOWS)
+    file(INSTALL ${CMAKE_CURRENT_LIST_DIR}/pkgconfig/release DESTINATION ${CURRENT_PACKAGES_DIR}/lib RENAME pkgconfig)
+    file(INSTALL ${CMAKE_CURRENT_LIST_DIR}/pkgconfig/debug DESTINATION ${CURRENT_PACKAGES_DIR}/debug/lib RENAME pkgconfig)
+endif ()
 
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/icu RENAME copyright)
 file(WRITE ${CURRENT_PACKAGES_DIR}/share/icu/version "${VERSION_MAJOR}.${VERSION_MINOR}.0")
