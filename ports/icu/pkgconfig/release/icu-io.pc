@@ -1,0 +1,41 @@
+prefix=${pcfiledir}/../..
+# Copyright (C) 2016 and later: Unicode, Inc. and others.
+# License & terms of use: http://www.unicode.org/copyright.html
+# Copyright (C) 2010-2013, International Business Machines Corporation. All Rights Reserved.
+
+# CFLAGS contains only anything end users should set
+CFLAGS = 
+# CXXFLAGS contains only anything end users should set
+CXXFLAGS = 
+# DEFS only contains those UCONFIG_CPPFLAGS which are not auto-set by platform.h
+DEFS = 
+exec_prefix = ${prefix}
+#bindir = ${prefix}/tools/icu/bin
+libdir = ${prefix}/lib
+includedir = ${prefix}/include
+baselibs = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -lcomdlg32 -ladvapi32
+#datarootdir = ${prefix}/share/icu
+#datadir = ${datarootdir}
+#sbindir = ${prefix}/tools/icu/sbin
+#mandir = ${prefix}/share/icu
+#sysconfdir = ${prefix}/etc
+UNICODE_VERSION=16.0
+ICUPREFIX=icu
+ICULIBSUFFIX=
+LIBICU=lib${ICUPREFIX}
+#SHAREDLIBCFLAGS=-fPIC
+pkglibdir=${libdir}/icu${ICULIBSUFFIX}/76.1
+#pkgdatadir=${datadir}/icu${ICULIBSUFFIX}/76.1
+ICUDATA_NAME = icudt76l
+#ICUPKGDATA_DIR=${prefix}/lib
+#ICUDATA_DIR=${pkgdatadir}
+ICUDESC=International Components for Unicode
+
+Version: 76.1
+Cflags: "-I${includedir}"
+# end of icu.pc.in
+Description: International Components for Unicode: Stream and I/O Library
+Name: icu-io
+Requires.private: icu-i18n
+Libs: "-L${libdir}" -licuio
+
