@@ -22,5 +22,5 @@
 | Library | Version | Release Date |
 |---|:---:|:---:|
 | [icu](http://site.icu-project.org) | 76.1 | 2024-10-24 |
-| [curl](https://curl.se) | 8.11.1 | 2024-12-11 |
-| [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.18.0 | 2023-09-23 |
+| [curl](https://curl.se) | 8.12.0 | 2025-02-05 |
+| [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.18.2 | 2024-09-1 |
