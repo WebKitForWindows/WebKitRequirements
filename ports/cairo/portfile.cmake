@@ -1,4 +1,4 @@
-set(VERSION 1.18.0)
+set(VERSION 1.18.2)
 
 set(FILENAME "cairo-${VERSION}.tar.bz2")
 set(URLS "https://gitlab.freedesktop.org/cairo/cairo/-/archive/${VERSION}/${FILENAME}")
@@ -7,7 +7,7 @@ set(URLS "https://gitlab.freedesktop.org/cairo/cairo/-/archive/${VERSION}/${FILE
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 bd702f3b64061f8add954c243c9b59f5d44271adfa76d997941ddab629ff8018c2a1d3368edf2362573e0018c342c61483de58240c63e15e1e6035d2511d3e40
+    SHA512 8db31b675791b892379bc5fca7f421d3e8ebca9c3cbcdc27fa80efb1274f12d89276a54fa1ec18008f81de9b1dc2fafb9fbee9ee368e893e8b035a332d07e141
 )
 
 # Patches
