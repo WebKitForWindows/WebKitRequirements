@@ -1,26 +1,17 @@
 # WebKitRequirements
 > Third party packages required for building the open source WebKit port for Windows.
 
-> [!WARNING]  
-> ## 🚧 REPOSITORY UNDER HEAVY CONSTRUCTION! 🚧
->
-> The Windows WebKit port has an influx of new contributors and interests.
-> Feedback from that group identified some friction around managing third party
-> libraries. To support that community's efforts the direction of this
-> repository is changing.
->
-> Going forward `vcpkg` will be directly integrated in the Windows WebKit port.
-> The third party libraries will be built there through the canonical
-> [registry](https://github.com/microsoft/vcpkg) with this registry providing
-> overlays of ports from it when absolutely necessary.
->
-> At this time this repository is not accepting any changes from the community.
-> It will reopen after the transition is completed.
+The WebKitRequirements repository is a
+[vcpkg registry](https://learn.microsoft.com/en-us/vcpkg/concepts/registries)
+which contains
+[overlay ports](https://learn.microsoft.com/en-us/vcpkg/concepts/overlay-ports)
+of third party libraries used in the Windows port of WebKit.
 
-## Current Versions
+## Overlay ports
 
-| Library | Version | Release Date |
-|---|:---:|:---:|
-| [icu](http://site.icu-project.org) | 76.1 | 2024-10-24 |
-| [curl](https://curl.se) | 8.12.0 | 2025-02-05 |
-| [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.18.2 | 2024-09-1 |
+| Library | Version | Release Date | Reason for Overlay |
+|---|:---:|:---:|---|
+| [icu](http://site.icu-project.org) | 76.1 | 2024-10-24 | CMake port. Upstream pinned to 74.1 |
+| [zlib](https://github.com/zlib-ng/zlib-ng) | zlib-ng | N/A | Map zlib to zlib-ng |
+| [curl](https://curl.se) | 8.12.0 | 2025-02-05 | Customization of build options |
+| [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.18.2 | 2024-09-01 | CMake port. Will remove when cairo taken out of WebKit |
