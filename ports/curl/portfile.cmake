@@ -1,14 +1,21 @@
-set(VERSION 8.12.1)
+set(VERSION 8.13.0-rc2)
 string(REPLACE "." "_" TAG ${VERSION})
 
-set(FILENAME "curl-${VERSION}.zip")
-set(URLS "https://github.com/curl/curl/releases/download/curl-${TAG}/${FILENAME}")
+set(FILENAME "curl-${VERSION}.tar.xz")
+if (VERSION MATCHES "-rc")
+    set(URLS "https://curl.se/rc/${FILENAME}")
+else ()
+    set(URLS
+        "https://curl.se/download/${FILENAME}"
+        "https://github.com/curl/curl/releases/download/curl-${TAG}/${FILENAME}"
+    )
+endif ()
 
 # Get archive
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 c0be503358811b82f360f6bc65389b7b6e45526c1078689df4a6ae5f848c2103babac2f2fcc0bed0c562c22948b990684a420b83aadf028b3912bf2b361c3462
+    SHA512 299b41b5bf52b29f5064f68cd7d8d1e95d8b8f8b36fb80fb67ed2b342123f1fc87a543754cbee8c49c83a8e73daca89cb132a76c795d7fa4d9231c6bf281a9e0
 )
 
 # Extract archive
