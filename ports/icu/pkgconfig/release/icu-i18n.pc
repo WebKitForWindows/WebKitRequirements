@@ -24,18 +24,17 @@ ICUPREFIX=icu
 ICULIBSUFFIX=
 LIBICU=lib${ICUPREFIX}
 #SHAREDLIBCFLAGS=-fPIC
-pkglibdir=${libdir}/icu${ICULIBSUFFIX}/76.1
-#pkgdatadir=${datadir}/icu${ICULIBSUFFIX}/76.1
+pkglibdir=${libdir}/icu${ICULIBSUFFIX}/77.1
+#pkgdatadir=${datadir}/icu${ICULIBSUFFIX}/77.1
 ICUDATA_NAME = icudt76l
 #ICUPKGDATA_DIR=${prefix}/lib
 #ICUDATA_DIR=${pkgdatadir}
 ICUDESC=International Components for Unicode
 
-Version: 76.1
+Version: 77.1
 Cflags: "-I${includedir}"
 # end of icu.pc.in
 Description: International Components for Unicode: Internationalization library
 Name: icu-i18n
 Requires.private: icu-uc
 Libs: "-L${libdir}" -licuin
-

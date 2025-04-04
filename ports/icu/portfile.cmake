@@ -1,4 +1,4 @@
-set(VERSION_MAJOR 76)
+set(VERSION_MAJOR 77)
 set(VERSION_MINOR 1)
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
 set(VERSION2 "${VERSION_MAJOR}_${VERSION_MINOR}")
@@ -11,7 +11,7 @@ set(URLS "https://github.com/unicode-org/icu/releases/download/release-${VERSION
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 b702ab62fb37a1574d5f4a768326d0f8fa30d9db5b015605b5f8215b5d8547f83d84880c586d3dcc7b6c76f8d47ef34e04b0f51baa55908f737024dd79a42a6c
+    SHA512 a47d6d9c327d037a05ea43d1d1a06b2fd757cc02a94f7c1a238f35cfc3dfd4ab78d0612790f3a3cca0292c77412a9c2c15c8f24b718f79a857e007e66f07e7cd
 )
 
 # Patches
