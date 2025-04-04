@@ -9,7 +9,7 @@
       "port-version": 0
     },
     "icu": {
-      "baseline": "76.1.0",
+      "baseline": "77.1.0",
       "port-version": 0
     },
     "zlib": {
