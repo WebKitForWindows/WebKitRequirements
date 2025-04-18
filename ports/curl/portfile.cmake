@@ -18,6 +18,10 @@ vcpkg_download_distfile(ARCHIVE
     SHA512 d266e460f162ee455b56726e5b7247b2d1aa5265ae12081513fc0c5c79e785a594097bc71d505dc9bcd2c2f6f1ff6f4bab9dbd9d120bb76d06c5be8521a8ca7d
 )
 
+set(PATCHES
+    0001-cpool-cshutdown-force-close-connections-under-pressu.patch
+)
+
 # Extract archive
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
