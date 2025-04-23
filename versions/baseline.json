@@ -12,6 +12,10 @@
       "baseline": "77.1.0",
       "port-version": 0
     },
+    "openssl": {
+      "baseline": "libressl",
+      "port-version": 0
+    },
     "zlib": {
       "baseline": "zlib-ng",
       "port-version": 0
