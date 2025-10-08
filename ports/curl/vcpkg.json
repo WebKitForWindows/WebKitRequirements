@@ -1,6 +1,6 @@
 {
   "name": "curl",
-  "version": "8.13.0",
+  "version": "8.16.0",
   "port-version": 1,
   "description": "A library for transferring data with URLs",
   "homepage": "https://curl.se/",
@@ -34,7 +34,12 @@
       "description": "Enable HTTP/3 support.",
       "dependencies": [
         "nghttp3",
-        "ngtcp2"
+        {
+          "name": "ngtcp2",
+          "features": [
+            "openssl"
+          ]
+        }
       ]
     },
     "ipv6": {

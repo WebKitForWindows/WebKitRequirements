@@ -14,5 +14,5 @@ of third party libraries used in the Windows port of WebKit.
 | [icu](http://site.icu-project.org) | 77.1 | 2025-03-13 | CMake port. Upstream pinned to 74.1 |
 | [openssl](https://www.libressl.org/) | libressl | N/A | Map openssl to libressl |
 | [zlib](https://github.com/zlib-ng/zlib-ng) | zlib-ng | N/A | Map zlib to zlib-ng |
-| [curl](https://curl.se) | 8.13.0 | 2025-04-02 | Customization of build options, and release candidates |
+| [curl](https://curl.se) | 8.16.0 | 2025-09-10 | Customization of build options, and release candidates |
 | [cairo](https://gitlab.freedesktop.org/cairo/cairo) | 1.18.2 | 2024-09-01 | CMake port. Will remove when cairo taken out of WebKit |
