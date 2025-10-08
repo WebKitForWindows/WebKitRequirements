@@ -1,4 +1,4 @@
-set(VERSION 8.13.0)
+set(VERSION 8.16.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 set(FILENAME "curl-${VERSION}.tar.xz")
@@ -15,11 +15,7 @@ endif ()
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 d266e460f162ee455b56726e5b7247b2d1aa5265ae12081513fc0c5c79e785a594097bc71d505dc9bcd2c2f6f1ff6f4bab9dbd9d120bb76d06c5be8521a8ca7d
-)
-
-set(PATCHES
-    0001-cpool-cshutdown-force-close-connections-under-pressu.patch
+    SHA512 8262c3dc113cfd5744ef1b82dbccaa69448a9395ad5c094c22df5cf537a047a927d3332db2cb3be12a31a68a60d8d0fa8485b916e975eda36a4ebd860da4f621
 )
 
 # Extract archive
