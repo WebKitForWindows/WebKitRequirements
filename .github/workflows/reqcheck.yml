@@ -1,0 +1,67 @@
+name: Check requirements
+
+on:
+  # Run every monday at noon
+  schedule:
+    - cron: 0 12 * * 1
+  workflow_dispatch:
+
+jobs:
+  reqcheck:
+    name: Check for new requirements versions
+    runs-on: ubuntu-latest
+
+    steps:
+      # Get the Git SHA used in WebKit
+      - name: Determine vcpkg sha
+        uses: actions/github-script@v8
+        id: get-sha
+        with:
+          result-encoding: string
+          script: |
+            const res = await fetch('https://raw.githubusercontent.com/WebKit/WebKit/refs/heads/main/vcpkg-configuration.json');
+            if (res.ok) {
+              const data = await res.json();
+              return data['default-registry']['baseline'];
+            }
+            return '';
+
+      - uses: actions/checkout@v4
+        with:
+          repository: microsoft/vcpkg
+          ref: ${{ steps.get-sha.outputs.result }}
+      - uses: actions/checkout@v4
+        with:
+          path: WebKitRequirements
+
+      # Download reqcheck locally
+      - name: Download reqcheck
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: WebKitForWindows/reqcheck
+          latest: true
+          fileName: reqcheck_linux_amd64.tar.gz
+      - name: Unzip reqcheck
+        run: tar -zxvf reqcheck_linux_amd64.tar.gz
+      - name: Verify reqcheck
+        run: ./reqcheck --help
+      - name: Add config
+        run: cp WebKitRequirements/.reqcheck.yml .reqcheck.yml
+
+      # Run the command
+      - name: Run reqcheck
+        run: ./reqcheck vcpkg --slack --output-file results.json --overlay WebKitRequirements .
+        env:
+          github_public_token: ${{ secrets.GITHUB_TOKEN }}
+          gitlab_freedesktop_token: ${{ secrets.GITLAB_FREEDESKTOP_TOKEN }}
+
+      # Notify the results to WebKit slack
+      - name: Forward a saved message
+        uses: slackapi/slack-github-action@v2
+        with:
+          payload-file-path: results.json
+          payload-templated: true
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+        env:
+          SLACK_CHANNEL_ID: windows
