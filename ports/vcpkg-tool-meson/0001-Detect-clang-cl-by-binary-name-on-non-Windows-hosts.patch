@@ -1,0 +1,31 @@
+--- meson-1.9.0/mesonbuild/compilers/detect.py	2025-08-24 12:24:15.000000000 -0400
++++ meson-1.9.0-patched/mesonbuild/compilers/detect.py	2026-02-05 21:55:31.816774859 -0500
+@@ -452,6 +452,28 @@
+                     full_version=full_version, linker=linker)
+ 
+         if 'clang' in out or 'Clang' in out:
++            # On Linux, clang-cl doesn't output "CL.EXE COMPATIBILITY" so the
++            # earlier check misses it. Detect by binary name and redirect to
++            # the ClangCl handler.
++            compiler_name = os.path.basename(compiler[0])
++            if 'clang-cl' in compiler_name and env.machines[for_machine].is_windows():
++                arg = '--version'
++                try:
++                    p, out, err = Popen_safe(compiler + [arg])
++                except OSError as e:
++                    popen_exceptions[join_args(compiler + [arg])] = e
++                version = search_version(out)
++                match = re.search('^Target: (.*?)-', out, re.MULTILINE)
++                target = match.group(1) if match else 'unknown target'
++                cls = c.ClangClCCompiler if lang == 'c' else cpp.ClangClCPPCompiler
++                # Use the linker from the cross file (c_ld), falling back to lld-link
++                ld_entry = env.lookup_binary_entry(for_machine, lang + '_ld')
++                linker_cmd = ld_entry if ld_entry is not None else ['lld-link']
++                linker = guess_win_linker(env, linker_cmd, cls, version, for_machine)
++                return cls(
++                    compiler, version, for_machine, is_cross, info, target,
++                    linker=linker)
++
+             linker = None
+ 
+             defines = _get_clang_compiler_defines(compiler, lang)

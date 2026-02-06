@@ -1,0 +1,30 @@
+--- a/source/tools/pkgdata/pkgdata.cpp
++++ b/source/tools/pkgdata/pkgdata.cpp
+@@ -769,14 +769,26 @@
+ #ifdef CAN_WRITE_OBJ_CODE
+                     /* Try to detect the arch type, use nullptr if unsuccessful */
+                     char optMatchArch[10] = { 0 };
+                     pkg_createOptMatchArch(optMatchArch);
++
++                    /* Determine the CPU architecture string for writeObjectCode.
++                     * When using Clang on Windows, the _M_* macros reflect the
++                     * target architecture set by the compiler driver. */
++                    const char *optCpuArch = nullptr;
++#if defined(_M_AMD64)
++                    optCpuArch = "x64";
++#elif defined(_M_ARM64)
++                    optCpuArch = "arm64";
++#elif defined(_M_IX86)
++                    optCpuArch = "x86";
++#endif
+                     writeObjectCode(
+                         datFileNamePath,
+                         o->tmpDir,
+                         o->entryName,
+                         (optMatchArch[0] == 0 ? nullptr : optMatchArch),
+-                        nullptr,
++                        optCpuArch,
+                         nullptr,
+                         gencFilePath,
+                         sizeof(gencFilePath),
+                         true);
