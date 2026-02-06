@@ -20,6 +20,14 @@ set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-platform.patch
     # Patch specifically for vcpkg on top of above
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Remove-install-suffix-on-Windows.patch
+    # Append CMAKE_EXECUTABLE_SUFFIX to tool paths for cross-compilation
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Append-CMAKE_EXECUTABLE_SUFFIX-to-tool-paths.patch
+    # Copy stubdata DLL to bin/ during cross-compilation (not just native Windows)
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Copy-stubdata-dll-to-bin-for-cross-compile.patch
+    # Pass optCpuArch to writeObjectCode to avoid nullptr dereference with clang
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0005-Pass-optCpuArch-from-pkgdata-to-writeObjectCode.patch
+    # Allow overriding link.exe/LIB.exe via env vars for cross-compilation
+    ${CMAKE_CURRENT_LIST_DIR}/patches/0006-Skip-pkgdata-link-step-when-cross-compiling.patch
 )
 
 # Extract archive
@@ -49,6 +57,13 @@ if (DEFINED ICU_CROSS_BUILD_ROOT)
 else ()
     set(CROSS_COMPILING OFF)
     set(ENABLE_TOOLS ON)
+endif ()
+
+# When cross-compiling for Windows from a non-Windows host, pkgdata.exe runs
+# under Wine but cannot invoke link.exe/LIB.exe. The CMake build links the
+# data library itself, so skip the redundant link step in pkgdata (patch 0006).
+if (NOT VCPKG_HOST_IS_WINDOWS AND ENABLE_TOOLS)
+    set(ENV{ICU_SKIP_PKGDATA_LINK} 1)
 endif ()
 
 vcpkg_cmake_configure(
@@ -101,7 +116,10 @@ if (ENABLE_TOOLS)
         file(RENAME ${CURRENT_PACKAGES_DIR}/sbin/${tool}${TOOL_EXTENSION} ${CURRENT_PACKAGES_DIR}/tools/icu/${tool}${TOOL_EXTENSION})
     endforeach()
 
-    vcpkg_copy_tool_dependencies(${CURRENT_PACKAGES_DIR}/tools/icu)
+    # vcpkg_copy_tool_dependencies requires PowerShell, skip on non-Windows hosts
+    if (VCPKG_HOST_IS_WINDOWS)
+        vcpkg_copy_tool_dependencies(${CURRENT_PACKAGES_DIR}/tools/icu)
+    endif ()
 endif ()
 
 # Prepare distribution

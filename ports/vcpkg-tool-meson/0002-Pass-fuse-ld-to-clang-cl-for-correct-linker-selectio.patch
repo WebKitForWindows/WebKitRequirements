@@ -1,0 +1,18 @@
+--- meson-1.9.0/mesonbuild/compilers/mixins/visualstudio.py	2025-08-24 12:24:15.000000000 -0400
++++ meson-1.9.0-patched/mesonbuild/compilers/mixins/visualstudio.py	2026-02-05 21:55:49.130235239 -0500
+@@ -480,7 +480,14 @@
+     def linker_to_compiler_args(self, args: T.List[str]) -> T.List[str]:
+         # clang-cl forwards arguments span-wise with the /LINK flag
+         # therefore -Wl will be received by lld-link or LINK and rejected
+-        return super().use_linker_args(self.linker.id, '') + super().linker_to_compiler_args([flag[4:] if flag.startswith('-Wl,') else flag for flag in args])
++        # Tell clang-cl which linker binary to use via -fuse-ld so that
++        # on non-Windows hosts it doesn't fall back to /usr/bin/ld.
++        import os
++        ld_args: T.List[str] = []
++        if hasattr(self.linker, 'exelist') and self.linker.exelist:
++            ld_name = os.path.basename(self.linker.exelist[0])
++            ld_args = [f'-fuse-ld={ld_name}']
++        return ld_args + super().linker_to_compiler_args([flag[4:] if flag.startswith('-Wl,') else flag for flag in args])
+ 
+     def get_dependency_compile_args(self, dep: 'Dependency') -> T.List[str]:
+         if dep.get_include_type() == 'system':

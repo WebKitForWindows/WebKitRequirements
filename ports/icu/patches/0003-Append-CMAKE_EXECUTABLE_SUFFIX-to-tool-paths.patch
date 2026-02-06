@@ -1,0 +1,449 @@
+--- a/source/data/CMakeLists.txt	2026-02-05 18:06:41.270799091 -0500
++++ b/source/data/CMakeLists.txt	2026-02-05 18:07:45.873543869 -0500
+@@ -112,7 +112,7 @@
+ set(ICUPKGDATA_OUTDIR ${OUTDIR})
+ 
+ set(PKGDATA
+-    ${TOOLBINDIR}/pkgdata
++    ${TOOLBINDIR}/pkgdata${CMAKE_EXECUTABLE_SUFFIX}
+     ${PKGDATA_OPTS}
+     -c # --copyright
+     -s
+@@ -183,7 +183,7 @@
+ 
+         add_custom_command(
+             OUTPUT ${ICUDATA_SOURCE_ARCHIVE} ${icudata_source_archive_STAMP}
+-            COMMAND ${TOOLBINDIR}/icupkg -t${ICUDATA_CHAR} # --type
++            COMMAND ${TOOLBINDIR}/icupkg${CMAKE_EXECUTABLE_SUFFIX} -t${ICUDATA_CHAR} # --type
+                     ${ICUDATA_ARCHIVE} ${ICUDATA_SOURCE_ARCHIVE}
+             COMMAND ${CMAKE_COMMAND} -E touch ${icudata_source_archive_STAMP}
+             DEPENDS ${deps_icupkg} ${ICUDATA_ARCHIVE} # ${OUTDIR}
+@@ -225,7 +225,7 @@
+             OUTPUT ${PKGDATA_LIST} ${pkgdata_list_STAMP}
+             COMMAND ${CMAKE_COMMAND} -E remove -f ${PKGDATA_LIST}
+             COMMAND
+-                ${TOOLBINDIR}/icupkg -d ${BUILDDIR} # --destdir
++                ${TOOLBINDIR}/icupkg${CMAKE_EXECUTABLE_SUFFIX} -d ${BUILDDIR} # --destdir
+                 --list -x ${extract_pattern} # --extract
+                 ${ICUDATA_SOURCE_ARCHIVE} -o ${PKGDATA_LIST} # --outlist
+             COMMAND ${CMAKE_COMMAND} -E touch ${pkgdata_list_STAMP}
+--- a/source/data/rules.cmake	2026-02-05 18:06:41.272384701 -0500
++++ b/source/data/rules.cmake	2026-02-05 18:07:45.884110040 -0500
+@@ -26,21 +26,21 @@
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/cnvalias.icu
+-    DEPENDS data_dirs ${IN_DIR}/mappings/convrtrs.txt ${TOOLBINDIR}/gencnval
+-    COMMAND ${TOOLBINDIR}/gencnval -s ${IN_DIR} -d ${OUT_DIR} mappings/convrtrs.txt
++    DEPENDS data_dirs ${IN_DIR}/mappings/convrtrs.txt ${TOOLBINDIR}/gencnval${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/gencnval${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR} -d ${OUT_DIR} mappings/convrtrs.txt
+ )
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/ulayout.icu
+-    DEPENDS data_dirs ${IN_DIR}/in/ulayout.icu ${TOOLBINDIR}/icupkg
+-    COMMAND ${TOOLBINDIR}/icupkg -t${ICUDATA_CHAR} ${IN_DIR}/in/ulayout.icu ${OUT_DIR}/ulayout.icu
++    DEPENDS data_dirs ${IN_DIR}/in/ulayout.icu ${TOOLBINDIR}/icupkg${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/icupkg${CMAKE_EXECUTABLE_SUFFIX} -t${ICUDATA_CHAR} ${IN_DIR}/in/ulayout.icu ${OUT_DIR}/ulayout.icu
+ )
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/confusables.cfu
+     DEPENDS data_dirs ${OUT_DIR}/cnvalias.icu ${IN_DIR}/unidata/confusables.txt
+-            ${IN_DIR}/unidata/confusablesWholeScript.txt ${TOOLBINDIR}/gencfu
+-    COMMAND ${TOOLBINDIR}/gencfu -d ${OUT_DIR} -i ${OUT_DIR} -c -r ${IN_DIR}/unidata/confusables.txt -w
++            ${IN_DIR}/unidata/confusablesWholeScript.txt ${TOOLBINDIR}/gencfu${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/gencfu${CMAKE_EXECUTABLE_SUFFIX} -d ${OUT_DIR} -i ${OUT_DIR} -c -r ${IN_DIR}/unidata/confusables.txt -w
+             ${IN_DIR}/unidata/confusablesWholeScript.txt -o confusables.cfu
+ )
+ 
+@@ -50,8 +50,8 @@
+     file(TO_NATIVE_PATH "mappings/${FILE}.ucm" CNV_INPUT)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/${FILE}.cnv
+-        DEPENDS data_dirs ${IN_DIR}/mappings/${FILE}.ucm ${TOOLBINDIR}/makeconv
+-        COMMAND ${TOOLBINDIR}/makeconv -s ${IN_DIR} -d ${OUT_DIR} -c ${CNV_INPUT}
++        DEPENDS data_dirs ${IN_DIR}/mappings/${FILE}.ucm ${TOOLBINDIR}/makeconv${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/makeconv${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR} -d ${OUT_DIR} -c ${CNV_INPUT}
+     )
+ endfunction()
+ 
+@@ -260,8 +260,8 @@
+ macro(generate_brk FILE)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/brkitr/${FILE}.brk
+-        DEPENDS data_dirs ${BRKITR_BRK_DEPS} ${IN_DIR}/brkitr/rules/${FILE}.txt ${TOOLBINDIR}/genbrk
+-        COMMAND ${TOOLBINDIR}/genbrk -d ${OUT_DIR} -i ${OUT_DIR} -c -r
++        DEPENDS data_dirs ${BRKITR_BRK_DEPS} ${IN_DIR}/brkitr/rules/${FILE}.txt ${TOOLBINDIR}/genbrk${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/genbrk${CMAKE_EXECUTABLE_SUFFIX} -d ${OUT_DIR} -i ${OUT_DIR} -c -r
+                 ${IN_DIR}/brkitr/rules/${FILE}.txt -o brkitr/${FILE}.brk
+     )
+ endmacro()
+@@ -307,8 +307,8 @@
+ macro(generate_spp FILE)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/${FILE}.spp
+-        DEPENDS data_dirs ${STRINGPREP_DEPS} ${IN_DIR}/sprep/${FILE}.txt ${TOOLBINDIR}/gensprep
+-        COMMAND ${TOOLBINDIR}/gensprep -s ${IN_DIR}/sprep -d ${OUT_DIR} -i ${OUT_DIR} -b ${SPP_FILE} -m
++        DEPENDS data_dirs ${STRINGPREP_DEPS} ${IN_DIR}/sprep/${FILE}.txt ${TOOLBINDIR}/gensprep${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/gensprep${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/sprep -d ${OUT_DIR} -i ${OUT_DIR} -b ${SPP_FILE} -m
+                 ${IN_DIR}/unidata -u 3.2.0 ${FILE}.txt
+     )
+ endmacro()
+@@ -323,8 +323,8 @@
+ function(generate_brkitrdict FILE)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/brkitr/${FILE}.dict
+-        DEPENDS data_dirs ${IN_DIR}/brkitr/dictionaries/${FILE}.txt ${TOOLBINDIR}/gendict
+-        COMMAND ${TOOLBINDIR}/gendict -i ${OUT_DIR} -c ${BRKITR_DICT_${FILE}_FLAGS}
++        DEPENDS data_dirs ${IN_DIR}/brkitr/dictionaries/${FILE}.txt ${TOOLBINDIR}/gendict${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/gendict${CMAKE_EXECUTABLE_SUFFIX} -i ${OUT_DIR} -c ${BRKITR_DICT_${FILE}_FLAGS}
+                 ${IN_DIR}/brkitr/dictionaries/${FILE}.txt ${OUT_DIR}/brkitr/${FILE}.dict
+     )
+ endfunction()
+@@ -346,8 +346,8 @@
+ function(generate_nrm FILE)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/${FILE}.nrm
+-        DEPENDS data_dirs ${IN_DIR}/in/${FILE}.nrm ${TOOLBINDIR}/icupkg
+-        COMMAND ${TOOLBINDIR}/icupkg -t${ICUDATA_CHAR} ${IN_DIR}/in/${FILE}.nrm ${OUT_DIR}/${FILE}.nrm
++        DEPENDS data_dirs ${IN_DIR}/in/${FILE}.nrm ${TOOLBINDIR}/icupkg${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/icupkg${CMAKE_EXECUTABLE_SUFFIX} -t${ICUDATA_CHAR} ${IN_DIR}/in/${FILE}.nrm ${OUT_DIR}/${FILE}.nrm
+     )
+ endfunction()
+ 
+@@ -361,8 +361,8 @@
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/coll/ucadata.icu
+-    DEPENDS data_dirs ${IN_DIR}/in/coll/ucadata-unihan.icu ${TOOLBINDIR}/icupkg
+-    COMMAND ${TOOLBINDIR}/icupkg -t${ICUDATA_CHAR} ${IN_DIR}/in/coll/ucadata-unihan.icu
++    DEPENDS data_dirs ${IN_DIR}/in/coll/ucadata-unihan.icu ${TOOLBINDIR}/icupkg${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/icupkg${CMAKE_EXECUTABLE_SUFFIX} -t${ICUDATA_CHAR} ${IN_DIR}/in/coll/ucadata-unihan.icu
+             ${OUT_DIR}/coll/ucadata.icu
+ )
+ 
+@@ -370,8 +370,8 @@
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/unames.icu
+-    DEPENDS data_dirs ${IN_DIR}/in/unames.icu ${TOOLBINDIR}/icupkg
+-    COMMAND ${TOOLBINDIR}/icupkg -t${ICUDATA_CHAR} ${IN_DIR}/in/unames.icu ${OUT_DIR}/unames.icu
++    DEPENDS data_dirs ${IN_DIR}/in/unames.icu ${TOOLBINDIR}/icupkg${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/icupkg${CMAKE_EXECUTABLE_SUFFIX} -t${ICUDATA_CHAR} ${IN_DIR}/in/unames.icu ${OUT_DIR}/unames.icu
+ )
+ 
+ # misc res
+@@ -379,8 +379,8 @@
+ function(generate_misc_res FILE)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/${FILE}.res
+-        DEPENDS data_dirs ${IN_DIR}/misc/${FILE}.txt ${TOOLBINDIR}/genrb
+-        COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/misc -d ${OUT_DIR} -i ${OUT_DIR} -k -q ${FILE}.txt
++        DEPENDS data_dirs ${IN_DIR}/misc/${FILE}.txt ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/misc -d ${OUT_DIR} -i ${OUT_DIR} -k -q ${FILE}.txt
+     )
+ endfunction()
+ 
+@@ -413,8 +413,8 @@
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/curr/supplementalData.res
+-    DEPENDS data_dirs ${IN_DIR}/curr/supplementalData.txt ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/curr -d ${OUT_DIR}/curr -i ${OUT_DIR} -k -q
++    DEPENDS data_dirs ${IN_DIR}/curr/supplementalData.txt ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/curr -d ${OUT_DIR}/curr -i ${OUT_DIR} -k -q
+             supplementalData.txt
+ )
+ list(APPEND tmpdep ${OUT_DIR}/curr/supplementalData.res)
+@@ -781,20 +781,20 @@
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/translit/root.res
+-    DEPENDS data_dirs ${IN_DIR}/translit/root.txt ${TRANSLIT_RES_DEPS} ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/translit -d ${OUT_DIR}/translit/ -i ${OUT_DIR} -k root.txt
++    DEPENDS data_dirs ${IN_DIR}/translit/root.txt ${TRANSLIT_RES_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/translit -d ${OUT_DIR}/translit/ -i ${OUT_DIR} -k root.txt
+ )
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/translit/en.res
+-    DEPENDS data_dirs ${IN_DIR}/translit/en.txt ${TRANSLIT_RES_DEPS} ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/translit -d ${OUT_DIR}/translit/ -i ${OUT_DIR} -k en.txt
++    DEPENDS data_dirs ${IN_DIR}/translit/en.txt ${TRANSLIT_RES_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/translit -d ${OUT_DIR}/translit/ -i ${OUT_DIR} -k en.txt
+ )
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/translit/el.res
+-    DEPENDS data_dirs ${IN_DIR}/translit/el.txt ${TRANSLIT_RES_DEPS} ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/translit -d ${OUT_DIR}/translit/ -i ${OUT_DIR} -k el.txt
++    DEPENDS data_dirs ${IN_DIR}/translit/el.txt ${TRANSLIT_RES_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/translit -d ${OUT_DIR}/translit/ -i ${OUT_DIR} -k el.txt
+ )
+ 
+ # locales pool
+@@ -1645,8 +1645,8 @@
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/pool.res
+-    DEPENDS data_dirs ${LOCALES_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/locales -d ${OUT_DIR}/ -i ${OUT_DIR} --writePoolBundle -k
++    DEPENDS data_dirs ${LOCALES_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/locales -d ${OUT_DIR}/ -i ${OUT_DIR} --writePoolBundle -k
+             ${LOCALES_POOL_WRITE_FILES}
+ )
+ 
+@@ -1655,8 +1655,8 @@
+ function(generate_locale_item ITEM)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/${ITEM}.res
+-        DEPENDS data_dirs ${IN_DIR}/locales/${ITEM}.txt ${LOCALES_RES_DEPS} ${TOOLBINDIR}/genrb
+-        COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/locales -d ${OUT_DIR}/ -i ${OUT_DIR} --usePoolBundle
++        DEPENDS data_dirs ${IN_DIR}/locales/${ITEM}.txt ${LOCALES_RES_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/locales -d ${OUT_DIR}/ -i ${OUT_DIR} --usePoolBundle
+                 ${OUT_DIR}/ -k ${ITEM}.txt
+     )
+ endfunction()
+@@ -1671,8 +1671,8 @@
+ configure_file(${IN_DIR}/cmake-locales-index-txt-content.in ${TMP_DIR}/locales/${INDEX_NAME}.txt)
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/${INDEX_NAME}.res
+-    DEPENDS data_dirs ${TMP_DIR}/locales/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${TMP_DIR}/locales -d ${OUT_DIR}/ -i ${OUT_DIR} -k ${INDEX_NAME}.txt
++    DEPENDS data_dirs ${TMP_DIR}/locales/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${TMP_DIR}/locales -d ${OUT_DIR}/ -i ${OUT_DIR} -k ${INDEX_NAME}.txt
+ )
+ 
+ # curr pool
+@@ -2231,8 +2231,8 @@
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/curr/pool.res
+-    DEPENDS data_dirs ${CURR_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/curr -d ${OUT_DIR}/curr/ -i ${OUT_DIR} --writePoolBundle -k
++    DEPENDS data_dirs ${CURR_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/curr -d ${OUT_DIR}/curr/ -i ${OUT_DIR} --writePoolBundle -k
+             ${CURR_POOL_WRITE_FILES}
+ )
+ 
+@@ -2241,8 +2241,8 @@
+ function(generate_curr_item ITEM)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/curr/${ITEM}.res
+-        DEPENDS data_dirs ${IN_DIR}/curr/${ITEM}.txt ${CURR_RES_DEPS} ${TOOLBINDIR}/genrb
+-        COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/curr -d ${OUT_DIR}/curr/ -i ${OUT_DIR} --usePoolBundle
++        DEPENDS data_dirs ${IN_DIR}/curr/${ITEM}.txt ${CURR_RES_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/curr -d ${OUT_DIR}/curr/ -i ${OUT_DIR} --usePoolBundle
+                 ${OUT_DIR}/curr/ -k ${ITEM}.txt
+     )
+ endfunction()
+@@ -2257,8 +2257,8 @@
+ configure_file(${IN_DIR}/cmake-curr-index-txt-content.in ${TMP_DIR}/curr/${INDEX_NAME}.txt)
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/curr/${INDEX_NAME}.res
+-    DEPENDS data_dirs ${TMP_DIR}/curr/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${TMP_DIR}/curr -d ${OUT_DIR}/curr/ -i ${OUT_DIR} -k
++    DEPENDS data_dirs ${TMP_DIR}/curr/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${TMP_DIR}/curr -d ${OUT_DIR}/curr/ -i ${OUT_DIR} -k
+             ${INDEX_NAME}.txt
+ )
+ list(APPEND tmpdep ${OUT_DIR}/curr/${INDEX_NAME}.res)
+@@ -2749,8 +2749,8 @@
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/lang/pool.res
+-    DEPENDS data_dirs ${LANG_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/lang -d ${OUT_DIR}/lang/ -i ${OUT_DIR} --writePoolBundle -k
++    DEPENDS data_dirs ${LANG_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/lang -d ${OUT_DIR}/lang/ -i ${OUT_DIR} --writePoolBundle -k
+             ${LANG_POOL_WRITE_FILES}
+ )
+ 
+@@ -2759,8 +2759,8 @@
+ function(generate_lang_item ITEM)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/lang/${ITEM}.res
+-        DEPENDS data_dirs ${IN_DIR}/lang/${ITEM}.txt ${LANG_RES_DEPS} ${TOOLBINDIR}/genrb
+-        COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/lang -d ${OUT_DIR}/lang/ -i ${OUT_DIR} --usePoolBundle
++        DEPENDS data_dirs ${IN_DIR}/lang/${ITEM}.txt ${LANG_RES_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/lang -d ${OUT_DIR}/lang/ -i ${OUT_DIR} --usePoolBundle
+                 ${OUT_DIR}/lang/ -k ${ITEM}.txt
+     )
+ endfunction()
+@@ -2775,8 +2775,8 @@
+ configure_file(${IN_DIR}/cmake-lang-index-txt-content.in ${TMP_DIR}/lang/${INDEX_NAME}.txt)
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/lang/${INDEX_NAME}.res
+-    DEPENDS data_dirs ${TMP_DIR}/lang/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${TMP_DIR}/lang -d ${OUT_DIR}/lang/ -i ${OUT_DIR} -k
++    DEPENDS data_dirs ${TMP_DIR}/lang/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${TMP_DIR}/lang -d ${OUT_DIR}/lang/ -i ${OUT_DIR} -k
+             ${INDEX_NAME}.txt
+ )
+ 
+@@ -3265,8 +3265,8 @@
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/region/pool.res
+-    DEPENDS data_dirs ${REGION_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/region -d ${OUT_DIR}/region/ -i ${OUT_DIR}
++    DEPENDS data_dirs ${REGION_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/region -d ${OUT_DIR}/region/ -i ${OUT_DIR}
+             --writePoolBundle -k ${REGION_POOL_WRITE_FILES}
+ )
+ 
+@@ -3275,8 +3275,8 @@
+ function(generate_region_item ITEM)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/region/${ITEM}.res
+-        DEPENDS data_dirs ${IN_DIR}/region/${ITEM}.txt ${REGION_RES_DEPS} ${TOOLBINDIR}/genrb
+-        COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/region -d ${OUT_DIR}/region/ -i ${OUT_DIR}
++        DEPENDS data_dirs ${IN_DIR}/region/${ITEM}.txt ${REGION_RES_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/region -d ${OUT_DIR}/region/ -i ${OUT_DIR}
+                 --usePoolBundle ${OUT_DIR}/region/ -k ${ITEM}.txt
+     )
+ endfunction()
+@@ -3291,8 +3291,8 @@
+ configure_file(${IN_DIR}/cmake-region-index-txt-content.in ${TMP_DIR}/region/${INDEX_NAME}.txt)
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/region/${INDEX_NAME}.res
+-    DEPENDS data_dirs ${TMP_DIR}/region/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${TMP_DIR}/region -d ${OUT_DIR}/region/ -i ${OUT_DIR} -k
++    DEPENDS data_dirs ${TMP_DIR}/region/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${TMP_DIR}/region -d ${OUT_DIR}/region/ -i ${OUT_DIR} -k
+             ${INDEX_NAME}.txt
+ )
+ 
+@@ -3781,8 +3781,8 @@
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/zone/pool.res
+-    DEPENDS data_dirs ${ZONE_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/zone -d ${OUT_DIR}/zone/ -i ${OUT_DIR} --writePoolBundle -k
++    DEPENDS data_dirs ${ZONE_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/zone -d ${OUT_DIR}/zone/ -i ${OUT_DIR} --writePoolBundle -k
+             ${ZONE_POOL_WRITE_FILES}
+ )
+ 
+@@ -3791,8 +3791,8 @@
+ function(generate_zone_item ITEM)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/zone/${ITEM}.res
+-        DEPENDS data_dirs ${IN_DIR}/zone/${ITEM}.txt ${ZONE_RES_DEPS} ${TOOLBINDIR}/genrb
+-        COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/zone -d ${OUT_DIR}/zone/ -i ${OUT_DIR} --usePoolBundle
++        DEPENDS data_dirs ${IN_DIR}/zone/${ITEM}.txt ${ZONE_RES_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/zone -d ${OUT_DIR}/zone/ -i ${OUT_DIR} --usePoolBundle
+                 ${OUT_DIR}/zone/ -k ${ITEM}.txt
+     )
+ endfunction()
+@@ -3807,8 +3807,8 @@
+ configure_file(${IN_DIR}/cmake-zone-index-txt-content.in ${TMP_DIR}/zone/${INDEX_NAME}.txt)
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/zone/${INDEX_NAME}.res
+-    DEPENDS data_dirs ${TMP_DIR}/zone/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${TMP_DIR}/zone -d ${OUT_DIR}/zone/ -i ${OUT_DIR} -k
++    DEPENDS data_dirs ${TMP_DIR}/zone/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${TMP_DIR}/zone -d ${OUT_DIR}/zone/ -i ${OUT_DIR} -k
+             ${INDEX_NAME}.txt
+ )
+ 
+@@ -4288,8 +4288,8 @@
+ 
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/unit/pool.res
+-    DEPENDS data_dirs ${UNIT_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/unit -d ${OUT_DIR}/unit/ -i ${OUT_DIR} --writePoolBundle -k
++    DEPENDS data_dirs ${UNIT_POOL_WRITE_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/unit -d ${OUT_DIR}/unit/ -i ${OUT_DIR} --writePoolBundle -k
+             ${UNIT_POOL_WRITE_FILES}
+ )
+ 
+@@ -4298,8 +4298,8 @@
+ function(generate_unit_item ITEM)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/unit/${ITEM}.res
+-        DEPENDS data_dirs ${IN_DIR}/unit/${ITEM}.txt ${UNIT_RES_DEPS} ${TOOLBINDIR}/genrb
+-        COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/unit -d ${OUT_DIR}/unit/ -i ${OUT_DIR} --usePoolBundle
++        DEPENDS data_dirs ${IN_DIR}/unit/${ITEM}.txt ${UNIT_RES_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/unit -d ${OUT_DIR}/unit/ -i ${OUT_DIR} --usePoolBundle
+                 ${OUT_DIR}/unit/ -k ${ITEM}.txt
+     )
+ endfunction()
+@@ -4314,8 +4314,8 @@
+ configure_file(${IN_DIR}/cmake-unit-index-txt-content.in ${TMP_DIR}/unit/${INDEX_NAME}.txt)
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/unit/${INDEX_NAME}.res
+-    DEPENDS data_dirs ${TMP_DIR}/unit/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${TMP_DIR}/unit -d ${OUT_DIR}/unit/ -i ${OUT_DIR} -k
++    DEPENDS data_dirs ${TMP_DIR}/unit/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${TMP_DIR}/unit -d ${OUT_DIR}/unit/ -i ${OUT_DIR} -k
+             ${INDEX_NAME}.txt
+ )
+ 
+@@ -4514,8 +4514,8 @@
+ function(generate_coll_item ITEM)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/coll/${ITEM}.res
+-        DEPENDS data_dirs ${IN_DIR}/coll/${ITEM}.txt ${COLL_RES_DEPS} ${TOOLBINDIR}/genrb
+-        COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/coll -d ${OUT_DIR}/coll/ -i ${OUT_DIR} -k ${ITEM}.txt
++        DEPENDS data_dirs ${IN_DIR}/coll/${ITEM}.txt ${COLL_RES_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/coll -d ${OUT_DIR}/coll/ -i ${OUT_DIR} -k ${ITEM}.txt
+     )
+ endfunction()
+ 
+@@ -4529,8 +4529,8 @@
+ configure_file(${IN_DIR}/cmake-coll-index-txt-content.in ${TMP_DIR}/coll/${INDEX_NAME}.txt)
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/coll/${INDEX_NAME}.res
+-    DEPENDS data_dirs ${TMP_DIR}/coll/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${TMP_DIR}/coll -d ${OUT_DIR}/coll/ -i ${OUT_DIR} -k
++    DEPENDS data_dirs ${TMP_DIR}/coll/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${TMP_DIR}/coll -d ${OUT_DIR}/coll/ -i ${OUT_DIR} -k
+             ${INDEX_NAME}.txt
+ )
+ 
+@@ -4578,8 +4578,8 @@
+ function(generate_brkitr_res_item ITEM)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/brkitr/${ITEM}.res
+-        DEPENDS data_dirs ${IN_DIR}/brkitr/${ITEM}.txt ${BRKITR_RES_DEPS} ${TOOLBINDIR}/genrb
+-        COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/brkitr -d ${OUT_DIR}/brkitr/ -i ${OUT_DIR} -k
++        DEPENDS data_dirs ${IN_DIR}/brkitr/${ITEM}.txt ${BRKITR_RES_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/brkitr -d ${OUT_DIR}/brkitr/ -i ${OUT_DIR} -k
+                 ${ITEM}.txt
+     )
+ endfunction()
+@@ -4594,8 +4594,8 @@
+ configure_file(${IN_DIR}/cmake-brkitr-index-txt-content.in ${TMP_DIR}/brkitr/${INDEX_NAME}.txt)
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/brkitr/${INDEX_NAME}.res
+-    DEPENDS data_dirs ${TMP_DIR}/brkitr/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${TMP_DIR}/brkitr -d ${OUT_DIR}/brkitr/ -i ${OUT_DIR} -k
++    DEPENDS data_dirs ${TMP_DIR}/brkitr/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${TMP_DIR}/brkitr -d ${OUT_DIR}/brkitr/ -i ${OUT_DIR} -k
+             ${INDEX_NAME}.txt
+ )
+ 
+@@ -4714,8 +4714,8 @@
+ function(generate_rbnf_item ITEM)
+     add_custom_command(
+         OUTPUT ${OUT_DIR}/rbnf/${ITEM}.res
+-        DEPENDS data_dirs ${IN_DIR}/rbnf/${ITEM}.txt ${RBNF_DEPS} ${TOOLBINDIR}/genrb
+-        COMMAND ${TOOLBINDIR}/genrb -s ${IN_DIR}/rbnf -d ${OUT_DIR}/rbnf/ -i ${OUT_DIR} -k ${ITEM}.txt
++        DEPENDS data_dirs ${IN_DIR}/rbnf/${ITEM}.txt ${RBNF_DEPS} ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++        COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${IN_DIR}/rbnf -d ${OUT_DIR}/rbnf/ -i ${OUT_DIR} -k ${ITEM}.txt
+     )
+ endfunction()
+ 
+@@ -4729,8 +4729,8 @@
+ configure_file(${IN_DIR}/cmake-rbnf-index-txt-content.in ${TMP_DIR}/rbnf/${INDEX_NAME}.txt)
+ add_custom_command(
+     OUTPUT ${OUT_DIR}/rbnf/${INDEX_NAME}.res
+-    DEPENDS data_dirs ${TMP_DIR}/rbnf/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb
+-    COMMAND ${TOOLBINDIR}/genrb -s ${TMP_DIR}/rbnf -d ${OUT_DIR}/rbnf/ -i ${OUT_DIR} -k
++    DEPENDS data_dirs ${TMP_DIR}/rbnf/${INDEX_NAME}.txt ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX}
++    COMMAND ${TOOLBINDIR}/genrb${CMAKE_EXECUTABLE_SUFFIX} -s ${TMP_DIR}/rbnf -d ${OUT_DIR}/rbnf/ -i ${OUT_DIR} -k
+             ${INDEX_NAME}.txt
+ )
+ 

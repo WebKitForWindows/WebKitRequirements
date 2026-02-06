@@ -1,0 +1,15 @@
+--- a/source/tools/pkgdata/pkgdata.cpp
++++ b/source/tools/pkgdata/pkgdata.cpp
+@@ -1795,5 +1795,12 @@
+ static int32_t pkg_createWindowsDLL(const char mode, const char *gencFilePath, UPKGOptions *o) {
+     int32_t result = 0;
+     char cmd[LARGE_BUFFER_MAX_SIZE];
++
++    /* When cross-compiling from a non-Windows host, the CMake build system
++     * links the data library itself; skip the link/lib step here. */
++    const char *skipLink = getenv("ICU_SKIP_PKGDATA_LINK");
++    if (skipLink && skipLink[0] == '1')
++        return 0;
++
+     if (IN_STATIC_MODE(mode)) {
+         char staticLibFilePath[SMALL_BUFFER_MAX_SIZE] = "";
