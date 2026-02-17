@@ -10,7 +10,7 @@
     },
     "icu": {
       "baseline": "77.1.0",
-      "port-version": 1
+      "port-version": 2
     },
     "openssl": {
       "baseline": "libressl",

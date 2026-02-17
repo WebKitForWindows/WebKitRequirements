@@ -20,7 +20,7 @@ set(PATCHES
     ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Add-CMake-platform.patch
     # Patch specifically for vcpkg on top of above
     ${CMAKE_CURRENT_LIST_DIR}/patches/0002-Remove-install-suffix-on-Windows.patch
-    # Append CMAKE_EXECUTABLE_SUFFIX to tool paths for cross-compilation
+    # Append CMAKE_EXECUTABLE_SUFFIX and CMAKE_CROSSCOMPILING_EMULATOR to tool paths for cross-compilation
     ${CMAKE_CURRENT_LIST_DIR}/patches/0003-Append-CMAKE_EXECUTABLE_SUFFIX-to-tool-paths.patch
     # Copy stubdata DLL to bin/ during cross-compilation (not just native Windows)
     ${CMAKE_CURRENT_LIST_DIR}/patches/0004-Copy-stubdata-dll-to-bin-for-cross-compile.patch
