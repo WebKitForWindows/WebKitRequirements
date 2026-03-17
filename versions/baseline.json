@@ -10,6 +10,10 @@
     },
     "icu": {
       "baseline": "77.1.0",
+      "port-version": 3
+    },
+    "libwebp": {
+      "baseline": "1.6.0",
       "port-version": 2
     },
     "openssl": {
@@ -22,6 +26,10 @@
     },
     "zlib": {
       "baseline": "zlib-ng",
+      "port-version": 0
+    },
+    "zlib-ng": {
+      "baseline": "2.3.3",
       "port-version": 0
     }
   }
