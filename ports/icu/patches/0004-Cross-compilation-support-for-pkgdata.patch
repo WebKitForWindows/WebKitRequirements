@@ -1,0 +1,47 @@
+diff --git a/source/tools/pkgdata/pkgdata.cpp b/source/tools/pkgdata/pkgdata.cpp
+index 3e4cfd7..1516f7d 100644
+--- a/source/tools/pkgdata/pkgdata.cpp
++++ b/source/tools/pkgdata/pkgdata.cpp
+@@ -770,12 +770,27 @@ static int32_t pkg_executeOptions(UPKGOptions *o) {
+                     /* Try to detect the arch type, use nullptr if unsuccessful */
+                     char optMatchArch[10] = { 0 };
+                     pkg_createOptMatchArch(optMatchArch);
++
++                    /* Determine the CPU architecture string for writeObjectCode.
++                     * First check ICU_DATA_CPU_ARCH env var (set during cross-
++                     * compilation from a non-Windows host). Otherwise use _M_*
++                     * macros which Clang sets for the target architecture. */
++                    const char *optCpuArch = getenv("ICU_DATA_CPU_ARCH");
++                    if (!optCpuArch) {
++#if defined(_M_AMD64)
++                        optCpuArch = "x64";
++#elif defined(_M_ARM64)
++                        optCpuArch = "arm64";
++#elif defined(_M_IX86)
++                        optCpuArch = "x86";
++#endif
++                    }
+                     writeObjectCode(
+                         datFileNamePath,
+                         o->tmpDir,
+                         o->entryName,
+                         (optMatchArch[0] == 0 ? nullptr : optMatchArch),
+-                        nullptr,
++                        optCpuArch,
+                         nullptr,
+                         gencFilePath,
+                         sizeof(gencFilePath),
+@@ -1783,6 +1798,13 @@ static int32_t pkg_createWithoutAssemblyCode(UPKGOptions *o, const char *targetD
+ static int32_t pkg_createWindowsDLL(const char mode, const char *gencFilePath, UPKGOptions *o) {
+     int32_t result = 0;
+     char cmd[LARGE_BUFFER_MAX_SIZE];
++
++    /* When cross-compiling from a non-Windows host, the CMake build system
++     * links the data library itself; skip the link/lib step here. */
++    const char *skipLink = getenv("ICU_SKIP_PKGDATA_LINK");
++    if (skipLink && skipLink[0] == '1')
++        return 0;
++
+     if (IN_STATIC_MODE(mode)) {
+         char staticLibFilePath[SMALL_BUFFER_MAX_SIZE] = "";
+ 
