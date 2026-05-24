@@ -5,8 +5,8 @@
       "port-version": 0
     },
     "curl": {
-      "baseline": "8.16.0",
-      "port-version": 1
+      "baseline": "8.20.0",
+      "port-version": 0
     },
     "icu": {
       "baseline": "77.1.0",
