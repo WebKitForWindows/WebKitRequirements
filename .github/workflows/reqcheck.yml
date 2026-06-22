@@ -26,11 +26,11 @@ jobs:
             }
             return '';
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           ref: ${{ steps.get-sha.outputs.result }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           path: WebKitRequirements
 
