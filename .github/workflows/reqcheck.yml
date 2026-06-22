@@ -57,7 +57,7 @@ jobs:
 
       # Notify the results to WebKit slack
       - name: Forward a saved message
-        uses: slackapi/slack-github-action@v2
+        uses: slackapi/slack-github-action@v3
         with:
           payload-file-path: results.json
           payload-templated: true
