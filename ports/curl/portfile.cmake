@@ -1,4 +1,4 @@
-set(VERSION 8.16.0)
+set(VERSION 8.20.0)
 string(REPLACE "." "_" TAG ${VERSION})
 
 set(FILENAME "curl-${VERSION}.tar.xz")
@@ -15,7 +15,7 @@ endif ()
 vcpkg_download_distfile(ARCHIVE
     URLS ${URLS}
     FILENAME ${FILENAME}
-    SHA512 8262c3dc113cfd5744ef1b82dbccaa69448a9395ad5c094c22df5cf537a047a927d3332db2cb3be12a31a68a60d8d0fa8485b916e975eda36a4ebd860da4f621
+    SHA512 edfa5882aaeefcf2226fe03b19246151c0377c3656f9c8cc385bdaf34565e1354e762005b58780917a6d98039ae34085e4a4bcb44255c77e3b0e1d94090c010b
 )
 
 # Extract archive
